@@ -1,37 +1,71 @@
 <?php
-/**
- * Functions which enhance the theme by hooking into WordPress
- *
- * @package ulytan
- */
-
-/**
- * Adds custom classes to the array of body classes.
- *
- * @param array $classes Classes for the body element.
- * @return array
- */
-function ulytan_body_classes( $classes ) {
-	// Adds a class of hfeed to non-singular pages.
-	if ( ! is_singular() ) {
-		$classes[] = 'hfeed';
-	}
-
-	// Adds a class of no-sidebar when there is no sidebar present.
-	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-		$classes[] = 'no-sidebar';
-	}
-
-	return $classes;
+// Setup theme setting page
+if (function_exists('acf_add_options_page')) {
+	$name_option = 'Theme Settings';
+	acf_add_options_page(
+		array(
+			'page_title' => $name_option,
+			'menu_title' => $name_option,
+			'menu_slug' => 'theme-settings',
+			'capability' => 'edit_posts',
+			'redirect' => false,
+			'position' => 80
+		)
+	);
 }
-add_filter( 'body_class', 'ulytan_body_classes' );
 
 /**
- * Add a pingback url auto-discovery header for single posts, pages, or attachments.
+ * Add Recommended size image to Featured Image Box    
  */
-function ulytan_pingback_header() {
-	if ( is_singular() && pings_open() ) {
-		printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
+add_filter('admin_post_thumbnail_html', 'add_featured_image_instruction');
+function add_featured_image_instruction($html)
+{
+	if (get_post_type() === 'post') {
+		$html .= '<p>Recommended size: 300x300</p>';
+	}
+
+	return $html;
+}
+
+
+function activate_my_plugins()
+{
+	$plugins = [
+		'advanced-custom-fields-pro\acf.php',
+		'classic-editor\classic-editor.php',
+		'duplicate-post\duplicate-post.php',
+		'wordpress-seo\wp-seo.php',
+		'wp-cerber\wp-cerber.php',
+		'all-in-one-wp-migration-master\all-in-one-wp-migration.php',
+	];
+
+	foreach ($plugins as $plugin) {
+		$plugin_path = WP_PLUGIN_DIR . '/' . $plugin;
+
+		if (file_exists($plugin_path) && !is_plugin_active($plugin)) {
+			activate_plugin($plugin);
+		}
 	}
 }
-add_action( 'wp_head', 'ulytan_pingback_header' );
+add_action('admin_init', 'activate_my_plugins');
+
+// stop upgrading wp cerber plugin
+add_filter('site_transient_update_plugins', 'disable_plugins_update');
+function disable_plugins_update($value)
+{
+	// disable acf pro
+	if (isset($value->response['advanced-custom-fields-pro/acf.php'])) {
+		unset($value->response['advanced-custom-fields-pro/acf.php']);
+	}
+
+	// disable All-in-One WP Migration
+	if (isset($value->response['all-in-one-wp-migration-master/all-in-one-wp-migration.php'])) {
+		unset($value->response['all-in-one-wp-migration-master/all-in-one-wp-migration.php']);
+	}
+	return $value;
+}
+
+/**
+ * auto update plugin
+ */
+add_filter('auto_update_plugin', '__return_false');
