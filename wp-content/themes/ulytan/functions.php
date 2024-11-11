@@ -199,3 +199,4 @@ add_action('wp_enqueue_scripts', 'ulytan_scripts');
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+require get_template_directory() . '/inc/security.php';

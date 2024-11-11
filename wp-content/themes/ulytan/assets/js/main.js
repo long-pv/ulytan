@@ -15,6 +15,18 @@
 		$(".header__toggleItem").toggle();
 		$(".mainBodyContent").toggleClass("menu__openSp");
 	}
+
+	$(".menu-item-has-children > .dropdown-arrow").click(function (e) {
+		e.preventDefault();
+		var $submenu = $(this).siblings(".sub-menu");
+
+		if ($submenu.length) {
+			$submenu.stop(true, true).slideToggle();
+			$(this).parent().toggleClass("open");
+			$(".sub-menu").not($submenu).slideUp();
+			$(".menu-item-has-children").not($(this).parent()).removeClass("open");
+		}
+	});
 	// end mobile menu
 
 	// wpadminbar
@@ -22,84 +34,40 @@
 		$(".header").css("margin-top", $("#wpadminbar").outerHeight(true));
 	}
 
-	// slick hiển thị arrow ngay cả khi có quá ít item
-	function calculateSlidesToShow(selector, itemClass) {
-		var item = $(selector).find(itemClass);
-		item.css("display", "inline-block");
-		var itemCount = item.length;
-		var totalItemWidth = 0;
-		item.each(function () {
-			totalItemWidth += $(this).outerWidth(true);
-		});
-		var sliderWidth = 0;
-		var slidesToShowCount = 0;
-		sliderWidth = $(selector).width();
-		slidesToShowCount = totalItemWidth < sliderWidth ? itemCount : Math.floor(sliderWidth / item.outerWidth(true));
-		return slidesToShowCount;
+	function adjustPadding() {
+		$("body").css("padding-top", $("#header").outerHeight(true));
 	}
 
-	function setupCustomNavigation(selector) {
-		$(selector).on("init", function (event, slick) {
-			var prevButton = $('<button class="slick-prev slick-arrow"></button>');
-			var nextButton = $('<button class="slick-next slick-arrow"></button>');
-			$(selector).append(prevButton, nextButton);
+	adjustPadding();
+	$(window).resize(adjustPadding);
 
-			prevButton.on("click", function () {
-				var currentSlide = slick.slickCurrentSlide();
-				$(selector + ' .slick-slide[data-slick-index="' + (currentSlide - 1) + '"]').click();
-			});
+	// Banner
+	$(".sectionBanner__slider").slick({
+		dots: true,
+		arrows: true,
+		autoplay: true,
+		autoplaySpeed: 5000,
+	});
 
-			nextButton.on("click", function () {
-				var currentSlide = slick.slickCurrentSlide();
-				$(selector + ' .slick-slide[data-slick-index="' + (currentSlide + 1) + '"]').click();
-			});
+	// video url
+	if ($("#videoUrl").length) {
+		let videoSrc = "";
+		let videoId = $("#video");
+		let videoUrl = $("#videoUrl");
+
+		// Add click event for each .videoBlock__playAction
+		$(document).on("click", ".videoBlock__playAction", function (e) {
+			e.preventDefault();
+			videoSrc = $(this).data("src");
+		});
+
+		videoUrl.on("shown.bs.modal", function (e) {
+			videoId.attr("src", videoSrc + "?autoplay=1&mute=1&modestbranding=1&showinfo=0");
+		});
+
+		videoUrl.on("hide.bs.modal", function (e) {
+			videoId.attr("src", "");
+			videoSrc = "";
 		});
 	}
-
-	setupCustomNavigation(".slideGalleryAll");
-	$(".slideGalleryAll").slick({
-		variableWidth: true,
-		slidesToScroll: 1,
-		adaptiveHeight: true,
-		focusOnSelect: true,
-		infinite: true,
-		arrows: false,
-		slidesToShow: calculateSlidesToShow(".slideGalleryAll", ".slideGallery__item"),
-	});
-	// end -- slick hiển thị arrow ngay cả khi có quá ít item
-
-	$(document).on("click", ".favorite_posts", function (e) {
-		e.preventDefault(); // Ngăn chặn hành động mặc định nếu có
-		let $this = $(this);
-		let post_id = $this.data("post_id");
-
-		$.ajax({
-			url: url_ajax,
-			type: "POST",
-			data: {
-				action: "favorite_posts",
-				post_id: post_id,
-			},
-			beforeSend: function () {
-				$("body").append('<div id="ajax-loader"><div class="spinner"></div></div>');
-			},
-			success: function (response) {
-				if (response.success) {
-					if (response.data.status === "added") {
-						$('.favorite_posts[data-post_id="' + post_id + '"]').addClass("active");
-					} else if (response.data.status === "removed") {
-						$('.favorite_posts[data-post_id="' + post_id + '"]').removeClass("active");
-					}
-				} else {
-					alert(response.data.message);
-				}
-			},
-			error: function () {
-				alert("Something went wrong.");
-			},
-			complete: function () {
-				$("body #ajax-loader").remove();
-			},
-		});
-	});
 })(jQuery, window);

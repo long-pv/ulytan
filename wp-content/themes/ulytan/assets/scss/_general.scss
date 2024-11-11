@@ -2,19 +2,14 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     line-height: 1.5;
-    color: #333333;
+    color: $body;
     font-size: 16px;
-    padding-top: 56px;
 
     @include media-breakpoint-down(md) {
         -webkit-touch-callout: none;
         -khtml-user-select: none;
         -ms-touch-action: pan-y;
         touch-action: pan-y;
-    }
-
-    @include media-breakpoint-up(lg) {
-        padding-top: 72px;
     }
 }
 

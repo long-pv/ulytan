@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The header for our theme
  *
@@ -12,48 +13,97 @@
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
+
 <head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+
+	<!-- fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet" />
 
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'ulytan' ); ?></a>
+	<?php
+	// hook body content
+	wp_body_open();
+	?>
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$ulytan_description = get_bloginfo( 'description', 'display' );
-			if ( $ulytan_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $ulytan_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+	<header id="header" class="header">
+		<div class="container">
+			<div class="header__inner">
+				<div class="row">
+					<div class="col-6 col-lg-3">
+						<a href="<?php echo home_url(); ?>" class="header__logo">
+							<?php $logo_url = get_template_directory_uri() . '/assets/images/logo.png'; ?>
+							<img src="<?php echo $logo_url; ?>" alt="logo">
+						</a>
+					</div>
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'ulytan' ); ?></button>
+					<div class="col-6 col-lg-9">
+						<div class="header__navInner">
+							<!-- menu PC -->
+							<?php
+							if (has_nav_menu('menu-1')) {
+								wp_nav_menu(
+									array(
+										'theme_location' => 'menu-1',
+										'container' => 'nav',
+										'container_class' => 'header__menupc',
+										'depth' => 2,
+									)
+								);
+							}
+							?>
+							<!-- end -->
+
+							<!-- button toggle menu mobile -->
+							<div class="header__toggle">
+								<span class="header__toggleItem header__toggleItem--open"></span>
+								<span class="header__toggleItem header__toggleItem--close"></span>
+							</div>
+							<!-- end -->
+
+							<div class="header_line">
+							</div>
+
+							<div class="form_search">
+								<form role="search" method="get" action="<?php echo home_url('/'); ?>">
+									<input type="text" name="s" placeholder="Tìm kiếm..."
+										value="<?php the_search_query(); ?>" required />
+									<button type="submit" aria-label="button icon">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+											<path fill="#900101"
+												d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+										</svg>
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- menu Mobile -->
+		<div class="header__menusp">
 			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
+			if (has_nav_menu('menu-1')) {
+				wp_nav_menu(
+					array(
+						'theme_location' => 'menu-1',
+						'container' => 'nav',
+						'container_class' => 'header__menuspInner',
+						'depth' => 2,
+					)
+				);
+			}
 			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+		</div>
+	</header>
+
+	<main class="mainBodyContent">
