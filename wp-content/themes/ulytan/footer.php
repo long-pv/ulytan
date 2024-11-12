@@ -16,7 +16,37 @@
 <!-- end main body -->
 
 <footer id="footer" class="footer secSpace">
+    <div class="container">
+        <div class="headquarters_list">
+            <?php
+            $headquarters = get_field('headquarters', 'option') ?? [];
+            if ($headquarters):
+                foreach ($headquarters as $item):
+            ?>
+                    <div class="headquarters_item">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <h3 class="headquarters_item_title">
+                                    <?php echo $item['title']; ?>
+                                </h3>
 
+                                <div class="headquarters_item_content editor">
+                                    <?php echo $item['content']; ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="headquarters_item_iframe">
+                                    <?php echo $item['google_map']; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <?php
+                endforeach;
+            endif;
+            ?>
+        </div>
+    </div>
 </footer>
 
 <!-- modal video -->
