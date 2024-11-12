@@ -64,126 +64,143 @@ if ($banner):
 	</div>
 </div>
 
-<section class="service secSpace">
-	<div class="container">
-		<h2 class="sec_title text-center mb-4">
-			DANH SÁCH DỊCH VỤ CỦA ULYTAN
-		</h2>
+<?php
+$args = array(
+	'post_type' => 'service',
+	'posts_per_page' => '15',
+);
+$query = new WP_Query($args);
+if ($query->have_posts()):
+?>
+	<section class="service secSpace">
+		<div class="container">
+			<h2 class="sec_title text-center mb-4">
+				DANH SÁCH DỊCH VỤ CỦA ULYTAN
+			</h2>
 
-		<div class="service_list">
-			<div class="row row_24">
-				<?php
-				$args = array(
-					'post_type' => 'service',
-					'posts_per_page' => '15',
-				);
-				$query = new WP_Query($args);
-				if ($query->have_posts()):
+			<div class="service_list">
+				<div class="row row_24">
+					<?php
 					while ($query->have_posts()):
 						$query->the_post();
-				?>
+					?>
 						<div class="col-md-6 col-lg-4">
 							<?php get_template_part('template-parts/content_service'); ?>
 						</div>
-				<?php
+					<?php
 					endwhile;
-					wp_reset_postdata();
-				endif;
-				?>
+					?>
+				</div>
 			</div>
 		</div>
-	</div>
-</section>
+	</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
 
 <section class="home_news secSpace">
 	<div class="container">
 		<div class="row row_24">
-			<div class="col-lg-8">
-				<div class="featured_news">
-					<h2 class="home_news_title mb-4">
-						Tin tức nổi bật
-					</h2>
-					<div class="row row_24">
-						<?php
-						$args = array(
-							'post_type' => 'post',
-							'posts_per_page' => '2',
-						);
-						$query = new WP_Query($args);
-						if ($query->have_posts()):
+			<?php
+			$view_all_news = get_field('view_all_news') ?? '';
+			$args = array(
+				'post_type' => 'post',
+				'posts_per_page' => '2',
+			);
+			$query = new WP_Query($args);
+			if ($query->have_posts()):
+			?>
+				<div class="col-lg-8">
+					<div class="featured_news">
+						<h2 class="home_news_title mb-4">
+							Tin tức nổi bật
+						</h2>
+						<div class="row row_24">
+							<?php
 							while ($query->have_posts()):
 								$query->the_post();
-						?>
+							?>
 								<div class="col-md-6">
 									<?php get_template_part('template-parts/content_post'); ?>
 								</div>
-						<?php
+							<?php
 							endwhile;
-							wp_reset_postdata();
-						endif;
-						?>
-					</div>
+							?>
+						</div>
 
-					<?php
-					$view_all_news = get_field('view_all_news') ?? '';
-					if ($view_all_news):
-					?>
-						<a class="view_all_news" href="<?php echo $view_all_news; ?>">Xem tất cả</a>
-					<?php endif; ?>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="most_read">
-					<h2 class="home_news_title mb-4">
-						Các bài đọc nhiều nhất
-					</h2>
-					<div class="most_read_list">
 						<?php
-						$args = array(
-							'post_type' => 'post',
-							'posts_per_page' => '10',
-							'order' => 'DESC',
-							'meta_key' => 'post_views_count',
-							'orderby' => 'meta_value_num',
-						);
-						$query = new WP_Query($args);
-						$index = 1;
-						if ($query->have_posts()):
+
+						if ($view_all_news):
+						?>
+							<a class="view_all_news" href="<?php echo $view_all_news; ?>">Xem tất cả</a>
+						<?php endif; ?>
+					</div>
+				</div>
+			<?php
+			endif;
+			wp_reset_postdata();
+			?>
+
+
+			<?php
+			$args = array(
+				'post_type' => 'post',
+				'posts_per_page' => '10',
+				'order' => 'DESC',
+				'meta_key' => 'post_views_count',
+				'orderby' => 'meta_value_num',
+			);
+			$query = new WP_Query($args);
+			if ($query->have_posts()):
+			?>
+				<div class="col-lg-4">
+					<div class="most_read">
+						<h2 class="home_news_title mb-4">
+							Các bài đọc nhiều nhất
+						</h2>
+						<div class="most_read_list">
+							<?php
+							$index = 1;
 							while ($query->have_posts()):
 								$query->the_post();
-						?>
+							?>
 								<a href="<?php the_permalink(); ?>" class="most_read_item">
 									<?php echo $index . ". " . get_the_title(); ?>
 								</a>
-						<?php
+							<?php
 								$index++;
 							endwhile;
-							wp_reset_postdata();
-						endif;
-						?>
+							?>
+						</div>
 					</div>
 				</div>
-			</div>
+			<?php
+			endif;
+			wp_reset_postdata();
+			?>
 		</div>
 	</div>
 </section>
 
-<section class="video_customer secSpace bg-light">
-	<div class="container">
-		<h2 class="sec_title text-center mb-4">
-			KHÁCH HÀNG NÓI VỀ ULYTAN
-		</h2>
-		<div class="video_customer_slider">
-			<?php
-			$args = array(
-				'post_type' => 'video_customer',
-				'posts_per_page' => -1,
-			);
-			$query = new WP_Query($args);
-			if ($query->have_posts()):
+<?php
+$args = array(
+	'post_type' => 'video_customer',
+	'posts_per_page' => -1,
+);
+$query = new WP_Query($args);
+if ($query->have_posts()):
+?>
+	<section class="video_customer secSpace bg-light">
+		<div class="container">
+			<h2 class="sec_title text-center mb-4">
+				KHÁCH HÀNG NÓI VỀ ULYTAN
+			</h2>
+			<div class="video_customer_slider">
+				<?php
 				while ($query->have_posts()):
 					$query->the_post();
-			?>
+				?>
 					<div>
 						<div class="video_customer_item">
 							<?php
@@ -193,15 +210,16 @@ if ($banner):
 							?>
 						</div>
 					</div>
-			<?php
+				<?php
 				endwhile;
-				wp_reset_postdata();
-			endif;
-			?>
+				?>
+			</div>
 		</div>
-	</div>
-</section>
-
+	</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
 
 <?php
 get_footer();

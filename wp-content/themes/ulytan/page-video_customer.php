@@ -21,16 +21,47 @@ get_header();
 		<?php
 		wp_breadcrumbs();
 		?>
-		<div class="row justify-content-center">
-			<div class="col-lg-10">
-				<div class="editor">
-					<h1 class="title_page_default mb-4 text-center">
-						<?php the_title(); ?>
-					</h1>
-					<?php the_content(); ?>
-				</div>
+		<h2 class="sec_title text-center mb-4">
+			<?php the_title(); ?>
+		</h2>
+		<?php
+		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+		$args = array(
+			'post_type' => 'video_customer',
+			'posts_per_page' => 9,
+			'paged' => $paged,
+		);
+		$query = new WP_Query($args);
+		if ($query->have_posts()):
+		?>
+			<div class="row row_24">
+				<?php
+
+				while ($query->have_posts()):
+					$query->the_post();
+				?>
+					<div class="col-md-6 col-lg-4">
+						<div class="video_customer_item">
+							<?php
+							$featured_image = get_field('featured_image');
+							$iframe_video = get_field('iframe_video');
+							video_popup($iframe_video, $featured_image);
+							?>
+							<h3 class="video_customer_title">
+								<?php the_title(); ?>
+							</h3>
+						</div>
+					</div>
+				<?php
+				endwhile;
+				?>
 			</div>
-		</div>
+
+			<?php pagination($query); ?>
+		<?php
+		endif;
+		wp_reset_postdata();
+		?>
 	</div>
 </div>
 

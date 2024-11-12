@@ -21,7 +21,7 @@ $categories = get_the_category($post_id);
             </div>
         <?php endif; ?>
 
-        <a href="d-flex" href="<?php the_permalink(); ?>">
+        <a class="d-flex" href="<?php the_permalink(); ?>">
             <h3 class="single_post_title mb-0 wow" data-mh="title">
                 <?php the_title(); ?>
             </h3>

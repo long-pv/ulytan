@@ -414,3 +414,54 @@ function custom_excerpt_length($length)
 	return 20;
 }
 add_filter('excerpt_length', 'custom_excerpt_length');
+
+function force_comments_open($open, $post_id)
+{
+	return true;
+}
+add_filter('comments_open', 'force_comments_open', 10, 2);
+
+function custom_comment_form_fields($fields)
+{
+	$fields['author'] = '<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label>' .
+		'<input id="author" name="author" type="text" value="" size="30" required="required" /></p>';
+
+	$fields['email'] = '<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label>' .
+		'<input id="email" name="email" type="email" value="" size="30" required="required" /></p>';
+
+	$fields['url'] = '';
+
+	return $fields;
+}
+add_filter('comment_form_default_fields', 'custom_comment_form_fields');
+
+function custom_comment_form_title($defaults)
+{
+	$defaults['title_reply'] = 'Viết bình luận';
+	return $defaults;
+}
+add_filter('comment_form_defaults', 'custom_comment_form_title');
+
+function remove_comment_form_email_notice($defaults)
+{
+	$defaults['comment_notes_before'] = '';
+
+	return $defaults;
+}
+add_filter('comment_form_defaults', 'remove_comment_form_email_notice');
+
+function remove_comment_form_cookies_consent($fields)
+{
+	if (isset($fields['cookies'])) {
+		unset($fields['cookies']);
+	}
+	return $fields;
+}
+add_filter('comment_form_fields', 'remove_comment_form_cookies_consent');
+
+function change_comment_form_submit_button_text($defaults)
+{
+	$defaults['label_submit'] = 'Gửi bình luận';
+	return $defaults;
+}
+add_filter('comment_form_defaults', 'change_comment_form_submit_button_text');

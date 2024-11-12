@@ -18,31 +18,255 @@ array_push($arrPost, $post_id);
 get_header();
 ?>
 
-<main id="primary" class="site-main">
+<section class="secSpace">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 mb-4">
+				<div class="toc_block">
+					<div class="toc_title">Mục lục</div>
+					<div id="sticky-navigator">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-7 mb-4">
+				<?php
+				wp_breadcrumbs();
+				?>
+				<div class="single_post_editor editor">
+					<h1 class="mb-4">
+						<?php the_title(); ?>
+					</h1>
+					<?php the_content(); ?>
+				</div>
+			</div>
+			<div class="col-lg-2">
+				<div class="share_post mb-4">
+					<div class="share_post_title">
+						Chia sẻ bài viết
+					</div>
+					<div class="share_post_mxh">
+						<a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;" class="share_post_mxh_item">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+								<path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z" />
+							</svg>
+						</a>
+						<a href="javascript:void(0);" onclick="copyToClipboard('#copy2')" class="share_post_mxh_item">
+							<span id="copy2" style="display:none"><?php the_permalink(); ?></span>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+								<path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" />
+							</svg>
+						</a>
+					</div>
+				</div>
 
-	<?php
-	while (have_posts()) :
-		the_post();
-
-		get_template_part('template-parts/content', get_post_type());
-
-		the_post_navigation(
-			array(
-				'prev_text' => '<span class="nav-subtitle">' . esc_html__('Previous:', 'ulytan') . '</span> <span class="nav-title">%title</span>',
-				'next_text' => '<span class="nav-subtitle">' . esc_html__('Next:', 'ulytan') . '</span> <span class="nav-title">%title</span>',
-			)
-		);
-
-		// If comments are open or we have at least one comment, load up the comment template.
-		if (comments_open() || get_comments_number()) :
-			comments_template();
-		endif;
-
-	endwhile; // End of the loop.
-	?>
-
-</main><!-- #main -->
+				<div class="receive_doc">
+					<div class="share_post_title">
+						Đăng ký nhận tài liệu độc quyền
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 <?php
-get_sidebar();
+if (comments_open() || get_comments_number()) :
+?>
+	<section class="secSpace bg-light">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6">
+					<?php comment_form(); ?>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php
+endif;
+?>
+
+<?php
+$related_services = get_field('related_services') ?? [];
+if ($related_services) :
+	$args = array(
+		'post_type' => 'post',
+		'posts_per_page' => -1,
+		'post__in' => $related_services,
+		'orderby' => 'post__in',
+	);
+	$query = new WP_Query($args);
+	if ($query->have_posts()):
+?>
+		<section class="secSpace related_services">
+			<div class="container">
+				<h2 class="home_news_title mb-4">
+					Các dịch vụ liên quan
+				</h2>
+				<div class="row row_24">
+					<?php
+					while ($query->have_posts()):
+						$query->the_post();
+					?>
+						<div class="col-md-6 col-lg-4">
+							<?php get_template_part('template-parts/content_service'); ?>
+						</div>
+					<?php
+					endwhile;
+					?>
+				</div>
+			</div>
+		</section>
+<?php
+	endif;
+	wp_reset_postdata();
+endif;
+?>
+
+<?php
+$notarized_translation_news = get_field('notarized_translation_news', 'option') ?? [];
+if ($notarized_translation_news) :
+	$args = array(
+		'post_type' => 'post',
+		'posts_per_page' => -1,
+		'post__in' => $notarized_translation_news,
+		'orderby' => 'post__in',
+	);
+	$query = new WP_Query($args);
+	if ($query->have_posts()):
+?>
+		<section class="secSpace notarized_translation_news bg-light">
+			<div class="container">
+				<h2 class="home_news_title mb-4">
+					Tin tức dịch công chứng
+				</h2>
+				<div class="row">
+					<div class="col-lg-6">
+						<ul class="notarized_translation_news_list">
+							<?php
+							while ($query->have_posts()):
+								$query->the_post();
+							?>
+								<li>
+									<a class="notarized_translation_news_item" href="<?php the_permalink(); ?>">
+										<?php the_title(); ?>
+									</a>
+								</li>
+							<?php
+							endwhile;
+							?>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+<?php
+	endif;
+	wp_reset_postdata();
+endif;
+?>
+
+<?php
+$view_all_news = get_field('view_all_news') ?? '';
+$args = array(
+	'post_type' => 'post',
+	'posts_per_page' => '6',
+	'post__not_in' => $arrPost,
+);
+$query = new WP_Query($args);
+if ($query->have_posts()):
+?>
+	<section class="secSpace related_posts">
+		<div class="container">
+			<h2 class="home_news_title mb-4">
+				Bài viết liên quan
+			</h2>
+			<div class="row row_24">
+				<?php
+				while ($query->have_posts()):
+					$query->the_post();
+				?>
+					<div class="col-md-6 col-lg-4">
+						<?php get_template_part('template-parts/content_post'); ?>
+					</div>
+				<?php
+				endwhile;
+				?>
+			</div>
+		</div>
+	</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
+
+<script>
+	function copyToClipboard(selector) {
+		var textElement = document.querySelector(selector);
+		if (textElement) {
+			var tempInput = document.createElement('input');
+			tempInput.value = textElement.textContent;
+			document.body.appendChild(tempInput);
+			tempInput.select();
+
+			try {
+				var successful = document.execCommand('copy');
+				var msg = successful ? 'Copy thành công!' : 'Copy không thành công, vui lòng thử lại.';
+				alert(msg);
+			} catch (err) {
+				console.error('Oops, unable to copy', err);
+				alert('Copy không thành công, vui lòng thử lại.');
+			}
+
+			document.body.removeChild(tempInput);
+		}
+	}
+</script>
+
+<?php
 get_footer();
+?>
+<script src="<?php echo get_template_directory_uri() . '/assets/js/jquery-stickyNavigator.js'; ?>"></script>
+<script>
+	jQuery(document).ready(function($) {
+		$('#sticky-navigator').stickyNavigator({
+			wrapselector: '.single_post_editor',
+			targetselector: "h2,h3"
+
+		});
+
+		// Kiểm tra form bình luận khi submit
+		$('#commentform').submit(function(e) {
+			var isValid = true;
+
+			// Kiểm tra trường Tên
+			var name = $('#author').val();
+			if (name.trim() == '') {
+				isValid = false;
+				alert('Vui lòng nhập tên!');
+			}
+
+			// Kiểm tra trường Email
+			var email = $('#email').val();
+			var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+			if (email.trim() == '') {
+				isValid = false;
+				alert('Vui lòng nhập email!');
+			} else if (!emailPattern.test(email)) {
+				isValid = false;
+				alert('Email không hợp lệ!');
+			}
+
+			// Kiểm tra trường Bình luận
+			var comment = $('#comment').val();
+			if (comment.trim() == '') {
+				isValid = false;
+				alert('Vui lòng nhập bình luận!');
+			}
+
+			// Nếu không hợp lệ, ngừng gửi form
+			if (!isValid) {
+				e.preventDefault();
+			}
+		});
+	});
+</script>

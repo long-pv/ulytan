@@ -42,38 +42,28 @@ add_filter('xmlrpc_enabled', '__return_false');
 add_filter('upload_size_limit', 'PBP_increase_upload');
 function PBP_increase_upload($bytes)
 {
-    return 524288 * 4 * 100;
+    return 524288 * 4 * 10;
 }
 
-// Remove the Comments menu from the Dashboard
-function remove_comments_menu()
-{
-    remove_menu_page('edit-comments.php');
-}
-add_action('admin_menu', 'remove_comments_menu');
 
 // Remove wp's default comment function
 function disable_comments_and_pings_post_type()
 {
-    // Remove comments displayed in posts
-    remove_post_type_support('post', 'comments');
-    remove_post_type_support('post', 'trackbacks');
-
     // Automatically update status in admin settings
-    if (get_option('default_ping_status') != 'closed') {
-        update_option('default_ping_status', 'closed');
+    if (get_option('default_ping_status') != 'open') {
+        update_option('default_ping_status', 'open');
     }
-    if (get_option('default_comment_status') != 'closed') {
-        update_option('default_comment_status', 'closed');
+    if (get_option('default_comment_status') != 'open') {
+        update_option('default_comment_status', 'open');
     }
-    if (get_option('comments_notify') != 0) {
-        update_option('comments_notify', 0);
+    if (get_option('comments_notify') != 1) {
+        update_option('comments_notify', 1);
     }
     if (get_option('moderation_notify') != 1) {
         update_option('moderation_notify', 1);
     }
-    if (get_option('comment_registration') != 1) {
-        update_option('comment_registration', 1);
+    if (get_option('comment_registration') != 0) {
+        update_option('comment_registration', 0);
     }
     if (get_option('close_comments_for_old_posts') != 1) {
         update_option('close_comments_for_old_posts', 1);
@@ -93,8 +83,8 @@ function disable_comments_and_pings_post_type()
     if (get_option('close_comments_days_old') != 1) {
         update_option('close_comments_days_old', 1);
     }
-    if (get_option('default_pingback_flag') != 0) {
-        update_option('default_pingback_flag', 0);
+    if (get_option('default_pingback_flag') != 1) {
+        update_option('default_pingback_flag', 1);
     }
     if (get_option('comment_moderation') != 1) {
         update_option('comment_moderation', 1);
