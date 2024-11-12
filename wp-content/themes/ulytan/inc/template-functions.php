@@ -80,7 +80,9 @@ function video_popup($src_iframe, $thumb = null)
 			<div class="videoBlock__videoAction">
 				<a href="javascript:void(0);" class="videoBlock__playAction" data-toggle="modal" data-target="#videoUrl"
 					data-src="<?php echo $url; ?>">
-					<?php _e('Xem thêm', 'basetheme'); ?>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+						<path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z" />
+					</svg>
 				</a>
 			</div>
 		</div>
@@ -90,18 +92,18 @@ function video_popup($src_iframe, $thumb = null)
 
 function getYoutubeEmbedUrl($input)
 {
-	// Case 1: If the input is a direct URL (starting with https://)
 	if (filter_var($input, FILTER_VALIDATE_URL)) {
-		return $input; // Return the URL as is
+		return $input;
 	}
 
-	// Case 2: If the input is an HTML string containing an iframe
-	// Use regex to find the value of the src attribute
-	if (preg_match('/<iframe.*?src="([^"]+)".*?>/i', $input, $matches)) {
-		return $matches[1]; // Return the URL found in the src attribute of the iframe
+	if (preg_match('/<iframe[^>]+src=["\']([^"\']+)["\']/i', $input, $matches)) {
+		$url = $matches[1];
+		$parsedUrl = parse_url($url);
+		$cleanUrl = $parsedUrl['scheme'] . '://' . $parsedUrl['host'] . $parsedUrl['path'];
+
+		return $cleanUrl;
 	}
 
-	// If neither case, return null or an error message
 	return NO_IMAGE;
 }
 
@@ -251,4 +253,21 @@ function img_url($img = '', $size = 'medium')
 		$url = '';
 	}
 	return $url ?: NO_IMAGE;
+}
+
+/*
+ * Set post views count using post meta
+ */
+function set_post_views($postID)
+{
+	$countKey = 'post_views_count';
+	$count = get_post_meta($postID, $countKey, true);
+	if ($count == '') {
+		$count = 0;
+		delete_post_meta($postID, $countKey);
+		add_post_meta($postID, $countKey, '1');
+	} else {
+		$count++;
+		update_post_meta($postID, $countKey, $count);
+	}
 }

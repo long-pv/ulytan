@@ -87,6 +87,7 @@ if ($banner):
 						</div>
 				<?php
 					endwhile;
+					wp_reset_postdata();
 				endif;
 				?>
 			</div>
@@ -118,13 +119,43 @@ if ($banner):
 								</div>
 						<?php
 							endwhile;
+							wp_reset_postdata();
 						endif;
 						?>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-4">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae omnis eveniet, ut dolores eum incidunt id cupiditate odio ea, aut dolorem nesciunt officiis ad sapiente. Est porro aliquam totam ea.
+				<div class="most_read">
+					<h2 class="home_news_title mb-4">
+						Các bài đọc nhiều nhất
+					</h2>
+					<div class="most_read_list">
+						<?php
+						$args = array(
+							'post_type' => 'post',
+							'posts_per_page' => '10',
+							'order' => 'DESC',
+							'meta_key' => 'post_views_count',
+							'orderby' => 'meta_value_num',
+						);
+						$query = new WP_Query($args);
+						$index = 1;
+						if ($query->have_posts()):
+							while ($query->have_posts()):
+								$query->the_post();
+						?>
+								<a href="<?php the_permalink(); ?>" class="most_read_item">
+									<?php echo $index . ". " . get_the_title(); ?>
+								</a>
+						<?php
+								$index++;
+							endwhile;
+							wp_reset_postdata();
+						endif;
+						?>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
