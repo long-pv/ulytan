@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying archive pages
  *
@@ -8,44 +9,33 @@
  */
 
 get_header();
+$current_category = get_queried_object();
 ?>
 
-	<main id="primary" class="site-main">
+<div class="container">
+	<div class="secSpace">
+		<?php wp_breadcrumbs(); ?>
 
-		<?php if ( have_posts() ) : ?>
+		<h2 class="archive_cat_title">
+			<?php echo $current_category->name; ?>
+		</h2>
 
-			<header class="page-header">
-				<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
-
+		<div class="row row_24">
 			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
+			// list post
+			while (have_posts()):
 				the_post();
-
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
-
+			?>
+				<div class="col-md-6 col-lg-4">
+					<?php get_template_part('template-parts/content_post'); ?>
+				</div>
+			<?php
 			endwhile;
+			?>
+		</div>
 
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-	</main><!-- #main -->
-
+		<?php pagination(); ?>
+	</div>
+</div>
 <?php
-get_sidebar();
 get_footer();
