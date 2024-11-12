@@ -134,6 +134,23 @@
                     "delay": 0
                 }
             ]
+        },
+        {
+            "key": "field_6732ebb393a15",
+            "label": "View all news",
+            "name": "view_all_news",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -160,5 +177,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1731288846
+    "modified": 1731390485
 }

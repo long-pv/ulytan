@@ -115,6 +115,11 @@ function register_cpt_post_types()
 			'cap' => false,
 			'hierarchical' => false
 		],
+		'video_customer' => [
+			'labels' => __('Video customer', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
 	];
 
 	// $cpt_tax = [

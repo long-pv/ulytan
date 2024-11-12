@@ -123,6 +123,13 @@ if ($banner):
 						endif;
 						?>
 					</div>
+
+					<?php
+					$view_all_news = get_field('view_all_news') ?? '';
+					if ($view_all_news):
+					?>
+						<a class="view_all_news" href="<?php echo $view_all_news; ?>">Xem tất cả</a>
+					<?php endif; ?>
 				</div>
 			</div>
 			<div class="col-lg-4">
@@ -157,6 +164,40 @@ if ($banner):
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+</section>
+
+<section class="video_customer secSpace bg-light">
+	<div class="container">
+		<h2 class="sec_title text-center mb-4">
+			KHÁCH HÀNG NÓI VỀ ULYTAN
+		</h2>
+		<div class="video_customer_slider">
+			<?php
+			$args = array(
+				'post_type' => 'video_customer',
+				'posts_per_page' => -1,
+			);
+			$query = new WP_Query($args);
+			if ($query->have_posts()):
+				while ($query->have_posts()):
+					$query->the_post();
+			?>
+					<div>
+						<div class="video_customer_item">
+							<?php
+							$featured_image = get_field('featured_image');
+							$iframe_video = get_field('iframe_video');
+							video_popup($iframe_video, $featured_image);
+							?>
+						</div>
+					</div>
+			<?php
+				endwhile;
+				wp_reset_postdata();
+			endif;
+			?>
 		</div>
 	</div>
 </section>
