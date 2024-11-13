@@ -96,4 +96,61 @@
 			},
 		],
 	});
+
+	$("#sticky-navigator").stickyNavigator({
+		wrapselector: ".single_post_editor",
+		targetselector: "h2,h3",
+	});
+
+	// Kiểm tra form bình luận khi submit
+	$("#commentform").submit(function (e) {
+		var isValid = true;
+
+		// Kiểm tra trường Tên
+		var name = $("#author").val();
+		if (name.trim() == "") {
+			isValid = false;
+			alert("Vui lòng nhập tên!");
+		}
+
+		// Kiểm tra trường Email
+		var email = $("#email").val();
+		var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+		if (email.trim() == "") {
+			isValid = false;
+			alert("Vui lòng nhập email!");
+		} else if (!emailPattern.test(email)) {
+			isValid = false;
+			alert("Email không hợp lệ!");
+		}
+
+		// Kiểm tra trường Bình luận
+		var comment = $("#comment").val();
+		if (comment.trim() == "") {
+			isValid = false;
+			alert("Vui lòng nhập bình luận!");
+		}
+
+		// Nếu không hợp lệ, ngừng gửi form
+		if (!isValid) {
+			e.preventDefault();
+		}
+	});
+
+	$("#searchInput").on("input", function () {
+		var searchText = $(this).val().toLowerCase();
+
+		// Duyệt qua tất cả các accordion-item
+		$(".accordion .accordion__item").each(function () {
+			var questionText = $(this).find(".accordion__btn").text().toLowerCase(); // lấy văn bản từ .accordion__btn
+			var answerText = $(this).find(".accordion__body").text().toLowerCase(); // lấy văn bản từ .accordion__body
+
+			// Kiểm tra nếu văn bản tìm kiếm tồn tại trong .accordion__btn hoặc .accordion__body
+			if (questionText.includes(searchText) || answerText.includes(searchText)) {
+				$(this).show();
+			} else {
+				$(this).hide();
+			}
+		});
+	});
 })(jQuery, window);

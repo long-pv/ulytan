@@ -548,3 +548,12 @@ function accordion($data = [])
 <?php
 	endif;
 }
+
+function filter_search_to_posts_only($query)
+{
+	if ($query->is_search && !is_admin() && $query->is_main_query()) {
+		$query->set('post_type', 'post');
+		$query->set('posts_per_page', 9);
+	}
+}
+add_action('pre_get_posts', 'filter_search_to_posts_only');
