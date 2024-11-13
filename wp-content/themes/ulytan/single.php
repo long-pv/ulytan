@@ -61,37 +61,39 @@ get_header();
 				</div>
 			</div>
 			<div class="col-lg-2">
-				<div class="share_post mb-4">
-					<div class="share_post_title">
-						Chia sẻ bài viết
-					</div>
-					<div class="share_post_mxh">
-						<a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;" class="share_post_mxh_item">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-								<path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z" />
-							</svg>
-						</a>
-						<a href="javascript:void(0);" onclick="copyToClipboard('#copy2')" class="share_post_mxh_item">
-							<span id="copy2" style="display:none"><?php the_permalink(); ?></span>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-								<path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" />
-							</svg>
-						</a>
-					</div>
-				</div>
-
-				<div class="receive_doc">
-					<?php
-					$sign_up_for_exclusive_material = get_field('sign_up_for_exclusive_material', 'option') ?? null;
-					if ($sign_up_for_exclusive_material):
-					?>
+				<div class="post_sidebar_right">
+					<div class="share_post mb-4">
 						<div class="share_post_title">
-							Đăng ký nhận tài liệu độc quyền
+							Chia sẻ bài viết
 						</div>
-						<div class="contact_form_7">
-							<?php echo do_shortcode('[contact-form-7 id="' . $sign_up_for_exclusive_material . '"]'); ?>
+						<div class="share_post_mxh">
+							<a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;" class="share_post_mxh_item">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+									<path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z" />
+								</svg>
+							</a>
+							<a href="javascript:void(0);" onclick="copyToClipboard('#copy2')" class="share_post_mxh_item">
+								<span id="copy2" style="display:none"><?php the_permalink(); ?></span>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+									<path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" />
+								</svg>
+							</a>
 						</div>
-					<?php endif; ?>
+					</div>
+
+					<div class="receive_doc">
+						<?php
+						$sign_up_for_exclusive_material = get_field('sign_up_for_exclusive_material', 'option') ?? null;
+						if ($sign_up_for_exclusive_material):
+						?>
+							<div class="share_post_title">
+								Đăng ký nhận tài liệu độc quyền
+							</div>
+							<div class="contact_form_7">
+								<?php echo do_shortcode('[contact-form-7 id="' . $sign_up_for_exclusive_material . '"]'); ?>
+							</div>
+						<?php endif; ?>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -99,9 +101,44 @@ get_header();
 </section>
 
 <?php
+$faqs = get_field('faqs') ?? [];
+if ($faqs):
+	$args = array(
+		'post_type' => 'faqs',
+		'posts_per_page' => -1,
+		'post__in' => $faqs,
+		'orderby' => 'post__in',
+	);
+	$query = new WP_Query($args);
+	if ($query->have_posts()):
+		$data = [];
+
+		while ($query->have_posts()):
+			$query->the_post();
+			$data[] = [
+				'title' => get_the_title(),
+				'content' => apply_filters('the_content', get_the_content()),
+			];
+		endwhile;
+?>
+		<section class="secSpace bg-light">
+			<div class="container">
+				<input type="text" id="searchInput" class="post_search_faqs mb-4" placeholder="Tìm kiếm câu hỏi và trả lời">
+				<?php
+				accordion($data);
+				?>
+			</div>
+		</section>
+<?php
+	endif;
+	wp_reset_postdata();
+endif;
+?>
+
+<?php
 if (comments_open() || get_comments_number()) :
 ?>
-	<section class="secSpace bg-light">
+	<section class="secSpace--top">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
@@ -310,6 +347,23 @@ get_footer();
 			if (!isValid) {
 				e.preventDefault();
 			}
+		});
+
+		$('#searchInput').on('input', function() {
+			var searchText = $(this).val().toLowerCase();
+
+			// Duyệt qua tất cả các accordion-item
+			$('.accordion .accordion__item').each(function() {
+				var questionText = $(this).find('.accordion__btn').text().toLowerCase(); // lấy văn bản từ .accordion__btn
+				var answerText = $(this).find('.accordion__body').text().toLowerCase(); // lấy văn bản từ .accordion__body
+
+				// Kiểm tra nếu văn bản tìm kiếm tồn tại trong .accordion__btn hoặc .accordion__body
+				if (questionText.includes(searchText) || answerText.includes(searchText)) {
+					$(this).show();
+				} else {
+					$(this).hide();
+				}
+			});
 		});
 	});
 </script>
