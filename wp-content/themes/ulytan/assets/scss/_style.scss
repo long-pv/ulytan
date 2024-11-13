@@ -898,17 +898,6 @@
     margin-bottom: 24px;
 }
 
-.page_contact_form {
-    input {
-        width: 100%;
-        height: 40px;
-        padding: 4px 12px;
-        border: 1px solid $body;
-        outline: none !important;
-        border-radius: 4px;
-    }
-}
-
 .page_contact_sidebar_head {
     padding: 8px 12px;
     background-color: #e6e6e6;
@@ -916,4 +905,92 @@
     font-weight: 700;
     border-bottom: 3px solid $primary;
     margin-bottom: 16px;
+}
+
+.page_contact_see_more {
+    color: $primary;
+    font-weight: 600;
+    text-decoration: underline !important;
+}
+
+.contact_label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.contact_input {
+    width: 100%;
+    height: 40px;
+    padding: 4px 12px;
+    border: 1px solid $body;
+    outline: none !important;
+    border-radius: 4px;
+
+    &+.error {
+        color: $danger;
+    }
+}
+
+.page_contact_service_table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+        border: solid 1px #ddd;
+        padding: 5px !important;
+        vertical-align: middle;
+    }
+}
+
+.td_checkbox {
+    text-align: center;
+}
+
+.contact_submit {
+    background-color: $primary;
+    border: none !important;
+    outline: none !important;
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+#upload_file_input {
+    width: 100%;
+}
+
+#ajax-loader {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

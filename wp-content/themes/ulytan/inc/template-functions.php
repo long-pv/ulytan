@@ -37,6 +37,8 @@ function activate_my_plugins()
 		'wordpress-seo\wp-seo.php',
 		'wp-cerber\wp-cerber.php',
 		'all-in-one-wp-migration-master\all-in-one-wp-migration.php',
+		'wp-mail-smtp\wp_mail_smtp.php',
+		'contact-form-7\wp-contact-form-7.php',
 	];
 
 	foreach ($plugins as $plugin) {
@@ -127,6 +129,11 @@ function register_cpt_post_types()
 		],
 		'faqs' => [
 			'labels' => __('FAQs', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
+		'contact_info' => [
+			'labels' => __('Contact information', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
@@ -557,3 +564,75 @@ function filter_search_to_posts_only($query)
 	}
 }
 add_action('pre_get_posts', 'filter_search_to_posts_only');
+
+// The function "write_log" is used to write debug logs to a file in PHP.
+function write_log($log = null, $title = 'Debug')
+{
+	if ($log) {
+		if (is_array($log) || is_object($log)) {
+			$log = print_r($log, true);
+		}
+
+		$timestamp = date('Y-m-d H:i:s');
+		$text = '[' . $timestamp . '] : ' . $title . ' - Log: ' . $log . "\n";
+		$log_file = WP_CONTENT_DIR . '/debug.log';
+		$file_handle = fopen($log_file, 'a');
+		fwrite($file_handle, $text);
+		fclose($file_handle);
+	}
+}
+
+// Hook để xử lý yêu cầu AJAX
+add_action('wp_ajax_save_contact_info', 'save_contact_info');
+add_action('wp_ajax_nopriv_save_contact_info', 'save_contact_info'); // Để cho phép người dùng chưa đăng nhập
+
+function save_contact_info()
+{
+	// Lấy dữ liệu từ AJAX
+	write_log($_POST);
+
+	if (!empty($_POST)) {
+		$data = $_POST;
+		// Tạo một post mới của custom post type 'contact_info'
+		$new_post = array(
+			'post_type'   => 'contact_info',
+			'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['email']),
+			'post_status' => 'publish',
+		);
+
+		// Tạo post và lấy ID của post mới
+		$post_id = wp_insert_post($new_post);
+
+		if ($post_id) {
+			// Cập nhật ACF fields
+			if (function_exists('update_field')) {
+				update_field('phone', sanitize_text_field($data['phone']), $post_id);
+				update_field('email', sanitize_text_field($data['email']), $post_id);
+				update_field('services',   implode(', ', $data['services']), $post_id);
+
+				if (isset($_FILES['upload_file']) && !empty($_FILES['upload_file']['name'])) {
+					$file = $_FILES['upload_file'];
+					// Upload file
+					$upload = wp_handle_upload($file, array('test_form' => false));
+
+					if (isset($upload['file'])) {
+						$file_url = $upload['url'];
+						update_field('upload_file', $file_url, $post_id);
+					}
+				}
+
+				if (isset($data['google_driver'])) {
+					update_field('google_driver', sanitize_text_field($data['google_driver']), $post_id);
+				}
+			}
+
+			wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
+		} else {
+			wp_send_json_error(array('message' => 'Không thể lưu thông tin'));
+		}
+	} else {
+		wp_send_json_error(array('message' => 'Dữ liệu không hợp lệ'));
+	}
+
+	wp_die(); // Kết thúc AJAX request
+}

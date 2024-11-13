@@ -49,6 +49,10 @@
     </div>
 </footer>
 
+<div id="ajax-loader" style="display: none;">
+    <div class="spinner"></div>
+</div>
+
 <!-- modal video -->
 <div class="modal modalVideo fade" id="videoUrl" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel"
     aria-hidden="true">

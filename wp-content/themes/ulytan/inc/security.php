@@ -133,11 +133,10 @@ function restrict_file_types($mimes)
         'gif' => 'image/gif',
         'pdf' => 'application/pdf',
         'mp4' => 'video/mp4',
-        // 'gif' => 'image/gif',
-        // 'doc' => 'application/msword',
-        // 'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        // 'csv' => 'text/csv',
-        // 'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'doc' => 'application/msword',
+        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'csv' => 'text/csv',
+        'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     );
 
     $mimes = array_intersect($allowed_mime_types, $mimes);
@@ -281,7 +280,7 @@ function custom_login_logo()
       background-size: contain !important;
       width: 100% !important;
       height: 80px !important;
-      display: flex !important;
+      display: none !important;
       background-color: #fff;
     }
   </style>';
