@@ -120,6 +120,16 @@ function register_cpt_post_types()
 			'cap' => false,
 			'hierarchical' => false
 		],
+		'notarization' => [
+			'labels' => __('Notarization', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
+		'faqs' => [
+			'labels' => __('FAQs', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
 	];
 
 	// $cpt_tax = [

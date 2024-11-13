@@ -32,10 +32,16 @@ get_header();
 				<?php
 				wp_breadcrumbs();
 				?>
+
 				<div class="single_post_editor editor">
 					<h1 class="mb-4">
 						<?php the_title(); ?>
 					</h1>
+					<div class="single_post_info">
+						<div class="single_post_date">
+
+						</div>
+					</div>
 					<?php the_content(); ?>
 				</div>
 			</div>
@@ -123,46 +129,60 @@ endif;
 ?>
 
 <?php
-$notarized_translation_news = get_field('notarized_translation_news', 'option') ?? [];
-if ($notarized_translation_news) :
-	$args = array(
-		'post_type' => 'post',
-		'posts_per_page' => -1,
-		'post__in' => $notarized_translation_news,
-		'orderby' => 'post__in',
-	);
-	$query = new WP_Query($args);
-	if ($query->have_posts()):
+$paged = isset($_GET['pag']) ? $_GET['pag'] : 1;
+$args = array(
+	'post_type' => 'notarization',
+	'posts_per_page' => 4,
+	'paged' => $paged,
+);
+$query = new WP_Query($args);
+if ($query->have_posts()):
 ?>
-		<section class="secSpace notarized_translation_news bg-light">
-			<div class="container">
-				<h2 class="home_news_title mb-4">
-					Tin tức dịch công chứng
-				</h2>
-				<div class="row">
-					<div class="col-lg-6">
-						<ul class="notarized_translation_news_list">
-							<?php
-							while ($query->have_posts()):
-								$query->the_post();
-							?>
-								<li>
-									<a class="notarized_translation_news_item" href="<?php the_permalink(); ?>">
-										<?php the_title(); ?>
-									</a>
-								</li>
-							<?php
-							endwhile;
-							?>
-						</ul>
-					</div>
+	<section class="secSpace notarized_translation_news bg-light" id="notarized_translation_news">
+		<div class="container">
+			<h2 class="home_news_title mb-4">
+				Tin tức dịch công chứng
+			</h2>
+			<div class="row">
+				<div class="col-lg-6">
+					<ul class="notarized_translation_news_list">
+						<?php
+						while ($query->have_posts()):
+							$query->the_post();
+						?>
+							<li>
+								<a class="notarized_translation_news_item" href="<?php the_permalink(); ?>">
+									<?php the_title(); ?>
+								</a>
+							</li>
+						<?php
+						endwhile;
+						?>
+					</ul>
 				</div>
 			</div>
-		</section>
+
+			<?php
+			echo '<div class="pagination justify-content-start">';
+			echo paginate_links(
+				array(
+					'total'   => $query->max_num_pages,
+					'current' => $paged,
+					'format'  => '?pag=%#%',
+					'end_size' => 2,
+					'mid_size' => 1,
+					'prev_text' => __('Trước', 'basetheme'),
+					'next_text' => __('Sau', 'basetheme'),
+					'add_fragment' => '#notarized_translation_news',
+				)
+			);
+			echo '</div>';
+			?>
+		</div>
+	</section>
 <?php
-	endif;
-	wp_reset_postdata();
 endif;
+wp_reset_postdata();
 ?>
 
 <?php
