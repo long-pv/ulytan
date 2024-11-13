@@ -753,3 +753,70 @@
     font-weight: 700;
     margin-bottom: 16px;
 }
+
+.single_post_info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.single_post_info_item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    svg {
+        width: 14px;
+        height: 14px;
+        fill: $primary;
+    }
+
+    span {
+        font-size: 14px;
+    }
+}
+
+.single_post_info_line {
+    width: 1px;
+    height: 100%;
+    background-color: $body;
+}
+
+.contact_form_7 {
+    p {
+        margin: 0px !important;
+    }
+
+    br {
+        display: none !important;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        height: 40px;
+        padding: 4px 12px;
+        border: 1px solid $body;
+        outline: none !important;
+        border-radius: 4px;
+    }
+
+    .wpcf7-form-control-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .wpcf7-submit {
+        background-color: $primary;
+        color: #fff;
+        font-weight: 600;
+        border: none !important;
+        margin-top: 16px;
+    }
+
+    .wpcf7-response-output {
+        margin: 0px !important;
+    }
+}

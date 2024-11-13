@@ -34,12 +34,27 @@ get_header();
 				?>
 
 				<div class="single_post_editor editor">
-					<h1 class="mb-4">
+					<h1 class="mb-3">
 						<?php the_title(); ?>
 					</h1>
-					<div class="single_post_info">
-						<div class="single_post_date">
+					<div class="single_post_info mb-2">
+						<div class="single_post_info_item">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+								<path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
+							</svg>
+							<span>
+								<?php echo get_the_date('d/m/Y'); ?>
+							</span>
+						</div>
+						<div class="single_post_info_line"></div>
+						<div class="single_post_info_item">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+								<path d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z" />
+							</svg>
 
+							<span>
+								<?php echo $post_views . ' views'; ?>
+							</span>
 						</div>
 					</div>
 					<?php the_content(); ?>
@@ -66,9 +81,17 @@ get_header();
 				</div>
 
 				<div class="receive_doc">
-					<div class="share_post_title">
-						Đăng ký nhận tài liệu độc quyền
-					</div>
+					<?php
+					$sign_up_for_exclusive_material = get_field('sign_up_for_exclusive_material', 'option') ?? null;
+					if ($sign_up_for_exclusive_material):
+					?>
+						<div class="share_post_title">
+							Đăng ký nhận tài liệu độc quyền
+						</div>
+						<div class="contact_form_7">
+							<?php echo do_shortcode('[contact-form-7 id="' . $sign_up_for_exclusive_material . '"]'); ?>
+						</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,6 @@
 {
     "key": "group_673385c55ffeb",
-    "title": "Post settings",
+    "title": "Post details",
     "fields": [
         {
             "key": "field_673385c821467",
@@ -52,5 +52,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1731431541
+    "modified": 1731469214
 }
