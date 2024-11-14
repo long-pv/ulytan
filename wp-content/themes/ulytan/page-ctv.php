@@ -211,13 +211,403 @@ get_header();
 							<div class="custom_dropdown">
 								<div class="custom_dropdown_button">Chọn tùy chọn</div>
 								<div class="custom_dropdown_menu">
-									<label class="custom_dropdown_item" for="option1">
-										<input type="checkbox" id="option1"> Tùy chọn 1
-									</label>
-									<label class="custom_dropdown_item" for="option2">
-										<input type="checkbox" id="option2"> Tùy chọn 2
-									</label>
+									<div class="group-language">
+										<div class="root">1.Nhóm luật</div>
+										<div class="item">
+											<label><input type="checkbox" name="language_speciality[]" value="Luật kinh tế"> Luật kinh tế</label>
+											<label><input type="checkbox" name="language_speciality[]" value="Luật dân sự"> Luật dân sự</label>
+											<label><input type="checkbox" name="language_speciality[]" value="Luật quốc tế"> Luật quốc tế</label>
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">2.Nhóm kinh tế</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Marketing"> Marketing</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Tài chính - Ngân hàng"> Tài chính - Ngân hàng</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kế toán"> Kế toán</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Bảo hiểm"> Bảo hiểm</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">3.Nhóm dược học</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Dược học"> Dược học</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">4.Nhóm y học</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Sản khoa"> Sản khoa</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Nội khoa"> Nội khoa</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Ngoại khoa"> Ngoại khoa</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Y học cổ truyền"> Y học cổ truyền</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Răng-hàm-mặt"> Răng-hàm-mặt</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Điều dưỡng"> Điều dưỡng</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật Y học"> Kỹ thuật Y học</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Dinh dưỡng"> Dinh dưỡng</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">5.Công nghệ thông tin</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật máy tính"> Kỹ thuật máy tính</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Truyền thông và mạng máy tính"> Truyền thông và mạng máy tính</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật phần mềm"> Kỹ thuật phần mềm</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Hệ thống thông tin"> Hệ thống thông tin</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Toán-tin ứng dụng"> Toán-tin ứng dụng</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">6.Nhóm Điện-điện tử</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật điện - điện tử"> Kỹ thuật điện - điện tử</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật điều khiển tự động hóa"> Kỹ thuật điều khiển tự động hóa</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật điện tử truyền thông"> Kỹ thuật điện tử truyền thông</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Hệ thống điện"> Hệ thống điện</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Nhiệt điện"> Nhiệt điện</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Thủy điện"> Thủy điện</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Năng lượng hạt nhân"> Năng lượng hạt nhân</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">7.Cơ khí</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Cơ kĩ thuật"> Cơ kĩ thuật</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ kĩ thuật ô tô"> Công nghệ kĩ thuật ô tô</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kĩ thuật cơ khí"> Kĩ thuật cơ khí</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kĩ thuật hàng không"> Kĩ thuật hàng không</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kĩ thuật tàu thủy"> Kĩ thuật tàu thủy</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ chế tạo máy"> Công nghệ chế tạo máy</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ kĩ thuật cơ điện tử"> Công nghệ kĩ thuật cơ điện tử</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kĩ thuật nồi hơi"> Kĩ thuật nồi hơi</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kĩ thuật nhiệt nóng"> Kĩ thuật nhiệt nóng</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kĩ thuật nhiệt lạnh"> Kĩ thuật nhiệt lạnh</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">8.Nhóm Khoa học và công nghệ vật liệu</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Vật liệu Polyme"> Vật liệu Polyme</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Vật liệu Silicat"> Vật liệu Silicat</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Vật liệu kim loại - Hợp kim"> Vật liệu kim loại - Hợp kim</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">9.Nhóm công nghệ sinh học</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật sinh học"> Kỹ thuật sinh học</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật môi trường"> Kỹ thuật môi trường</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ thực phẩm"> Công nghệ thực phẩm</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ sinh học"> Công nghệ sinh học</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">10.Nhóm công nghệ hóa học</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Hóa vô cơ"> Hóa vô cơ</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Hóa hữu cơ"> Hóa hữu cơ</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Hóa phân tích"> Hóa phân tích</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ in và xuất bản"> Công nghệ in và xuất bản</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ hóa dầu"> Công nghệ hóa dầu</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">11.Nhóm công nghiệp mỏ-khai khoáng</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật mỏ"> Kỹ thuật mỏ</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật tuyển khoáng"> Kỹ thuật tuyển khoáng</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật địa vật lí"> Kỹ thuật địa vật lí</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật trắc địa bản đồ"> Kỹ thuật trắc địa bản đồ</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">12.Nhóm xây dựng</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kiến trúc"> Kiến trúc</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Quy hoạch vùng và đô thị"> Quy hoạch vùng và đô thị</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật công trình xây dựng"> Kỹ thuật công trình xây dựng</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật xây dựng công trình giao thông"> Kỹ thuật xây dựng công trình giao thông</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật xây dựng công trình cầu đường"> Kỹ thuật xây dựng công trình cầu đường</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Quản lý xây dựng"> Quản lý xây dựng</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kinh tế xây dựng"> Kinh tế xây dựng</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật công trình biển"> Kỹ thuật công trình biển</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">13.Nhóm vật lý - kỹ thuật</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Vật lý-Kỹ thuật"> Vật lý-Kỹ thuật</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">14.Nhóm khoa học tự nhiên</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Toán học"> Toán học</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Khoa học đất"> Khoa học đất</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Vật lý học"> Vật lý học</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">15.Nông lâm - ngư nghiệp</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Khoa học cây trồng"> Khoa học cây trồng</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Bảo vệ thực vật"> Bảo vệ thực vật</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Nông nghiệp"> Nông nghiệp</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ rau quả và cảnh quan"> Công nghệ rau quả và cảnh quan</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ sau thu hoạch"> Công nghệ sau thu hoạch</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Chăn nuôi"> Chăn nuôi</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Thú y"> Thú y</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Lâm sinh"> Lâm sinh</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kinh tế nông nghiệp"> Kinh tế nông nghiệp</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Quản lý tài nguyên rừng"> Quản lý tài nguyên rừng</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ chế biến lâm sản"> Công nghệ chế biến lâm sản</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Nuôi trồng thủy sản"> Nuôi trồng thủy sản</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">16.Nhóm thủy lợi</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật tài nguyên nước"> Kỹ thuật tài nguyên nước</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật công trình biển"> Kỹ thuật công trình biển</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật thủy điện và năng lượng tái tạo"> Kỹ thuật thủy điện và năng lượng tái tạo</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Thủy văn"> Thủy văn</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Cấp thoát nước"> Cấp thoát nước</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">17.Nhóm khoa học xã hội</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Chính trị học"> Chính trị học</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Lịch sử"> Lịch sử</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Nhân học"> Nhân học</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Tâm lý học"> Tâm lý học</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Triết học"> Triết học</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Văn học"> Văn học</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Xã hội học"> Xã hội học</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">18.Nhóm truyền thông-báo chí</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Công nghệ đa phương tiện"> Công nghệ đa phương tiện</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Quan hệ công chúng"> Quan hệ công chúng</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">19.Nhóm công đoàn-Nhân lực</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Bảo hộ lao động"> Bảo hộ lao động</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Quản trị nhân lực"> Quản trị nhân lực</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">20.Nhóm an ninh</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Điều tra trinh sát"> Điều tra trinh sát</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Điều tra hình sự"> Điều tra hình sự</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Quản lý nhà nước về an ninh trật tự"> Quản lý nhà nước về an ninh trật tự</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Kỹ thuật hình sự"> Kỹ thuật hình sự</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Quản lý giáo dục cải tạo phạm nhân"> Quản lý giáo dục cải tạo phạm nhân</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">21.Nhóm phòng cháy chữa cháy</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Phòng cháy chữa cháy"> Phòng cháy chữa cháy</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Cứu hộ"> Cứu hộ</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">22.Nhóm mỹ thuật</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Hội họa"> Hội họa</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Đồ họa"> Đồ họa</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Thiết kế đồ họa"> Thiết kế đồ họa</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Điêu khắc"> Điêu khắc</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Lý luận, lịch sử và phê bình mỹ thuật"> Lý luận, lịch sử và phê bình mỹ thuật</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Gốm"> Gốm</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">23.Nhóm thể dục, thể thao</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Giáo dục thể chất"> Giáo dục thể chất</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Huấn luyện thể thao"> Huấn luyện thể thao</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Y sinh học thể dục thể thao"> Y sinh học thể dục thể thao</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">24.Nhóm âm nhạc</div>
+										<div class="item">
+
+											<label><input type="checkbox" name="language_speciality[]" value="Sáng tác âm nhạc"> Sáng tác âm nhạc</label>
+
+											<label><input type="checkbox" name="language_speciality[]" value="Thanh nhạc"> Thanh nhạc</label>
+
+										</div>
+									</div>
+
+									<div class="group-language">
+										<div class="root">25.Nhóm Khác</div>
+										<div class="item">
+											<label><input type="checkbox" name="language_speciality[]" value="Khác"> Khác</label>
+										</div>
+									</div>
 								</div>
+
+								<input type="text" class="page_ctv_form_hidden" name="language_speciality_val">
 							</div>
 						</div>
 					</div>
@@ -507,6 +897,9 @@ get_footer();
 				how_do_you_know_val: {
 					required: true,
 				},
+				language_speciality_val: {
+					required: true,
+				},
 			},
 			messages: {
 				// full_name: {
@@ -565,7 +958,7 @@ get_footer();
 				dropdown.find('input[type="checkbox"]:checked').each(function() {
 					selectedLanguages.push($(this).val());
 				});
-				dropdown.find('input.page_ctv_form_hidden').val(selectedLanguages.join(', '));
+				dropdown.find('input.page_ctv_form_hidden').val(selectedLanguages.join(', ')).trigger('change');
 			});
 		});
 	});
