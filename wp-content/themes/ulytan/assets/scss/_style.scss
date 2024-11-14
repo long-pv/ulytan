@@ -1002,3 +1002,163 @@
 .radio_group_note {
     font-size: 12px;
 }
+
+.page_ctv_form {
+    border: 1px solid $primary;
+    padding: 24px;
+    position: relative;
+    margin-top: 60px;
+
+    @include media-breakpoint-down(md) {
+        padding: 16px;
+    }
+}
+
+.page_ctv_form_header {
+    display: flex;
+    justify-content: center;
+
+    @include media-breakpoint-up(lg) {
+        transform: translateY(-50%);
+        margin-top: -24px;
+        padding: 0px 40px;
+    }
+}
+
+.page_ctv_form_title {
+    background: $primary;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 12px;
+    text-align: center;
+
+    @include media-breakpoint-down(md) {
+        margin-bottom: 16px;
+    }
+}
+
+.page_ctv_form_label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.page_ctv_form_input {
+    width: 100%;
+    height: 40px;
+    padding: 4px 12px;
+    border: 1px solid $body;
+    outline: none !important;
+    border-radius: 4px;
+
+    &+.error {
+        color: $danger;
+    }
+}
+
+.page_ctv_form_textarea {
+    width: 100%;
+    height: 120px;
+    padding: 4px 12px;
+    border: 1px solid $body;
+    outline: none !important;
+    border-radius: 4px;
+
+    &+.error {
+        color: $danger;
+    }
+}
+
+.page_ctv_form_note {
+    color: #888;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.page_ctv_form_group_radio {
+    display: flex;
+    gap: 16px;
+}
+
+.custom_dropdown {
+    position: relative;
+    display: block;
+}
+
+.custom_dropdown_button {
+    padding: 4px 12px;
+    background-color: #fff;
+    border: 1px solid $body;
+    cursor: pointer;
+    border-radius: 4px;
+    height: 40px;
+    width: 100%;
+    outline: none !important;
+    display: flex;
+    align-items: center;
+}
+
+.custom_dropdown_menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.custom_dropdown_menu label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.custom_dropdown_menu label:last-child {
+    margin-bottom: 0;
+}
+
+.page_ctv_form_group_item {
+    margin-bottom: 16px;
+
+    &:last-child {
+        margin-bottom: 0px;
+    }
+}
+
+.page_ctv_form_upload_file {
+    width: 100%;
+
+    &+.error {
+        color: $danger;
+    }
+}
+
+.page_ctv_form_group {
+    position: relative;
+
+    .error {
+        color: $danger;
+    }
+}
+
+.page_ctv_form_hidden {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0px;
+    height: 0px;
+    visibility: hidden;
+}

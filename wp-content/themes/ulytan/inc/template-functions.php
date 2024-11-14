@@ -133,7 +133,12 @@ function register_cpt_post_types()
 			'hierarchical' => false
 		],
 		'contact_info' => [
-			'labels' => __('Contact information', 'basetheme'),
+			'labels' => __('Form Contact Info', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
+		'form_ctv' => [
+			'labels' => __('Form CTV', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
@@ -626,6 +631,72 @@ function save_contact_info()
 						if (isset($data['google_driver'])) {
 							update_field('google_driver', sanitize_text_field($data['google_driver']), $post_id);
 						}
+					}
+
+					wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
+				} else {
+					wp_send_json_error(array('message' => 'Không thể lưu thông tin'));
+				}
+			} else {
+				wp_send_json_error(array('message' => 'Không thể gửi email'));
+			}
+		} else {
+			wp_send_json_error(array('message' => 'Email không hợp lệ'));
+		}
+	} else {
+		wp_send_json_error(array('message' => 'Dữ liệu không hợp lệ'));
+	}
+	wp_die();
+}
+
+
+// Hook để xử lý yêu cầu AJAX
+add_action('wp_ajax_save_form_ctv', 'save_form_ctv');
+add_action('wp_ajax_nopriv_save_form_ctv', 'save_form_ctv'); // Để cho phép người dùng chưa đăng nhập
+
+function save_form_ctv()
+{
+	// Lấy dữ liệu từ AJAX
+	if (!empty($_POST)) {
+		$data = $_POST;
+		if (isset($data['email']) && is_email($data['email'])) {
+			$to = $data['email'];
+			$subject = 'Mail cảm ơn đăng ký dịch vụ';
+			$headers = array('Content-Type: text/html; charset=UTF-8');
+			$message = 'Cảm ơn bạn đã gửi yêu cầu sử dụng dịch vụ.';
+
+			if (wp_mail($to, $subject, $message, $headers)) {
+				$new_post = array(
+					'post_type'   => 'form_ctv',
+					'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['email']),
+					'post_status' => 'publish',
+				);
+				$post_id = wp_insert_post($new_post);
+
+				if ($post_id) {
+					// Cập nhật ACF fields
+					if (function_exists('update_field')) {
+						update_field('full_name', sanitize_text_field($data['full_name']), $post_id);
+						update_field('birthdate', sanitize_text_field($data['birthdate']), $post_id);
+						update_field('phone', sanitize_text_field($data['phone']), $post_id);
+						update_field('email', sanitize_text_field($data['email']), $post_id);
+						update_field('speak_language', sanitize_text_field($data['speak_language']), $post_id);
+						update_field('graduation_school', sanitize_text_field($data['graduation_school']), $post_id);
+						update_field('graduation_year', sanitize_text_field($data['graduation_year']), $post_id);
+						update_field('translation_unit', sanitize_text_field($data['translation_unit']), $post_id);
+						update_field('translation_unit_name', sanitize_text_field($data['translation_unit_name']), $post_id);
+						update_field('dictionary', sanitize_text_field($data['dictionary']), $post_id);
+						update_field('registration_language_val', sanitize_text_field($data['registration_language_val']), $post_id);
+
+						// if (isset($_FILES['upload_file']) && !empty($_FILES['upload_file']['name'])) {
+						// 	$file = $_FILES['upload_file'];
+						// 	$upload = wp_handle_upload($file, array('test_form' => false));
+
+						// 	if (isset($upload['file'])) {
+						// 		$file_url = $upload['url'];
+						// 		update_field('upload_file', $file_url, $post_id);
+						// 	}
+						// }
 					}
 
 					wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
