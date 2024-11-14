@@ -700,6 +700,7 @@ function save_form_ctv()
 						update_field('info_18', sanitize_text_field($data['info_18']), $post_id);
 						update_field('info_18_province', sanitize_text_field($data['info_18_province']), $post_id);
 						update_field('info_18_district', sanitize_text_field($data['info_18_district']), $post_id);
+						update_field('language_speciality_val', sanitize_text_field($data['language_speciality_val']), $post_id);
 
 						if (isset($_FILES['upload_file_1']) && !empty($_FILES['upload_file_1']['name'])) {
 							$file = $_FILES['upload_file_1'];

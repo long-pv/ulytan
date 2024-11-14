@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_67358e1d22d1c",
-            "label": "full_name",
+            "label": "Họ và tên",
             "name": "full_name",
             "aria-label": "",
             "type": "text",
@@ -24,7 +24,7 @@
         },
         {
             "key": "field_67358e4776c5f",
-            "label": "birthdate",
+            "label": "Ngày sinh",
             "name": "birthdate",
             "aria-label": "",
             "type": "text",
@@ -44,7 +44,7 @@
         },
         {
             "key": "field_67358e5376c60",
-            "label": "phone",
+            "label": "Số Mobile",
             "name": "phone",
             "aria-label": "",
             "type": "text",
@@ -64,7 +64,7 @@
         },
         {
             "key": "field_67358e6076c61",
-            "label": "email",
+            "label": "Địa chỉ Email",
             "name": "email",
             "aria-label": "",
             "type": "text",
@@ -84,7 +84,7 @@
         },
         {
             "key": "field_67358e7176c62",
-            "label": "speak_language",
+            "label": "Bạn sẽ mời người bản địa",
             "name": "speak_language",
             "aria-label": "",
             "type": "text",
@@ -104,7 +104,7 @@
         },
         {
             "key": "field_67358e7c76c63",
-            "label": "graduation_school",
+            "label": "Trường tốt nghiệp",
             "name": "graduation_school",
             "aria-label": "",
             "type": "text",
@@ -124,7 +124,7 @@
         },
         {
             "key": "field_67358e8676c64",
-            "label": "graduation_year",
+            "label": "Năm tốt nghiệp",
             "name": "graduation_year",
             "aria-label": "",
             "type": "text",
@@ -144,7 +144,7 @@
         },
         {
             "key": "field_67358e9476c65",
-            "label": "translation_unit",
+            "label": "Đơn vị dịch thuật bạn đã từng cộng tác?",
             "name": "translation_unit",
             "aria-label": "",
             "type": "text",
@@ -164,7 +164,7 @@
         },
         {
             "key": "field_67358e9e76c66",
-            "label": "translation_unit_name",
+            "label": "Đơn vị dịch thuật bạn đã từng cộng tác?",
             "name": "translation_unit_name",
             "aria-label": "",
             "type": "text",
@@ -184,7 +184,7 @@
         },
         {
             "key": "field_67358eaa76c67",
-            "label": "dictionary",
+            "label": "Bạn hay tra từ điển nào ?",
             "name": "dictionary",
             "aria-label": "",
             "type": "text",
@@ -204,7 +204,7 @@
         },
         {
             "key": "field_67358ebc76c68",
-            "label": "registration_language_val",
+            "label": "Ngôn ngữ đăng ký làm CTV",
             "name": "registration_language_val",
             "aria-label": "",
             "type": "text",
@@ -224,7 +224,7 @@
         },
         {
             "key": "field_67359512d4531",
-            "label": "how_do_you_know_val",
+            "label": "Bạn biết Ulytan qua đâu?",
             "name": "how_do_you_know_val",
             "aria-label": "",
             "type": "text",
@@ -244,7 +244,7 @@
         },
         {
             "key": "field_67359522d4532",
-            "label": "translation_skill_val",
+            "label": "Bạn biết dịch xuôi hay ngược?",
             "name": "translation_skill_val",
             "aria-label": "",
             "type": "text",
@@ -263,8 +263,28 @@
             "append": ""
         },
         {
+            "key": "field_67359e7d4a0a3",
+            "label": "Chuyên ngành đăng ký làm CTV",
+            "name": "language_speciality_val",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_67359538d4533",
-            "label": "translation_software",
+            "label": "Bạn dùng phần mềm dịch thuật nào ?",
             "name": "translation_software",
             "aria-label": "",
             "type": "text",
@@ -284,7 +304,7 @@
         },
         {
             "key": "field_67359546d4534",
-            "label": "translation_software_name",
+            "label": "Bạn dùng phần mềm dịch thuật nào ?",
             "name": "translation_software_name",
             "aria-label": "",
             "type": "text",
@@ -304,7 +324,7 @@
         },
         {
             "key": "field_67359552d4535",
-            "label": "live_translate",
+            "label": "Bạn có thể phiên dịch không?",
             "name": "live_translate",
             "aria-label": "",
             "type": "text",
@@ -324,7 +344,7 @@
         },
         {
             "key": "field_6735955dd4536",
-            "label": "live_translate_select_val",
+            "label": "Bạn có thể phiên dịch không?",
             "name": "live_translate_select_val",
             "aria-label": "",
             "type": "text",
@@ -344,7 +364,7 @@
         },
         {
             "key": "field_67359569d4537",
-            "label": "summary_description",
+            "label": "Mô tả tóm tắt kinh nghiệm làm việc",
             "name": "summary_description",
             "aria-label": "",
             "type": "textarea",
@@ -364,7 +384,7 @@
         },
         {
             "key": "field_67359572d4538",
-            "label": "info_17",
+            "label": "Bạn có hợp tác với phòng tư pháp quận, huyện nào?",
             "name": "info_17",
             "aria-label": "",
             "type": "text",
@@ -384,7 +404,7 @@
         },
         {
             "key": "field_6735958bd4539",
-            "label": "info_17_province",
+            "label": "Phòng tư pháp thuộc tỉnh hoặc thành phố nào?",
             "name": "info_17_province",
             "aria-label": "",
             "type": "text",
@@ -404,7 +424,7 @@
         },
         {
             "key": "field_67359597d453a",
-            "label": "info_17_district",
+            "label": "Phòng tư pháp thuộc quận huyện nào?",
             "name": "info_17_district",
             "aria-label": "",
             "type": "text",
@@ -424,7 +444,7 @@
         },
         {
             "key": "field_673595a5d453b",
-            "label": "info_18",
+            "label": "Bạn có hợp tác với văn phòng công chứng tư nào ko?",
             "name": "info_18",
             "aria-label": "",
             "type": "text",
@@ -444,7 +464,7 @@
         },
         {
             "key": "field_673595b1d453c",
-            "label": "info_18_province",
+            "label": "Phòng công chứng thuộc tỉnh hoặc thành phố nào?",
             "name": "info_18_province",
             "aria-label": "",
             "type": "text",
@@ -464,7 +484,7 @@
         },
         {
             "key": "field_673595bed453d",
-            "label": "info_18_district",
+            "label": "Phòng công chứng thuộc quận huyện nào?",
             "name": "info_18_district",
             "aria-label": "",
             "type": "text",
@@ -547,5 +567,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1731565163
+    "modified": 1731567411
 }
