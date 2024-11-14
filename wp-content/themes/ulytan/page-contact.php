@@ -128,20 +128,20 @@ get_header();
 										<td>
 											<strong class="d-block mb-3">File đính kèm</strong>
 											<div class="radio_group mb-3">
-												<label class="d-block">
+												<label class="d-block radio_group_label">
 													<input type="radio" name="file_option" value="upload_file" checked> Upload file
 												</label>
-												<p>
+												<p class="radio_group_note">
 													Ghi chú: Phần upload này tối đa 50 Mb và chỉ chấp nhận file có đuôi .doc, .docx, .pdf, .zip
 													Nếu file năng hơn 50Mb A/c vui lòng chọn Google Driver bên dưới.
 												</p>
 												<input type="file" name="upload_file" accept=".doc,.docx,.pdf" id="upload_file_input">
 											</div>
 											<div class="radio_group">
-												<label class="d-block">
+												<label class="d-block radio_group_label">
 													<input type="radio" name="file_option" value="google_driver"> Google Driver
 												</label>
-												<p>
+												<p class="radio_group_note">
 													Ghi chú: Anh chị vui lòng truy cập https://www.google.com/drive ==> Tài file ==> Copy đường link và dán vào ô bên dưới.
 												</p>
 												<input type="text" name="google_driver" class="contact_input" placeholder="Nhập link google driver">
@@ -295,9 +295,9 @@ get_footer();
 					success: function(response) {
 						if (response.success) {
 							alert('Thông tin đã được gửi thành công!');
-							form.reset();
+							window.location.href = "<?php echo get_permalink(); ?>";
 						} else {
-							alert('Có lỗi xảy ra, vui lòng thử lại.');
+							alert(response.data.message);
 						}
 					},
 					error: function() {

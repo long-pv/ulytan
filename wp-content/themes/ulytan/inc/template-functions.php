@@ -589,50 +589,57 @@ add_action('wp_ajax_nopriv_save_contact_info', 'save_contact_info'); // Để ch
 function save_contact_info()
 {
 	// Lấy dữ liệu từ AJAX
-	write_log($_POST);
-
 	if (!empty($_POST)) {
 		$data = $_POST;
-		// Tạo một post mới của custom post type 'contact_info'
-		$new_post = array(
-			'post_type'   => 'contact_info',
-			'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['email']),
-			'post_status' => 'publish',
-		);
+		if (isset($data['email']) && is_email($data['email'])) {
+			$to = $data['email'];
+			$subject = 'Mail cảm ơn đăng ký dịch vụ';
+			$headers = array('Content-Type: text/html; charset=UTF-8');
+			$message = 'Cảm ơn bạn đã gửi yêu cầu sử dụng dịch vụ.';
 
-		// Tạo post và lấy ID của post mới
-		$post_id = wp_insert_post($new_post);
+			if (wp_mail($to, $subject, $message, $headers)) {
+				$new_post = array(
+					'post_type'   => 'contact_info',
+					'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['email']),
+					'post_status' => 'publish',
+				);
+				$post_id = wp_insert_post($new_post);
 
-		if ($post_id) {
-			// Cập nhật ACF fields
-			if (function_exists('update_field')) {
-				update_field('phone', sanitize_text_field($data['phone']), $post_id);
-				update_field('email', sanitize_text_field($data['email']), $post_id);
-				update_field('services',   implode(', ', $data['services']), $post_id);
+				if ($post_id) {
+					// Cập nhật ACF fields
+					if (function_exists('update_field')) {
+						update_field('phone', sanitize_text_field($data['phone']), $post_id);
+						update_field('email', sanitize_text_field($data['email']), $post_id);
+						update_field('services',   implode(', ', $data['services']), $post_id);
 
-				if (isset($_FILES['upload_file']) && !empty($_FILES['upload_file']['name'])) {
-					$file = $_FILES['upload_file'];
-					// Upload file
-					$upload = wp_handle_upload($file, array('test_form' => false));
+						if (isset($_FILES['upload_file']) && !empty($_FILES['upload_file']['name'])) {
+							$file = $_FILES['upload_file'];
+							// Upload file
+							$upload = wp_handle_upload($file, array('test_form' => false));
 
-					if (isset($upload['file'])) {
-						$file_url = $upload['url'];
-						update_field('upload_file', $file_url, $post_id);
+							if (isset($upload['file'])) {
+								$file_url = $upload['url'];
+								update_field('upload_file', $file_url, $post_id);
+							}
+						}
+
+						if (isset($data['google_driver'])) {
+							update_field('google_driver', sanitize_text_field($data['google_driver']), $post_id);
+						}
 					}
-				}
 
-				if (isset($data['google_driver'])) {
-					update_field('google_driver', sanitize_text_field($data['google_driver']), $post_id);
+					wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
+				} else {
+					wp_send_json_error(array('message' => 'Không thể lưu thông tin'));
 				}
+			} else {
+				wp_send_json_error(array('message' => 'Không thể gửi email'));
 			}
-
-			wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
 		} else {
-			wp_send_json_error(array('message' => 'Không thể lưu thông tin'));
+			wp_send_json_error(array('message' => 'Email không hợp lệ'));
 		}
 	} else {
 		wp_send_json_error(array('message' => 'Dữ liệu không hợp lệ'));
 	}
-
-	wp_die(); // Kết thúc AJAX request
+	wp_die();
 }
