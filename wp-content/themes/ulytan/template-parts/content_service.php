@@ -3,7 +3,7 @@ $post_id = get_the_ID();
 $thumbnail_id = get_post_thumbnail_id($post_id);
 $categories = get_the_category($post_id);
 ?>
-<article id="post-<?php echo $post_id; ?>" class="single_service">
+<article id="post-<?php echo $post_id; ?>" class="single_service" data-mh="single_service">
     <a href="<?php the_permalink(); ?>" class="imgGroup single_service_img">
         <picture>
             <source media="(min-width:992px)" srcset="<?php echo img_url($thumbnail_id, 'medium'); ?>">

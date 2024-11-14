@@ -26,13 +26,15 @@ if ($banner):
 			<div id="sectionBanner__slider" class="sectionBanner__slider">
 				<?php
 				foreach ($banner as $index => $item):
+					if ($item['image']):
 				?>
-					<div>
-						<div class="sectionBanner__item">
-							<img width="1000" height="500" src="<?php echo $item['image']; ?>" alt="Banner no <?php echo $index + 1; ?>">
+						<div>
+							<div class="sectionBanner__item">
+								<img width="1000" height="500" src="<?php echo img_url($item['image'], 'large'); ?>" alt="Banner no <?php echo $index + 1; ?>">
+							</div>
 						</div>
-					</div>
 				<?php
+					endif;
 				endforeach;
 				?>
 			</div>
