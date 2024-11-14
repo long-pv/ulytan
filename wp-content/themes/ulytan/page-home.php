@@ -40,35 +40,53 @@ if ($banner):
 	</section>
 <?php endif; ?>
 
-<div class="about_us secSpace">
-	<div class="container">
-		<h2 class="sec_title text-center mb-4">
-			GIỚI THIỆU CHUNG VỀ ULYTAN
-		</h2>
-		<div class="row">
-			<div class="col-lg-6">
-				<?php
-				$about_us_video_image = get_field('about_us_video_image');
-				$about_us_iframe_video = get_field('about_us_iframe_video');
-				video_popup($about_us_iframe_video, $about_us_video_image);
-				?>
-			</div>
-			<div class="col-lg-6">
-				<div class="about_us_content">
-					<div class="editor">
-						<?php echo get_field('about_us_content'); ?>
+<?php
+$about_us_video_image = get_field('about_us_video_image') ?? '';
+$about_us_iframe_video = get_field('about_us_iframe_video') ?? '';
+$about_us_content = get_field('about_us_content') ?? '';
+if ($about_us_content || ($about_us_iframe_video && $about_us_video_image)) :
+?>
+	<div class="about_us secSpace">
+		<div class="container">
+			<h2 class="sec_title text-center mb-4">
+				GIỚI THIỆU CHUNG VỀ ULYTAN
+			</h2>
+			<div class="row">
+				<div class="col-lg-6">
+					<?php
+					if ($about_us_iframe_video && $about_us_video_image) {
+						video_popup($about_us_iframe_video, $about_us_video_image);
+					}
+					?>
+				</div>
+				<div class="col-lg-6">
+					<div class="about_us_content">
+						<div class="editor">
+							<?php echo get_field('about_us_content'); ?>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+<?php endif; ?>
 
 <?php
-$args = array(
-	'post_type' => 'service',
-	'posts_per_page' => '15',
-);
+$services = get_field('services') ?? [];
+if ($services) {
+	$args = array(
+		'post_type' => 'service',
+		'posts_per_page' => -1,
+		'post__in' => $services,
+		'orderby' => 'post__in',
+	);
+} else {
+	$args = array(
+		'post_type' => 'service',
+		'posts_per_page' => '15',
+	);
+}
+
 $query = new WP_Query($args);
 if ($query->have_posts()):
 ?>
@@ -104,10 +122,21 @@ wp_reset_postdata();
 		<div class="row row_24">
 			<?php
 			$view_all_news = get_field('view_all_news') ?? '';
-			$args = array(
-				'post_type' => 'post',
-				'posts_per_page' => '2',
-			);
+			$featured_news = get_field('featured_news') ?? [];
+			if ($featured_news) {
+				$args = array(
+					'post_type' => 'post',
+					'posts_per_page' => -1,
+					'post__in' => $featured_news,
+					'orderby' => 'post__in',
+				);
+			} else {
+				$args = array(
+					'post_type' => 'post',
+					'posts_per_page' => '2',
+				);
+			}
+
 			$query = new WP_Query($args);
 			if ($query->have_posts()):
 			?>
@@ -184,10 +213,21 @@ wp_reset_postdata();
 </section>
 
 <?php
-$args = array(
-	'post_type' => 'video_customer',
-	'posts_per_page' => -1,
-);
+$video_customer = get_field('video_customer') ?? [];
+if ($video_customer) {
+	$args = array(
+		'post_type' => 'video_customer',
+		'posts_per_page' => -1,
+		'post__in' => $video_customer,
+		'orderby' => 'post__in',
+	);
+} else {
+	$args = array(
+		'post_type' => 'video_customer',
+		'posts_per_page' => 6,
+	);
+}
+
 $query = new WP_Query($args);
 if ($query->have_posts()):
 ?>

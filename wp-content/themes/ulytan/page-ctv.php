@@ -65,7 +65,7 @@ get_header();
 							<input type="text" class="page_ctv_form_input" name="email" placeholder=" Ví dụ: sales@ulytan.vn">
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_5" style="display:none;">
 						<div class="page_ctv_form_group">
 							<div class="page_ctv_form_label">
 								5. Bạn sẽ mời người bản địa*
@@ -83,7 +83,7 @@ get_header();
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_6" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								6. Trường tốt nghiệp*
@@ -91,15 +91,15 @@ get_header();
 							<input type="text" class="page_ctv_form_input" name="graduation_school" placeholder="ĐH tốt nghiệp gần đây nhất">
 						</div>
 					</div>
-					<div class="col-lg-3">
-						<div class="page_ctv_form_group">
+					<div class="col-lg-3 page_ctv_step_7" style="display:none;">
+						<div class=" page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								7. Năm tốt nghiệp*
 							</label>
 							<input type="text" class="page_ctv_form_input" name="graduation_year" placeholder=" Điền dưới dạng Ngày/Tháng/Năm">
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_8" style="display:none;">
 						<div class="page_ctv_form_group">
 							<div class="page_ctv_form_label">
 								8. Đơn vị dịch thuật bạn đã từng cộng tác?*
@@ -115,7 +115,7 @@ get_header();
 							<input type="text" class="page_ctv_form_input" name="translation_unit_name" placeholder=" Ví dụ: Dịch thuật Ulytan">
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_9" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								9. Bạn hay tra từ điển nào ?*
@@ -123,7 +123,7 @@ get_header();
 							<input type="text" class="page_ctv_form_input" name="dictionary" placeholder="Ghi ngắn gọn tên từ điển VD: Lạc Việt">
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_10" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								10. Ngôn ngữ đăng ký làm CTV*
@@ -165,7 +165,7 @@ get_header();
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_11" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								11. Bạn biết Ulytan qua đâu?*
@@ -186,7 +186,7 @@ get_header();
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_12" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								12. Bạn biết dịch xuôi hay ngược?*
@@ -203,7 +203,7 @@ get_header();
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_13" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								13. Chuyên ngành đăng ký làm CTV*
@@ -611,7 +611,7 @@ get_header();
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_14" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								14. Bạn dùng phần mềm dịch thuật nào ?*
@@ -627,7 +627,7 @@ get_header();
 							<input type="text" class="page_ctv_form_input" name="translation_software_name" placeholder=" Ví dụ: Dịch thuật Ulytan">
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-3 page_ctv_step_15" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								15. Bạn có thể phiên dịch không?*
@@ -653,7 +653,7 @@ get_header();
 						</div>
 					</div>
 
-					<div class="col-12">
+					<div class="col-12 page_ctv_step_16" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
 								16. Mô tả tóm tắt kinh nghiệm làm việc.
@@ -662,7 +662,7 @@ get_header();
 						</div>
 					</div>
 
-					<div class="col-lg-6">
+					<div class="col-lg-6 page_ctv_step_17" style="display:none;">
 						<div class="page_ctv_form_group">
 							<div class="page_ctv_form_label">
 								17. Bạn có hợp tác với phòng tư pháp quận, huyện nào?*
@@ -694,7 +694,7 @@ get_header();
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-6 page_ctv_step_18" style="display:none;">
 						<div class="page_ctv_form_group">
 							<div class="page_ctv_form_label">
 								18. Bạn có hợp tác với văn phòng công chứng tư nào ko?*
@@ -727,7 +727,7 @@ get_header();
 						</div>
 					</div>
 
-					<div class="col-12">
+					<div class="col-12 page_ctv_step_19" style="display:none;">
 						<div class="page_ctv_form_group_file">
 							<div class="page_contact_subtitle">
 								Gửi tài liệu cả bản dịch lẫn bản gốc bạn đã dịch cho ULYTAN
@@ -960,6 +960,76 @@ get_footer();
 				});
 				dropdown.find('input.page_ctv_form_hidden').val(selectedLanguages.join(', ')).trigger('change');
 			});
+		});
+
+		// logic form
+		$('input[name="email"], input[name="full_name"], input[name="birthdate"], input[name="phone"]').on('change', function() {
+			let full_name = $('input[name="full_name"]').val();
+			let birthdate = $('input[name="birthdate"]').val();
+			let phone = $('input[name="phone"]').val();
+			let email = $('input[name="email"]').val();
+
+			if (full_name && birthdate && phone && email) {
+				$('.page_ctv_step_5').show();
+			}
+		});
+		$('.page_ctv_step_5').on('click', function() {
+			$('.page_ctv_step_6').show();
+		});
+		$('input[name="graduation_school"]').on('change', function() {
+			if ($(this).val()) {
+				$('.page_ctv_step_7').show();
+			}
+		});
+		$('input[name="graduation_year"]').on('change', function() {
+			if ($(this).val()) {
+				$('.page_ctv_step_8').show();
+			}
+		});
+		// page_ctv_step_8
+		$('.page_ctv_step_8').on('click', function() {
+			$('.page_ctv_step_9').show();
+		});
+		$('input[name="dictionary"]').on('change', function() {
+			if ($(this).val()) {
+				$('.page_ctv_step_10').show();
+			}
+		});
+		$('input[name="registration_language_val"]').on('change', function() {
+			if ($(this).val()) {
+				$('.page_ctv_step_11').show();
+			}
+		});
+		$('input[name="how_do_you_know_val"]').on('change', function() {
+			if ($(this).val()) {
+				$('.page_ctv_step_12').show();
+			}
+		});
+		$('input[name="translation_skill_val"]').on('change', function() {
+			if ($(this).val()) {
+				$('.page_ctv_step_13').show();
+			}
+		});
+		$('input[name="language_speciality_val"]').on('change', function() {
+			if ($(this).val()) {
+				$('.page_ctv_step_14').show();
+			}
+		});
+		// page_ctv_step_14
+		$('.page_ctv_step_14').on('click', function() {
+			$('.page_ctv_step_15').show();
+		});
+		$('.page_ctv_step_15').on('click', function() {
+			$('.page_ctv_step_16').show();
+		});
+		$('.page_ctv_form_textarea').on('change', function() {
+			$('.page_ctv_step_17').show();
+		});
+		$('.page_ctv_step_17').on('click', function() {
+			$('.page_ctv_step_18').show();
+		});
+		$('.page_ctv_step_18').on('click', function() {
+			$('.page_ctv_step_19').show();
 		});
 	});
 </script>

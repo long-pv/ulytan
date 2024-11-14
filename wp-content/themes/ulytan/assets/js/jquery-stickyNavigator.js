@@ -15,19 +15,32 @@
 			return;
 		}
 
+		var mainIndex = 0; // Số thứ tự chính
+		var subIndex = 0; // Số thứ tự phụ
+
 		var navigationMenu = [
 			"<ul>",
 			targets
 				.map(function () {
 					var target = $(this),
-						text = target.text();
+						tagName = target[0].tagName.toLowerCase();
+
+					// Tính số thứ tự
+					if (tagName === "h2") {
+						mainIndex++;
+						subIndex = 0;
+						var text = mainIndex + ". " + target.text();
+					} else if (tagName === "h3") {
+						subIndex++;
+						var text = mainIndex + "." + subIndex + " " + target.text();
+					}
+
 					var num = Math.floor(Math.random() * 99999999);
 					var href = "js-nav-" + num;
 					target.addClass("js-nav");
 					target.addClass(href);
 					target.data("num", num);
-					var clazz = "nav-" + target[0].tagName.toLowerCase();
-					clazz = clazz + " nav-" + num;
+					var clazz = "nav-" + tagName + " nav-" + num;
 					return '<li class="' + clazz + '"><a href="#" data-href=".' + href + '">' + $("<dummy>").text(text).html() + "</li>";
 				})
 				.get()
