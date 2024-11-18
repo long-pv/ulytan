@@ -557,7 +557,7 @@ function accordion($data = [])
 			endforeach;
 			?>
 		</div>
-<?php
+		<?php
 	endif;
 }
 
@@ -737,4 +737,112 @@ function save_form_ctv()
 		wp_send_json_error(array('message' => 'Dữ liệu không hợp lệ'));
 	}
 	wp_die();
+}
+
+
+add_action('wp_ajax_ajax_pagination_load_post', 'ajax_pagination_load_post');
+add_action('wp_ajax_nopriv_ajax_pagination_load_post', 'ajax_pagination_load_post');
+
+function ajax_pagination_load_post()
+{
+	$paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+
+	$args = array(
+		'post_type' => 'notarization',
+		'posts_per_page' => 4,
+		'paged' => $paged,
+	);
+	$query = new WP_Query($args);
+
+	if ($query->have_posts()) :
+		while ($query->have_posts()):
+			$query->the_post();
+		?>
+			<li>
+				<a class="notarized_translation_news_item" href="<?php the_permalink(); ?>">
+					<?php the_title(); ?>
+				</a>
+			</li>
+<?php
+		endwhile;
+	endif;
+	wp_die();
+}
+
+
+add_action('wp_ajax_ajax_pagination', 'ajax_pagination_handler');
+add_action('wp_ajax_nopriv_ajax_pagination', 'ajax_pagination_handler');
+function ajax_pagination_handler()
+{
+	$paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+
+	$args = array(
+		'post_type' => 'notarization',
+		'posts_per_page' => 4,
+		'paged' => $paged,
+	);
+	$query = new WP_Query($args);
+
+	echo paginate_links(
+		array(
+			'total'     => $query->max_num_pages,
+			'current'   => $paged,
+			'end_size' => 2,
+			'mid_size' => 1,
+			'prev_text' => __('Trước', 'basetheme'),
+			'next_text' => __('Sau', 'basetheme'),
+		)
+	);
+	wp_die();
+}
+
+add_action('wp_ajax_handle_reaction', 'handle_reaction');
+add_action('wp_ajax_nopriv_handle_reaction', 'handle_reaction');
+function handle_reaction()
+{
+	$post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
+	$reaction_type = isset($_POST['reaction_type']) ? sanitize_text_field($_POST['reaction_type']) : '';
+
+	if (!$post_id || !in_array($reaction_type, ['like', 'dislike'])) {
+		wp_send_json_error(['message' => 'Dữ liệu không hợp lệ']);
+	}
+
+	$like_meta_key = 'likes';
+	$dislike_meta_key = 'dislikes';
+	$session_key = "reaction_$post_id";
+
+	// Kiểm tra trạng thái hiện tại
+	$current_reaction = isset($_COOKIE[$session_key]) ? $_COOKIE[$session_key] : '';
+
+	// Nếu trạng thái cũ khác với trạng thái hiện tại, cập nhật
+	if ($current_reaction !== $reaction_type) {
+		// Giảm số lượng trạng thái cũ (nếu có)
+		if ($current_reaction === 'like') {
+			$current_likes = get_post_meta($post_id, $like_meta_key, true) ?: 0;
+			update_post_meta($post_id, $like_meta_key, max(0, $current_likes - 1));
+		} elseif ($current_reaction === 'dislike') {
+			$current_dislikes = get_post_meta($post_id, $dislike_meta_key, true) ?: 0;
+			update_post_meta($post_id, $dislike_meta_key, max(0, $current_dislikes - 1));
+		}
+
+		// Tăng số lượng trạng thái mới
+		if ($reaction_type === 'like') {
+			$current_likes = get_post_meta($post_id, $like_meta_key, true) ?: 0;
+			update_post_meta($post_id, $like_meta_key, $current_likes + 1);
+		} elseif ($reaction_type === 'dislike') {
+			$current_dislikes = get_post_meta($post_id, $dislike_meta_key, true) ?: 0;
+			update_post_meta($post_id, $dislike_meta_key, $current_dislikes + 1);
+		}
+
+		// Ghi nhận trạng thái tương tác
+		setcookie($session_key, $reaction_type, time() + (3600 * 24 * 30), '/');
+	} else {
+		wp_send_json_error(['message' => 'Trạng thái đã được cập nhật từ trước.']);
+	}
+
+	// Trả về số lượng cập nhật
+	wp_send_json_success([
+		'likes' => get_post_meta($post_id, $like_meta_key, true) ?: 0,
+		'dislikes' => get_post_meta($post_id, $dislike_meta_key, true) ?: 0,
+	]);
 }

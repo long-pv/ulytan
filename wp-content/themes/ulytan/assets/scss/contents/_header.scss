@@ -99,7 +99,9 @@
                     list-style-type: none;
                     padding: 0px;
                     margin: 0px;
-                    width: 280px;
+                    width: 350px;
+                    max-height: calc(100vh - 100px);
+                    overflow-y: auto;
                     left: 0px;
                     top: 200%;
                     height: 0px;

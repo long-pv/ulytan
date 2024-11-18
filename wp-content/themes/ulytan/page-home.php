@@ -50,7 +50,7 @@ if ($about_us_content || ($about_us_iframe_video && $about_us_video_image)) :
 ?>
 	<div class="about_us secSpace">
 		<div class="container">
-			<h2 class="sec_title text-center mb-4">
+			<h2 class="sec_title text-center">
 				GIỚI THIỆU CHUNG VỀ ULYTAN
 			</h2>
 			<div class="row">
@@ -94,7 +94,7 @@ if ($query->have_posts()):
 ?>
 	<section class="service secSpace">
 		<div class="container">
-			<h2 class="sec_title text-center mb-4">
+			<h2 class="sec_title text-center">
 				DANH SÁCH DỊCH VỤ CỦA ULYTAN
 			</h2>
 
@@ -235,7 +235,7 @@ if ($query->have_posts()):
 ?>
 	<section class="video_customer secSpace bg-light">
 		<div class="container">
-			<h2 class="sec_title text-center mb-4">
+			<h2 class="sec_title text-center">
 				KHÁCH HÀNG NÓI VỀ ULYTAN
 			</h2>
 			<div class="video_customer_slider">

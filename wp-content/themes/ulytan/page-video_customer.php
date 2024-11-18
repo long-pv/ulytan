@@ -21,7 +21,7 @@ get_header();
 		<?php
 		wp_breadcrumbs();
 		?>
-		<h2 class="sec_title text-center mb-4">
+		<h2 class="sec_title text-center">
 			<?php the_title(); ?>
 		</h2>
 		<?php

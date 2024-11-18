@@ -10,7 +10,7 @@
 
 if (! defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
-	define('_S_VERSION', '1.0.0');
+	define('_S_VERSION', '1.0.01');
 }
 
 /**
@@ -42,9 +42,9 @@ if (!defined('WP_AUTO_UPDATE_CORE')) {
 	define('WP_AUTO_UPDATE_CORE', false);
 }
 
-if (!defined('DISALLOW_FILE_MODS')) {
-	define('DISALLOW_FILE_MODS', true);
-}
+// if (!defined('DISALLOW_FILE_MODS')) {
+// 	define('DISALLOW_FILE_MODS', true);
+// }
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.

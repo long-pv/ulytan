@@ -280,6 +280,7 @@
     color: $primary !important;
     font-weight: 700 !important;
     text-transform: uppercase;
+    margin-bottom: 32px !important;
 }
 
 .row_16 {
@@ -1172,4 +1173,41 @@
 
 .sectionBanner__item {
     position: relative;
+}
+
+.reaction_buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.reaction_button_item {
+    background-color: #1877F2;
+    color: #fff !important;
+    text-decoration: none !important;
+    border: none !important;
+    outline: none !important;
+    display: flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-size: 14px;
+    min-height: 25px;
+
+    // #B0B3B8
+    &.dislike_button {
+        background-color: #B0B3B8;
+    }
+}
+
+.reaction_buttons_icon {
+    display: flex;
+    margin-right: 8px;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        fill: #fff;
+    }
 }
