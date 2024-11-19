@@ -77,7 +77,8 @@ function video_popup($src_iframe, $thumb = null)
 	$url = getYoutubeEmbedUrl($src_iframe);
 ?>
 	<div class="videoBlock">
-		<div class="videoBlock__inner" style="background-image: url('<?php echo $thumb; ?>');">
+		<div class="videoBlock__inner">
+			<img class="videoBlock__img" src="<?php echo $thumb; ?>">
 			<div class="videoBlock__overlay"></div>
 			<div class="videoBlock__videoAction">
 				<a href="javascript:void(0);" class="videoBlock__playAction" data-toggle="modal" data-target="#videoUrl"
