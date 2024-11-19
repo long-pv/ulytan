@@ -155,7 +155,7 @@ endif;
 $related_services = get_field('related_services') ?? [];
 if ($related_services) :
 	$args = array(
-		'post_type' => 'post',
+		'post_type' => 'service',
 		'posts_per_page' => -1,
 		'post__in' => $related_services,
 		'orderby' => 'post__in',
@@ -189,11 +189,10 @@ endif;
 ?>
 
 <?php
-$paged = isset($_GET['pag']) ? $_GET['pag'] : 1;
 $args = array(
 	'post_type' => 'notarization',
 	'posts_per_page' => 4,
-	'paged' => $paged,
+	'paged' => 1,
 );
 $query = new WP_Query($args);
 if ($query->have_posts()):
@@ -227,7 +226,7 @@ if ($query->have_posts()):
 			echo paginate_links(
 				array(
 					'total'   => $query->max_num_pages,
-					'current' => $paged,
+					'current' => 1,
 					'end_size' => 2,
 					'mid_size' => 1,
 					'prev_text' => __('Trước', 'basetheme'),

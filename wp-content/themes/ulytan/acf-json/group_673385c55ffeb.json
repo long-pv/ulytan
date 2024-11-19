@@ -17,7 +17,7 @@
                 "id": ""
             },
             "post_type": [
-                "post"
+                "service"
             ],
             "post_status": [
                 "publish"
@@ -97,5 +97,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1731520684
+    "modified": 1731987536
 }
