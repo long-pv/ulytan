@@ -241,6 +241,19 @@
         left: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.2);
+        z-index: 2;
+    }
+
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%) scale(1);
+        object-fit: cover;
+        transition: all 0.3s;
+        z-index: 1;
     }
 
     &__inner {
@@ -252,6 +265,13 @@
         height: 0;
         padding-bottom: 56.25%;
         z-index: 1;
+        overflow: hidden;
+
+        &:hover {
+            img {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
     }
 
     &__playAction {
