@@ -85,6 +85,7 @@ function ulytan_setup()
 	register_nav_menus(
 		array(
 			'menu-1' => esc_html__('Primary', 'ulytan'),
+			'menu-2' => esc_html__('Dịch thuật công chứng', 'ulytan'),
 		)
 	);
 

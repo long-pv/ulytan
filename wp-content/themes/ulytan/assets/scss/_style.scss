@@ -1233,3 +1233,106 @@
         fill: #fff;
     }
 }
+
+.form_advisory_title {
+    font-weight: 600;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 24px;
+
+    @include media-breakpoint-up(lg) {
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+}
+
+.form_advisory_label {
+    display: block;
+    margin-bottom: 4px;
+    color: #fff;
+    font-weight: 500;
+}
+
+.form_advisory_group {
+    margin-bottom: 24px;
+}
+
+.form_advisory {
+    br {
+        display: none !important;
+    }
+
+    p {
+        margin: 0px !important;
+    }
+
+    input[type="text"],
+    input[type="tel"] {
+        height: 40px;
+        border-radius: 4px;
+        background-color: #fff;
+        padding: 8px 16px;
+        outline: none !important;
+        width: 100%;
+        border: none !important;
+    }
+
+    input[type="submit"] {
+        background-color: #EB1924;
+        outline: none !important;
+        border: none !important;
+        color: #fff;
+        min-width: 240px;
+        max-width: 250px;
+        padding: 8px 24px;
+        border-radius: 100px;
+
+        @include media-breakpoint-down(sm) {
+            min-width: unset;
+            width: 100%;
+        }
+    }
+
+    .wpcf7-not-valid-tip {
+        color: #EB1924;
+    }
+
+    .wpcf7-response-output {
+        color: #fff;
+    }
+}
+
+.image_advisory {
+    position: absolute;
+    width: auto;
+    height: calc(100% + 80px);
+    left: 0px;
+    bottom: -50px;
+
+    @include media-breakpoint-down(md) {
+        height: calc(100% + 30px);
+        bottom: -30px;
+    }
+}
+
+.image_advisory_wrap {
+    position: relative;
+    height: 100%;
+    min-height: 250px;
+    max-height: 100%;
+}
+
+.price_table_list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.price_table_img {
+    width: 100%;
+    height: auto;
+}
+
+.price_table_title {
+    margin-bottom: 16px !important;
+}
