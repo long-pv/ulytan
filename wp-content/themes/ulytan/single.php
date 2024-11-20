@@ -153,39 +153,47 @@ endif;
 
 <?php
 $related_services = get_field('related_services') ?? [];
-if ($related_services) :
+
+if ($related_services) {
 	$args = array(
 		'post_type' => 'service',
 		'posts_per_page' => -1,
 		'post__in' => $related_services,
 		'orderby' => 'post__in',
 	);
-	$query = new WP_Query($args);
-	if ($query->have_posts()):
+} else {
+	$args = array(
+		'post_type' => 'service',
+		'posts_per_page' => '6',
+		'post__not_in' => $arrPost,
+	);
+}
+
+$query = new WP_Query($args);
+if ($query->have_posts()):
 ?>
-		<section class="secSpace related_services">
-			<div class="container">
-				<h2 class="home_news_title mb-4">
-					Các dịch vụ liên quan
-				</h2>
-				<div class="row row_24">
-					<?php
-					while ($query->have_posts()):
-						$query->the_post();
-					?>
-						<div class="col-md-6 col-lg-4">
-							<?php get_template_part('template-parts/content_service'); ?>
-						</div>
-					<?php
-					endwhile;
-					?>
-				</div>
+	<section class="secSpace related_services">
+		<div class="container">
+			<h2 class="home_news_title mb-4">
+				Các dịch vụ liên quan
+			</h2>
+			<div class="row row_24">
+				<?php
+				while ($query->have_posts()):
+					$query->the_post();
+				?>
+					<div class="col-md-6 col-lg-4">
+						<?php get_template_part('template-parts/content_service'); ?>
+					</div>
+				<?php
+				endwhile;
+				?>
 			</div>
-		</section>
+		</div>
+	</section>
 <?php
-	endif;
-	wp_reset_postdata();
 endif;
+wp_reset_postdata();
 ?>
 
 <?php
@@ -280,7 +288,6 @@ wp_reset_postdata();
 </section>
 
 <?php
-$view_all_news = get_field('view_all_news') ?? '';
 $args = array(
 	'post_type' => 'post',
 	'posts_per_page' => '6',
