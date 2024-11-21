@@ -143,6 +143,11 @@ function register_cpt_post_types()
 			'cap' => false,
 			'hierarchical' => false
 		],
+		'form_contribute' => [
+			'labels' => __('Form contribute', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
 	];
 
 	// $cpt_tax = [
@@ -722,6 +727,59 @@ function save_form_ctv()
 								update_field('upload_file_2', $file_url, $post_id);
 							}
 						}
+					}
+
+					wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
+				} else {
+					wp_send_json_error(array('message' => 'Không thể lưu thông tin'));
+				}
+			} else {
+				wp_send_json_error(array('message' => 'Không thể gửi email'));
+			}
+		} else {
+			wp_send_json_error(array('message' => 'Email không hợp lệ'));
+		}
+	} else {
+		wp_send_json_error(array('message' => 'Dữ liệu không hợp lệ'));
+	}
+	wp_die();
+}
+
+
+// Hook để xử lý yêu cầu AJAX
+add_action('wp_ajax_save_page_form', 'save_page_form');
+add_action('wp_ajax_nopriv_save_page_form', 'save_page_form'); // Để cho phép người dùng chưa đăng nhập
+
+function save_page_form()
+{
+	// Lấy dữ liệu từ AJAX
+	if (!empty($_POST)) {
+		$data = $_POST;
+		if (isset($data['email']) && is_email($data['email'])) {
+			$to = $data['email'];
+			$subject = 'Thư cảm ơn.';
+			$headers = array('Content-Type: text/html; charset=UTF-8');
+			$message = 'Cảm ơn quý khách đã đóng góp ý kiến.';
+
+			if (wp_mail($to, $subject, $message, $headers)) {
+				$new_post = array(
+					'post_type'   => 'form_contribute',
+					'post_title'  => sanitize_text_field($data['email']),
+					'post_status' => 'publish',
+				);
+				$post_id = wp_insert_post($new_post);
+
+				if ($post_id) {
+					// Cập nhật ACF fields
+					if (function_exists('update_field')) {
+						update_field('ho_va_ten', sanitize_text_field($data['ho_va_ten']), $post_id);
+						update_field('so_dien_thoai', sanitize_text_field($data['so_dien_thoai']), $post_id);
+						update_field('email', sanitize_text_field($data['email']), $post_id);
+						update_field('ma_don_hang', sanitize_text_field($data['ma_don_hang']), $post_id);
+						update_field('nhan_vien_tu_van', sanitize_text_field($data['nhan_vien_tu_van']), $post_id);
+						update_field('ke_toan', sanitize_text_field($data['ke_toan']), $post_id);
+						update_field('nhan_vien_xu_ly_don_hang', sanitize_text_field($data['nhan_vien_xu_ly_don_hang']), $post_id);
+						update_field('ly_do', sanitize_text_field($data['ly_do']), $post_id);
 					}
 
 					wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));

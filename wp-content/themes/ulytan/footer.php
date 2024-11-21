@@ -16,7 +16,7 @@
 <!-- end main body -->
 
 <?php
-if (!is_page_template('page-dich_thuat_cong_chung.php')) :
+if (!is_page_template('page-dich_thuat_cong_chung.php') && !is_page_template('page-form.php')) :
 ?>
     <footer id="footer" class="footer secSpace">
         <div class="container">
