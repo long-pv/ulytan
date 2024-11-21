@@ -24,7 +24,7 @@
 		if (targetElement.length > 0) {
 			$("html, body").animate(
 				{
-					scrollTop: targetElement.offset().top - $("#header").outerHeight(true) + 50,
+					scrollTop: targetElement.offset().top - $("#header").outerHeight(true) - 10,
 				},
 				1000
 			);

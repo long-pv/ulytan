@@ -79,7 +79,7 @@ $achieve_brand_title = get_field('achieve_brand_title') ?? '';
 $achieve_brand_image = get_field('achieve_brand_image') ?? [];
 if ($achieve_brand_image) :
 ?>
-	<section class="achieve_brand secSpace">
+	<section class="achieve_brand secSpace" id="scroll_1">
 		<div class="container">
 			<h2 class="home_news_title text-center mb-4">
 				<?php
@@ -141,7 +141,7 @@ if ($endow_content || ($endow_iframe_video && $endow_video_image)) :
 $price_table = get_field('price_table') ?? '';
 if ($price_table) :
 ?>
-	<section class="price_table secSpace">
+	<section class="price_table secSpace" id="scroll_2">
 		<div class="container">
 			<div class="price_table_list">
 				<?php foreach ($price_table as $item) : ?>
@@ -164,7 +164,7 @@ if ($price_table) :
 	</section>
 <?php endif; ?>
 
-<section class="advisory secSpace bg-primary">
+<section class="advisory secSpace bg-primary" id="scroll_6">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-9">
@@ -214,7 +214,7 @@ if ($services) {
 $query = new WP_Query($args);
 if ($query->have_posts()):
 ?>
-	<section class="service secSpace">
+	<section class="service secSpace" id="scroll_3">
 		<div class="container">
 			<h2 class="sec_title text-center">
 				CÁC DỊCH VỤ BỔ SUNG
@@ -260,7 +260,7 @@ if ($video_customer) {
 $query = new WP_Query($args);
 if ($query->have_posts()):
 ?>
-	<section class="video_customer secSpace bg-light">
+	<section class="video_customer secSpace bg-light" id="scroll_4">
 		<div class="container">
 			<h2 class="sec_title text-center">
 				KHÁCH HÀNG NÓI VỀ ULYTAN
@@ -334,7 +334,7 @@ $args = array(
 $query = new WP_Query($args);
 if ($query->have_posts()):
 ?>
-	<section class="secSpace notarized_translation_news" id="notarized_translation_news">
+	<section class="secSpace notarized_translation_news" id="scroll_5">
 		<div class="container">
 			<h2 class="home_news_title mb-4">
 				Tin tức dịch công chứng
