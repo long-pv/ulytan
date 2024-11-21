@@ -1323,3 +1323,111 @@
 .price_table_title {
     margin-bottom: 16px !important;
 }
+
+.endow_content.editor {
+    * {
+        color: #fff !important;
+    }
+
+    h2 {
+        font-size: 24px;
+        padding: 4px 24px;
+        display: inline-flex;
+        border-radius: 24px;
+        color: $primary !important;
+        background-color: #fff;
+    }
+}
+
+.achieve_brand_img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0px auto;
+
+    @include media-breakpoint-down(md) {
+        width: 100%;
+    }
+}
+
+.choice_reason_item_number {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+
+    span {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid $primary;
+        display: inline-flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        background: #7FBA44;
+        font-size: 32px;
+        font-weight: 700;
+    }
+}
+
+.choice_reason_item_title {
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.choice_reason_item_desc {
+    text-align: center;
+    font-size: 18px;
+    color: #2D2D2D;
+}
+
+.banner_landing_content .editor {
+    * {
+        color: #fff !important;
+        font-size: 24px;
+        font-weight: 600;
+
+        @include media-breakpoint-down(md) {
+            font-size: 18px;
+        }
+    }
+}
+
+.banner_landing_img_wrap {
+    position: relative;
+    height: 100%;
+    min-height: 250px;
+    max-height: 100%;
+
+    @include media-breakpoint-up(md) {
+        min-height: 300px;
+    }
+
+    @include media-breakpoint-up(lg) {
+        min-height: 400px;
+    }
+}
+
+.banner_landing_img {
+    position: absolute;
+    width: auto;
+    height: calc(100% + 80px);
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -50px;
+
+    @include media-breakpoint-down(md) {
+        bottom: -30px;
+        height: calc(100% + 30px);
+    }
+}
+
+.banner_landing_content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

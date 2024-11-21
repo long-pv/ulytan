@@ -18,6 +18,126 @@ get_header();
 ?>
 
 <?php
+$banner_content = get_field('banner_content') ?? '';
+$banner_image = get_field('banner_image') ?? '';
+if ($banner_content) :
+?>
+	<section class="banner_landing secSpace bg-primary">
+		<div class="container">
+			<div class="row row_24">
+				<div class="col-md-6">
+					<div class="banner_landing_content">
+						<div class="editor ">
+							<?php echo $banner_content; ?>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="banner_landing_img_wrap">
+						<img class="banner_landing_img" src="<?php echo $banner_image; ?>" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>
+
+<?php
+$choice_reason = get_field('choice_reason') ?? [];
+if ($choice_reason):
+?>
+	<section class="choice_reason secSpace">
+		<div class="container">
+			<h2 class="home_news_title text-center mb-4">
+				Lý do chọn ULYTAN
+			</h2>
+			<div class="row row_24">
+				<?php foreach ($choice_reason as $key => $item) : ?>
+					<div class="col-md-6 col-lg-3">
+						<div class="choice_reason_item">
+							<div class="choice_reason_item_number">
+								<span>
+									<?php echo $key + 1; ?>
+								</span>
+							</div>
+							<h3 class="choice_reason_item_title" data-mh="choice_reason_item_title">
+								<?php echo $item['title']; ?>
+							</h3>
+							<div class="choice_reason_item_desc">
+								<?php echo $item['description']; ?>
+							</div>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>
+
+<?php
+$achieve_brand_title = get_field('achieve_brand_title') ?? '';
+$achieve_brand_image = get_field('achieve_brand_image') ?? [];
+if ($achieve_brand_image) :
+?>
+	<section class="achieve_brand secSpace">
+		<div class="container">
+			<h2 class="home_news_title text-center mb-4">
+				<?php
+				if ($achieve_brand_title) {
+					echo $achieve_brand_title;
+				} else {
+					echo '“Doanh nghiệp đạt thương hiệu nổi tiếng Việt Nam với 15 năm kinh nghiệm”';
+				}
+				?>
+			</h2>
+			<div class="row justify-content-center">
+				<div class="col-lg-10">
+					<div class="row justify-content-center row_24">
+						<?php
+						foreach ($achieve_brand_image as $item):
+							if ($item['image']):
+						?>
+								<div class="col-md-6">
+									<img class="achieve_brand_img" src="<?php echo $item['image']; ?>" alt="">
+								</div>
+						<?php
+							endif;
+						endforeach;
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>
+
+<?php
+$endow_video_image = get_field('endow_video_image') ?? '';
+$endow_iframe_video = get_field('endow_iframe_video') ?? '';
+$endow_content = get_field('endow_content') ?? '';
+if ($endow_content || ($endow_iframe_video && $endow_video_image)) :
+?>
+	<section class="endow secSpace bg-primary">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-7 mb-4 mb-lg-0">
+					<?php
+					if ($endow_iframe_video && $endow_video_image) {
+						video_popup($endow_iframe_video, $endow_video_image);
+					}
+					?>
+				</div>
+				<div class="col-lg-5">
+					<div class="editor endow_content">
+						<?php echo $endow_content; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>
+
+<?php
 $price_table = get_field('price_table') ?? '';
 if ($price_table) :
 ?>
