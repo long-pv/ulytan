@@ -30,30 +30,49 @@ get_header();
 							<span class="page_form_req">*</span> Bắt buộc
 						</div>
 
-						<div class="page_form_group">
-							<div class="page_form_label">
-								1. Họ và tên của quý khách <span class="page_form_req">*</span>
+						<?php
+						if (get_field('ho_va_ten') != '0'):
+						?>
+							<div class="page_form_group">
+								<div class="page_form_label">
+									1. Họ và tên của quý khách <span class="page_form_req">*</span>
+								</div>
+								<input type="text" name="ho_va_ten" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
 							</div>
-							<input type="text" name="ho_va_ten" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
-						</div>
-						<div class="page_form_group">
-							<div class="page_form_label">
-								2. Nhập số điện thoại của quý khách <span class="page_form_req">*</span>
+						<?php endif; ?>
+
+						<?php
+						if (get_field('so_dien_thoai') != '0'):
+						?>
+							<div class="page_form_group">
+								<div class="page_form_label">
+									2. Nhập số điện thoại của quý khách <span class="page_form_req">*</span>
+								</div>
+								<input type="text" name="so_dien_thoai" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
 							</div>
-							<input type="text" name="so_dien_thoai" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
-						</div>
-						<div class="page_form_group">
-							<div class="page_form_label">
-								3. Email của quý khách <span class="page_form_req">*</span>
+						<?php endif; ?>
+
+						<?php
+						if (get_field('email') != '0'):
+						?>
+							<div class="page_form_group">
+								<div class="page_form_label">
+									3. Email của quý khách <span class="page_form_req">*</span>
+								</div>
+								<input type="text" name="email" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
 							</div>
-							<input type="text" name="email" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
-						</div>
-						<div class="page_form_group">
-							<div class="page_form_label">
-								4. Mã đơn hàng của quý khách <span class="page_form_req">*</span>
+						<?php endif; ?>
+
+						<?php
+						if (get_field('ma_don_hang') != '0'):
+						?>
+							<div class="page_form_group">
+								<div class="page_form_label">
+									4. Mã đơn hàng của quý khách <span class="page_form_req">*</span>
+								</div>
+								<input type="text" name="ma_don_hang" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
 							</div>
-							<input type="text" name="ma_don_hang" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
-						</div>
+						<?php endif; ?>
 
 						<div class="page_form_rating">
 							<div class="page_form_label">
