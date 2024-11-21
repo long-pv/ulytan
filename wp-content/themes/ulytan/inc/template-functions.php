@@ -565,8 +565,8 @@ function accordion($data = [])
 function filter_search_to_posts_only($query)
 {
 	if ($query->is_search && !is_admin() && $query->is_main_query()) {
-		$query->set('post_type', 'post');
-		$query->set('posts_per_page', 9);
+		$query->set('post_type', array('post', 'service'));
+		$query->set('posts_per_page', 25);
 	}
 }
 add_action('pre_get_posts', 'filter_search_to_posts_only');

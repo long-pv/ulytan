@@ -47,6 +47,7 @@
 		arrows: true,
 		autoplay: true,
 		autoplaySpeed: 5000,
+		adaptiveHeight: true,
 	});
 
 	// video url
