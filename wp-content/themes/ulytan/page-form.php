@@ -161,6 +161,20 @@ get_footer();
 			});
 		});
 
+		// Custom regex for email validation
+		$.validator.addMethod(
+			"customEmail",
+			function(value, element) {
+				var regex = /^[a-zA-Z0-9._%+-]+(?:.[a-zA-Z0-9._%+-]+)*@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+				return this.optional(element) || regex.test(value);
+			},
+			"Vui lòng nhập địa chỉ email hợp lệ."
+		);
+
+		$.extend($.validator.messages, {
+			required: "Vui lòng nhập giá trị."
+		});
+
 		$("#page_form_form").validate({
 			rules: {
 				ho_va_ten: {
@@ -168,10 +182,13 @@ get_footer();
 				},
 				so_dien_thoai: {
 					required: true,
+					digits: true,
+					minlength: 1,
+					maxlength: 11
 				},
 				email: {
 					required: true,
-					email: true
+					customEmail: true
 				},
 				ma_don_hang: {
 					required: true,
@@ -186,7 +203,13 @@ get_footer();
 					required: true,
 				},
 			},
-			messages: {},
+			messages: {
+				so_dien_thoai: {
+					digits: "Chỉ được phép chứa các chữ số",
+					minlength: "Số điện thoại phải có ít nhất 1 ký tự",
+					maxlength: "Số điện thoại không được vượt quá 11 ký tự"
+				},
+			},
 			errorPlacement: function(error, element) {
 				error.appendTo(element.closest(".page_form_group, .question"));
 			},
