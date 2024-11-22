@@ -1430,6 +1430,16 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: justify;
+    // padding-right: 60px;
+
+    // @include media-breakpoint-down(md) {
+    //     padding-right: 30px;
+    // }
+
+    // @include media-breakpoint-down(sm) {
+    //     padding-right: 0px;
+    // }
 }
 
 .page_form {
