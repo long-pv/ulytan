@@ -902,3 +902,23 @@ function handle_reaction()
 		'dislikes' => get_post_meta($post_id, $dislike_meta_key, true) ?: 0,
 	]);
 }
+
+add_filter('acf/prepare_field', function ($field) {
+	// Danh sách post type muốn áp dụng
+	$restricted_post_types = ['form_ctv', 'contact_info', 'form_contribute'];
+
+	// Kiểm tra nếu đang trong trang chỉnh sửa bài viết
+	if (is_admin() && isset($_GET['post'])) {
+		$post_id = $_GET['post'];
+		$post_type = get_post_type($post_id);
+
+		// Nếu post type nằm trong danh sách, đặt trường thành read-only
+		if (in_array($post_type, $restricted_post_types)) {
+			if (in_array($field['type'], ['text', 'textarea'])) {
+				$field['readonly'] = true; // Tắt chỉnh sửa
+			}
+		}
+	}
+
+	return $field;
+});

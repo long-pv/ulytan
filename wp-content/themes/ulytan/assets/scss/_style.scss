@@ -1403,11 +1403,11 @@
     max-height: 100%;
 
     @include media-breakpoint-up(md) {
-        min-height: 300px;
+        min-height: 350px;
     }
 
     @include media-breakpoint-up(lg) {
-        min-height: 400px;
+        min-height: 500px;
     }
 }
 
@@ -1415,13 +1415,18 @@
     position: absolute;
     width: auto;
     height: calc(100% + 80px);
-    left: 50%;
-    transform: translateX(-50%);
+    right: 0px;
     bottom: -50px;
 
     @include media-breakpoint-down(md) {
         bottom: -30px;
         height: calc(100% + 30px);
+    }
+
+    @include media-breakpoint-down(sm) {
+        right: unset;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 

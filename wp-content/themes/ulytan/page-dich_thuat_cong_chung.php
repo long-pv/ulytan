@@ -25,18 +25,14 @@ if ($banner_content) :
 	<section class="banner_landing secSpace bg-primary">
 		<div class="container">
 			<div class="row row_24">
-				<div class="col-md-6">
-					<div class="row justify-content-center align-item-center">
-						<div class="col-lg-9">
-							<div class="banner_landing_content">
-								<div class="editor">
-									<?php echo $banner_content; ?>
-								</div>
-							</div>
+				<div class="col-md-6 col-lg-6">
+					<div class="banner_landing_content">
+						<div class="editor">
+							<?php echo $banner_content; ?>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 col-lg-6">
 					<div class="banner_landing_img_wrap">
 						<img class="banner_landing_img" src="<?php echo $banner_image; ?>" alt="">
 					</div>
