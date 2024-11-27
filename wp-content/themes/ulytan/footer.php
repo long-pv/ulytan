@@ -147,35 +147,37 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                                 <?php
                                 $dich_vu_cot_1 = get_field('dich_vu_cot_1', 'option') ?? [];
 
-                                $args = array(
-                                    'post_type' => 'service',
-                                    'posts_per_page' => -1,
-                                    'post__in' => $dich_vu_cot_1,
-                                    'orderby' => 'post__in',
-                                );
+                                if ($dich_vu_cot_1):
+                                    $args = array(
+                                        'post_type' => 'service',
+                                        'posts_per_page' => -1,
+                                        'post__in' => $dich_vu_cot_1,
+                                        'orderby' => 'post__in',
+                                    );
 
-                                $query = new WP_Query($args);
-                                if ($query->have_posts()):
+                                    $query = new WP_Query($args);
+                                    if ($query->have_posts()):
                                 ?>
-                                    <div class="footer_list">
-                                        <?php
-                                        while ($query->have_posts()):
-                                            $query->the_post();
-                                        ?>
-                                            <a href="<?php the_permalink(); ?>" class="footer_item_link">
-                                                <span class="icon">
-                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" fill="#111111" />
-                                                    </svg>
-                                                </span>
+                                        <div class="footer_list">
+                                            <?php
+                                            while ($query->have_posts()):
+                                                $query->the_post();
+                                            ?>
+                                                <a href="<?php the_permalink(); ?>" class="footer_item_link">
+                                                    <span class="icon">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" fill="#111111" />
+                                                        </svg>
+                                                    </span>
 
-                                                <?php the_title(); ?>
-                                            </a>
-                                        <?php
-                                        endwhile;
-                                        ?>
-                                    </div>
+                                                    <?php the_title(); ?>
+                                                </a>
+                                            <?php
+                                            endwhile;
+                                            ?>
+                                        </div>
                                 <?php
+                                    endif;
                                 endif;
                                 wp_reset_postdata();
                                 ?>
@@ -184,35 +186,37 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                                 <?php
                                 $dich_vu_cot_2 = get_field('dich_vu_cot_2', 'option') ?? [];
 
-                                $args = array(
-                                    'post_type' => 'service',
-                                    'posts_per_page' => -1,
-                                    'post__in' => $dich_vu_cot_2,
-                                    'orderby' => 'post__in',
-                                );
+                                if ($dich_vu_cot_2):
+                                    $args = array(
+                                        'post_type' => 'service',
+                                        'posts_per_page' => -1,
+                                        'post__in' => $dich_vu_cot_2,
+                                        'orderby' => 'post__in',
+                                    );
 
-                                $query = new WP_Query($args);
-                                if ($query->have_posts()):
+                                    $query = new WP_Query($args);
+                                    if ($query->have_posts()):
                                 ?>
-                                    <div class="footer_list">
-                                        <?php
-                                        while ($query->have_posts()):
-                                            $query->the_post();
-                                        ?>
-                                            <a href="<?php the_permalink(); ?>" class="footer_item_link">
-                                                <span class="icon">
-                                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" fill="#111111" />
-                                                    </svg>
-                                                </span>
+                                        <div class="footer_list">
+                                            <?php
+                                            while ($query->have_posts()):
+                                                $query->the_post();
+                                            ?>
+                                                <a href="<?php the_permalink(); ?>" class="footer_item_link">
+                                                    <span class="icon">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" fill="#111111" />
+                                                        </svg>
+                                                    </span>
 
-                                                <?php the_title(); ?>
-                                            </a>
-                                        <?php
-                                        endwhile;
-                                        ?>
-                                    </div>
+                                                    <?php the_title(); ?>
+                                                </a>
+                                            <?php
+                                            endwhile;
+                                            ?>
+                                        </div>
                                 <?php
+                                    endif;
                                 endif;
                                 wp_reset_postdata();
                                 ?>
@@ -230,35 +234,37 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                     <?php
                     $tuyen_dung = get_field('tuyen_dung', 'option') ?? [];
 
-                    $args = array(
-                        'post_type' => ['post', 'page'],
-                        'posts_per_page' => -1,
-                        'post__in' => $tuyen_dung,
-                        'orderby' => 'post__in',
-                    );
+                    if ($tuyen_dung):
+                        $args = array(
+                            'post_type' => ['post', 'page'],
+                            'posts_per_page' => -1,
+                            'post__in' => $tuyen_dung,
+                            'orderby' => 'post__in',
+                        );
 
-                    $query = new WP_Query($args);
-                    if ($query->have_posts()):
+                        $query = new WP_Query($args);
+                        if ($query->have_posts()):
                     ?>
-                        <div class="footer_list">
-                            <?php
-                            while ($query->have_posts()):
-                                $query->the_post();
-                            ?>
-                                <a href="<?php the_permalink(); ?>" class="footer_item_link">
-                                    <span class="icon">
-                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" fill="#111111" />
-                                        </svg>
-                                    </span>
+                            <div class="footer_list">
+                                <?php
+                                while ($query->have_posts()):
+                                    $query->the_post();
+                                ?>
+                                    <a href="<?php the_permalink(); ?>" class="footer_item_link">
+                                        <span class="icon">
+                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" fill="#111111" />
+                                            </svg>
+                                        </span>
 
-                                    <?php the_title(); ?>
-                                </a>
-                            <?php
-                            endwhile;
-                            ?>
-                        </div>
+                                        <?php the_title(); ?>
+                                    </a>
+                                <?php
+                                endwhile;
+                                ?>
+                            </div>
                     <?php
+                        endif;
                     endif;
                     wp_reset_postdata();
                     ?>
@@ -272,35 +278,37 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                     <?php
                     $chinh_sach = get_field('chinh_sach', 'option') ?? [];
 
-                    $args = array(
-                        'post_type' => ['post', 'page'],
-                        'posts_per_page' => -1,
-                        'post__in' => $chinh_sach,
-                        'orderby' => 'post__in',
-                    );
+                    if ($chinh_sach) :
+                        $args = array(
+                            'post_type' => ['post', 'page'],
+                            'posts_per_page' => -1,
+                            'post__in' => $chinh_sach,
+                            'orderby' => 'post__in',
+                        );
 
-                    $query = new WP_Query($args);
-                    if ($query->have_posts()):
+                        $query = new WP_Query($args);
+                        if ($query->have_posts()):
                     ?>
-                        <div class="footer_list">
-                            <?php
-                            while ($query->have_posts()):
-                                $query->the_post();
-                            ?>
-                                <a href="<?php the_permalink(); ?>" class="footer_item_link">
-                                    <span class="icon">
-                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" fill="#111111" />
-                                        </svg>
-                                    </span>
+                            <div class="footer_list">
+                                <?php
+                                while ($query->have_posts()):
+                                    $query->the_post();
+                                ?>
+                                    <a href="<?php the_permalink(); ?>" class="footer_item_link">
+                                        <span class="icon">
+                                            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" fill="#111111" />
+                                            </svg>
+                                        </span>
 
-                                    <?php the_title(); ?>
-                                </a>
-                            <?php
-                            endwhile;
-                            ?>
-                        </div>
+                                        <?php the_title(); ?>
+                                    </a>
+                                <?php
+                                endwhile;
+                                ?>
+                            </div>
                     <?php
+                        endif;
                     endif;
                     wp_reset_postdata();
                     ?>

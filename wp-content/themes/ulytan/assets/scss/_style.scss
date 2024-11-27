@@ -1652,12 +1652,12 @@
 
 .footer_row {
     @include media-breakpoint-up(lg) {
-        margin-left: -35px;
-        margin-right: -35px;
+        margin-left: -24px;
+        margin-right: -24px;
 
         &>* {
-            padding-left: 35px;
-            padding-right: 35px;
+            padding-left: 24px;
+            padding-right: 24px;
         }
     }
 }
