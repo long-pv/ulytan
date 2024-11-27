@@ -324,9 +324,6 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                     $form_khuyen_mai = get_field('form_khuyen_mai', 'option') ?? null;
                     if ($form_khuyen_mai):
                     ?>
-                        <div class="share_post_title">
-                            Đăng ký nhận tài liệu độc quyền
-                        </div>
                         <div class="footer_form">
                             <?php echo do_shortcode('[contact-form-7 id="' . $form_khuyen_mai . '"]'); ?>
                         </div>
