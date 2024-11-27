@@ -3570,15 +3570,17 @@ function cerber_admin_head() {
 
     <style>
         #crb-admin-2fa-pins {
+            border-left: solid 3px rgba(0, 121, 219, 0.63);
+        }
+        #crb-admin-2fa-pins table {
             border-collapse: collapse;
         }
-        #crb-admin-2fa-pins tr:first-child td {
+        #crb-admin-2fa-pins table tr:first-child td {
             font-weight: bold;
         }
-        #crb-admin-2fa-pins td {
-            padding: 6px;
-            border: 2px solid rgb(255, 255, 255, 0.5);
-            background-color: rgba(187, 187, 187, 0.12);
+        #crb-admin-2fa-pins table td {
+            padding: 6px 12px;
+            background-color: rgba(255, 255, 255, 0.5);
         }
     </style>
 
@@ -5044,14 +5046,23 @@ function cerber_show_traffic( $args = array(), $echo = true ) {
 			}
 
 			if ( ! empty( $details[9] ) ) {
-				$start = strlen( 'Set-Cookie:' );
-				$list = array();
-				foreach ( $details[9] as $item ) {
-					if ( $e = explode( '=', substr( $item, $start ), 2 ) ) {
-						$list[ $e[0] ] = $e[1];
-					}
+				$server_cookies = array();
+
+                foreach ( $details[9] as $item ) {
+	                if ( 0 === strpos( $item, 'Set-Cookie:' ) ) {
+		                $item = substr( $item, 11 ); // Old format includes Set-Cookie:
+                    }
+
+	                if ( $e = explode( '=', $item, 2 ) ) {
+		                $pos = strpos( $e[1], ';' );
+		                $decoded_value = urldecode( substr( $e[1], 0, $pos ) );
+		                $server_cookies[ trim( $e[0] ) ] = $decoded_value . substr( $e[1], $pos );
+	                }
 				}
-				$more_details[] = array( '', cerber_table_view( __( 'Server Response Cookies', 'wp-cerber' ), $list ) );
+
+				crb_green_marker( $server_cookies, 2 );
+
+                $more_details[] = array( '', cerber_table_view( __( 'Server Response Cookies', 'wp-cerber' ), $server_cookies ) );
 			}
 
 			if ( ! empty( $details[7] ) ) {
@@ -5262,18 +5273,28 @@ function cerber_show_traffic( $args = array(), $echo = true ) {
 function crb_green_marker( &$fields, $type = 1 ) {
     static $crb_fields;
 
-	if ( ! $anti = cerber_antibot_gene() ) {
-		return;
-	}
-
 	if ( ! $crb_fields ) {
+
+		if ( ! $anti = cerber_antibot_gene() ) {
+			return;
+		}
+
 		$crb_fields[1] = array_flip( array_column( $anti[0], 0 ) );
+
+        // All cookies
 
 		$crb_cookies = array_column( $anti[1], 0 );
 
 		foreach ( $crb_cookies as &$val ) {
 			$val = cerber_get_cookie_prefix() . $val;
 		}
+
+		$crb_cookies[] = cerber_get_cookie_prefix() . CRB_GROOVE;
+
+		$groove_x = cerber_get_groove_x();
+		$crb_cookies[] = cerber_get_cookie_prefix() . CRB_GROOVE . '_x_' . $groove_x[0];
+
+		$crb_cookies[] = cerber_get_cookie_prefix() . 'cerber_nexus_id';
 
 		$crb_fields[2] = array_flip( $crb_cookies );
 	}

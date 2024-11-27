@@ -806,7 +806,7 @@ function crb_admin_get_user_cell( $user_id = null, $base_url = '', $text = '', $
 		$roles = '<span class="crb_act_role">' . implode( ', ', $r ) . '</span>';
 	}
 
-	$lbl = ( $label ) ? '<span class="crb-us-lbl">' . $label . '</span>' : '';
+	$lbl = ( $label ) ? '<span class="crb-label crb-label-green">' . $label . '</span>' : '';
 
 	if ( $base_url ) {
 		$ret = '<a href="' . $base_url . '&amp;filter_user=' . $user_id . '"><b>' . $user_data['display_name'] . '</b></a>' . $lbl . '<div>' . $roles . '</div>';
@@ -1401,7 +1401,27 @@ class CRB_Sessions_Table extends WP_List_Table {
 					}*/
 				}
 
-				return '<span title="' . $url . '">' . cerber_date( $item['started'] ) . '</span>' . $this->row_actions( $set );
+				$label = '';
+
+				if ( $ms = $item['mfa_status'] ) {
+
+                    $label_class = 'crb-label crb-label-green';
+					$more = '';
+
+					if ( $ms == 1 ) {
+						$label = '2FA';
+						$label_class .= ' crb-label-outline';
+						$more = 'Awaiting 2FA completion';
+					}
+                    elseif ( $ms == 2 ) {
+						$label = '2FA';
+						$more = '2FA successfully completed';
+					}
+
+					$label = ( $label ) ? '<span class="' . $label_class . '" title="' . $more . '">' . $label . '</span>' : '';
+				}
+
+				return '<span title="' . $url . '">' . cerber_date( $item['started'] ) . '</span>' . $label . $this->row_actions( $set );
 
 				break;
 			case 'ses_expires':

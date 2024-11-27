@@ -696,13 +696,24 @@ div.crb-announcement p {
     }
 }
 
-.crb-tab-sessions .crb-us-lbl {
+.crb-tab-sessions .crb-label {
     display: inline-block;
-    padding: 3px 5px 3px 5px;
+    padding: 1px 4px;
     border-radius: 3px;
+    border: 2px solid;
     margin-left: 0.5em;
-    background-color: #83CE77;
+    line-height: 1;
     color: white;
+}
+
+.crb-tab-sessions .crb-label-green {
+    border-color: var(--crb-green-label-bg-color);
+    background-color: var(--crb-green-label-bg-color);
+}
+
+.crb-tab-sessions .crb-label-outline {
+    background-color: transparent;
+    color: black;
 }
 
 /* Primarily for IPv6 */
