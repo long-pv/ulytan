@@ -1,10 +1,10 @@
 {
     "key": "group_67341fa9b604f",
-    "title": "Post settings",
+    "title": "Cài đặt bài viết",
     "fields": [
         {
             "key": "field_67341fa99a763",
-            "label": "Sign up for exclusive material",
+            "label": "Đăng ký để nhận tài liệu độc quyền",
             "name": "sign_up_for_exclusive_material",
             "aria-label": "",
             "type": "post_object",
@@ -49,5 +49,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1731469317
+    "modified": 1732721833
 }

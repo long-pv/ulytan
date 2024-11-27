@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_673385c821467",
-            "label": "Related Services",
+            "label": "Các dịch vụ liên quan",
             "name": "related_services",
             "aria-label": "",
             "type": "relationship",
@@ -35,7 +35,7 @@
         },
         {
             "key": "field_67343da6f4d1c",
-            "label": "FAQs",
+            "label": "Câu hỏi thường gặp",
             "name": "faqs",
             "aria-label": "",
             "type": "relationship",
@@ -97,5 +97,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1731987536
+    "modified": 1732721895
 }

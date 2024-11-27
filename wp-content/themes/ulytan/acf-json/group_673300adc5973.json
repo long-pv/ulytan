@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_673300adbb29a",
-            "label": "Headquarters",
+            "label": "Địa chỉ trụ sở",
             "name": "headquarters",
             "aria-label": "",
             "type": "repeater",
@@ -26,7 +26,7 @@
             "sub_fields": [
                 {
                     "key": "field_673301083790b",
-                    "label": "Title",
+                    "label": "Tiêu đề",
                     "name": "title",
                     "aria-label": "",
                     "type": "text",
@@ -47,7 +47,7 @@
                 },
                 {
                     "key": "field_6733011d3790c",
-                    "label": "Content",
+                    "label": "Nội dung",
                     "name": "content",
                     "aria-label": "",
                     "type": "wysiwyg",
@@ -108,5 +108,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1731398082
+    "modified": 1732721771
 }

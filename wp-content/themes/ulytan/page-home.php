@@ -43,6 +43,7 @@ if ($banner):
 <?php endif; ?>
 
 <?php
+$about_us_title = get_field('about_us_title') ?? 'GIỚI THIỆU CHUNG VỀ ULYTAN';
 $about_us_video_image = get_field('about_us_video_image') ?? '';
 $about_us_iframe_video = get_field('about_us_iframe_video') ?? '';
 $about_us_content = get_field('about_us_content') ?? '';
@@ -51,18 +52,35 @@ if ($about_us_content || ($about_us_iframe_video && $about_us_video_image)) :
 	<div class="about_us secSpace">
 		<div class="container">
 			<h2 class="sec_title text-center">
-				GIỚI THIỆU CHUNG VỀ ULYTAN
+				<?php echo $about_us_title; ?>
 			</h2>
 			<div class="row">
 				<div class="col-lg-6">
-					<?php
-					if ($about_us_iframe_video && $about_us_video_image) {
-						video_popup($about_us_iframe_video, $about_us_video_image);
-					}
-					?>
+					<div class="about_us_video">
+						<?php
+						if ($about_us_iframe_video && $about_us_video_image) {
+							// video_popup($about_us_iframe_video, $about_us_video_image);
+						?>
+							<div class="videoBlock">
+								<div class="videoBlock__inner" data-mh="videoBlock__inner">
+									<img class="videoBlock__img" src="http://localhost/wp/ulytan/wp-content/uploads/2024/11/wp_dummy_content_generator_469.jpg">
+									<div class="videoBlock__overlay"></div>
+									<div class="videoBlock__videoAction">
+										<a href="javascript:void(0);" class="videoBlock__playAction" data-toggle="modal" data-target="#videoUrl" data-src="https://www.youtube.com/embed/okz5RIZRT0U">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+												<path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path>
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+						<?php
+						}
+						?>
+					</div>
 				</div>
 				<div class="col-lg-6">
-					<div class="about_us_content">
+					<div class="about_us_content" data-mh="videoBlock__inner">
 						<div class="editor">
 							<?php echo get_field('about_us_content'); ?>
 						</div>
@@ -74,6 +92,7 @@ if ($about_us_content || ($about_us_iframe_video && $about_us_video_image)) :
 <?php endif; ?>
 
 <?php
+$title_services = get_field('title_services') ?? 'DANH SÁCH DỊCH VỤ CỦA ULYTAN';
 $services = get_field('services') ?? [];
 if ($services) {
 	$args = array(
@@ -92,10 +111,10 @@ if ($services) {
 $query = new WP_Query($args);
 if ($query->have_posts()):
 ?>
-	<section class="service secSpace">
+	<section class="service secSpace--bottom">
 		<div class="container">
 			<h2 class="sec_title text-center">
-				DANH SÁCH DỊCH VỤ CỦA ULYTAN
+				<?php echo $title_services; ?>
 			</h2>
 
 			<div class="service_list">
@@ -119,10 +138,12 @@ endif;
 wp_reset_postdata();
 ?>
 
-<section class="home_news secSpace">
+<section class="home_news secSpace--bottom">
 	<div class="container">
 		<div class="row row_24">
 			<?php
+			$title_news_1 = get_field('title_news_1') ?? 'Tin tức nổi bật';
+			$title_news_2 = get_field('title_news_2') ?? 'Các bài đọc nhiều nhất';
 			$view_all_news = get_field('view_all_news') ?? '';
 			$featured_news = get_field('featured_news') ?? [];
 			if ($featured_news) {
@@ -145,7 +166,7 @@ wp_reset_postdata();
 				<div class="col-lg-8">
 					<div class="featured_news">
 						<h2 class="home_news_title mb-4">
-							Tin tức nổi bật
+							<?php echo $title_news_1; ?>
 						</h2>
 						<div class="row row_24">
 							<?php
@@ -188,7 +209,7 @@ wp_reset_postdata();
 				<div class="col-lg-4">
 					<div class="most_read">
 						<h2 class="home_news_title mb-4">
-							Các bài đọc nhiều nhất
+							<?php echo $title_news_2; ?>
 						</h2>
 						<div class="most_read_list">
 							<?php
@@ -215,6 +236,7 @@ wp_reset_postdata();
 </section>
 
 <?php
+$title_customer = get_field('title_customer') ?? 'KHÁCH HÀNG NÓI VỀ ULYTAN';
 $video_customer = get_field('video_customer') ?? [];
 if ($video_customer) {
 	$args = array(
@@ -236,7 +258,7 @@ if ($query->have_posts()):
 	<section class="video_customer secSpace bg-light">
 		<div class="container">
 			<h2 class="sec_title text-center">
-				KHÁCH HÀNG NÓI VỀ ULYTAN
+				<?php echo $title_customer; ?>
 			</h2>
 			<div class="video_customer_slider">
 				<?php

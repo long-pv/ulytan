@@ -114,57 +114,47 @@ function register_cpt_post_types()
 {
 	$cpt_list = [
 		'service' => [
-			'labels' => __('Service', 'basetheme'),
+			'labels' => __('Dịch vụ', 'basetheme'),
+			'slug' => 'dich-vu',
 			'cap' => false,
 			'hierarchical' => false
 		],
 		'video_customer' => [
-			'labels' => __('Video customer', 'basetheme'),
+			'labels' => __('Video khách hàng', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
 		'notarization' => [
-			'labels' => __('Notarization', 'basetheme'),
+			'labels' => __('Dịch công chứng', 'basetheme'),
+			'slug' => 'dich-cong-chung',
 			'cap' => false,
 			'hierarchical' => false
 		],
 		'faqs' => [
-			'labels' => __('FAQs', 'basetheme'),
+			'labels' => __('Câu hỏi thường gặp', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
 		'contact_info' => [
-			'labels' => __('Form Contact Info', 'basetheme'),
+			'labels' => __('Form 1 - Liên hệ', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
 		'form_ctv' => [
-			'labels' => __('Form CTV', 'basetheme'),
+			'labels' => __('Form 2 - Cộng tác viên', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
 		'form_contribute' => [
-			'labels' => __('Form contribute', 'basetheme'),
+			'labels' => __('Form 3 - Đóng góp ý kiến', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
 	];
 
-	// $cpt_tax = [
-	//     'event_category' => [
-	//         'labels' => __('Event category', 'basetheme'),
-	//         'cap' => false,
-	//         'post_type' => ['event']
-	//     ],
-	// ];
-
 	foreach ($cpt_list as $post_type => $data) {
 		register_cpt($post_type, $data);
 	}
-
-	// foreach ($cpt_tax as $ctx => $data) {
-	//     register_ctx($ctx, $data);
-	// }
 }
 add_action('init', 'register_cpt_post_types');
 
@@ -180,27 +170,19 @@ function register_cpt($post_type, $data = [])
 	];
 
 	$args = array(
-		'labels' => $labels,
-		'description' => '',
-		'public' => true,
-		'publicly_queryable' => true,
-		'show_ui' => true,
-		'show_in_rest' => true,
-		'rest_base' => '',
-		'rest_controller_class' => 'WP_REST_Posts_Controller',
-		'has_archive' => false,
-		'show_in_menu' => true,
-		'show_in_nav_menus' => true,
-		'delete_with_user' => false,
-		'exclude_from_search' => true,
-		'map_meta_cap' => true,
-		'hierarchical' => $hierarchical,
-		'rewrite' => array('slug' => $post_type, 'with_front' => true),
-		'query_var' => true,
-		'menu_icon' => 'dashicons-admin-post',
-		'supports' => array('title', 'editor', 'thumbnail', 'revisions', 'author', $attributes),
-		'capability_type' => 'post',
-		'can_export' => true,
+		'labels'             => $labels,
+		'public'             => true,
+		'has_archive'        => true,
+		'rewrite'            => array(
+			'slug'       => $data['slug'] ?? $post_type,
+			'with_front' => false,
+			'hierarchical' => true,
+		),
+		'menu_position' => 61,
+		'supports'           => array('title', 'editor', 'thumbnail', 'revisions', 'author', $attributes),
+		'show_in_nav_menus'  => true,
+		'show_ui'            => true,
+		'menu_icon'          => 'dashicons-admin-post',
 	);
 
 	if (!empty($data['tax'])) {
@@ -225,46 +207,6 @@ function register_cpt($post_type, $data = [])
 	}
 
 	register_post_type($post_type, $args);
-}
-
-function register_ctx($ctx, $data)
-{
-	$labels = [
-		'name' => $data['labels'],
-		'singular_name' => $data['labels'],
-	];
-
-	$args = [
-		"label" => $ctx,
-		"labels" => $labels,
-		"public" => true,
-		"publicly_queryable" => true,
-		"hierarchical" => true,
-		"show_ui" => true,
-		"show_in_menu" => true,
-		"show_in_nav_menus" => true,
-		"query_var" => true,
-		"rewrite" => ['slug' => $ctx, 'with_front' => true],
-		"show_admin_column" => true,
-		"show_in_rest" => true,
-		"rest_base" => "car_model_id",
-		"rest_controller_class" => "WP_REST_Terms_Controller",
-		"show_in_quick_edit" => true,
-		"show_in_graphql" => false,
-		'show_tagcloud' => true,
-	];
-
-	if (!empty($data['cap'])) {
-		$capabilities = [
-			'manage_terms' => 'manage_' . $ctx,
-			'edit_terms' => 'edit_' . $ctx,
-			'delete_terms' => 'delete_' . $ctx,
-			'assign_terms' => 'assign_' . $ctx,
-		];
-		$args['capabilities'] = $capabilities;
-	}
-
-	register_taxonomy($ctx, $data['post_type'], $args);
 }
 
 function img_url($img = '', $size = 'medium')
@@ -921,4 +863,19 @@ add_filter('acf/prepare_field', function ($field) {
 	}
 
 	return $field;
+});
+
+add_filter('get_user_metadata', function ($null, $object_id, $meta_key) {
+	if ($meta_key === 'locale') {
+		return false;
+	}
+	return $null;
+}, 10, 3);
+
+add_action('admin_head', function () {
+	echo '<style>
+        .user-language-wrap {
+            display: none !important;
+        }
+    </style>';
 });

@@ -1,6 +1,6 @@
 {
     "key": "group_673084179e6eb",
-    "title": "Home page",
+    "title": "Trang chủ",
     "fields": [
         {
             "key": "field_67361243a2e19",
@@ -71,7 +71,7 @@
         },
         {
             "key": "field_67361252a2e1a",
-            "label": "About us",
+            "label": "Giới thiệu chung",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -88,7 +88,7 @@
         },
         {
             "key": "field_67308df322aec",
-            "label": "About us",
+            "label": "Giới thiệu chung",
             "name": "about_us",
             "aria-label": "",
             "type": "group",
@@ -102,6 +102,26 @@
             },
             "layout": "row",
             "sub_fields": [
+                {
+                    "key": "field_674732c04cd64",
+                    "label": "Tiêu đề",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
                 {
                     "key": "field_67308e2122aee",
                     "label": "Video image",
@@ -149,7 +169,7 @@
                 },
                 {
                     "key": "field_67308e4122af0",
-                    "label": "Content",
+                    "label": "Nội dung",
                     "name": "content",
                     "aria-label": "",
                     "type": "wysiwyg",
@@ -171,7 +191,7 @@
         },
         {
             "key": "field_6736131a56148",
-            "label": "Services",
+            "label": "Danh sách dịch vụ",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -187,8 +207,28 @@
             "endpoint": 0
         },
         {
+            "key": "field_674732f04cd65",
+            "label": "Tiêu đề",
+            "name": "title_services",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_6736133356149",
-            "label": "Services",
+            "label": "Danh sách dịch vụ",
             "name": "services",
             "aria-label": "",
             "type": "relationship",
@@ -219,7 +259,7 @@
         },
         {
             "key": "field_673613745614a",
-            "label": "News",
+            "label": "Tin tức",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -235,8 +275,48 @@
             "endpoint": 0
         },
         {
+            "key": "field_6747333c4cd66",
+            "label": "Tiêu đề 1",
+            "name": "title_news_1",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_674733564cd67",
+            "label": "Tiêu đề 2",
+            "name": "title_news_2",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_673613865614b",
-            "label": "Featured News",
+            "label": "Tin tức nổi bật",
             "name": "featured_news",
             "aria-label": "",
             "type": "relationship",
@@ -267,7 +347,7 @@
         },
         {
             "key": "field_6732ebb393a15",
-            "label": "View all news",
+            "label": "Xem tất cả",
             "name": "view_all_news",
             "aria-label": "",
             "type": "url",
@@ -284,7 +364,7 @@
         },
         {
             "key": "field_673613dd61ebc",
-            "label": "Video customer",
+            "label": "Video Khách hàng",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -300,8 +380,28 @@
             "endpoint": 0
         },
         {
+            "key": "field_674733814cd68",
+            "label": "Tiêu đề",
+            "name": "title_customer",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_673613e461ebd",
-            "label": "Video customer",
+            "label": "Video Khách hàng",
             "name": "video_customer",
             "aria-label": "",
             "type": "relationship",
@@ -355,5 +455,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1731600878
+    "modified": 1732719570
 }
