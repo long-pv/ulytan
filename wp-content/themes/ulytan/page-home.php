@@ -60,13 +60,14 @@ if ($about_us_content || ($about_us_iframe_video && $about_us_video_image)) :
 						<?php
 						if ($about_us_iframe_video && $about_us_video_image) {
 							// video_popup($about_us_iframe_video, $about_us_video_image);
+							$about_us_iframe_video = getYoutubeEmbedUrl($about_us_iframe_video);
 						?>
 							<div class="videoBlock">
 								<div class="videoBlock__inner" data-mh="videoBlock__inner">
-									<img class="videoBlock__img" src="http://localhost/wp/ulytan/wp-content/uploads/2024/11/wp_dummy_content_generator_469.jpg">
+									<img class="videoBlock__img" src="<?php echo $about_us_video_image; ?>">
 									<div class="videoBlock__overlay"></div>
 									<div class="videoBlock__videoAction">
-										<a href="javascript:void(0);" class="videoBlock__playAction" data-toggle="modal" data-target="#videoUrl" data-src="https://www.youtube.com/embed/okz5RIZRT0U">
+										<a href="javascript:void(0);" class="videoBlock__playAction" data-toggle="modal" data-target="#videoUrl" data-src="<?php echo $about_us_iframe_video; ?>">
 											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 												<path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path>
 											</svg>
