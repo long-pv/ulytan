@@ -54,7 +54,7 @@ get_header();
 							<label for="" class="page_ctv_form_label">
 								3. Số Mobile*
 							</label>
-							<input type="text" class="page_ctv_form_input" name="phone" placeholder="Điền tối đa 11 số">
+							<input type="text" class="page_ctv_form_input" name="phone" placeholder="Điền tối đa 10 số">
 						</div>
 					</div>
 					<div class="col-lg-3">

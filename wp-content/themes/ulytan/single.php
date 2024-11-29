@@ -10,6 +10,15 @@
 
 // count view
 $post_id = get_the_ID();
+
+if (get_post_type($post_id) == 'service') {
+	$landing_page = get_field('lien_ket_den_trang_landing_page') ?? '';
+	if ($landing_page) {
+		wp_redirect($landing_page);
+		exit;
+	}
+}
+
 set_post_views($post_id);
 $post_views = get_field('post_views_count', $post_id);
 $arrPost = [];

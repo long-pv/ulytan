@@ -183,6 +183,7 @@ function register_cpt($post_type, $data = [])
 		'show_in_nav_menus'  => true,
 		'show_ui'            => true,
 		'menu_icon'          => 'dashicons-admin-post',
+		'archive_title' => $data['labels'],
 	);
 
 	if (!empty($data['tax'])) {
@@ -296,9 +297,15 @@ function wp_breadcrumbs()
 		echo '<a href="' . $homeLink . '">' . $home . '</a>' . $delimiter . ' ';
 
 		switch (true) {
-			case is_category() || is_archive():
+			case is_category() || is_tag() || is_tax():
 				$cat_obj = get_queried_object();
 				echo $before . $cat_obj->name . $after;
+				break;
+
+			case is_archive():
+				$post_type = get_query_var('post_type');
+				$archive_post_type = get_post_type_object($post_type);
+				echo $before . $archive_post_type->archive_title . $after;
 				break;
 
 			case is_single() && !is_attachment():
@@ -761,7 +768,7 @@ function ajax_pagination_load_post()
 					<?php the_title(); ?>
 				</a>
 			</li>
-<?php
+	<?php
 		endwhile;
 	endif;
 	wp_die();
@@ -878,4 +885,15 @@ add_action('admin_head', function () {
             display: none !important;
         }
     </style>';
+});
+
+add_action('admin_footer', function () {
+	?>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$('#toplevel_page_cfdb7-list .wp-menu-name').text('Form 4 - Tài liệu/ Tư vấn / Khuyến mãi');
+			$('#menu-pages .wp-menu-name').text('Loại trang');
+		});
+	</script>
+<?php
 });

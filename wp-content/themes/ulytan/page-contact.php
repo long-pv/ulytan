@@ -38,7 +38,7 @@ get_header();
 									<label class="contact_label" for="">
 										1. Số điện thoại*
 									</label>
-									<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 11 số">
+									<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
 								</div>
 								<div class="col-lg-6">
 									<label class="contact_label" for="">
@@ -237,7 +237,7 @@ get_footer();
 					required: true,
 					digits: true,
 					minlength: 1,
-					maxlength: 11
+					maxlength: 10
 				},
 				email: {
 					required: true,
@@ -314,7 +314,7 @@ get_footer();
 		});
 
 		$('input[name="phone"], input[name="email"]').on("change", function() {
-			if ($('input[name="phone"]').valid() && $('input[name="email"]').valid()) {
+			if ($('input[name="phone"]').val() && $('input[name="email"]').val()) {
 				$(".page_contact_service").show();
 			} else {
 				$(".page_contact_service").hide();
