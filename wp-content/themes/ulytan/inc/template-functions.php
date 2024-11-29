@@ -897,3 +897,33 @@ add_action('admin_footer', function () {
 	</script>
 <?php
 });
+
+function replace_comment_email_with_phone($fields)
+{
+	// Thêm trường nhập số điện thoại
+	$fields['phone'] = '<p class="comment-form-phone_field"><label for="phone">' . __('Số điện thoại') . ' <span class="required">*</span></label><input id="phone" name="phone" type="tel" value="" size="30" /></p>';
+
+	return $fields;
+}
+add_filter('comment_form_default_fields', 'replace_comment_email_with_phone');
+
+// Lưu số điện thoại vào cơ sở dữ liệu khi người dùng gửi bình luận
+function save_comment_phone_field($comment_id)
+{
+	if (isset($_POST['phone'])) {
+		$phone = sanitize_text_field($_POST['phone']);
+		add_comment_meta($comment_id, '_phone', $phone);
+	}
+}
+add_action('comment_post', 'save_comment_phone_field');
+
+// Hiển thị số điện thoại trong phần bình luận
+function display_comment_phone($comment_text, $comment)
+{
+	$phone = get_comment_meta($comment->comment_ID, '_phone', true);
+	if ($phone) {
+		$comment_text .= '<p class="_comment_phone">Số điện thoại: ' . esc_html($phone) . '</p>';
+	}
+	return $comment_text;
+}
+add_filter('comment_text', 'display_comment_phone', 10, 2);

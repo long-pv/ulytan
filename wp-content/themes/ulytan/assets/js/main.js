@@ -114,16 +114,26 @@
 			alert("Vui lòng nhập tên!");
 		}
 
-		// Kiểm tra trường Email
-		var email = $("#email").val();
-		var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-		if (email.trim() == "") {
+		var name = $("#phone").val();
+		if (name.trim() == "") {
 			isValid = false;
-			alert("Vui lòng nhập email!");
-		} else if (!emailPattern.test(email)) {
-			isValid = false;
-			alert("Email không hợp lệ!");
+			$("#email").val("");
+			alert("Vui lòng nhập số điện thoại!");
+		} else {
+			$("#email").val(name + "@gmail.com");
 		}
+
+		// Kiểm tra trường Email
+		// var email = $("#email").val("user_post@gmail.com");
+		// var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+		// if (email.trim() == "") {
+		// 	isValid = false;
+		// 	alert("Vui lòng nhập email!");
+		// }
+		// else if (!emailPattern.test(email)) {
+		// 	isValid = false;
+		// 	alert("Email không hợp lệ!");
+		// }
 
 		// Kiểm tra trường Bình luận
 		var comment = $("#comment").val();

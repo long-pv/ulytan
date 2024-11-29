@@ -769,6 +769,10 @@
     align-items: center;
     justify-content: flex-end;
     gap: 8px;
+
+    @include media-breakpoint-down(md) {
+        justify-content: flex-start;
+    }
 }
 
 .single_post_info_item {
@@ -1659,5 +1663,43 @@
             padding-left: 24px;
             padding-right: 24px;
         }
+    }
+}
+
+.comment-form-email {
+    display: none;
+}
+
+.comment-form-phone_field {
+    order: 2;
+}
+
+.single_post_info_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    @include media-breakpoint-down(md) {
+        flex-direction: column;
+    }
+
+    &>* {
+        flex: 1 1 auto;
+        width: 50%;
+
+        @include media-breakpoint-down(md) {
+            width: 100%;
+        }
+    }
+
+    .author,
+    .people {
+        font-weight: 600;
+        color: $primary;
+    }
+
+    .post_author {
+        margin-bottom: 4px;
     }
 }
