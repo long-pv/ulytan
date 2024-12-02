@@ -1703,3 +1703,24 @@
         margin-bottom: 4px;
     }
 }
+
+.td_req {
+    color: #dc3545;
+}
+
+.td_group {
+    .error {
+        color: #dc3545;
+        display: block;
+    }
+}
+
+.td_input {
+    height: 40px;
+    width: 300px;
+    border: 1px solid $body !important;
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: $body;
+    outline: none !important;
+}

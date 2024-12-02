@@ -571,6 +571,12 @@ function save_contact_info()
 						update_field('phone', sanitize_text_field($data['phone']), $post_id);
 						update_field('email', sanitize_text_field($data['email']), $post_id);
 						update_field('services',   implode(', ', $data['services']), $post_id);
+						update_field('services_2', sanitize_text_field($data['services_2']), $post_id);
+						update_field('services_7', sanitize_text_field($data['services_7']), $post_id);
+						update_field('services_9', sanitize_text_field($data['services_9']), $post_id);
+						update_field('services_10', sanitize_text_field($data['services_10']), $post_id);
+						update_field('services_11', sanitize_text_field($data['services_11']), $post_id);
+						update_field('services_12', sanitize_text_field($data['services_12']), $post_id);
 
 						if (isset($_FILES['upload_file']) && !empty($_FILES['upload_file']['name'])) {
 							$file = $_FILES['upload_file'];

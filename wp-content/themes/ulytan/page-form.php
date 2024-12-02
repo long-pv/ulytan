@@ -165,7 +165,7 @@ get_footer();
 		$.validator.addMethod(
 			"customEmail",
 			function(value, element) {
-				var regex = /^[a-zA-Z0-9._%+-]+(?:.[a-zA-Z0-9._%+-]+)*@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+				var regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 				return this.optional(element) || regex.test(value);
 			},
 			"Vui lòng nhập địa chỉ email hợp lệ."
