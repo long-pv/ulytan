@@ -963,7 +963,7 @@ get_footer();
 		});
 
 		// logic form
-		$('input[name="email"], input[name="full_name"], input[name="birthdate"], input[name="phone"]').on('change', function() {
+		$('input[name="email"], input[name="full_name"], input[name="birthdate"], input[name="phone"]').on('input', function() {
 			let full_name = $('input[name="full_name"]').val();
 			let birthdate = $('input[name="birthdate"]').val();
 			let phone = $('input[name="phone"]').val();
@@ -976,12 +976,12 @@ get_footer();
 		$('.page_ctv_step_5').on('click', function() {
 			$('.page_ctv_step_6').show();
 		});
-		$('input[name="graduation_school"]').on('change', function() {
+		$('input[name="graduation_school"]').on('input', function() {
 			if ($(this).val()) {
 				$('.page_ctv_step_7').show();
 			}
 		});
-		$('input[name="graduation_year"]').on('change', function() {
+		$('input[name="graduation_year"]').on('input', function() {
 			if ($(this).val()) {
 				$('.page_ctv_step_8').show();
 			}
@@ -990,7 +990,7 @@ get_footer();
 		$('.page_ctv_step_8').on('click', function() {
 			$('.page_ctv_step_9').show();
 		});
-		$('input[name="dictionary"]').on('change', function() {
+		$('input[name="dictionary"]').on('input', function() {
 			if ($(this).val()) {
 				$('.page_ctv_step_10').show();
 			}
@@ -1022,7 +1022,7 @@ get_footer();
 		$('.page_ctv_step_15').on('click', function() {
 			$('.page_ctv_step_16').show();
 		});
-		$('.page_ctv_form_textarea').on('change', function() {
+		$('.page_ctv_form_textarea').on('input', function() {
 			$('.page_ctv_step_17').show();
 		});
 		$('.page_ctv_step_17').on('click', function() {
