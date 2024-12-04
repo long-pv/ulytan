@@ -933,3 +933,25 @@ function display_comment_phone($comment_text, $comment)
 	return $comment_text;
 }
 add_filter('comment_text', 'display_comment_phone', 10, 2);
+
+function add_dropdown_arrow_to_menu($items, $args)
+{
+	if (!empty($args->theme_location)) {
+		$items = preg_replace('/(<a.*?>)(.*)<\/a>/i', '<span class="dropdown-arrow"></span>$1$2</a>', $items);
+	}
+	return $items;
+}
+add_filter('wp_nav_menu_items', 'add_dropdown_arrow_to_menu', 10, 2);
+
+// Chỉ áp dụng nếu trong nội dung có <h2> đầu tiên
+add_filter('the_content', function ($content) {
+	if (strpos($content, '<h2') !== false) {
+		$content = preg_replace(
+			'/(<h2[^>]*>)/i', // Regex tìm thẻ <h2>
+			'<div id="sticky-nav-mb"></div>$1', // Chèn <div> vào trước thẻ <h2>
+			$content,
+			1 // Chỉ áp dụng cho lần xuất hiện đầu tiên
+		);
+	}
+	return $content;
+});

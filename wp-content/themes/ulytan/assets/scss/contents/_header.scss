@@ -238,6 +238,29 @@
 
             &>li {
                 border-bottom: 1px solid #c0c0c0;
+                position: relative;
+
+                &.menu-item-has-children {
+                    &>.dropdown-arrow {
+                        width: 20px;
+                        height: 20px;
+                        position: absolute;
+                        top: 12px;
+                        right: 0px;
+                        z-index: 10;
+                        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23900101' d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-size: cover;
+                        transform: rotate(0deg);
+                        transition: all 0.3s;
+                    }
+
+                    &.open>.dropdown-arrow {
+                        transform: rotate(180deg);
+                        transition: all 0.3s;
+                    }
+                }
 
                 &:last-child() {
                     border-bottom: none;
@@ -262,6 +285,7 @@
                 }
 
                 &>ul {
+                    display: none;
                     padding-left: 16px;
                     margin: 0px;
                     list-style-type: none;

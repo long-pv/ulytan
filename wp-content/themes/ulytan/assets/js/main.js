@@ -102,6 +102,10 @@
 		wrapselector: ".single_post_editor",
 		targetselector: "h2,h3",
 	});
+	$("#sticky-nav-mb").stickyNavigator({
+		wrapselector: ".single_post_editor",
+		targetselector: "h2,h3",
+	});
 
 	// Kiểm tra form bình luận khi submit
 	$("#commentform").submit(function (e) {
