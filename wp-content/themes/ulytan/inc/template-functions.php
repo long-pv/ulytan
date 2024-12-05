@@ -381,7 +381,7 @@ function generate_page_parent($parent_id, $delimiter)
 function custom_posts_per_page_archive($query)
 {
 	if (!is_admin() && $query->is_archive() && $query->is_main_query()) {
-		$query->set('posts_per_page', 9);
+		$query->set('posts_per_page', 5);
 	}
 }
 add_action('pre_get_posts', 'custom_posts_per_page_archive');
