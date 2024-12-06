@@ -646,6 +646,10 @@
     position: sticky;
     top: 100px;
     border-radius: 8px;
+
+    @include media-breakpoint-down(md) {
+        display: none !important;
+    }
 }
 
 .toc_title {
@@ -1832,7 +1836,7 @@
         left: 50% !important;
         top: 65px !important;
         transform: translateX(-50%) !important;
-        width: 1170px !important;
+        width: 100vw !important;
 
         .title {
             font-size: 24px;
@@ -1895,3 +1899,91 @@
     }
 }
 
+.single_toc_mb {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+
+    @include media-breakpoint-up(lg) {
+        display: none !important;
+    }
+
+    .single_toc_btn {
+        background: rgba(243, 243, 243, 0.95);
+        padding: 8px 16px;
+        font-size: 18px;
+        font-weight: 700;
+        padding-left: 40px;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 16px;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-position: center center;
+            background-size: cover;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M40 48C26.7 48 16 58.7 16 72l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24L40 48zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L192 64zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zM16 232l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0z'/%3E%3C/svg%3E");
+        }
+    }
+
+    .single_toc_content {
+        padding: 16px;
+        background: rgba(243, 243, 243, 0.95);
+        display: none;
+
+        ul {
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
+
+            li {
+                margin-bottom: 8px;
+            }
+
+            a {
+                color: $body !important;
+            }
+
+            li.nav-h3 {
+                padding-left: 16px;
+            }
+        }
+    }
+}
+
+.single_toc_mb.scroll_active {
+    .single_toc_btn {
+        .text {
+            display: none;
+        }
+
+        padding: 0px;
+
+        height: 50px;
+        width: 50px;
+        position: fixed;
+        top: 50%;
+        right: 0px;
+        transform: translateY(-50%);
+        z-index: 10;
+
+        &::after {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .single_toc_content {
+        position: fixed;
+        width: calc(100% - 30px);
+        height: calc(100vh - 90px);
+        bottom: 10px;
+        right: 20px;
+        z-index: 9;
+    }
+}

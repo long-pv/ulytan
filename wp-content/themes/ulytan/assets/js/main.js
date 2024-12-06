@@ -168,4 +168,27 @@
 			}
 		});
 	});
+
+	if ($(".single_toc_mb").length > 0) {
+		$(".single_toc_btn").on("click", function () {
+			$(".single_toc_content").toggle();
+		});
+
+		var $target = $(".single_toc_mb");
+		var targetOffset = $target.offset().top;
+
+		$(window).on("scroll", function () {
+			var scrollTop = $(this).scrollTop();
+
+			if (scrollTop >= targetOffset) {
+				$target.addClass("scroll_active");
+			} else {
+				$target.removeClass("scroll_active");
+			}
+		});
+
+		$(document).on("click", ".single_toc_mb .single_toc_content a", function () {
+			$(this).parents(".single_toc_content").toggle();
+		});
+	}
 })(jQuery, window);

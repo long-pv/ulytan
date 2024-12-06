@@ -948,7 +948,7 @@ add_filter('the_content', function ($content) {
 	if (strpos($content, '<h2') !== false) {
 		$content = preg_replace(
 			'/(<h2[^>]*>)/i', // Regex tìm thẻ <h2>
-			'<div id="sticky-nav-mb"></div>$1', // Chèn <div> vào trước thẻ <h2>
+			'<div class="single_toc_mb"><div class="single_toc_btn"><span class="text">Nội dung chính</span></div><div id="sticky-nav-mb" class="single_toc_content"></div></div>$1', // Chèn <div> vào trước thẻ <h2>
 			$content,
 			1 // Chỉ áp dụng cho lần xuất hiện đầu tiên
 		);
