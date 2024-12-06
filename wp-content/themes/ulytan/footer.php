@@ -387,7 +387,7 @@ if ($query->have_posts()):
     while ($query->have_posts()) : $query->the_post();
         $menu_html .= '<div class="col-lg-3" id="menu-item-' . get_the_ID() . '">';
         $menu_html .= '<a class="dich_vu_item" href="' . get_permalink() . '">';
-        $menu_html .= '<div class="item_title">' . get_the_title() . '</div>';
+        $menu_html .= '<div class="item_title line-2">' . get_the_title() . '</div>';
         $menu_html .= '<div class="item_desc">' . (get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi') . '</div>';
         $menu_html .= '</a>';
         $menu_html .= '</div>';

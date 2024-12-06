@@ -13,11 +13,12 @@ $current_category = get_queried_object();
 $term_id = $current_category->term_id;
 $banner_image = get_term_meta($term_id, 'banner_image', true) ?? '';
 $dich_vu_lien_quan = get_term_meta($term_id, 'dich_vu_lien_quan', true) ?? [];
+$img_id = $banner_image ?: (get_field('anh_banner', 'option') ?? '');
 ?>
 
-<?php if ($banner_image): ?>
+<?php if ($img_id): ?>
 	<div class="cat_banner_img">
-		<?php echo wp_get_attachment_image($banner_image, 'full'); ?>
+		<?php echo wp_get_attachment_image($img_id, 'full'); ?>
 	</div>
 <?php endif; ?>
 
