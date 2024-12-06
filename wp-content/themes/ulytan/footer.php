@@ -375,8 +375,11 @@ $args = array(
 
 $query = new WP_Query($args);
 $menu_html = '';
+$menu_html_mb = '';
 
-if ($query->have_posts()) :
+if ($query->have_posts()):
+    $menu_html_mb .= '<ul class="sub-menu">';
+
     $menu_html .= '<div class="sub_menu_dich_vu">';
     $menu_html .= '<div class="title">Dịch vụ</div>';
     $menu_html .= '<div class="desc">ULYTAN cung cấp dịch vụ dịch thuật cho rất nhiều thứ tiếng với 63 quốc gia hiện nay, cùng với nhiều dịch vụ khác như đổi bằng lái xe, xin visa quốc tế, ...</div>';
@@ -388,9 +391,22 @@ if ($query->have_posts()) :
         $menu_html .= '<div class="item_desc">' . (get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi') . '</div>';
         $menu_html .= '</a>';
         $menu_html .= '</div>';
+
+        $menu_html_mb .= '<li>';
+        $menu_html_mb .= '<a class="dich_vu_item_link_mb" href="' . get_permalink() . '">';
+        $menu_html_mb .= '<span class="title">';
+        $menu_html_mb .= get_the_title();
+        $menu_html_mb .= '</span>';
+        $menu_html_mb .= '<span class="desc">';
+        $menu_html_mb .= get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi';
+        $menu_html_mb .= '</span>';
+        $menu_html_mb .= '</a>';
+        $menu_html_mb .= '</li>';
     endwhile;
     $menu_html .= '</div>';
     $menu_html .= '</div>';
+
+    $menu_html_mb .= '</ul>';
 endif;
 wp_reset_postdata();
 ?>
@@ -398,8 +414,11 @@ wp_reset_postdata();
 <script>
     jQuery(document).ready(function($) {
         var menu_dich_vu = '<?php echo $menu_html; ?>';
-        $('#menu-menu-1 li.menu_dich_vu').addClass('menu-item-has-children');
-        $('#menu-menu-1 li.menu_dich_vu').append(menu_dich_vu);
+        var menu_dich_vu_mb = '<?php echo $menu_html_mb; ?>';
+        $('.header__menupc ul.menu li.menu_dich_vu').addClass('menu-item-has-children');
+        $('.header__menupc ul.menu li.menu_dich_vu').append(menu_dich_vu);
+        $('.header__menusp ul.menu li.menu_dich_vu').addClass('menu-item-has-children');
+        $('.header__menusp ul.menu li.menu_dich_vu').append(menu_dich_vu_mb);
     });
 </script>
 

@@ -16,7 +16,7 @@
 		$(".mainBodyContent").toggleClass("menu__openSp");
 	}
 
-	$(".menu-item-has-children > .dropdown-arrow").click(function (e) {
+	$(document).on("click", ".menu-item-has-children > .dropdown-arrow", function (e) {
 		e.preventDefault();
 		var $submenu = $(this).siblings(".sub-menu");
 
