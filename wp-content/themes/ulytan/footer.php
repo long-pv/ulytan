@@ -365,6 +365,44 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
 
 <?php wp_footer(); ?>
 
+<?php
+$args = array(
+    'post_type'      => 'service',
+    'posts_per_page' => 40,
+    'post_status'    => 'publish',
+    // 'order'          => 'ASC',
+);
+
+$query = new WP_Query($args);
+$menu_html = '';
+
+if ($query->have_posts()) :
+    $menu_html .= '<div class="sub_menu_dich_vu">';
+    $menu_html .= '<div class="title">Dịch vụ</div>';
+    $menu_html .= '<div class="desc">ULYTAN cung cấp dịch vụ dịch thuật cho rất nhiều thứ tiếng với 63 quốc gia hiện nay, cùng với nhiều dịch vụ khác như đổi bằng lái xe, xin visa quốc tế, ...</div>';
+    $menu_html .= '<div class="row list_dich_vu">';
+    while ($query->have_posts()) : $query->the_post();
+        $menu_html .= '<div class="col-lg-3" id="menu-item-' . get_the_ID() . '">';
+        $menu_html .= '<a class="dich_vu_item" href="' . get_permalink() . '">';
+        $menu_html .= '<div class="item_title">' . get_the_title() . '</div>';
+        $menu_html .= '<div class="item_desc">' . (get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi') . '</div>';
+        $menu_html .= '</a>';
+        $menu_html .= '</div>';
+    endwhile;
+    $menu_html .= '</div>';
+    $menu_html .= '</div>';
+endif;
+wp_reset_postdata();
+?>
+
+<script>
+    jQuery(document).ready(function($) {
+        var menu_dich_vu = '<?php echo $menu_html; ?>';
+        $('#menu-menu-1 li.menu_dich_vu').addClass('menu-item-has-children');
+        $('#menu-menu-1 li.menu_dich_vu').append(menu_dich_vu);
+    });
+</script>
+
 </body>
 
 </html>

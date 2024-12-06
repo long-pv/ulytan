@@ -1823,3 +1823,58 @@
     gap: 24px;
     margin-bottom: 40px;
 }
+
+.sub_menu_dich_vu {
+    position: fixed !important;
+    left: 50% !important;
+    top: 65px !important;
+    transform: translateX(-50%) !important;
+    width: 1170px !important;
+
+    .title {
+        font-size: 24px;
+        color: $primary;
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    .desc {
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    .list_dich_vu {
+        margin-left: -4px;
+        margin-right: -4px;
+        row-gap: 8px;
+
+        &>* {
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+
+        .dich_vu_item {
+            background-color: #F7F7F7;
+            height: 100%;
+            border-radius: 12px;
+            padding: 8px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            justify-content: space-between;
+
+            .item_title {
+                font-size: 22px;
+                font-weight: 500;
+                color: $primary;
+            }
+
+            .item_desc {
+                font-size: 14px;
+                font-style: italic;
+                color: $body;
+            }
+        }
+    }
+}

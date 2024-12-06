@@ -1,6 +1,6 @@
 {
     "key": "group_6749da8f709a1",
-    "title": "Landing page",
+    "title": "Cài đặt dịch vụ",
     "fields": [
         {
             "key": "field_6749da929ba7a",
@@ -18,6 +18,26 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_6752a99baef12",
+            "label": "Mô tả trên menu",
+            "name": "mo_ta_tren_menu",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -38,5 +58,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1732893379
+    "modified": 1733470632
 }
