@@ -932,8 +932,14 @@ get_footer();
 					},
 					success: function(response) {
 						if (response.success) {
-							alert('Thông tin đã được gửi thành công!');
-							window.location.href = "<?php echo get_permalink(); ?>";
+							<?php
+							$ctv_thanh_cong = get_field('ctv_thanh_cong', 'option') ?? '';
+							if ($ctv_thanh_cong) {
+								echo 'window.location.href = "' . get_permalink($ctv_thanh_cong) . '";';
+							} else {
+								echo 'window.location.href = "' . get_permalink() . '";';
+							}
+							?>
 						} else {
 							alert(response.data.message);
 						}

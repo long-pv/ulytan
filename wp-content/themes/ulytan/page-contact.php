@@ -465,8 +465,14 @@ get_footer();
 					},
 					success: function(response) {
 						if (response.success) {
-							alert('Thông tin đã được gửi thành công!');
-							window.location.href = "<?php echo get_permalink(); ?>";
+							<?php
+							$lien_he_thanh_cong = get_field('lien_he_thanh_cong', 'option') ?? '';
+							if ($lien_he_thanh_cong) {
+								echo 'window.location.href = "' . get_permalink($lien_he_thanh_cong) . '";';
+							} else {
+								echo 'window.location.href = "' . get_permalink() . '";';
+							}
+							?>
 						} else {
 							alert(response.data.message);
 						}

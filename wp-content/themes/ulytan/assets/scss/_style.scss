@@ -1987,3 +1987,66 @@
         z-index: 9;
     }
 }
+
+
+.chia_se_mxh {
+    padding-top: 32px;
+    border-top: 1px solid #c0c0c0;
+    margin-top: 32px;
+
+    .title {
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .list_link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 24px;
+
+        &>a {
+            display: flex;
+            flex: 0 0 auto;
+            height: 32px;
+            width: 32px;
+            background-color: $primary;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+
+            svg {
+                width: 20px;
+                height: 20px;
+                fill: #fff;
+            }
+        }
+    }
+
+    .social_share_post {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+
+        &>a {
+            display: flex;
+            flex: 0 0 auto;
+            height: 32px;
+            width: 32px;
+            background-color: $primary;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+
+            svg {
+                width: 20px;
+                height: 20px;
+                fill: #fff;
+            }
+        }
+    }
+}

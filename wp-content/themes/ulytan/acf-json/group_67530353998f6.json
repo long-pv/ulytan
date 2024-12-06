@@ -1,0 +1,76 @@
+{
+    "key": "group_67530353998f6",
+    "title": "Trang thành công",
+    "fields": [
+        {
+            "key": "field_6753035793803",
+            "label": "Tiktok",
+            "name": "tiktok",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_6753038a93804",
+            "label": "Facebook",
+            "name": "facebook",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_6753039593805",
+            "label": "Youtube",
+            "name": "youtube",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-ctv_thanh_cong.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1733493687
+}
