@@ -315,7 +315,7 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                 </div>
 
 
-                <div class="mt-3 mt-lg-4">
+                <!-- <div class="mt-3 mt-lg-4">
                     <h3 class="footer_title">
                         <?php echo $tieu_de_5; ?>
                     </h3>
@@ -328,7 +328,7 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                             <?php echo do_shortcode('[contact-form-7 id="' . $form_khuyen_mai . '"]'); ?>
                         </div>
                     <?php endif; ?>
-                </div>
+                </div> -->
 
             </div>
         </div>

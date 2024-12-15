@@ -56,7 +56,7 @@ get_header();
 										</td>
 										<td>
 											<strong>2. Dịch vụ xin cấp visa đa quốc gia</strong>
-											<div>(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>
+											<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>
 											<div class="td_group mt-2" style="display:none;">
 												<div class="td_label mb-1">
 													Quốc gia <span class="td_req">(*bắt buộc)</span>
@@ -103,13 +103,6 @@ get_header();
 										</td>
 										<td>
 											<strong>7. Dịch vụ chứng thực lãnh sự tại đại sứ quán 60 Quốc Gia</strong>
-											<div>(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>
-											<div class="td_group mt-2" style="display:none;">
-												<div class="td_label mb-1">
-													Quốc gia <span class="td_req">(*bắt buộc)</span>
-												</div>
-												<input type="text" name="services_7" class="td_input services_7">
-											</div>
 										</td>
 									</tr>
 									<tr>
@@ -126,15 +119,6 @@ get_header();
 										</td>
 										<td>
 											<strong>9. Dịch vụ xin cấp giấy phép lao động.</strong>
-											<div>
-												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
-											</div>
-											<div class="td_group mt-2" style="display:none;">
-												<div class="td_label mb-1">
-													Quốc gia <span class="td_req">(*bắt buộc)</span>
-												</div>
-												<input type="text" name="services_9" class="td_input services_9">
-											</div>
 										</td>
 									</tr>
 									<tr>
@@ -143,7 +127,7 @@ get_header();
 										</td>
 										<td>
 											<strong>10. Dịch vụ xuất khẩu lao động</strong>
-											<div>
+											<div class="td_checkbox_desc">
 												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
 											</div>
 											<div class="td_group mt-2" style="display:none;">
@@ -160,7 +144,7 @@ get_header();
 										</td>
 										<td>
 											<strong>11. Dịch vụ du học quốc tế</strong>
-											<div>
+											<div class="td_checkbox_desc">
 												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
 											</div>
 											<div class="td_group mt-2" style="display:none;">
@@ -177,7 +161,7 @@ get_header();
 										</td>
 										<td>
 											<strong>12. Dịch vụ đào tạo ngoại ngữ</strong>
-											<div>
+											<div class="td_checkbox_desc">
 												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
 											</div>
 											<div class="td_group mt-2" style="display:none;">
@@ -190,10 +174,19 @@ get_header();
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="13. Dịch vụ du lịch quốc tế">
+											<input type="checkbox" id="services_13" name="services[]" class="contact_checkox" value="13. Dịch vụ du lịch quốc tế">
 										</td>
 										<td>
 											<strong>13. Dịch vụ du lịch quốc tế</strong>
+											<div class="td_checkbox_desc">
+												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
+											</div>
+											<div class="td_group mt-2" style="display:none;">
+												<div class="td_label mb-1">
+													Quốc gia <span class="td_req">(*bắt buộc)</span>
+												</div>
+												<input type="text" name="services_13" class="td_input services_13">
+											</div>
 										</td>
 									</tr>
 									<tr>
@@ -411,12 +404,6 @@ get_footer();
 				services_2: {
 					required: "Vui lòng tên quốc gia",
 				},
-				services_7: {
-					required: "Vui lòng tên quốc gia",
-				},
-				services_9: {
-					required: "Vui lòng tên quốc gia",
-				},
 				services_10: {
 					required: "Vui lòng tên quốc gia",
 				},
@@ -424,6 +411,9 @@ get_footer();
 					required: "Vui lòng tên quốc gia",
 				},
 				services_12: {
+					required: "Vui lòng tên quốc gia",
+				},
+				services_13: {
 					required: "Vui lòng tên quốc gia",
 				},
 			},
@@ -472,14 +462,6 @@ get_footer();
 				return false;
 			}
 		});
-
-		// $('input[name="phone"], input[name="email"]').on("change", function() {
-		// 	if ($('input[name="phone"]').val() && $('input[name="email"]').val()) {
-		// 		$(".page_contact_service").show();
-		// 	} else {
-		// 		$(".page_contact_service").hide();
-		// 	}
-		// });
 
 		$('input[name="services[]"]').on('change', function() {
 			var $tdGroup = $(this).closest('tr').find('.td_group');

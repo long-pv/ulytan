@@ -45,7 +45,7 @@
         {
             "key": "field_6734e04f9cd3c",
             "label": "Services",
-            "name": "services",
+            "name": "services_list",
             "aria-label": "",
             "type": "textarea",
             "instructions": "",
@@ -58,53 +58,13 @@
             },
             "default_value": "",
             "maxlength": "",
-            "rows": "",
+            "rows": 4,
             "placeholder": "",
             "new_lines": ""
         },
         {
-            "key": "field_6734e08e9cd3e",
-            "label": "Upload file",
-            "name": "upload_file",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_6734e0829cd3d",
-            "label": "Google driver",
-            "name": "google_driver",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_674dd1d244149",
-            "label": "Quốc gia (services_2)",
+            "label": "Quốc gia (2. Dịch vụ xin cấp visa đa quốc gia)",
             "name": "services_2",
             "aria-label": "",
             "type": "text",
@@ -123,48 +83,8 @@
             "append": ""
         },
         {
-            "key": "field_674dd1e04414a",
-            "label": "Quốc gia (services_7)",
-            "name": "services_7",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_674dd1eb4414b",
-            "label": "Quốc gia (services_9)",
-            "name": "services_9",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_674dd1f24414c",
-            "label": "Quốc gia (services_10)",
+            "label": "Quốc gia (10. Dịch vụ xuất khẩu lao động)",
             "name": "services_10",
             "aria-label": "",
             "type": "text",
@@ -184,7 +104,7 @@
         },
         {
             "key": "field_674dd1fa4414d",
-            "label": "Quốc gia (services_11)",
+            "label": "Quốc gia (11. Dịch vụ du học quốc tế)",
             "name": "services_11",
             "aria-label": "",
             "type": "text",
@@ -204,8 +124,28 @@
         },
         {
             "key": "field_674dd2014414e",
-            "label": "Quốc gia (services_12)",
+            "label": "Quốc gia (12. Dịch vụ đào tạo ngoại ngữ)",
             "name": "services_12",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_675f0b190190b",
+            "label": "Quốc gia (13. Dịch vụ du lịch quốc tế)",
+            "name": "services_13",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -247,5 +187,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1733153336
+    "modified": 1734282567
 }
