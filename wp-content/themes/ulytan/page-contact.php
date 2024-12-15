@@ -28,28 +28,8 @@ get_header();
 						<h2 class="page_contact_title">
 							XIN MỜI ĐIỀN THÔNG TIN ĐỂ NHẬN ĐƯỢC GIÁ KHUYẾN MÃI.
 						</h2>
-						<div class="page_contact_info">
-							<div class="page_contact_subtitle">
-								Thông tin cá nhân
-							</div>
 
-							<div class="row row_16">
-								<div class="col-lg-6">
-									<label class="contact_label" for="">
-										1. Số điện thoại*
-									</label>
-									<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
-								</div>
-								<div class="col-lg-6">
-									<label class="contact_label" for="">
-										2. Địa chỉ Email*
-									</label>
-									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sales@ulytan.vn">
-								</div>
-							</div>
-						</div>
-
-						<div class="page_contact_service" style="display:none;">
+						<div class="page_contact_service">
 							<div class="page_contact_subtitle">
 								Bạn sử dụng dịch vụ nào sau đây
 							</div>
@@ -103,10 +83,10 @@ get_header();
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="5. Dịch vụ hỗ trợ hợp pháp hóa lãnh sự">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="5. Dịch vụ hỗ trợ hợp pháp hoá lãnh sự">
 										</td>
 										<td>
-											<strong>5. Dịch vụ hỗ trợ hợp pháp hóa lãnh sự</strong>
+											<strong>5. Dịch vụ hỗ trợ hợp pháp hoá lãnh sự</strong>
 										</td>
 									</tr>
 									<tr>
@@ -119,10 +99,10 @@ get_header();
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" id="services_7" name="services[]" class="contact_checkox" value="7. Dịch vụ chứng nhận lãnh sự tại đại sứ quán 60 Quốc gia">
+											<input type="checkbox" id="services_7" name="services[]" class="contact_checkox" value="7. Dịch vụ chứng thực lãnh sự tại đại sứ quán 60 Quốc Gia">
 										</td>
 										<td>
-											<strong>7. Dịch vụ chứng nhận lãnh sự tại đại sứ quán 60 Quốc gia</strong>
+											<strong>7. Dịch vụ chứng thực lãnh sự tại đại sứ quán 60 Quốc Gia</strong>
 											<div>(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>
 											<div class="td_group mt-2" style="display:none;">
 												<div class="td_label mb-1">
@@ -134,18 +114,18 @@ get_header();
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="8. Dịch vụ gia hạn thẻ tạm trú, cấp giấy phép lao động">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="8. Dịch vụ xin cấp gia hạn thẻ tạm trú">
 										</td>
 										<td>
-											<strong>8. Dịch vụ gia hạn thẻ tạm trú, cấp giấy phép lao động</strong>
+											<strong>8. Dịch vụ xin cấp gia hạn thẻ tạm trú</strong>
 										</td>
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" id="services_9" name="services[]" class="contact_checkox" value="9. Dịch vụ xuất khẩu lao động">
+											<input type="checkbox" id="services_9" name="services[]" class="contact_checkox" value="9. Dịch vụ xin cấp giấy phép lao động.">
 										</td>
 										<td>
-											<strong>9. Dịch vụ xuất khẩu lao động</strong>
+											<strong>9. Dịch vụ xin cấp giấy phép lao động.</strong>
 											<div>
 												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
 											</div>
@@ -159,10 +139,10 @@ get_header();
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" id="services_10" name="services[]" class="contact_checkox" value="10. Dịch vụ du học quốc tế">
+											<input type="checkbox" id="services_10" name="services[]" class="contact_checkox" value="10. Dịch vụ xuất khẩu lao động">
 										</td>
 										<td>
-											<strong>10. Dịch vụ du học quốc tế</strong>
+											<strong>10. Dịch vụ xuất khẩu lao động</strong>
 											<div>
 												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
 											</div>
@@ -176,10 +156,10 @@ get_header();
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" id="services_11" name="services[]" class="contact_checkox" value="11. Dịch vụ đào tạo ngoại ngữ quốc tế">
+											<input type="checkbox" id="services_11" name="services[]" class="contact_checkox" value="11. Dịch vụ du học quốc tế">
 										</td>
 										<td>
-											<strong>11. Dịch vụ đào tạo ngoại ngữ quốc tế</strong>
+											<strong>11. Dịch vụ du học quốc tế</strong>
 											<div>
 												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
 											</div>
@@ -193,10 +173,10 @@ get_header();
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" id="services_12" name="services[]" class="contact_checkox" value="12. Dịch vụ du lịch quốc tế">
+											<input type="checkbox" id="services_12" name="services[]" class="contact_checkox" value="12. Dịch vụ đào tạo ngoại ngữ">
 										</td>
 										<td>
-											<strong>12. Dịch vụ du lịch quốc tế</strong>
+											<strong>12. Dịch vụ đào tạo ngoại ngữ</strong>
 											<div>
 												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
 											</div>
@@ -210,71 +190,91 @@ get_header();
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="13. Dịch vụ làm evisa cho người nước ngoài vào Việt Nam">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="13. Dịch vụ du lịch quốc tế">
 										</td>
 										<td>
-											<strong>13. Dịch vụ làm evisa cho người nước ngoài vào Việt Nam</strong>
+											<strong>13. Dịch vụ du lịch quốc tế</strong>
 										</td>
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="14. Dịch vụ Công chứng hợp đồng mua bán, cho thuê">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="14. Dịch vụ tư vấn hỗ trợ evisa cho người nước ngoài vào Việt Nam">
 										</td>
 										<td>
-											<strong>14. Dịch vụ Công chứng hợp đồng mua bán, cho thuê</strong>
+											<strong>14. Dịch vụ tư vấn hỗ trợ evisa cho người nước ngoài vào Việt Nam</strong>
 										</td>
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="15. Dịch vụ xin cấp Căn cước công dân">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="15. Dịch vụ bán bảo hiểm du lịch quốc tế">
 										</td>
 										<td>
-											<strong>15. Dịch vụ xin cấp Căn cước công dân</strong>
+											<strong>15. Dịch vụ bán bảo hiểm du lịch quốc tế</strong>
 										</td>
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="16. Dịch vụ bán bảo hiểm du lịch quốc tế">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="16. Dịch vụ bán vé máy bay trong nước và quốc tế">
 										</td>
 										<td>
-											<strong>16. Dịch vụ bán bảo hiểm du lịch quốc tế</strong>
+											<strong>16. Dịch vụ bán vé máy bay trong nước và quốc tế</strong>
 										</td>
 									</tr>
 									<tr>
 										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="17. Dịch vụ sao y bản chính">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="17. Dịch vụ tư vấn hỗ trợ làm thẻ doanh nhân Apec">
 										</td>
 										<td>
-											<strong>17. Dịch vụ sao y bản chính</strong>
+											<strong>17. Dịch vụ tư vấn hỗ trợ làm thẻ doanh nhân Apec</strong>
 										</td>
 									</tr>
-									<tr style="display:none;">
-										<td></td>
+									<tr>
+										<td class="td_checkbox">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="18. Dịch vụ chứng minh tài chính (cho visa du lịch, xuất khẩu lao động)">
+										</td>
 										<td>
-											<strong class="d-block mb-3">File đính kèm</strong>
-											<div class="radio_group mb-3">
-												<label class="d-block radio_group_label">
-													<input type="radio" name="file_option" value="upload_file" checked> Upload file
-												</label>
-												<p class="radio_group_note">
-													Ghi chú: Phần upload này tối đa 50 Mb và chỉ chấp nhận file có đuôi .doc, .docx, .pdf, .zip
-													Nếu file năng hơn 50Mb A/c vui lòng chọn Google Driver bên dưới.
-												</p>
-												<input type="file" name="upload_file" accept=".doc,.docx,.pdf" id="upload_file_input">
-											</div>
-											<div class="radio_group">
-												<label class="d-block radio_group_label">
-													<input type="radio" name="file_option" value="google_driver"> Google Driver
-												</label>
-												<p class="radio_group_note">
-													Ghi chú: Anh chị vui lòng truy cập https://www.google.com/drive ==> Tài file ==> Copy đường link và dán vào ô bên dưới.
-												</p>
-												<input type="text" name="google_driver" class="contact_input" placeholder="Nhập link google driver">
-											</div>
+											<strong>18. Dịch vụ chứng minh tài chính (cho visa du lịch, xuất khẩu lao động)</strong>
+										</td>
+									</tr>
+									<tr>
+										<td class="td_checkbox">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="19. Dịch vụ khai báo hải quan">
+										</td>
+										<td>
+											<strong>19. Dịch vụ khai báo hải quan</strong>
+										</td>
+									</tr>
+									<tr>
+										<td class="td_checkbox">
+											<input type="checkbox" name="services[]" class="contact_checkox" value="20. Dịch thuật chuyên sâu">
+										</td>
+										<td>
+											<strong>20. Dịch thuật chuyên sâu</strong>
 										</td>
 									</tr>
 								</tbody>
 							</table>
+						</div>
+
+						<div class="page_contact_info" style="display:none;">
+							<div class="page_contact_subtitle">
+								Thông tin cá nhân
+							</div>
+
+							<div class="row row_16">
+								<div class="col-lg-6">
+									<label class="contact_label" for="">
+										1. Số điện thoại*
+									</label>
+									<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
+								</div>
+								<div class="col-lg-6">
+									<label class="contact_label" for="">
+										2. Địa chỉ Email*
+									</label>
+									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sales@ulytan.vn">
+								</div>
+							</div>
 						</div>
 
 						<div class="mt-3 d-flex justify-content-center">
@@ -433,23 +433,6 @@ get_footer();
 					return false;
 				}
 
-				// let file_option = $('input[name="file_option"]:checked').val();
-				// if (file_option == 'upload_file') {
-				// 	let upload_file = $('input[name="upload_file"]').val();
-
-				// 	if (!upload_file) {
-				// 		alert("Vui lòng nhập file của bạn");
-				// 		return false;
-				// 	}
-				// } else if (file_option == 'google_driver') {
-				// 	let google_driver = $('input[name="google_driver"]').val();
-
-				// 	if (!google_driver) {
-				// 		alert("Vui lòng nhập link google driver của bạn");
-				// 		return false;
-				// 	}
-				// }
-
 				// Gửi AJAX request
 				var formData = new FormData(form);
 				formData.append("action", "save_contact_info");
@@ -490,21 +473,29 @@ get_footer();
 			}
 		});
 
-		$('input[name="phone"], input[name="email"]').on("change", function() {
-			if ($('input[name="phone"]').val() && $('input[name="email"]').val()) {
-				$(".page_contact_service").show();
-			} else {
-				$(".page_contact_service").hide();
-			}
-		});
+		// $('input[name="phone"], input[name="email"]').on("change", function() {
+		// 	if ($('input[name="phone"]').val() && $('input[name="email"]').val()) {
+		// 		$(".page_contact_service").show();
+		// 	} else {
+		// 		$(".page_contact_service").hide();
+		// 	}
+		// });
 
 		$('input[name="services[]"]').on('change', function() {
 			var $tdGroup = $(this).closest('tr').find('.td_group');
 			$tdGroup.find('input').val('');
 			if ($(this).is(':checked')) {
-				$tdGroup.show(); // Hiển thị ô nhập
+				$tdGroup.show();
 			} else {
-				$tdGroup.hide(); // Ẩn ô nhập
+				$tdGroup.hide();
+			}
+
+			var isAnyChecked = $('input[name="services[]"]:checked').length > 0;
+			if (!isAnyChecked) {
+				$('.page_contact_info').hide();
+				$('.page_contact_info').find('input').val('');
+			} else {
+				$('.page_contact_info').show();
 			}
 		});
 
