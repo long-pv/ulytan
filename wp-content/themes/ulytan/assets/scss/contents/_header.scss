@@ -93,6 +93,18 @@
                     }
                 }
 
+                &.noi_bat {
+                    padding-left: 12px;
+                    padding-right: 12px;
+
+                    a {
+                        color: #fff !important;
+                        padding: 5px 12px;
+                        background-color: $primary;
+                        border-radius: 8px;
+                    }
+                }
+
                 &>ul.sub-menu,
                 &>.sub_menu_dich_vu {
                     display: block;

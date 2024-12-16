@@ -161,6 +161,26 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_675fec4260a39",
+            "label": "Trang đã gửi",
+            "name": "trang_da_gui",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -187,5 +207,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1734282567
+    "modified": 1734339672
 }
