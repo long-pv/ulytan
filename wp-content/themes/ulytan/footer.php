@@ -385,7 +385,7 @@ if ($query->have_posts()):
     $menu_html .= '<div class="desc">ULYTAN cung cấp dịch vụ dịch thuật cho rất nhiều thứ tiếng với 63 quốc gia hiện nay, cùng với nhiều dịch vụ khác như đổi bằng lái xe, xin visa quốc tế, ...</div>';
     $menu_html .= '<div class="row list_dich_vu">';
     while ($query->have_posts()) : $query->the_post();
-        $menu_html .= '<div class="col-lg-3" id="menu-item-' . get_the_ID() . '">';
+        $menu_html .= '<div class="col-lg-4" id="menu-item-' . get_the_ID() . '">';
         $menu_html .= '<a class="dich_vu_item" href="' . get_permalink() . '">';
         $menu_html .= '<div class="item_title line-2">' . get_the_title() . '</div>';
         $menu_html .= '<div class="item_desc">' . (get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi') . '</div>';

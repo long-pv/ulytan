@@ -33,12 +33,7 @@ function activate_my_plugins()
 	$plugins = [
 		'advanced-custom-fields-pro\acf.php',
 		'classic-editor\classic-editor.php',
-		'duplicate-post\duplicate-post.php',
-		'wordpress-seo\wp-seo.php',
-		'wp-cerber\wp-cerber.php',
-		'all-in-one-wp-migration-master\all-in-one-wp-migration.php',
 		'wp-mail-smtp\wp_mail_smtp.php',
-		'contact-form-7\wp-contact-form-7.php',
 	];
 
 	foreach ($plugins as $plugin) {
@@ -561,7 +556,7 @@ function save_contact_info()
 
 		$new_post = array(
 			'post_type'   => 'contact_info',
-			'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['email']),
+			'post_title'  => sanitize_text_field($data['email'] . ' - ' . $data['ten_trang']),
 			'post_status' => 'publish',
 		);
 		$post_id = wp_insert_post($new_post);
@@ -577,6 +572,7 @@ function save_contact_info()
 				update_field('services_11', sanitize_text_field($data['services_11']), $post_id);
 				update_field('services_12', sanitize_text_field($data['services_12']), $post_id);
 				update_field('services_13', sanitize_text_field($data['services_13']), $post_id);
+				update_field('trang_da_gui', sanitize_text_field($data['trang_da_gui']), $post_id);
 			}
 
 			wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
@@ -920,9 +916,10 @@ add_filter('wp_nav_menu_items', 'add_dropdown_arrow_to_menu', 10, 2);
 // Chỉ áp dụng nếu trong nội dung có <h2> đầu tiên
 add_filter('the_content', function ($content) {
 	if (strpos($content, '<h2') !== false) {
+		$icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>';
 		$content = preg_replace(
 			'/(<h2[^>]*>)/i', // Regex tìm thẻ <h2>
-			'<div class="single_toc_mb"><div class="single_toc_btn"><span class="text">Nội dung chính</span></div><div id="sticky-nav-mb" class="single_toc_content"></div></div>$1', // Chèn <div> vào trước thẻ <h2>
+			'<div class="single_toc_mb"><div class="single_toc_btn"><span class="text">Nội dung chính</span><span class="icon">' . $icon . '</span></div><div id="sticky-nav-mb" class="single_toc_content"></div></div>$1', // Chèn <div> vào trước thẻ <h2>
 			$content,
 			1 // Chỉ áp dụng cho lần xuất hiện đầu tiên
 		);

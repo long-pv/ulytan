@@ -155,34 +155,11 @@ function custom_login_redirect()
         exit();
     }
 
-    // prevent users from entering the wp-admin page
-    if (strpos($_SERVER['REQUEST_URI'], 'wp-admin') !== false && !is_admin() && !defined('DOING_AJAX') && !is_user_logged_in()) {
-        wp_redirect(home_url('/404'));
-        exit();
-    }
-
     // Particularly, urls containing xmlrpc.php give status 403
     if (strpos($_SERVER['REQUEST_URI'], 'xmlrpc.php') !== false) {
         status_header(403);
         exit();
     }
-}
-
-// Apply a filter to the field value before saving
-function custom_modify_text_field($value, $post_id, $field)
-{
-    $value_change = custom_replace_value($value);
-
-    return $value_change;
-}
-add_filter('acf/update_value', 'custom_modify_text_field', 10, 3);
-
-// Apply a filter to the title before saving
-add_filter('title_save_pre', 'clear_tag_html_post_title');
-function clear_tag_html_post_title($title)
-{
-    $title = custom_replace_value($title);
-    return strip_tags($title);
 }
 
 // Block CORS in WordPress
@@ -206,32 +183,6 @@ function cl_customize_rest_cors()
     });
 }
 add_action('rest_api_init', 'cl_customize_rest_cors', 15);
-
-// Removed scripts imported from editor in admin
-add_filter('content_save_pre', 'custom_content_save');
-function custom_content_save($content)
-{
-    $content = custom_replace_value($content);
-    $content = preg_replace('/\b(?:o[nN][eE]?[rR][rR]?[oO][rR]?)\b/i', '', $content);
-
-    return $content;
-}
-
-function custom_replace_value($text)
-{
-    $special_characters = [
-        '<script>',
-        '</script>',
-        'alert(',
-        '$(',
-        '&lt;script&gt;',
-        '&lt;/script&gt',
-        'document.',
-    ];
-    $text = str_replace($special_characters, '', $text);
-
-    return $text;
-}
 
 // Disable some endpoints for unauthenticated users
 add_filter('rest_endpoints', 'disable_default_endpoints');
@@ -398,13 +349,6 @@ function allow_iframe_script_tags($allowedposttags)
     return $allowedposttags;
 }
 add_filter("wp_kses_allowed_html", "allow_iframe_script_tags", 1);
-
-// Hide Tags
-// function hide_tags()
-// {
-//     register_taxonomy('post_tag', array());
-// }
-// add_action('init', 'hide_tags');
 
 // setting image in content editor
 function set_default_image_settings_on_login($user_login, $user)

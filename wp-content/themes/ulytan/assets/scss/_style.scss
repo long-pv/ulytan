@@ -1837,19 +1837,18 @@
         left: 50% !important;
         top: 65px !important;
         transform: translateX(-50%) !important;
-        width: 100vw !important;
+        width: 900px !important;
 
         .title {
             font-size: 24px;
             color: $primary;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 16px;
-            text-align: center;
         }
 
         .desc {
             margin-bottom: 16px;
-            text-align: center;
+            font-size: 14px;
         }
 
         .list_dich_vu {
@@ -1865,17 +1864,17 @@
             .dich_vu_item {
                 background-color: #F7F7F7;
                 height: 100%;
-                border-radius: 12px;
-                padding: 8px 12px;
+                border-radius: 10px;
+                padding: 10px;
                 display: flex;
                 flex-direction: column;
                 gap: 4px;
                 justify-content: space-between;
 
                 .item_title {
-                    font-size: 22px;
-                    font-weight: 500;
-                    color: $primary;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: $body;
                 }
 
                 .item_desc {
@@ -1891,6 +1890,12 @@
         display: flex !important;
         flex-direction: column !important;
         gap: 4px !important;
+
+        .title {
+            color: $primary !important;
+            font-size: 16px;
+            font-style: unset !important;
+        }
 
         .desc {
             font-size: 14px !important;
@@ -1929,6 +1934,38 @@
             background-size: cover;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M40 48C26.7 48 16 58.7 16 72l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24L40 48zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L192 64zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zM16 232l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0z'/%3E%3C/svg%3E");
         }
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 16px;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-position: center center;
+            background-size: cover;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M40 48C26.7 48 16 58.7 16 72l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24L40 48zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L192 64zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32l288 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-288 0zM16 232l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24l0 48c0 13.3 10.7 24 24 24l48 0c13.3 0 24-10.7 24-24l0-48c0-13.3-10.7-24-24-24l-48 0z'/%3E%3C/svg%3E");
+        }
+
+        .icon {
+            position: absolute;
+            right: 16px;
+            top: 12px;
+            display: flex;
+            transform: rotate(-90deg);
+
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        &.active {
+            .icon {
+                transform: rotate(0deg);
+            }
+        }
     }
 
     .single_toc_content {
@@ -1958,7 +1995,9 @@
 
 .single_toc_mb.scroll_active {
     .single_toc_btn {
-        .text {
+
+        .text,
+        .icon {
             display: none;
         }
 

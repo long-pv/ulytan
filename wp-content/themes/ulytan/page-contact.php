@@ -29,6 +29,9 @@ get_header();
 							XIN MỜI ĐIỀN THÔNG TIN ĐỂ NHẬN ĐƯỢC GIÁ KHUYẾN MÃI.
 						</h2>
 
+						<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
+						<input type="hidden" name="ten_trang" value="<?php the_title(); ?>">
+
 						<div class="page_contact_service">
 							<div class="page_contact_subtitle">
 								Bạn sử dụng dịch vụ nào sau đây

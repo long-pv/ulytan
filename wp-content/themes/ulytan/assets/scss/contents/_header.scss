@@ -68,6 +68,13 @@
                 &:hover {
                     color: $primary !important;
                 }
+
+                span {
+                    color: $body;
+                    font-weight: 400 !important;
+                    font-style: italic;
+                    display: block;
+                }
             }
 
             &>li {
@@ -126,6 +133,8 @@
                     -moz-box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.16);
 
                     &>li {
+                        position: relative;
+
                         &>a {
                             display: block;
                             background: $white;
@@ -143,6 +152,57 @@
                                 font-weight: 700;
                             }
                         }
+
+                        &.menu-item-has-children {
+                            padding-right: 4px;
+
+                            &::before {
+                                content: '';
+                                position: absolute;
+                                right: 16px;
+                                top: 16px;
+                                width: 12px;
+                                height: 12px;
+                                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath fill='%23adadad' d='M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z'/%3E%3C/svg%3E");
+                                background-position: center center;
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                            }
+                        }
+
+                        &>ul.sub-menu {
+                            display: none;
+                            list-style-type: none;
+                            margin: 0px;
+                            padding: 0px;
+
+                            li {
+                                &>a {
+                                    display: block;
+                                    background: $white;
+                                    transition: all 0.3s;
+                                    color: $primary;
+                                    padding: 12px 12px 12px 24px;
+                                    font-size: 14px;
+                                }
+
+                                &:hover {
+                                    &>a {
+                                        font-weight: 600;
+                                    }
+                                }
+                            }
+                        }
+
+                        &:hover {
+                            &>a {
+                                font-weight: 600;
+                            }
+
+                            &>ul.sub-menu {
+                                display: block;
+                            }
+                        }
                     }
                 }
 
@@ -155,7 +215,7 @@
                     }
 
                     &>.sub_menu_dich_vu {
-                        padding: 24px !important;
+                        padding: 16px !important;
                     }
                 }
 
@@ -249,6 +309,16 @@
             transition: all 0.5s;
         }
 
+        a {
+            span {
+                color: $body;
+                font-weight: 400 !important;
+                font-style: italic;
+                display: block;
+                font-size: 14px !important;
+            }
+        }
+
         ul.menu {
             padding: 0px;
             margin: 0px;
@@ -284,8 +354,8 @@
                     border-bottom: none;
                 }
 
-                a {
-                    display: inline-flex;
+                &>a {
+                    display: block;
                     padding: 12px 0px;
                     color: $primary;
 
@@ -311,8 +381,22 @@
                     &>li {
                         border-bottom: 1px solid #c0c0c0;
 
+                        &>a {
+                            display: block;
+                            padding: 12px 0px;
+                            color: $primary;
+
+                            &:hover {
+                                text-decoration: none;
+                            }
+                        }
+
                         &:last-child() {
                             border-bottom: none;
+                        }
+
+                        &:first-child() {
+                            border-top: 1px solid #c0c0c0;
                         }
 
                         &.current-menu-parent,
@@ -320,6 +404,35 @@
                         &.current_page_item {
                             &>a {
                                 color: $primary !important;
+                            }
+                        }
+
+                        &>ul {
+                            display: block !important;
+                            padding-left: 16px;
+                            margin: 0px;
+                            list-style-type: none;
+
+                            &>li {
+                                border-bottom: 1px solid #c0c0c0;
+
+                                &>a {
+                                    display: block;
+                                    padding: 12px 0px;
+                                    color: $primary;
+
+                                    &:hover {
+                                        text-decoration: none;
+                                    }
+                                }
+
+                                &:last-child() {
+                                    border-bottom: none;
+                                }
+
+                                &:first-child() {
+                                    border-top: 1px solid #c0c0c0;
+                                }
                             }
                         }
                     }
