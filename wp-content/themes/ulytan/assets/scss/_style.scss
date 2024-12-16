@@ -889,8 +889,8 @@
 }
 
 .post_sidebar_right {
-    position: sticky;
-    top: 100px;
+    // position: sticky;
+    // top: 100px;
 }
 
 .post_search_faqs {
@@ -2140,5 +2140,37 @@
 
     .editor {
         padding: 24px 16px;
+    }
+}
+
+.sidebar_lien_he {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+
+    .page_contact_title {
+        background-color: #FC0D1C;
+        font-size: 18px;
+        color: #fff;
+        font-weight: 600;
+        padding: 16px;
+    }
+
+    .page_contact_subtitle {
+        text-align: center;
+        padding: 0px 16px;
+        font-size: 16px;
+    }
+
+    .contact_submit {
+        margin-bottom: 16px;
+    }
+
+    .td_input {
+        width: 100%;
+    }
+
+    .page_contact_info {
+        padding: 0px 16px;
     }
 }

@@ -404,32 +404,6 @@ get_footer();
 ?>
 <script>
 	jQuery(document).ready(function($) {
-		function toggleInputFields() {
-			var selectedOption = $('input[name="file_option"]:checked').val();
-
-			if (selectedOption === 'upload_file') {
-				$('input[name="upload_file"]').show();
-				$('input[name="google_driver"]').hide();
-			} else if (selectedOption === 'google_driver') {
-				$('input[name="google_driver"]').show();
-				$('input[name="upload_file"]').hide();
-			}
-		}
-		toggleInputFields();
-		$('input[name="file_option"]').on('change', toggleInputFields);
-
-		$('#upload_file_input').on('change', function() {
-			var file = this.files[0];
-			if (file) {
-				// Kiểm tra kích thước tối đa 2MB
-				if (file.size > 2 * 1024 * 1024) { // 2MB
-					alert('Kích thước file không được vượt quá 2MB');
-					this.value = ''; // Reset input nếu không đúng quy định
-					return;
-				}
-			}
-		});
-
 		// Custom regex for email validation
 		$.validator.addMethod(
 			"customEmail",
@@ -521,15 +495,6 @@ get_footer();
 						if (response.success) {
 							$('#modal_lien_he').modal('show');
 							$("#page_contact_form")[0].reset();
-
-							<?php
-							// $lien_he_thanh_cong = get_field('lien_he_thanh_cong', 'option') ?? '';
-							// if ($lien_he_thanh_cong) {
-							// 	echo 'window.location.href = "' . get_permalink($lien_he_thanh_cong) . '";';
-							// } else {
-							// 	echo 'window.location.href = "' . get_permalink() . '";';
-							// }
-							?>
 						} else {
 							alert(response.data.message);
 						}
