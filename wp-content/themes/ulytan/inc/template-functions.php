@@ -547,7 +547,7 @@ function save_contact_info()
 	if (!empty($_POST)) {
 		$data = $_POST;
 		$to = 'sales@ulytan.com';
-		$subject = 'Form 1 - Liên hệ - Email: ' . $data['email'];
+		$subject = 'Form 1 - Liên hệ';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
 		$message .= 'Email: ' . $data['email'] . '<br>';
@@ -597,7 +597,7 @@ function save_form_ctv()
 	if (!empty($_POST)) {
 		$data = $_POST;
 		$to = 'hr@ulytan.com';
-		$subject = 'Form 2 - Cộng tác viên - Email:' . $data['email'];
+		$subject = 'Form 2 - Cộng tác viên';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
 		$message .= 'Email: ' . $data['email'] . '<br>';
