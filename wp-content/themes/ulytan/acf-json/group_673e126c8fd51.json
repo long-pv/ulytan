@@ -66,7 +66,7 @@
         },
         {
             "key": "field_673f406c48627",
-            "label": "Choice reason",
+            "label": "Lý do lựa chọn",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -195,7 +195,7 @@
         },
         {
             "key": "field_673f38d62a957",
-            "label": "Achieve brand",
+            "label": "Đạt thương hiệu",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -282,7 +282,7 @@
         },
         {
             "key": "field_6760d22eac05e",
-            "label": "Customer object",
+            "label": "Đối tượng khách hàng",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -410,8 +410,205 @@
             ]
         },
         {
+            "key": "field_673e14b51df70",
+            "label": "Video khách hàng",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6760dd1516cbf",
+            "label": "Tiêu đề",
+            "name": "video_customer_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_673e148b1df6f",
+            "label": "Video customer",
+            "name": "video_customer",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "video_customer"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "id",
+            "min": "",
+            "max": "",
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
+            "key": "field_6760dda162cc2",
+            "label": "Sử dụng dịch vụ",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6760ddb162cc3",
+            "label": "Tiêu đề",
+            "name": "use_service_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6760ddcb62cc4",
+            "label": "Use service",
+            "name": "use_service",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "row",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_6760ddcb62cc5",
+                    "label": "Icon",
+                    "name": "icon",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "",
+                    "preview_size": "thumbnail",
+                    "parent_repeater": "field_6760ddcb62cc4"
+                },
+                {
+                    "key": "field_6760ddcb62cc6",
+                    "label": "Title",
+                    "name": "title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6760ddcb62cc4"
+                },
+                {
+                    "key": "field_6760ddcb62cc7",
+                    "label": "Content",
+                    "name": "content",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0,
+                    "parent_repeater": "field_6760ddcb62cc4"
+                }
+            ]
+        },
+        {
             "key": "field_673f282161daf",
-            "label": "Endow",
+            "label": "Ưu đãi",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -493,7 +690,7 @@
         },
         {
             "key": "field_673e2361ab342",
-            "label": "Price table",
+            "label": "Bảng giá",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -581,7 +778,7 @@
         },
         {
             "key": "field_673e17714db93",
-            "label": "Advisory",
+            "label": "Form tư vấn",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -595,6 +792,26 @@
             },
             "placement": "top",
             "endpoint": 0
+        },
+        {
+            "key": "field_6760e1186c81a",
+            "label": "Tiêu đề",
+            "name": "form_advisory_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_673e17884db94",
@@ -626,7 +843,7 @@
         },
         {
             "key": "field_673e15fb30c3f",
-            "label": "Services",
+            "label": "Dịch vụ",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -640,6 +857,26 @@
             },
             "placement": "top",
             "endpoint": 0
+        },
+        {
+            "key": "field_6760dcc763bab",
+            "label": "Tiêu đề",
+            "name": "services_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_673e160d30c40",
@@ -657,54 +894,6 @@
             },
             "post_type": [
                 "service"
-            ],
-            "post_status": [
-                "publish"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search"
-            ],
-            "return_format": "id",
-            "min": "",
-            "max": "",
-            "elements": "",
-            "bidirectional": 0,
-            "bidirectional_target": []
-        },
-        {
-            "key": "field_673e14b51df70",
-            "label": "Video customer",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_673e148b1df6f",
-            "label": "Video customer",
-            "name": "video_customer",
-            "aria-label": "",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "video_customer"
             ],
             "post_status": [
                 "publish"
@@ -770,7 +959,7 @@
         },
         {
             "key": "field_673e126d6fedf",
-            "label": "Related Posts",
+            "label": "Bài viết liên quan",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -784,6 +973,26 @@
             },
             "placement": "top",
             "endpoint": 0
+        },
+        {
+            "key": "field_6760dd3c16cc0",
+            "label": "Tiêu đề",
+            "name": "related_posts_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_673e12c42378a",
@@ -841,5 +1050,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1734398629
+    "modified": 1734402530
 }
