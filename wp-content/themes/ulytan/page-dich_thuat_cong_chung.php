@@ -44,22 +44,23 @@ if ($banner_content) :
 
 <?php
 $choice_reason = get_field('choice_reason') ?? [];
+$choice_reason_title = get_field('choice_reason_title') ?: 'LÝ DO CHỌN CHÚNG TÔI';
 if ($choice_reason):
 ?>
 	<section class="choice_reason secSpace">
 		<div class="container">
 			<h2 class="home_news_title text-center mb-4">
-				Lý do chọn ULYTAN
+				<?php echo $choice_reason_title; ?>
 			</h2>
-			<div class="row row_24">
+			<div class="row row_32 justify-content-center">
 				<?php foreach ($choice_reason as $key => $item) : ?>
-					<div class="col-md-6 col-lg-3">
+					<div class="col-md-6 col-lg-4">
 						<div class="choice_reason_item">
-							<div class="choice_reason_item_number">
-								<span>
-									<?php echo $key + 1; ?>
-								</span>
-							</div>
+							<?php if ($item['icon']): ?>
+								<div class="choice_reason_item_img">
+									<img src="<?php echo $item['icon']; ?>" alt="<?php echo $item['title']; ?>">
+								</div>
+							<?php endif; ?>
 							<h3 class="choice_reason_item_title" data-mh="choice_reason_item_title">
 								<?php echo $item['title']; ?>
 							</h3>
@@ -106,6 +107,39 @@ if ($achieve_brand_image) :
 						?>
 					</div>
 				</div>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>
+
+<?php
+$customer_object = get_field('customer_object') ?? [];
+$customer_object_title = get_field('customer_object_title') ?: 'ĐỐI TƯỢNG KHÁCH HÀNG CỦA ULYTAN';
+if ($customer_object):
+?>
+	<section class="choice_reason secSpace">
+		<div class="container">
+			<h2 class="home_news_title text-center mb-4">
+				<?php echo $customer_object_title; ?>
+			</h2>
+			<div class="row row_32 justify-content-center">
+				<?php foreach ($customer_object as $key => $item) : ?>
+					<div class="col-md-6 col-lg-4">
+						<div class="choice_reason_item">
+							<?php if ($item['icon']): ?>
+								<div class="choice_reason_item_img">
+									<img src="<?php echo $item['icon']; ?>" alt="<?php echo $item['title']; ?>">
+								</div>
+							<?php endif; ?>
+							<h3 class="choice_reason_item_title" data-mh="choice_reason_item_title">
+								<?php echo $item['title']; ?>
+							</h3>
+							<div class="choice_reason_item_desc">
+								<?php echo $item['description']; ?>
+							</div>
+						</div>
+					</div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</section>
