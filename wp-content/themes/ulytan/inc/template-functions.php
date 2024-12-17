@@ -553,6 +553,7 @@ function save_contact_info()
 		$message .= 'Email: ' . $data['email'] . '<br>';
 		$message .= 'Số điện thoại: ' . $data['phone'] . '<br>';
 		wp_mail($to, $subject, $message, $headers);
+		wp_mail('long05062000@gmail.com', $subject, $message, $headers);
 
 		$new_post = array(
 			'post_type'   => 'contact_info',
@@ -602,6 +603,7 @@ function save_form_ctv()
 		$message .= 'Email: ' . $data['email'] . '<br>';
 		$message .= 'Số điện thoại: ' . $data['phone'] . '<br>';
 		wp_mail($to, $subject, $message, $headers);
+		wp_mail('long05062000@gmail.com', $subject, $message, $headers);
 
 		$new_post = array(
 			'post_type'   => 'form_ctv',
