@@ -546,14 +546,13 @@ function save_contact_info()
 	// Lấy dữ liệu từ AJAX
 	if (!empty($_POST)) {
 		$data = $_POST;
-		$to = 'sales@ulytan.com';
 		$subject = 'Form 1 - Liên hệ';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
 		$message .= 'Email: ' . $data['email'] . '<br>';
 		$message .= 'Số điện thoại: ' . $data['phone'] . '<br>';
-		wp_mail($to, $subject, $message, $headers);
-		wp_mail('long05062000@gmail.com', $subject, $message, $headers);
+		wp_mail('Sales@ulytan.com', $subject, $message, $headers);
+		wp_mail('xuandxop@gmail.com', $subject, $message, $headers);
 
 		$new_post = array(
 			'post_type'   => 'contact_info',
@@ -596,14 +595,13 @@ function save_form_ctv()
 	// Lấy dữ liệu từ AJAX
 	if (!empty($_POST)) {
 		$data = $_POST;
-		$to = 'hr@ulytan.com';
 		$subject = 'Form 2 - Cộng tác viên';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
 		$message .= 'Email: ' . $data['email'] . '<br>';
 		$message .= 'Số điện thoại: ' . $data['phone'] . '<br>';
-		wp_mail($to, $subject, $message, $headers);
-		wp_mail('long05062000@gmail.com', $subject, $message, $headers);
+		wp_mail('hr@ulytan.com', $subject, $message, $headers);
+		wp_mail('xuandxop@gmail.com', $subject, $message, $headers);
 
 		$new_post = array(
 			'post_type'   => 'form_ctv',
