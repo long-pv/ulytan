@@ -11,7 +11,14 @@
 // count view
 $post_id = get_the_ID();
 
-if (get_post_type($post_id) == 'service') {
+$post_type = get_post_type($post_id);
+
+if (in_array($post_type, ['form_ctv', 'contact_info', 'form_contribute', 'faqs'])) {
+	wp_redirect(home_url());
+	exit;
+}
+
+if ($post_type == 'service') {
 	$landing_page = get_field('lien_ket_den_trang_landing_page') ?? '';
 	if ($landing_page) {
 		wp_redirect($landing_page);
@@ -528,6 +535,11 @@ wp_reset_postdata();
 					<?php echo get_post_meta($post_id, 'likes', true) ?: 0; ?>
 				</span>)
 			</button>
+
+			<a href="javascript:void(0);" onclick="copyToClipboard('#copy2')" class="reaction_button_item">
+				<span id="copy2" style="display:none"><?php the_permalink(); ?></span>
+				Copylink
+			</a>
 
 			<a class="reaction_button_item" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;" class="share_post_mxh_item">
 				Chia sẻ lên Facebook
