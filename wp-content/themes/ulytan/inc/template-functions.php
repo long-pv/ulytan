@@ -871,7 +871,7 @@ add_action('admin_footer', function () {
 			$('#menu-pages .wp-menu-name').text('Loại trang');
 		});
 	</script>
-<?php
+	<?php
 });
 
 function replace_comment_email_with_phone($fields)
@@ -926,3 +926,50 @@ add_filter('the_content', function ($content) {
 	}
 	return $content;
 });
+
+function add_export_button_with_jquery()
+{
+	global $pagenow, $post_type;
+
+	$arr_post_type = ['form_ctv', 'contact_info', 'form_contribute'];
+
+	if ($pagenow === 'edit.php' && in_array($post_type, $arr_post_type)) {
+	?>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				var noti = '<?php echo isset($_POST['export_csv']) ? 'Export successfully.' : ''; ?>';
+				var post_type_export = '<?php echo $post_type; ?>';
+				var buttonHTML = '<div style="margin: 10px 0 20px 0;">' +
+					'<form method="post">' +
+					'<input type="hidden" name="post_type_export" class="button button-primary" value="' + post_type_export + '" />' +
+					'<input type="submit" name="export_csv" class="button button-primary" value="Export CSV" />' +
+					'<p style="color: #198754;font-weight:700;">' + noti + '</p>' +
+					'</form>' +
+					'</div>';
+
+				var headerEnd = $('.wp-header-end');
+				if (headerEnd.length) {
+					headerEnd.after(buttonHTML);
+				}
+			});
+		</script>
+<?php
+	}
+}
+add_action('admin_footer', 'add_export_button_with_jquery');
+
+function handle_run_export_csv()
+{
+	if (!empty($_POST['export_csv']) && !empty($_POST['export_csv'])) {
+		if ($_POST['post_type_export'] == 'contact_info') {
+			// do_action('fetch_glueup_events_cron');
+		}
+		if ($_POST['post_type_export'] == 'form_ctv') {
+			// do_action('update_member');
+		}
+		if ($_POST['post_type_export'] == 'form_contribute') {
+			// do_action('update_membership_directory');
+		}
+	}
+}
+add_action('admin_init', 'handle_run_export_csv');
