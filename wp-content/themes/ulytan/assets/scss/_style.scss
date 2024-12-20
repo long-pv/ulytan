@@ -2172,6 +2172,10 @@
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid #ddd;
+    position: sticky;
+    top: 100px;
+    height: 100%;
+    left: 0px;
 
     .page_contact_title {
         background-color: #FC0D1C;
@@ -2204,4 +2208,28 @@
     * {
         color: #6C737F;
     }
+}
+
+.single_post_mxh {
+    position: fixed;
+    left: 0px;
+    bottom: 16px;
+    width: 100%;
+    z-index: 999;
+}
+
+.mxh_fb {
+    background-color: #1877F2 !important;
+}
+
+.mxh_tw {
+    background-color: #000000 !important;
+}
+
+.mxh_yt {
+    background-color: #FF0000 !important;
+}
+
+.mxh_tiktok {
+    background-color: #000000 !important;
 }
