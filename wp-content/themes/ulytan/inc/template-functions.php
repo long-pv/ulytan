@@ -869,6 +869,7 @@ add_action('admin_footer', function () {
 		jQuery(document).ready(function($) {
 			$('#toplevel_page_cfdb7-list .wp-menu-name').text('Form 4 - Tài liệu/ Tư vấn / Khuyến mãi');
 			$('#menu-pages .wp-menu-name').text('Loại trang');
+			$('#menu-posts a[href="edit-tags.php?taxonomy=category"]').text('Danh mục - Tin hữu ích');
 		});
 	</script>
 	<?php
