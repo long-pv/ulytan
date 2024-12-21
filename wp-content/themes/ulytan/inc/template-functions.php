@@ -962,14 +962,261 @@ function handle_run_export_csv()
 {
 	if (!empty($_POST['export_csv']) && !empty($_POST['export_csv'])) {
 		if ($_POST['post_type_export'] == 'contact_info') {
-			// do_action('fetch_glueup_events_cron');
+			contact_info_export_data_csv();
 		}
 		if ($_POST['post_type_export'] == 'form_ctv') {
-			// do_action('update_member');
+			form_ctv_export_data_csv();
 		}
 		if ($_POST['post_type_export'] == 'form_contribute') {
-			// do_action('update_membership_directory');
+			form_contribute_export_data_csv();
 		}
 	}
 }
 add_action('admin_init', 'handle_run_export_csv');
+
+function contact_info_export_data_csv()
+{
+	// Delete cached html
+	ob_clean();
+
+	$current_time = date("Y_m_d_H_i_s"); // get the current time
+	$output_filename = 'export_data_form_1_lien_he_' . $current_time . '.csv';
+	$output_handle = @fopen('php://output', 'w');
+	fwrite($output_handle, "\xEF\xBB\xBF"); // display Vietnamese text
+	header("Content-Type: application/force-download");
+	header("Content-Type: application/octet-stream");
+	header("Content-Type: application/download");
+	header('Content-Type: text/x-csv; charset=utf-8');
+	header('Content-Disposition: attachment;filename=' . $output_filename);
+
+	// Create CSV file and write data
+	$column_title = [
+		'Phone',
+		'Email',
+		'Services',
+		'Quốc gia (2. Dịch vụ xin cấp visa đa quốc gia)',
+		'Quốc gia (10. Dịch vụ xuất khẩu lao động)',
+		'Quốc gia (11. Dịch vụ du học quốc tế)',
+		'Quốc gia (12. Dịch vụ đào tạo ngoại ngữ)',
+		'Quốc gia (13. Dịch vụ du lịch quốc tế)',
+		'Trang đã gửi',
+		'Thời gian',
+	];
+
+	fputcsv(
+		$output_handle,
+		$column_title
+	);
+
+	$args = array(
+		'post_type'      => 'contact_info', // Post type cần lấy
+		'posts_per_page' => -1,             // Lấy tất cả bài viết
+		'post_status'    => 'publish',      // Chỉ lấy bài đã xuất bản
+	);
+
+	$query = new WP_Query($args);
+
+	if ($query->have_posts()) {
+		while ($query->have_posts()) {
+			$query->the_post();
+
+			fputcsv(
+				$output_handle,
+				[
+					"'" . get_field('phone') ?? '',
+					get_field('email') ?? '',
+					get_field('services_list') ?? '',
+					get_field('services_2') ?? '',
+					get_field('services_10') ?? '',
+					get_field('services_11') ?? '',
+					get_field('services_12') ?? '',
+					get_field('services_13') ?? '',
+					get_field('trang_da_gui') ?? '',
+					"'" . get_the_date('d/m/Y H:i'),
+				],
+			);
+		}
+		wp_reset_postdata();
+	}
+
+	// Close output file stream
+	fclose($output_handle);
+
+	die();
+}
+
+function form_ctv_export_data_csv()
+{
+	// Delete cached html
+	ob_clean();
+
+	$current_time = date("Y_m_d_H_i_s"); // get the current time
+	$output_filename = 'export_data_form_2_ctv_' . $current_time . '.csv';
+	$output_handle = @fopen('php://output', 'w');
+	fwrite($output_handle, "\xEF\xBB\xBF"); // display Vietnamese text
+	header("Content-Type: application/force-download");
+	header("Content-Type: application/octet-stream");
+	header("Content-Type: application/download");
+	header('Content-Type: text/x-csv; charset=utf-8');
+	header('Content-Disposition: attachment;filename=' . $output_filename);
+
+	// Create CSV file and write data
+	$column_title = [
+		'Họ và tên',
+		'Ngày sinh',
+		'Số Mobile',
+		'Địa chỉ Email',
+		'Bạn sẽ mời người bản địa',
+		'Trường tốt nghiệp',
+		'Năm tốt nghiệp',
+		'Đơn vị dịch thuật bạn đã từng cộng tác?',
+		'Đơn vị dịch thuật bạn đã từng cộng tác?',
+		'Bạn hay tra từ điển nào ?',
+		'Ngôn ngữ đăng ký làm CTV',
+		'Bạn biết Ulytan qua đâu?',
+		'Bạn biết dịch xuôi hay ngược?',
+		'Chuyên ngành đăng ký làm CTV',
+		'Bạn dùng phần mềm dịch thuật nào ?',
+		'Bạn dùng phần mềm dịch thuật nào ?',
+		'Bạn có thể phiên dịch không?',
+		'Bạn có thể phiên dịch không?',
+		'Mô tả tóm tắt kinh nghiệm làm việc',
+		'Bạn có hợp tác với phòng tư pháp quận, huyện nào?',
+		'Phòng tư pháp thuộc tỉnh hoặc thành phố nào?',
+		'Phòng tư pháp thuộc quận huyện nào?',
+		'Bạn có hợp tác với văn phòng công chứng tư nào ko?',
+		'Phòng công chứng thuộc tỉnh hoặc thành phố nào?',
+		'Phòng công chứng thuộc quận huyện nào?',
+		'Upload file 1',
+		'Upload file 2',
+		'Thời gian',
+	];
+
+	fputcsv(
+		$output_handle,
+		$column_title
+	);
+
+	$args = array(
+		'post_type'      => 'form_ctv', // Post type cần lấy
+		'posts_per_page' => -1,             // Lấy tất cả bài viết
+		'post_status'    => 'publish',      // Chỉ lấy bài đã xuất bản
+	);
+
+	$query = new WP_Query($args);
+
+	if ($query->have_posts()) {
+		while ($query->have_posts()) {
+			$query->the_post();
+
+			fputcsv(
+				$output_handle,
+				[
+					get_field('full_name') ?? '',
+					"'" . get_field('birthdate') ?? '',
+					"'" . get_field('phone') ?? '',
+					get_field('email') ?? '',
+					get_field('speak_language') ?? '',
+					get_field('graduation_school') ?? '',
+					get_field('graduation_year') ?? '',
+					get_field('translation_unit') ?? '',
+					get_field('translation_unit_name') ?? '',
+					get_field('dictionary') ?? '',
+					get_field('registration_language_val') ?? '',
+					get_field('how_do_you_know_val') ?? '',
+					get_field('translation_skill_val') ?? '',
+					get_field('language_speciality_val') ?? '',
+					get_field('translation_software') ?? '',
+					get_field('translation_software_name') ?? '',
+					get_field('live_translate') ?? '',
+					get_field('live_translate_select_val') ?? '',
+					get_field('summary_description') ?? '',
+					get_field('info_17') ?? '',
+					get_field('info_17_province') ?? '',
+					get_field('info_17_district') ?? '',
+					get_field('info_18') ?? '',
+					get_field('info_18_province') ?? '',
+					get_field('info_18_district') ?? '',
+					get_field('upload_file_1') ?? '',
+					get_field('upload_file_2') ?? '',
+					"'" . get_the_date('d/m/Y H:i'),
+				],
+			);
+		}
+		wp_reset_postdata();
+	}
+
+	// Close output file stream
+	fclose($output_handle);
+
+	die();
+}
+
+function form_contribute_export_data_csv()
+{
+	// Delete cached html
+	ob_clean();
+
+	$current_time = date("Y_m_d_H_i_s"); // get the current time
+	$output_filename = 'export_data_form_3_dong_gop_y_kien_' . $current_time . '.csv';
+	$output_handle = @fopen('php://output', 'w');
+	fwrite($output_handle, "\xEF\xBB\xBF"); // display Vietnamese text
+	header("Content-Type: application/force-download");
+	header("Content-Type: application/octet-stream");
+	header("Content-Type: application/download");
+	header('Content-Type: text/x-csv; charset=utf-8');
+	header('Content-Disposition: attachment;filename=' . $output_filename);
+
+	// Create CSV file and write data
+	$column_title = [
+		'Họ và tên',
+		'Số điện thoại',
+		'Email',
+		'Mã đơn hàng',
+		'Nhân viên tư vấn',
+		'Kế toán',
+		'Nhân viên xử lý đơn hàng',
+		'Lý do',
+		'Thời gian',
+	];
+
+	fputcsv(
+		$output_handle,
+		$column_title
+	);
+
+	$args = array(
+		'post_type'      => 'form_contribute', // Post type cần lấy
+		'posts_per_page' => -1,             // Lấy tất cả bài viết
+		'post_status'    => 'publish',      // Chỉ lấy bài đã xuất bản
+	);
+
+	$query = new WP_Query($args);
+
+	if ($query->have_posts()) {
+		while ($query->have_posts()) {
+			$query->the_post();
+
+			fputcsv(
+				$output_handle,
+				[
+					get_field('ho_va_ten') ?? '',
+					"'" . get_field('so_dien_thoai') ?? '',
+					get_field('email') ?? '',
+					"'" . get_field('ma_don_hang') ?? '',
+					get_field('nhan_vien_tu_van') ?? '',
+					get_field('ke_toan') ?? '',
+					get_field('nhan_vien_xu_ly_don_hang') ?? '',
+					get_field('ly_do') ?? '',
+					"'" . get_the_date('d/m/Y H:i'),
+				],
+			);
+		}
+		wp_reset_postdata();
+	}
+
+	// Close output file stream
+	fclose($output_handle);
+
+	die();
+}

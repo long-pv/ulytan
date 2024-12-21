@@ -504,7 +504,7 @@
         },
         {
             "key": "field_6735966024403",
-            "label": "upload_file_1",
+            "label": "Upload file 1",
             "name": "upload_file_1",
             "aria-label": "",
             "type": "text",
@@ -524,7 +524,7 @@
         },
         {
             "key": "field_6735966324404",
-            "label": "upload_file_2",
+            "label": "Upload file 2",
             "name": "upload_file_2",
             "aria-label": "",
             "type": "text",
@@ -567,5 +567,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1734339497
+    "modified": 1734801150
 }
