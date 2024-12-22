@@ -27,6 +27,18 @@
 			$("ul.menu > .menu-item-has-children").not($(this).parent()).removeClass("open");
 		}
 	});
+
+	$(document).on("click", "ul.menu > li > ul .menu-item-has-children > .dropdown-arrow", function (e) {
+		e.preventDefault();
+		var $submenu = $(this).siblings(".sub-menu");
+
+		if ($submenu.length) {
+			$submenu.stop(true, true).slideToggle();
+			$(this).parent().toggleClass("open");
+			$("ul.menu > li > ul > li > .sub-menu").not($submenu).slideUp();
+			$("ul.menu > li > ul > .menu-item-has-children").not($(this).parent()).removeClass("open");
+		}
+	});
 	// end mobile menu
 
 	// wpadminbar

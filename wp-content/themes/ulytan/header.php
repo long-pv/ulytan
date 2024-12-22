@@ -50,29 +50,29 @@
 							<div class="header__navInner">
 								<!-- menu PC -->
 								<?php
-								if (is_page_template('page-dich_thuat_cong_chung.php')) {
-									if (has_nav_menu('menu-2')) {
-										wp_nav_menu(
-											array(
-												'theme_location' => 'menu-2',
-												'container' => 'nav',
-												'container_class' => 'header__menupc',
-												'depth' => 3,
-											)
-										);
-									}
-								} else {
-									if (has_nav_menu('menu-1')) {
-										wp_nav_menu(
-											array(
-												'theme_location' => 'menu-1',
-												'container' => 'nav',
-												'container_class' => 'header__menupc',
-												'depth' => 3,
-											)
-										);
-									}
+								// if (is_page_template('page-dich_thuat_cong_chung.php')) {
+								// 	if (has_nav_menu('menu-2')) {
+								// 		wp_nav_menu(
+								// 			array(
+								// 				'theme_location' => 'menu-2',
+								// 				'container' => 'nav',
+								// 				'container_class' => 'header__menupc',
+								// 				'depth' => 3,
+								// 			)
+								// 		);
+								// 	}
+								// } else {
+								if (has_nav_menu('menu-1')) {
+									wp_nav_menu(
+										array(
+											'theme_location' => 'menu-1',
+											'container' => 'nav',
+											'container_class' => 'header__menupc',
+											'depth' => 3,
+										)
+									);
 								}
+								// }
 
 								?>
 								<!-- end -->
@@ -85,24 +85,26 @@
 								<!-- end -->
 
 								<?php
-								if (!is_page_template('page-dich_thuat_cong_chung.php')) :
+								// if (!is_page_template('page-dich_thuat_cong_chung.php')) :
 								?>
-									<div class="header_line">
-									</div>
+								<div class="header_line">
+								</div>
 
-									<div class="form_search">
-										<form role="search" method="get" action="<?php echo home_url('/'); ?>">
-											<input type="text" name="s" placeholder="Tìm kiếm..."
-												value="<?php the_search_query(); ?>" required />
-											<button type="submit" aria-label="button icon">
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-													<path fill="#900101"
-														d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-												</svg>
-											</button>
-										</form>
-									</div>
-								<?php endif; ?>
+								<div class="form_search">
+									<form role="search" method="get" action="<?php echo home_url('/'); ?>">
+										<input type="text" name="s" placeholder="Tìm kiếm..."
+											value="<?php the_search_query(); ?>" required />
+										<button type="submit" aria-label="button icon">
+											<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+												<path fill="#900101"
+													d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+											</svg>
+										</button>
+									</form>
+								</div>
+								<?php
+								//endif; 
+								?>
 							</div>
 						</div>
 					</div>
@@ -112,29 +114,29 @@
 			<!-- menu Mobile -->
 			<div class="header__menusp">
 				<?php
-				if (is_page_template('page-dich_thuat_cong_chung.php')) {
-					if (has_nav_menu('menu-2')) {
-						wp_nav_menu(
-							array(
-								'theme_location' => 'menu-2',
-								'container' => 'nav',
-								'container_class' => 'header__menuspInner',
-								'depth' => 2,
-							)
-						);
-					}
-				} else {
-					if (has_nav_menu('menu-1')) {
-						wp_nav_menu(
-							array(
-								'theme_location' => 'menu-1',
-								'container' => 'nav',
-								'container_class' => 'header__menuspInner',
-								'depth' => 3,
-							)
-						);
-					}
+				// if (is_page_template('page-dich_thuat_cong_chung.php')) {
+				// 	if (has_nav_menu('menu-2')) {
+				// 		wp_nav_menu(
+				// 			array(
+				// 				'theme_location' => 'menu-2',
+				// 				'container' => 'nav',
+				// 				'container_class' => 'header__menuspInner',
+				// 				'depth' => 2,
+				// 			)
+				// 		);
+				// 	}
+				// } else {
+				if (has_nav_menu('menu-1')) {
+					wp_nav_menu(
+						array(
+							'theme_location' => 'menu-1',
+							'container' => 'nav',
+							'container_class' => 'header__menuspInner',
+							'depth' => 3,
+						)
+					);
 				}
+				// }
 
 				?>
 			</div>
