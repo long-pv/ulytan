@@ -204,4 +204,39 @@
 			$(this).parents(".single_toc_content").toggle();
 		});
 	}
+
+	var staffTeam = $(".staff_team");
+	var staffTeamBtn = $(".staff_team_btn a");
+	var itemsToShow = 8; // Số lượng phần tử hiển thị ban đầu
+
+	function updateStaffTeamVisibility() {
+		var totalItems = staffTeam.length;
+
+		// Ẩn tất cả các phần tử
+		staffTeam.hide();
+
+		// Hiển thị chỉ các phần tử đầu tiên theo số lượng `itemsToShow`
+		staffTeam.slice(0, itemsToShow).show();
+
+		// Kiểm tra nếu tổng số phần tử <= itemsToShow, thì ẩn nút
+		if (totalItems <= itemsToShow) {
+			staffTeamBtn.hide();
+		} else {
+			staffTeamBtn.show();
+		}
+	}
+
+	// Cập nhật hiển thị khi tải trang
+	updateStaffTeamVisibility();
+
+	// Sự kiện khi click vào nút
+	staffTeamBtn.on("click", function (e) {
+		e.preventDefault();
+
+		// Hiển thị tất cả các phần tử
+		staffTeam.show();
+
+		// Ẩn nút
+		staffTeamBtn.hide();
+	});
 })(jQuery, window);
