@@ -42,6 +42,8 @@ if ($banner_content) :
 	</section>
 <?php endif; ?>
 
+<div class="section_2_scroll"></div>
+
 <?php
 $choice_reason = get_field('choice_reason') ?? [];
 $choice_reason_title = get_field('choice_reason_title') ?: 'LÝ DO CHỌN CHÚNG TÔI';
@@ -769,7 +771,19 @@ get_footer();
 ?>
 <script>
 	jQuery(document).ready(function($) {
-		$('#modal_landing').modal('show');
+		var sectionPassed = false;
+		$(window).on('scroll', function() {
+			var section = $('.section_2_scroll');
+			var sectionOffset = section.offset().top + section.outerHeight();
+			var windowScroll = $(window).scrollTop();
+
+			if (windowScroll > sectionOffset && !sectionPassed) {
+				sectionPassed = true;
+				$('#modal_landing').modal('show');
+			}
+		});
+		// $('#modal_landing').modal('show');
+
 		$(document).on('click', '.pagination_ajax .page-numbers', function(e) {
 			e.preventDefault();
 
