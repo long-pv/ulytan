@@ -182,8 +182,20 @@
                                     background: $white;
                                     transition: all 0.3s;
                                     color: $primary;
-                                    padding: 12px 12px 12px 24px;
+                                    padding: 12px 12px 12px 32px;
                                     font-size: 14px;
+                                    position: relative;
+
+                                    &::before {
+                                        content: '';
+                                        position: absolute;
+                                        top: 18px;
+                                        left: 20px;
+                                        width: 6px;
+                                        height: 6px;
+                                        border-radius: 50%;
+                                        background-color: $body;
+                                    }
                                 }
 
                                 &:hover {

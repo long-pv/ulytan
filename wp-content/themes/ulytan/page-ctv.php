@@ -75,7 +75,7 @@ get_header();
 							</div>
 							<div class="page_ctv_form_group_radio">
 								<label>
-									<input type="radio" name="speak_language" value="Có" checked> Có
+									<input type="radio" name="speak_language" value="Có"> Có
 								</label>
 								<label>
 									<input type="radio" name="speak_language" value="Không"> Không
@@ -106,7 +106,7 @@ get_header();
 							</div>
 							<div class="page_ctv_form_group_radio">
 								<label>
-									<input type="radio" name="translation_unit" value="Có" checked> Có
+									<input type="radio" name="translation_unit" value="Có"> Có
 								</label>
 								<label>
 									<input type="radio" name="translation_unit" value="Không"> Không
@@ -618,7 +618,7 @@ get_header();
 							</label>
 							<div class="page_ctv_form_group_radio">
 								<label>
-									<input type="radio" name="translation_software" value="Có" checked> Có
+									<input type="radio" name="translation_software" value="Có"> Có
 								</label>
 								<label>
 									<input type="radio" name="translation_software" value="Không"> Không
@@ -634,7 +634,7 @@ get_header();
 							</label>
 							<div class="page_ctv_form_group_radio">
 								<label>
-									<input type="radio" name="live_translate" value="Có" checked> Có
+									<input type="radio" name="live_translate" value="Có"> Có
 								</label>
 								<label>
 									<input type="radio" name="live_translate" value="Không"> Không
@@ -669,7 +669,7 @@ get_header();
 							</div>
 							<div class="page_ctv_form_group_radio">
 								<label>
-									<input type="radio" name="info_17" value="Có" checked> Có
+									<input type="radio" name="info_17" value="Có"> Có
 								</label>
 								<label>
 									<input type="radio" name="info_17" value="Không"> Không
@@ -701,7 +701,7 @@ get_header();
 							</div>
 							<div class="page_ctv_form_group_radio">
 								<label>
-									<input type="radio" name="info_18" value="Có" checked> Có
+									<input type="radio" name="info_18" value="Có"> Có
 								</label>
 								<label>
 									<input type="radio" name="info_18" value="Không"> Không
@@ -918,6 +918,12 @@ get_footer();
 				speak_language: {
 					required: true,
 				},
+				translation_unit: {
+					required: true,
+				},
+				translation_software: {
+					required: true,
+				},
 				graduation_school: {
 					required: true,
 				},
@@ -966,6 +972,9 @@ get_footer();
 				registration_language_val: {
 					required: true,
 				},
+				live_translate: {
+					required: true,
+				},
 				live_translate_select_val: {
 					required: true,
 				},
@@ -978,8 +987,94 @@ get_footer();
 				language_speciality_val: {
 					required: true,
 				},
+				info_17: {
+					required: true,
+				},
+				info_18: {
+					required: true,
+				},
 			},
-			messages: {},
+			messages: {
+				full_name: {
+					required: 'Bạn chưa nhập Họ và tên',
+				},
+				birthdate: {
+					required: 'Bạn chưa nhập Ngày sinh',
+				},
+				phone: {
+					required: 'Bạn chưa nhập Số Mobile',
+				},
+				email: {
+					required: 'Bạn chưa nhập  Địa chỉ Email',
+					email: 'Email không đúng định dạng'
+				},
+				speak_language: {
+					required: 'Bạn chưa nhập lựa chọn nào',
+				},
+				translation_unit: {
+					required: 'Bạn chưa nhập lựa chọn nào',
+				},
+				translation_software: {
+					required: 'Bạn chưa nhập lựa chọn nào',
+				},
+				graduation_school: {
+					required: 'Bạn chưa nhập Trường tốt nghiệp',
+				},
+				graduation_year: {
+					required: 'Bạn chưa nhập Năm tốt nghiệp',
+				},
+				translation_unit_name: {
+					required: 'Bạn chưa nhập Đơn vị dịch thuật bạn đã từng cộng tác',
+				},
+				info_17_province: {
+					required: 'Bạn chưa nhập Phòng tư pháp thuộc tỉnh hoặc thành phố nào?',
+				},
+				info_17_district: {
+					required: 'Bạn chưa nhập Phòng tư pháp thuộc quận huyện nào?',
+				},
+				info_18_province: {
+					required: 'Bạn chưa nhập Phòng công chứng thuộc tỉnh hoặc thành phố nào?',
+				},
+				info_18_district: {
+					required: 'Bạn chưa nhập Phòng công chứng thuộc quận huyện nào?',
+				},
+				translation_software_name: {
+					required: 'Bạn chưa nhập Bạn dùng phần mềm dịch thuật nào',
+				},
+				dictionary: {
+					required: 'Bạn chưa nhập Chuyên ngành đăng ký làm CTV',
+				},
+				upload_file_1: {
+					required: 'Bạn chưa nhập File',
+				},
+				upload_file_2: {
+					required: 'Bạn chưa nhập File',
+				},
+				registration_language_val: {
+					required: 'Bạn chưa nhập Ngôn ngữ đăng ký làm CTV',
+				},
+				live_translate: {
+					required: 'Bạn chưa nhập lựa chọn nào',
+				},
+				live_translate_select_val: {
+					required: 'Bạn chưa nhập Bạn có thể phiên dịch không',
+				},
+				translation_skill_val: {
+					required: 'Bạn chưa nhập Bạn biết dịch xuôi hay ngược',
+				},
+				how_do_you_know_val: {
+					required: 'Bạn chưa nhập Bạn biết Ulytan qua đâu',
+				},
+				language_speciality_val: {
+					required: 'Bạn chưa nhập Chuyên ngành đăng ký làm CTV',
+				},
+				info_17: {
+					required: 'Bạn chưa nhập lựa chọn nào',
+				},
+				info_18: {
+					required: 'Bạn chưa nhập lựa chọn nào',
+				},
+			},
 			errorPlacement: function(error, element) {
 				error.appendTo(element.closest(".page_ctv_form_group, .page_ctv_form_group_item"));
 			},
