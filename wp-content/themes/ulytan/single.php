@@ -36,7 +36,7 @@ get_header();
 
 <section class="secSpace">
 	<div class="container">
-		<div class="row">
+		<div class="row" style="width: 100%;">
 			<div class="col-lg-3 mb-4">
 				<div class="toc_block">
 					<div class="toc_title">Mục lục</div>
@@ -106,7 +106,7 @@ get_header();
 					<?php the_content(); ?>
 				</div>
 			</div>
-			<div class="col-lg-3 right_sticky">
+			<div class="col-lg-3">
 				<div class="sidebar_lien_he">
 					<form id="page_contact_form" class="page_contact_form" enctype="multipart/form-data">
 						<div class="page_contact_title">
