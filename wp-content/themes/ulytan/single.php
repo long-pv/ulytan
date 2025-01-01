@@ -116,6 +116,137 @@ get_header();
 						<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
 						<input type="hidden" name="ten_trang" value="<?php the_title(); ?>">
 
+						<?php
+						$services = [
+							[
+								'raw_name' => 'Dịch thuật công chứng',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Dịch thuật có công chứng từ tiếng Việt sang tiếng nước ngoài và ngược lại lấy nhanh'
+							],
+							[
+								'raw_name' => 'Hợp pháp hóa lãnh sự',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ hợp pháp hoá, để giấy tờ có giá trị pháp lý sử dụng trên toàn thế giới'
+							],
+							[
+								'raw_name' => 'Chứng thực lãnh sự',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ chứng thực tại đại sứ quán để các giấy tờ có thể sử dụng hợp pháp ở Việt Nam cũng như nhiều quốc gia khác nhau'
+							],
+							[
+								'raw_name' => 'Cấp visa đa quốc gia',
+								'show_input' => true,
+								'key_input' => 'services_1',
+								'mo_ta' => 'Hỗ trợ Xin cấp và gia hạn visa hơn 60 quốc gia'
+							],
+							[
+								'raw_name' => 'Cấp, đổi, gia hạn hộ chiếu',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ xin cấp, đổi và gia hạn hộ chiếu lấy nhanh'
+							],
+							[
+								'raw_name' => 'Lý lịch tư pháp',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ xin cấp phiếu lý lịch tư pháp các loại lấy nhanh'
+							],
+							[
+								'raw_name' => 'Đổi bằng lái xe quốc tế',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ để tài xế sử dụng bằng lái xe đã được đổi, có thể lái xe ở nhiều quốc gia trên toàn thế giới'
+							],
+							[
+								'raw_name' => 'Xin cấp, gia hạn thẻ tạm trú',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ này dành cho người nước ngoài sinh sống và làm việc tại Việt Nam'
+							],
+							[
+								'raw_name' => 'Cấp, gia hạn giấy phép lao động',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ thủ tục này cho người có quốc tịch nước ngoài sinh sống và làm việc tại Việt Nam'
+							],
+							[
+								'raw_name' => 'Xuất khẩu lao động',
+								'show_input' => true,
+								'key_input' => 'services_2',
+								'mo_ta' => 'Dịch vụ này dành cho người Việt Nam đi lao động tại nước ngoài như Úc, Nhật, Hàn, Nga, Pháp, Đức, Mỹ, Canada, Anh, New Zealand v.v.'
+							],
+							[
+								'raw_name' => 'Tư vấn du học quốc tế',
+								'show_input' => true,
+								'key_input' => 'services_3',
+								'mo_ta' => 'Tư vấn cho du học sinh Việt Nam học tại nước ngoài'
+							],
+							[
+								'raw_name' => 'Đào tạo ngoại ngữ',
+								'show_input' => true,
+								'key_input' => 'services_4',
+								'mo_ta' => 'Đào tạo ngoại ngữ hơn 15 ngôn ngữ cho người nước ngoài sống tại Việt Nam cũng như người Việt Nam sống tại Nước ngoài'
+							],
+							[
+								'raw_name' => 'Du lịch quốc tế',
+								'show_input' => true,
+								'key_input' => 'services_5',
+								'mo_ta' => 'Tổ chức tour cho cá nhân và tổ chức của Việt Nam đi ra nước ngoài'
+							],
+							[
+								'raw_name' => 'Xin cấp E-Visa',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ thủ tục cấp E-Visa cho người nước ngoài vào Việt Nam'
+							],
+							[
+								'raw_name' => 'Bảo hiểm du lịch quốc tế',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Bán bảo hiểm du lịch quốc tế cho các cá nhân và tổ chức với giá hợp lý'
+							],
+							[
+								'raw_name' => 'Đầu tư, định cư',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Tư vấn đầu tư, định cư ra nước ngoài cho người Việt Nam cũng như cho các công ty, tổ chức nước ngoài đầu tư vào Việt Nam'
+							],
+							[
+								'raw_name' => 'Thẻ APEC',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ làm thẻ doanh nhân Apec cho các doanh nghiệp'
+							],
+							[
+								'raw_name' => 'Chứng minh tài chính',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Dịch vụ dành cho người Việt Nam muốn chứng minh tài chính để xin visa du học, du lịch, xuất khẩu lao động'
+							],
+							[
+								'raw_name' => 'Thủ tục hải quan',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ khai báo, xử lý thủ tục xuất nhập khẩu'
+							],
+							[
+								'raw_name' => 'Bán vé máy bay',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Bán vé máy bay quốc tế'
+							],
+							[
+								'raw_name' => 'Giấy khám sức khoẻ',
+								'show_input' => false,
+								'key_input' => '',
+								'mo_ta' => 'Hỗ trợ cấp giấy khám sức khoẻ để làm Visa đi nước ngoài hoặc cho người nước ngoài làm giấy phép lao động, thẻ tạm trú tại Việt Nam'
+							]
+						];
+						?>
+
 						<div class="page_contact_service">
 							<div class="page_contact_subtitle">
 								Bạn sử dụng dịch vụ nào sau đây
@@ -129,209 +260,34 @@ get_header();
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="1. Dịch vụ dịch thuật công chứng">
-										</td>
-										<td>
-											<strong>1. Dịch vụ dịch thuật công chứng</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" id="#services_2" name="services[]" class="contact_checkox" value="2. Dịch vụ xin cấp visa đa quốc gia">
-										</td>
-										<td>
-											<strong>2. Dịch vụ xin cấp visa đa quốc gia</strong>
-											<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>
-											<div class="td_group mt-2" style="display:none;">
-												<div class="td_label mb-1">
-													Quốc gia <span class="td_req">(*bắt buộc)</span>
-												</div>
-												<input type="text" name="services_2" class="td_input services_2">
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="3. Dịch vụ xin cấp, đổi, gia hạn hộ chiếu">
-										</td>
-										<td>
-											<strong>3. Dịch vụ xin cấp, đổi, gia hạn hộ chiếu</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="4. Dịch vụ làm lý lịch tư pháp">
-										</td>
-										<td>
-											<strong>4. Dịch vụ làm lý lịch tư pháp</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="5. Dịch vụ hỗ trợ hợp pháp hoá lãnh sự">
-										</td>
-										<td>
-											<strong>5. Dịch vụ hỗ trợ hợp pháp hoá lãnh sự</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="6. Dịch vụ đổi bằng lái xe quốc tế">
-										</td>
-										<td>
-											<strong>6. Dịch vụ đổi bằng lái xe quốc tế</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" id="services_7" name="services[]" class="contact_checkox" value="7. Dịch vụ chứng thực lãnh sự tại đại sứ quán 60 Quốc Gia">
-										</td>
-										<td>
-											<strong>7. Dịch vụ chứng thực lãnh sự tại đại sứ quán 60 Quốc Gia</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="8. Dịch vụ xin cấp gia hạn thẻ tạm trú">
-										</td>
-										<td>
-											<strong>8. Dịch vụ xin cấp gia hạn thẻ tạm trú</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" id="services_9" name="services[]" class="contact_checkox" value="9. Dịch vụ xin cấp giấy phép lao động.">
-										</td>
-										<td>
-											<strong>9. Dịch vụ xin cấp giấy phép lao động.</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" id="services_10" name="services[]" class="contact_checkox" value="10. Dịch vụ xuất khẩu lao động">
-										</td>
-										<td>
-											<strong>10. Dịch vụ xuất khẩu lao động</strong>
-											<div class="td_checkbox_desc">
-												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
-											</div>
-											<div class="td_group mt-2" style="display:none;">
-												<div class="td_label mb-1">
-													Quốc gia <span class="td_req">(*bắt buộc)</span>
-												</div>
-												<input type="text" name="services_10" class="td_input services_10">
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" id="services_11" name="services[]" class="contact_checkox" value="11. Dịch vụ du học quốc tế">
-										</td>
-										<td>
-											<strong>11. Dịch vụ du học quốc tế</strong>
-											<div class="td_checkbox_desc">
-												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
-											</div>
-											<div class="td_group mt-2" style="display:none;">
-												<div class="td_label mb-1">
-													Quốc gia <span class="td_req">(*bắt buộc)</span>
-												</div>
-												<input type="text" name="services_11" class="td_input services_11">
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" id="services_12" name="services[]" class="contact_checkox" value="12. Dịch vụ đào tạo ngoại ngữ">
-										</td>
-										<td>
-											<strong>12. Dịch vụ đào tạo ngoại ngữ</strong>
-											<div class="td_checkbox_desc">
-												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
-											</div>
-											<div class="td_group mt-2" style="display:none;">
-												<div class="td_label mb-1">
-													Quốc gia <span class="td_req">(*bắt buộc)</span>
-												</div>
-												<input type="text" name="services_12" class="td_input services_12">
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" id="services_13" name="services[]" class="contact_checkox" value="13. Dịch vụ du lịch quốc tế">
-										</td>
-										<td>
-											<strong>13. Dịch vụ du lịch quốc tế</strong>
-											<div class="td_checkbox_desc">
-												(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)
-											</div>
-											<div class="td_group mt-2" style="display:none;">
-												<div class="td_label mb-1">
-													Quốc gia <span class="td_req">(*bắt buộc)</span>
-												</div>
-												<input type="text" name="services_13" class="td_input services_13">
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="14. Dịch vụ tư vấn hỗ trợ evisa cho người nước ngoài vào Việt Nam">
-										</td>
-										<td>
-											<strong>14. Dịch vụ tư vấn hỗ trợ evisa cho người nước ngoài vào Việt Nam</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="15. Dịch vụ bán bảo hiểm du lịch quốc tế">
-										</td>
-										<td>
-											<strong>15. Dịch vụ bán bảo hiểm du lịch quốc tế</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="16. Dịch vụ bán vé máy bay trong nước và quốc tế">
-										</td>
-										<td>
-											<strong>16. Dịch vụ bán vé máy bay trong nước và quốc tế</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="17. Dịch vụ tư vấn hỗ trợ làm thẻ doanh nhân Apec">
-										</td>
-										<td>
-											<strong>17. Dịch vụ tư vấn hỗ trợ làm thẻ doanh nhân Apec</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="18. Dịch vụ chứng minh tài chính (cho visa du lịch, xuất khẩu lao động)">
-										</td>
-										<td>
-											<strong>18. Dịch vụ chứng minh tài chính (cho visa du lịch, xuất khẩu lao động)</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="19. Dịch vụ khai báo hải quan">
-										</td>
-										<td>
-											<strong>19. Dịch vụ khai báo hải quan</strong>
-										</td>
-									</tr>
-									<tr>
-										<td class="td_checkbox">
-											<input type="checkbox" name="services[]" class="contact_checkox" value="20. Dịch thuật chuyên sâu">
-										</td>
-										<td>
-											<strong>20. Dịch thuật chuyên sâu</strong>
-										</td>
-									</tr>
+									<?php
+									foreach ($services as $key => $service) {
+										$slug = convert_to_slug($service['raw_name']); // Chuyển đổi name thành slug
+
+										echo '<tr>';
+										echo '<td class="td_checkbox">';
+										echo '<input type="checkbox" name="services[]" class="contact_checkox" value="' . esc_attr($slug) . '">';
+										echo '</td>';
+
+										echo '<td>';
+										echo '<strong>' . ($key + 1) . '. ' . esc_html($service['raw_name']) . '</strong>';
+										echo $service['mo_ta'] ? '<div style="font-style:italic; font-size: 14px;">(' . $service['mo_ta'] . ')</div>' : '';
+
+										// Hiển thị input bổ sung nếu show_input = true
+										if ($service['show_input']) {
+											echo '<div class="td_group mt-2" style="display:none;">';
+											echo '<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>';
+											echo '<div class="td_label mb-1">';
+											echo 'Quốc gia <span class="td_req">(*bắt buộc)</span>';
+											echo '</div>';
+											echo '<input type="text" name="quoc_gia_' . $slug . '" class="td_input ' . esc_attr($service['key_input']) . '">';
+											echo '</div>';
+										}
+
+										echo '</td>';
+										echo '</tr>';
+									}
+									?>
 								</tbody>
 							</table>
 						</div>
@@ -344,13 +300,19 @@ get_header();
 							<div class="row row_16">
 								<div class="col-12">
 									<label class="contact_label" for="">
-										1. Số điện thoại*
+										1. Họ và tên*
+									</label>
+									<input type="text" name="full_name" class="contact_input" placeholder="Nhập họ và tên">
+								</div>
+								<div class="col-12">
+									<label class="contact_label" for="">
+										2. Số điện thoại*
 									</label>
 									<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
 								</div>
 								<div class="col-12">
 									<label class="contact_label" for="">
-										2. Địa chỉ Email*
+										3. Địa chỉ Email*
 									</label>
 									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sales@ulytan.vn">
 								</div>
@@ -734,6 +696,9 @@ get_footer();
 
 		$("#page_contact_form").validate({
 			rules: {
+				full_name: {
+					required: true,
+				},
 				phone: {
 					required: true,
 					digits: true,
@@ -744,26 +709,11 @@ get_footer();
 					required: true,
 					customEmail: true
 				},
-				services_2: {
-					required: true,
-				},
-				services_7: {
-					required: true,
-				},
-				services_9: {
-					required: true,
-				},
-				services_10: {
-					required: true,
-				},
-				services_11: {
-					required: true,
-				},
-				services_12: {
-					required: true,
-				},
 			},
 			messages: {
+				full_name: {
+					required: "Vui lòng nhập họ và tên của bạn",
+				},
 				phone: {
 					required: "Vui lòng nhập số điện thoại của bạn",
 					digits: "Chỉ được phép chứa các chữ số",
@@ -774,25 +724,35 @@ get_footer();
 					required: "Vui lòng nhập địa chỉ email của bạn",
 					email: "Vui lòng nhập một địa chỉ email hợp lệ"
 				},
-				services_2: {
-					required: "Vui lòng tên quốc gia",
-				},
-				services_10: {
-					required: "Vui lòng tên quốc gia",
-				},
-				services_11: {
-					required: "Vui lòng tên quốc gia",
-				},
-				services_12: {
-					required: "Vui lòng tên quốc gia",
-				},
-				services_13: {
-					required: "Vui lòng tên quốc gia",
-				},
 			},
 			submitHandler: function(form) {
 				if ($('input[name="services[]"]:checked').length == 0) {
 					alert("Vui lòng chọn ít nhất một dịch vụ.");
+					return false;
+				}
+
+				var hasError = false;
+				$('.td_group .td_input').each(function() {
+					var input = $(this);
+					var inputValue = input.val(); // Lấy giá trị của input
+					var checkbox = input.closest('tr').find('input[name="services[]"]:checked');
+
+					// Nếu input chưa có giá trị
+					if (inputValue.trim() === '' && checkbox.length > 0) {
+						hasError = true;
+						// Nếu chưa có lỗi, thêm span.error
+						if (input.next('.error').length === 0) {
+							input.after('<span class="error" >Vui lòng nhập quốc gia</span>');
+							input.focus();
+						}
+					} else {
+						// Nếu đã có giá trị và có lỗi, xóa span.error
+						input.next('.error').remove();
+					}
+				});
+
+				// Nếu có lỗi, ngừng submit form
+				if (hasError) {
 					return false;
 				}
 
