@@ -573,6 +573,39 @@ function save_contact_info()
 				update_field('services_12', sanitize_text_field($data['services_12']), $post_id);
 				update_field('services_13', sanitize_text_field($data['services_13']), $post_id);
 				update_field('trang_da_gui', sanitize_text_field($data['trang_da_gui']), $post_id);
+
+				$ten_trang = $data['ten_trang']; // Tên term cần xử lý
+
+				if (!empty($ten_trang) && !empty($post_id)) {
+					// Kiểm tra xem term đã tồn tại hay chưa
+					$term = get_term_by('name', $ten_trang, 'loai_page'); // 'loai_page' là taxonomy
+
+					if (!$term) {
+						// Nếu term chưa tồn tại, tiến hành tạo mới
+						$result = wp_insert_term(
+							$ten_trang, // Tên của term
+							'loai_page' // Taxonomy
+						);
+
+						if (is_wp_error($result)) {
+							return;
+						} else {
+							// Lấy ID của term vừa tạo thành công
+							$term_id = $result['term_id'];
+						}
+					} else {
+						// Nếu term đã tồn tại, lấy ID của term đó
+						$term_id = $term->term_id;
+					}
+
+					// Gắn bài viết vào term
+					$update_result = wp_set_post_terms(
+						$post_id, // ID bài viết
+						$term_id, // ID của term hoặc mảng ID
+						'loai_page', // Taxonomy
+						false // False để thay thế các term hiện tại
+					);
+				}
 			}
 
 			wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
@@ -937,14 +970,37 @@ function add_export_button_with_jquery()
 	$arr_post_type = ['form_ctv', 'contact_info', 'form_contribute'];
 
 	if ($pagenow === 'edit.php' && in_array($post_type, $arr_post_type)) {
+		// Lấy danh sách terms trong taxonomy 'loai_page' nếu post type là contact_info
+		$terms = [];
+		if ($post_type === 'contact_info') {
+			$terms = get_terms(array(
+				'taxonomy'   => 'loai_page',
+				'hide_empty' => false,
+			));
+		}
 	?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				var noti = '<?php echo isset($_POST['export_csv']) ? 'Export successfully.' : ''; ?>';
 				var post_type_export = '<?php echo $post_type; ?>';
+
+				var selectHTML = '';
+				<?php if ($post_type === 'contact_info') : ?>
+					// Tạo danh sách <option> từ các terms nếu là contact_info
+					selectHTML = '<select name="loai_page_select" class="button button-secondary" style="margin-right: 10px;">';
+					selectHTML += '<option value="">Tất cả loại page</option>';
+					<?php if (!empty($terms)) : ?>
+						<?php foreach ($terms as $term) : ?>
+							selectHTML += '<option value="<?php echo esc_attr($term->slug); ?>"><?php echo esc_html($term->name); ?></option>';
+						<?php endforeach; ?>
+					<?php endif; ?>
+					selectHTML += '</select>';
+				<?php endif; ?>
+
 				var buttonHTML = '<div style="margin: 10px 0 20px 0;">' +
 					'<form method="post">' +
-					'<input type="hidden" name="post_type_export" class="button button-primary" value="' + post_type_export + '" />' +
+					'<input type="hidden" name="post_type_export" value="' + post_type_export + '" />' +
+					selectHTML +
 					'<input type="submit" name="export_csv" class="button button-primary" value="Export CSV" />' +
 					'<p style="color: #198754;font-weight:700;">' + noti + '</p>' +
 					'</form>' +
@@ -1011,12 +1067,24 @@ function contact_info_export_data_csv()
 		$column_title
 	);
 
+	$loai_page_select = $_POST['loai_page_select'] ?? ''; // Lấy giá trị của loại page (nếu có)
 	$args = array(
 		'post_type'      => 'contact_info', // Post type cần lấy
 		'posts_per_page' => -1,             // Lấy tất cả bài viết
 		'post_status'    => 'publish',      // Chỉ lấy bài đã xuất bản
 	);
 
+	// Thêm điều kiện lọc theo loại page nếu có lựa chọn
+	if (!empty($loai_page_select)) {
+		$args['tax_query'] = array(
+			array(
+				'taxonomy' => 'loai_page',   // Taxonomy cần lọc
+				'field'    => 'slug',        // Lọc theo slug
+				'terms'    => $loai_page_select, // Giá trị của loại page (slug)
+			),
+		);
+	}
+	// Thực hiện query
 	$query = new WP_Query($args);
 
 	if ($query->have_posts()) {
@@ -1222,4 +1290,66 @@ function form_contribute_export_data_csv()
 	fclose($output_handle);
 
 	die();
+}
+function create_loai_page_taxonomy()
+{
+	// Đăng ký taxonomy 'loai_page'
+	$labels = array(
+		'name'              => _x('Loại Page', 'taxonomy general name'),
+		'singular_name'     => _x('Loại Page', 'taxonomy singular name'),
+		'search_items'      => __('Tìm Loại Page'),
+		'all_items'         => __('Tất cả Loại Page'),
+		'parent_item'       => __('Loại Page cha'),
+		'parent_item_colon' => __('Loại Page cha:'),
+		'edit_item'         => __('Chỉnh sửa Loại Page'),
+		'update_item'       => __('Cập nhật Loại Page'),
+		'add_new_item'      => __('Thêm mới Loại Page'),
+		'new_item_name'     => __('Tên mới của Loại Page'),
+		'menu_name'         => __('Loại Page'),
+	);
+
+	$args = array(
+		'hierarchical'      => true, // True nếu muốn hiển thị dạng phân cấp (giống category)
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array('slug' => 'loai_page'), // Đường dẫn của taxonomy
+	);
+
+	// Gắn taxonomy 'loai_page' với post type 'contact_info'
+	register_taxonomy('loai_page', array('contact_info'), $args);
+}
+
+// Gắn hàm vào action init
+add_action('init', 'create_loai_page_taxonomy');
+
+function convert_to_slug($string)
+{
+	$string = preg_replace('/[^\p{L}\p{N}\s]/u', '', $string); // Loại bỏ ký tự đặc biệt
+	$string = trim($string); // Loại bỏ khoảng trắng thừa
+	$string = mb_strtolower($string); // Chuyển thành chữ thường
+	$string = preg_replace('/\s+/', '_', $string); // Thay thế khoảng trắng bằng dấu gạch dưới
+	$string = stripVN($string);
+	return $string;
+}
+
+function stripVN($str)
+{
+	$str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
+	$str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $str);
+	$str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $str);
+	$str = preg_replace("/(ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ)/", 'o', $str);
+	$str = preg_replace("/(ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ)/", 'u', $str);
+	$str = preg_replace("/(ỳ|ý|ỵ|ỷ|ỹ)/", 'y', $str);
+	$str = preg_replace("/(đ)/", 'd', $str);
+
+	$str = preg_replace("/(À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ)/", 'A', $str);
+	$str = preg_replace("/(È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ)/", 'E', $str);
+	$str = preg_replace("/(Ì|Í|Ị|Ỉ|Ĩ)/", 'I', $str);
+	$str = preg_replace("/(Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ)/", 'O', $str);
+	$str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
+	$str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
+	$str = preg_replace("/(Đ)/", 'D', $str);
+	return $str;
 }
