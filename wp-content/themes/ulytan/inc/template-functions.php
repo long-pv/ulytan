@@ -606,6 +606,7 @@ function save_contact_info()
 					} else {
 						// Nếu term đã tồn tại, lấy ID của term đó
 						$term_id = $term->term_id;
+						update_term_meta($term_id, 'page_id', $id_trang);
 					}
 
 					// Gắn bài viết vào term

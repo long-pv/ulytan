@@ -188,7 +188,7 @@
             "name": "post_data",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "",
+            "instructions": "Sử dụng cho việc export dữ liệu",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -197,10 +197,10 @@
                 "id": ""
             },
             "default_value": "",
-            "new_lines": "",
             "maxlength": "",
+            "rows": "",
             "placeholder": "",
-            "rows": ""
+            "new_lines": ""
         }
     ],
     "location": [
@@ -227,5 +227,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1735759349
+    "modified": 1735760149
 }
