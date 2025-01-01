@@ -1088,15 +1088,21 @@ wp_reset_postdata();
 						</div>
 
 						<div class="row row_16">
-							<div class="col-12">
+							<div class="col-lg-4">
 								<label class="contact_label" for="">
-									1. Số điện thoại*
+									1. Họ và tên*
+								</label>
+								<input type="text" name="full_name" class="contact_input" placeholder="Nhập họ và tên">
+							</div>
+							<div class="col-lg-4">
+								<label class="contact_label" for="">
+									2. Số điện thoại*
 								</label>
 								<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
 							</div>
-							<div class="col-12">
+							<div class="col-lg-4">
 								<label class="contact_label" for="">
-									2. Địa chỉ Email*
+									3. Địa chỉ Email*
 								</label>
 								<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sales@ulytan.vn">
 							</div>
@@ -1196,6 +1202,9 @@ get_footer();
 
 		$("#page_contact_form").validate({
 			rules: {
+				full_name: {
+					required: true,
+				},
 				phone: {
 					required: true,
 					digits: true,
@@ -1208,6 +1217,9 @@ get_footer();
 				},
 			},
 			messages: {
+				full_name: {
+					required: "Vui lòng nhập họ và tên của bạn",
+				},
 				phone: {
 					required: "Vui lòng nhập số điện thoại của bạn",
 					digits: "Chỉ được phép chứa các chữ số",
