@@ -574,7 +574,16 @@ function save_contact_info()
 				update_field('services_13', sanitize_text_field($data['services_13']), $post_id);
 				update_field('trang_da_gui', sanitize_text_field($data['trang_da_gui']), $post_id);
 
+				if (!empty($data)) {
+					// Chuyển mảng thành chuỗi JSON (nếu cần thiết, bạn có thể lưu trực tiếp mảng tùy theo loại trường trong ACF)
+					$json_data = json_encode($data);
+
+					// Sử dụng hàm update_field của ACF để lưu dữ liệu vào trường meta của bài viết với ID 123
+					update_field('post_data', $json_data, $post_id);
+				}
+
 				$ten_trang = $data['ten_trang']; // Tên term cần xử lý
+				$id_trang = $data['id_trang']; // Tên term cần xử lý
 
 				if (!empty($ten_trang) && !empty($post_id)) {
 					// Kiểm tra xem term đã tồn tại hay chưa
@@ -592,6 +601,7 @@ function save_contact_info()
 						} else {
 							// Lấy ID của term vừa tạo thành công
 							$term_id = $result['term_id'];
+							update_term_meta($term_id, 'page_id', $id_trang);
 						}
 					} else {
 						// Nếu term đã tồn tại, lấy ID của term đó

@@ -117,6 +117,7 @@ if (is_category() || is_tag() || is_tax()) {
 
 						<input type="hidden" name="trang_da_gui" value="<?php echo $cat_link; ?>">
 						<input type="hidden" name="ten_trang" value="<?php echo $cat_name; ?>">
+						<input type="hidden" name="id_trang" value="<?php echo $term_id; ?>">
 
 						<?php
 						$services = [

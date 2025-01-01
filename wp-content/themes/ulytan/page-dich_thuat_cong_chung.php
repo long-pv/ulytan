@@ -519,6 +519,7 @@ wp_reset_postdata();
 
 					<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
 					<input type="hidden" name="ten_trang" value="<?php the_title(); ?>">
+					<input type="hidden" name="id_trang" value="<?php echo get_the_ID(); ?>">
 
 					<?php
 					$type_popup = get_field('type_popup') ?? '1';
