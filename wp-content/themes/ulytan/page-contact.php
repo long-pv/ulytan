@@ -196,7 +196,7 @@ get_header();
 											echo '<div class="td_label mb-1">';
 											echo 'Quốc gia <span class="td_req">(*bắt buộc)</span>';
 											echo '</div>';
-											echo '<input type="text" name="' . esc_attr($service['key_input']) . '" class="td_input ' . esc_attr($service['key_input']) . '">';
+											echo '<input type="text" name="quoc_gia_' . $slug . '" class="td_input ' . esc_attr($service['key_input']) . '">';
 											echo '</div>';
 										}
 

@@ -1024,6 +1024,51 @@
             "elements": "",
             "bidirectional": 0,
             "bidirectional_target": []
+        },
+        {
+            "key": "field_67758cea51ce2",
+            "label": "Cài đặt popup",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_67758cfd51ce3",
+            "label": "Loại popup hiển thị",
+            "name": "type_popup",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "1": "1. Dịch thuật công chứng",
+                "2": "2. Hợp pháp hoá lãnh sự",
+                "4": "4. Cấp Visa đa quốc gia",
+                "5": "5. Cấp đổi ra hạn Hộ chiếu"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -1050,5 +1095,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1734421766
+    "modified": 1735757533
 }
