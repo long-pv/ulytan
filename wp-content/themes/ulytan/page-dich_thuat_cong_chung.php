@@ -527,128 +527,86 @@ wp_reset_postdata();
 						$services = [
 							[
 								'raw_name' => 'Dịch thuật công chứng',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch thuật có công chứng từ tiếng Việt sang tiếng nước ngoài và ngược lại lấy nhanh'
 							],
 							[
 								'raw_name' => 'Hợp pháp hóa lãnh sự',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ hợp pháp hoá, để giấy tờ có giá trị pháp lý sử dụng trên toàn thế giới'
 							],
 							[
 								'raw_name' => 'Chứng thực lãnh sự',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ chứng thực tại đại sứ quán để các giấy tờ có thể sử dụng hợp pháp ở Việt Nam cũng như nhiều quốc gia khác nhau'
 							],
 							[
 								'raw_name' => 'Cấp visa đa quốc gia',
-								'show_input' => true,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ Xin cấp và gia hạn visa hơn 60 quốc gia'
 							],
 							[
 								'raw_name' => 'Cấp, đổi, gia hạn hộ chiếu',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ xin cấp, đổi và gia hạn hộ chiếu lấy nhanh'
 							],
 							[
 								'raw_name' => 'Lý lịch tư pháp',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ xin cấp phiếu lý lịch tư pháp các loại lấy nhanh'
 							],
 							[
 								'raw_name' => 'Đổi bằng lái xe quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ để tài xế sử dụng bằng lái xe đã được đổi, có thể lái xe ở nhiều quốc gia trên toàn thế giới'
 							],
 							[
 								'raw_name' => 'Xin cấp, gia hạn thẻ tạm trú',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ này dành cho người nước ngoài sinh sống và làm việc tại Việt Nam'
 							],
 							[
 								'raw_name' => 'Cấp, gia hạn giấy phép lao động',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ thủ tục này cho người có quốc tịch nước ngoài sinh sống và làm việc tại Việt Nam'
 							],
 							[
 								'raw_name' => 'Xuất khẩu lao động',
-								'show_input' => true,
-								'key_input' => '',
 								'mo_ta' => 'Dịch vụ này dành cho người Việt Nam đi lao động tại nước ngoài như, Úc, Nhật, Hàn, Nga, Pháp, Đức, Mỹ, Canada, Anh, Newzeland v.…v.'
 							],
 							[
 								'raw_name' => 'Tư vấn du học quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tư vấn cho du học sinh Việt Nam học tại nước ngoài'
 							],
 							[
 								'raw_name' => 'Đào tạo ngoại ngữ',
-								'show_input' => true,
-								'key_input' => '',
 								'mo_ta' => 'Đào tạo ngoại ngữ hơn 15 ngôn ngữ cho người nước ngoài sống tại Việt Nam cũng như người Việt Nam sống tại Nước ngoài'
 							],
 							[
 								'raw_name' => 'Du lịch quốc tế',
-								'show_input' => true,
-								'key_input' => '',
 								'mo_ta' => 'Tổ chức tour cho cá nhân và tổ chức của Việt Nam đi ra nước ngoài'
 							],
 							[
 								'raw_name' => 'Xin cấp E-Visa',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ thủ tục cấp E-Visa cho người nước ngoài vào Việt Nam'
 							],
 							[
 								'raw_name' => 'Bảo hiểm du lịch quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Bán bảo hiểm du lịch quốc tế cho các cá nhân và tổ chức với giá hợp lý'
 							],
 							[
 								'raw_name' => 'Đầu tư, định cư',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tư vấn đầu tư, định cư ra nước ngoài cho người Việt Nam cũng như cho các công ty, tổ chức nước ngoài đầu tư vào Việt Nam'
 							],
 							[
 								'raw_name' => 'Thẻ APEC',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ làm thể doanh nhân Apec cho các doanh nghiệp'
 							],
 							[
 								'raw_name' => 'Chứng minh tài chính',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch vụ dành cho người Việt Nam muốn chứng minh tài chính để xin visa du học, du lịch, xuất khẩu lao động'
 							],
 							[
 								'raw_name' => 'Thủ tục hải quan',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ khai báo, xử lý thủ tục xuất nhập khẩu'
 							],
 							[
 								'raw_name' => 'Bán vé máy bay',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Bán vé máy bay quốc tế'
 							],
 							[
 								'raw_name' => 'Giấy khám sức khoẻ',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ cấp giấy khám sức khoẻ để làm Visa đi nước ngoài hoặc cho người nước ngoài làm giấy phép lao động, thẻ tạm trú tại Việt Nam'
 							]
 						];
@@ -656,128 +614,86 @@ wp_reset_postdata();
 						$services = [
 							[
 								'raw_name' => 'Hợp pháp hóa lãnh sự',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ hợp pháp hoá, để giấy tờ có giá trị pháp lý sử dụng trên toàn thế giới'
 							],
 							[
 								'raw_name' => 'Dịch thuật công chứng',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch thuật có công chứng từ tiếng Việt sang tiếng nước ngoài và ngược lại lấy nhanh'
 							],
 							[
 								'raw_name' => 'Chứng thực lãnh sự',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ chứng thực tại đại sứ quán để các giấy tờ có thể sử dụng hợp pháp ở Việt Nam cũng như nhiều quốc gia khác nhau'
 							],
 							[
 								'raw_name' => 'Cấp visa đa quốc gia',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ Xin cấp và gia hạn visa hơn 60 quốc gia'
 							],
 							[
 								'raw_name' => 'Cấp, đổi, gia hạn hộ chiếu',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ xin cấp, đổi và gia hạn hộ chiếu lấy nhanh'
 							],
 							[
 								'raw_name' => 'Lý lịch tư pháp',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ xin cấp phiếu lý lịch tư pháp các loại lấy nhanh'
 							],
 							[
 								'raw_name' => 'Đổi bằng lái xe quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ để tài xế sử dụng bằng lái xe đã được đổi, có thể lái xe ở nhiều quốc gia trên toàn thế giới'
 							],
 							[
 								'raw_name' => 'Xin cấp, gia hạn thẻ tạm trú',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ này dành cho người nước ngoài sinh sống và làm việc tại Việt Nam'
 							],
 							[
 								'raw_name' => 'Cấp, gia hạn giấy phép lao động',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ thủ tục này cho người có quốc tịch nước ngoài sinh sống và làm việc tại Việt Nam'
 							],
 							[
 								'raw_name' => 'Xuất khẩu lao động',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch vụ này dành cho người Việt Nam đi lao động tại nước ngoài như, Úc, Nhật, Hàn, Nga, Pháp, Đức, Mỹ, Canada, Anh, Newzeland v.…v.'
 							],
 							[
 								'raw_name' => 'Tư vấn du học quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tư vấn cho du học sinh Việt Nam học tại nước ngoài'
 							],
 							[
 								'raw_name' => 'Đào tạo ngoại ngữ',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Đào tạo ngoại ngữ hơn 15 ngôn ngữ cho người nước ngoài sống tại Việt Nam cũng như người Việt Nam sống tại Nước ngoài'
 							],
 							[
 								'raw_name' => 'Du lịch quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tổ chức tour cho cá nhân và tổ chức của Việt Nam đi ra nước ngoài'
 							],
 							[
 								'raw_name' => 'Xin cấp E-Visa',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ thủ tục cấp E-Visa cho người nước ngoài vào Việt Nam'
 							],
 							[
 								'raw_name' => 'Bảo hiểm du lịch quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Bán bảo hiểm du lịch quốc tế cho các cá nhân và tổ chức với giá hợp lý'
 							],
 							[
 								'raw_name' => 'Đầu tư, định cư',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tư vấn đầu tư, định cư ra nước ngoài cho người Việt Nam cũng như cho các công ty, tổ chức nước ngoài đầu tư vào Việt Nam'
 							],
 							[
 								'raw_name' => 'Thẻ APEC',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ làm thể doanh nhân Apec cho các doanh nghiệp'
 							],
 							[
 								'raw_name' => 'Chứng minh tài chính',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch vụ dành cho người Việt Nam muốn chứng minh tài chính để xin visa du học, du lịch, xuất khẩu lao động'
 							],
 							[
 								'raw_name' => 'Thủ tục hải quan',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ khai báo, xử lý thủ tục xuất nhập khẩu'
 							],
 							[
 								'raw_name' => 'Bán vé máy bay',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Bán vé máy bay quốc tế'
 							],
 							[
 								'raw_name' => 'Giấy khám sức khoẻ',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ cấp giấy khám sức khoẻ để làm Visa đi nước ngoài hoặc cho người nước ngoài làm giấy phép lao động, thẻ tạm trú tại Việt Nam'
 							]
 						];
@@ -785,128 +701,86 @@ wp_reset_postdata();
 						$services = [
 							[
 								'raw_name' => 'Cấp visa đa quốc gia',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ Xin cấp và gia hạn visa hơn 60 quốc gia'
 							],
 							[
 								'raw_name' => 'Cấp, đổi, gia hạn hộ chiếu',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ xin cấp, đổi và gia hạn hộ chiếu lấy nhanh'
 							],
 							[
 								'raw_name' => 'Bán vé máy bay',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Bán vé máy bay quốc tế'
 							],
 							[
 								'raw_name' => 'Thủ tục hải quan',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ khai báo, xử lý thủ tục xuất nhập khẩu'
 							],
 							[
 								'raw_name' => 'Hợp pháp hóa lãnh sự',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ hợp pháp hoá, để giấy tờ có giá trị pháp lý sử dụng trên toàn thế giới'
 							],
 							[
 								'raw_name' => 'Chứng thực lãnh sự',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ chứng thực tại đại sứ quán để các giấy tờ có thể sử dụng hợp pháp ở Việt Nam cũng như nhiều quốc gia khác nhau'
 							],
 							[
 								'raw_name' => 'Dịch thuật công chứng',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch thuật có công chứng từ tiếng Việt sang tiếng nước ngoài và ngược lại lấy nhanh'
 							],
 							[
 								'raw_name' => 'Lý lịch tư pháp',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ xin cấp phiếu lý lịch tư pháp các loại lấy nhanh'
 							],
 							[
 								'raw_name' => 'Đổi bằng lái xe quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ để tài xế sử dụng bằng lái xe đã được đổi, có thể lái xe ở nhiều quốc gia trên toàn thế giới'
 							],
 							[
 								'raw_name' => 'Xin cấp, gia hạn thẻ tạm trú',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ này dành cho người nước ngoài sinh sống và làm việc tại Việt Nam'
 							],
 							[
 								'raw_name' => 'Cấp, gia hạn giấy phép lao động',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ thủ tục này cho người có quốc tịch nước ngoài sinh sống và làm việc tại Việt Nam'
 							],
 							[
 								'raw_name' => 'Xuất khẩu lao động',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch vụ này dành cho người Việt Nam đi lao động tại nước ngoài như, Úc, Nhật, Hàn, Nga, Pháp, Đức, Mỹ, Canada, Anh, Newzeland v.…v.'
 							],
 							[
 								'raw_name' => 'Tư vấn du học quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tư vấn cho du học sinh Việt Nam học tại nước ngoài'
 							],
 							[
 								'raw_name' => 'Đào tạo ngoại ngữ',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Đào tạo ngoại ngữ hơn 15 ngôn ngữ cho người nước ngoài sống tại Việt Nam cũng như người Việt Nam sống tại Nước ngoài'
 							],
 							[
 								'raw_name' => 'Du lịch quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tổ chức tour cho cá nhân và tổ chức của Việt Nam đi ra nước ngoài'
 							],
 							[
 								'raw_name' => 'Xin cấp E-Visa',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ thủ tục cấp E-Visa cho người nước ngoài vào Việt Nam'
 							],
 							[
 								'raw_name' => 'Bảo hiểm du lịch quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Bán bảo hiểm du lịch quốc tế cho các cá nhân và tổ chức với giá hợp lý'
 							],
 							[
 								'raw_name' => 'Đầu tư, định cư',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tư vấn đầu tư, định cư ra nước ngoài cho người Việt Nam cũng như cho các công ty, tổ chức nước ngoài đầu tư vào Việt Nam'
 							],
 							[
 								'raw_name' => 'Thẻ APEC',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ làm thể doanh nhân Apec cho các doanh nghiệp'
 							],
 							[
 								'raw_name' => 'Chứng minh tài chính',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch vụ dành cho người Việt Nam muốn chứng minh tài chính để xin visa du học, du lịch, xuất khẩu lao động'
 							],
 							[
 								'raw_name' => 'Giấy khám sức khoẻ',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ cấp giấy khám sức khoẻ để làm Visa đi nước ngoài hoặc cho người nước ngoài làm giấy phép lao động, thẻ tạm trú tại Việt Nam'
 							]
 						];
@@ -914,128 +788,86 @@ wp_reset_postdata();
 						$services = [
 							[
 								'raw_name' => 'Cấp, đổi, gia hạn hộ chiếu',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ xin cấp, đổi và gia hạn hộ chiếu lấy nhanh'
 							],
 							[
 								'raw_name' => 'Cấp visa đa quốc gia',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ Xin cấp và gia hạn visa hơn 60 quốc gia'
 							],
 							[
 								'raw_name' => 'Bán vé máy bay',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Bán vé máy bay quốc tế'
 							],
 							[
 								'raw_name' => 'Dịch thuật công chứng',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch thuật có công chứng từ tiếng Việt sang tiếng nước ngoài và ngược lại lấy nhanh'
 							],
 							[
 								'raw_name' => 'Hợp pháp hóa lãnh sự',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ hợp pháp hoá, để giấy tờ có giá trị pháp lý sử dụng trên toàn thế giới'
 							],
 							[
 								'raw_name' => 'Chứng thực lãnh sự',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ chứng thực tại đại sứ quán để các giấy tờ có thể sử dụng hợp pháp ở Việt Nam cũng như nhiều quốc gia khác nhau'
 							],
 							[
 								'raw_name' => 'Lý lịch tư pháp',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ xin cấp phiếu lý lịch tư pháp các loại lấy nhanh'
 							],
 							[
 								'raw_name' => 'Đổi bằng lái xe quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ để tài xế sử dụng bằng lái xe đã được đổi, có thể lái xe ở nhiều quốc gia trên toàn thế giới'
 							],
 							[
 								'raw_name' => 'Xin cấp, gia hạn thẻ tạm trú',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ này dành cho người nước ngoài sinh sống và làm việc tại Việt Nam'
 							],
 							[
 								'raw_name' => 'Cấp, gia hạn giấy phép lao động',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ thủ tục này cho người có quốc tịch nước ngoài sinh sống và làm việc tại Việt Nam'
 							],
 							[
 								'raw_name' => 'Xuất khẩu lao động',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch vụ này dành cho người Việt Nam đi lao động tại nước ngoài như, Úc, Nhật, Hàn, Nga, Pháp, Đức, Mỹ, Canada, Anh, Newzeland v.…v.'
 							],
 							[
 								'raw_name' => 'Tư vấn du học quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tư vấn cho du học sinh Việt Nam học tại nước ngoài'
 							],
 							[
 								'raw_name' => 'Đào tạo ngoại ngữ',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Đào tạo ngoại ngữ hơn 15 ngôn ngữ cho người nước ngoài sống tại Việt Nam cũng như người Việt Nam sống tại Nước ngoài'
 							],
 							[
 								'raw_name' => 'Du lịch quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tổ chức tour cho cá nhân và tổ chức của Việt Nam đi ra nước ngoài'
 							],
 							[
 								'raw_name' => 'Xin cấp E-Visa',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ thủ tục cấp E-Visa cho người nước ngoài vào Việt Nam'
 							],
 							[
 								'raw_name' => 'Bảo hiểm du lịch quốc tế',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Bán bảo hiểm du lịch quốc tế cho các cá nhân và tổ chức với giá hợp lý'
 							],
 							[
 								'raw_name' => 'Đầu tư, định cư',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Tư vấn đầu tư, định cư ra nước ngoài cho người Việt Nam cũng như cho các công ty, tổ chức nước ngoài đầu tư vào Việt Nam'
 							],
 							[
 								'raw_name' => 'Thẻ APEC',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ làm thẻ doanh nhân Apec cho các doanh nghiệp'
 							],
 							[
 								'raw_name' => 'Chứng minh tài chính',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Dịch vụ dành cho người Việt Nam muốn chứng minh tài chính để xin visa du học, du lịch, xuất khẩu lao động'
 							],
 							[
 								'raw_name' => 'Thủ tục hải quan',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ khai báo, xử lý thủ tục xuất nhập khẩu'
 							],
 							[
 								'raw_name' => 'Giấy khám sức khoẻ',
-								'show_input' => false,
-								'key_input' => '',
 								'mo_ta' => 'Hỗ trợ cấp giấy khám sức khoẻ để làm Visa đi nước ngoài hoặc cho người nước ngoài làm giấy phép lao động, thẻ tạm trú tại Việt Nam'
 							]
 						];
@@ -1052,6 +884,14 @@ wp_reset_postdata();
 							</thead>
 							<tbody>
 								<?php
+								$services_with_input = [
+									'Cấp visa đa quốc gia',
+									'Xuất khẩu lao động',
+									'Tư vấn du học quốc tế',
+									'Đào tạo ngoại ngữ',
+									'Du lịch quốc tế'
+								];
+
 								foreach ($services as $key => $service) {
 									$slug = convert_to_slug($service['raw_name']); // Chuyển đổi name thành slug
 
@@ -1065,7 +905,7 @@ wp_reset_postdata();
 									echo $service['mo_ta'] ? '<div style="font-style:italic; font-size: 14px;">(' . $service['mo_ta'] . ')</div>' : '';
 
 									// Hiển thị input bổ sung nếu show_input = true
-									if ($service['show_input']) {
+									if (in_array($service['raw_name'], $services_with_input)) {
 										echo '<div class="td_group mt-2" style="display:none;">';
 										echo '<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>';
 										echo '<div class="td_label mb-1">';
