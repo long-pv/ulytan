@@ -910,6 +910,9 @@ get_footer();
 				},
 				phone: {
 					required: true,
+					digits: true,
+					minlength: 1,
+					maxlength: 10
 				},
 				email: {
 					required: true,
@@ -1002,7 +1005,10 @@ get_footer();
 					required: 'Bạn chưa nhập Ngày sinh',
 				},
 				phone: {
-					required: 'Bạn chưa nhập Số Mobile',
+					required: "Bạn chưa nhập Số Mobile",
+					digits: "Chỉ được phép chứa các chữ số",
+					minlength: "Bạn điền số điện thoại không đúng",
+					maxlength: "Bạn điền số điện thoại không đúng"
 				},
 				email: {
 					required: 'Bạn chưa nhập  Địa chỉ Email',
