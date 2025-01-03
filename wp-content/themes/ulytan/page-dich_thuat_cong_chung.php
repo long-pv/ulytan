@@ -229,32 +229,6 @@ if ($use_service):
 <?php endif; ?>
 
 <?php
-$endow_video_image = get_field('endow_video_image') ?? '';
-$endow_iframe_video = get_field('endow_iframe_video') ?? '';
-$endow_content = get_field('endow_content') ?? '';
-if ($endow_content || ($endow_iframe_video && $endow_video_image)) :
-?>
-	<section class="endow secSpace bg-primary">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-7 mb-4 mb-lg-0">
-					<?php
-					if ($endow_iframe_video && $endow_video_image) {
-						video_popup($endow_iframe_video, $endow_video_image);
-					}
-					?>
-				</div>
-				<div class="col-lg-5">
-					<div class="editor endow_content">
-						<?php echo $endow_content; ?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-<?php endif; ?>
-
-<?php
 $price_table = get_field('price_table') ?? '';
 if ($price_table) :
 ?>

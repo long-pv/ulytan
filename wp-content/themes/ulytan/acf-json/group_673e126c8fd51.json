@@ -607,88 +607,6 @@
             ]
         },
         {
-            "key": "field_673f282161daf",
-            "label": "Ưu đãi",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_673f283a61db0",
-            "label": "Endow video image",
-            "name": "endow_video_image",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "url",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "preview_size": "thumbnail"
-        },
-        {
-            "key": "field_673f28ad61db1",
-            "label": "Endow iframe video",
-            "name": "endow_iframe_video",
-            "aria-label": "",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "rows": 2,
-            "placeholder": "",
-            "new_lines": ""
-        },
-        {
-            "key": "field_673f28d361db2",
-            "label": "Endow content",
-            "name": "endow_content",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
-        },
-        {
             "key": "field_673e2361ab342",
             "label": "Bảng giá",
             "name": "",
@@ -1140,5 +1058,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1735921728
+    "modified": 1735924161
 }
