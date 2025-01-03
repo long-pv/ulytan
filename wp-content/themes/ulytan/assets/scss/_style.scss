@@ -23,7 +23,7 @@
         padding-left: 32px;
         background-color: $white;
         color: $primary;
-        font-size: 12px;
+        font-size: 16px;
         width: 100%;
         font-style: italic;
 
@@ -35,11 +35,11 @@
 
         &::placeholder {
             font-style: italic;
-            font-size: 12px;
+            font-size: 16px;
             color: $primary;
 
             @include media-breakpoint-down(md) {
-                font-size: 10px;
+                font-size: 16px;
             }
         }
     }
@@ -1901,7 +1901,7 @@
                 .item_title {
                     font-size: 18px;
                     font-weight: 700;
-                    color: $body;
+                    color: $primary;
                 }
 
                 .item_desc {
