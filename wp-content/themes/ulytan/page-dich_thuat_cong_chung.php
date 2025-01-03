@@ -504,7 +504,7 @@ wp_reset_postdata();
 			<div class="modal-body">
 				<div>
 					<?php
-					$popup_image = get_field('landing_page_popup_image', 'option') ?? '';
+					$popup_image = get_field('anh_popup_hien_thi') ?? '';
 					if ($popup_image):
 					?>
 						<img class="modal_landing_img" src="<?php echo $popup_image; ?>" alt="modal landing image">
@@ -513,9 +513,15 @@ wp_reset_postdata();
 					?>
 				</div>
 				<form id="page_contact_form" class="page_contact_form" enctype="multipart/form-data">
-					<div class="page_contact_title">
-						Giảm 10% khi đăng ký sử dụng từ 2 dịch vụ trở lên
-					</div>
+					<?php
+					if (get_field('tieu_de_popup')) :
+					?>
+						<div class="page_contact_title">
+							<?php echo get_field('tieu_de_popup'); ?>
+						</div>
+					<?php
+					endif;
+					?>
 
 					<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
 					<input type="hidden" name="ten_trang" value="<?php the_title(); ?>">
