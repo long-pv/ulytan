@@ -496,12 +496,12 @@ wp_reset_postdata();
 ?>
 
 <div class="modal modal_landing fade" id="modal_landing" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 			</button>
-			<div class="modal-body">
+			<div class="modal-header d-block p-0 border-0">
 				<div>
 					<?php
 					$popup_image = get_field('anh_popup_hien_thi') ?? '';
@@ -512,17 +512,19 @@ wp_reset_postdata();
 					endif;
 					?>
 				</div>
-				<form id="page_contact_form" class="page_contact_form" enctype="multipart/form-data">
-					<?php
-					if (get_field('tieu_de_popup')) :
-					?>
-						<div class="page_contact_title">
-							<?php echo get_field('tieu_de_popup'); ?>
-						</div>
-					<?php
-					endif;
-					?>
 
+				<?php
+				if (get_field('tieu_de_popup')) :
+				?>
+					<div class="page_contact_title">
+						<?php echo get_field('tieu_de_popup'); ?>
+					</div>
+				<?php
+				endif;
+				?>
+			</div>
+			<div class="modal-body">
+				<form id="page_contact_form" class="page_contact_form" enctype="multipart/form-data">
 					<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
 					<input type="hidden" name="ten_trang" value="<?php the_title(); ?>">
 					<input type="hidden" name="id_trang" value="<?php echo get_the_ID(); ?>">
