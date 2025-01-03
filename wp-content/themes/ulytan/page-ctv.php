@@ -120,7 +120,7 @@ get_header();
 							<label for="" class="page_ctv_form_label">
 								9. Bạn hay tra từ điển nào ?*
 							</label>
-							<input type="text" class="page_ctv_form_input" name="dictionary" placeholder="Tên từ điển VD: Lạc Việt">
+							<input type="text" class="page_ctv_form_input" name="dictionary" placeholder="Ví dụ: Lạc Việt">
 						</div>
 					</div>
 					<div class="col-lg-3 page_ctv_step_10" style="display:none;">
@@ -658,7 +658,10 @@ get_header();
 							<label for="" class="page_ctv_form_label">
 								16. Mô tả tóm tắt kinh nghiệm làm việc.
 							</label>
-							<textarea name="summary_description" class="page_ctv_form_textarea"></textarea>
+							<textarea name="summary_description" class="page_ctv_form_textarea" placeholder="- Năm 2012 Tốt nghiệp đại học Công Đoàn
+- Năm 2014 Làm việc tại công ty Ulytan
+- Năm 2019 Làm việc Tại Ngân Hàng Vietcombank
+- Năm 2020 v.v."></textarea>
 						</div>
 					</div>
 
