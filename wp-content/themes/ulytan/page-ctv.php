@@ -106,10 +106,10 @@ get_header();
 							</div>
 							<div class="page_ctv_form_group_radio">
 								<label>
-									<input type="radio" name="translation_unit" value="Có"> Có
+									<input type="radio" name="translation_unit" value="Có"> Đã từng
 								</label>
 								<label>
-									<input type="radio" name="translation_unit" value="Không"> Không
+									<input type="radio" name="translation_unit" value="Không"> Chưa từng
 								</label>
 							</div>
 							<input type="text" class="page_ctv_form_input" name="translation_unit_name" placeholder=" Ví dụ: Dịch thuật Ulytan">
@@ -120,7 +120,7 @@ get_header();
 							<label for="" class="page_ctv_form_label">
 								9. Bạn hay tra từ điển nào ?*
 							</label>
-							<input type="text" class="page_ctv_form_input" name="dictionary" placeholder="Ghi ngắn gọn tên từ điển VD: Lạc Việt">
+							<input type="text" class="page_ctv_form_input" name="dictionary" placeholder="Tên từ điển VD: Lạc Việt">
 						</div>
 					</div>
 					<div class="col-lg-3 page_ctv_step_10" style="display:none;">
@@ -196,7 +196,7 @@ get_header();
 								<div class="custom_dropdown_menu">
 									<label><input type="checkbox" name="translation_skill[]" value="Dịch xuôi"> Dịch xuôi</label>
 									<label><input type="checkbox" name="translation_skill[]" value="Dịch ngược"> Dịch ngược</label>
-									<label><input type="checkbox" name="translation_skill[]" value="Cả 2"> Cả 2</label>
+									<label><input type="checkbox" name="translation_skill[]" value="Cả xuôi và ngược">Cả xuôi và ngược</label>
 								</div>
 
 								<input type="text" class="page_ctv_form_hidden" name="translation_skill_val">
@@ -614,7 +614,7 @@ get_header();
 					<div class="col-lg-3 page_ctv_step_14" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
-								14. Bạn dùng phần mềm dịch thuật nào ?*
+								14. Bạn có dùng phần mềm dịch thuật chuyên nghiệp nào không? *
 							</label>
 							<div class="page_ctv_form_group_radio">
 								<label>
@@ -624,7 +624,7 @@ get_header();
 									<input type="radio" name="translation_software" value="Không"> Không
 								</label>
 							</div>
-							<input type="text" class="page_ctv_form_input" name="translation_software_name" placeholder=" Ví dụ: Dịch thuật Ulytan">
+							<input type="text" class="page_ctv_form_input" name="translation_software_name" placeholder="Ví dụ: Dịch thuật trados">
 						</div>
 					</div>
 					<div class="col-lg-3 page_ctv_step_15" style="display:none;">
@@ -1042,7 +1042,7 @@ get_footer();
 					required: 'Bạn chưa nhập Bạn dùng phần mềm dịch thuật nào',
 				},
 				dictionary: {
-					required: 'Bạn chưa nhập Chuyên ngành đăng ký làm CTV',
+					required: 'Bạn chưa nhập Bạn hay tra từ điển nào',
 				},
 				upload_file_1: {
 					required: 'Bạn chưa nhập File',
