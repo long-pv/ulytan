@@ -576,7 +576,7 @@ function save_contact_info()
 
 				if (!empty($data)) {
 					// Chuyển mảng thành chuỗi JSON (nếu cần thiết, bạn có thể lưu trực tiếp mảng tùy theo loại trường trong ACF)
-					$json_data = json_encode($data);
+					$json_data = json_encode($data, JSON_UNESCAPED_UNICODE);
 
 					// Sử dụng hàm update_field của ACF để lưu dữ liệu vào trường meta của bài viết với ID 123
 					update_field('post_data', $json_data, $post_id);
@@ -1149,7 +1149,7 @@ function contact_info_export_data_csv()
 				$query->the_post();
 
 				$post_data_json = get_field('post_data') ?? '';
-				$post_data = json_decode($post_data_json);
+				$post_data = json_decode($post_data_json, true);
 				$post_data = (array) $post_data;
 				$services = $post_data['services'] ?? [];
 
@@ -1160,23 +1160,23 @@ function contact_info_export_data_csv()
 						// STT và thông tin người dùng
 						$index,
 						$post_data['full_name'] ?? '',
-						$post_data['phone'] ?? '',              // Số điện thoại
+						"'" . $post_data['phone'] ?? '',              // Số điện thoại
 						$post_data['email'] ?? '',              // Email
 
 						// Các dịch vụ từ 1 đến 21
 						in_array(convert_to_slug('Dịch thuật công chứng'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Hợp pháp hóa lãnh sự'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Chứng thực lãnh sự'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Cấp visa đa quốc gia')] : '',
 						in_array(convert_to_slug('Cấp, đổi, gia hạn hộ chiếu'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Lý lịch tư pháp'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Đổi bằng lái xe quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Xin cấp, gia hạn thẻ tạm trú'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Cấp, gia hạn giấy phép lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Xuất khẩu lao động')] : '',
+						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Tư vấn du học quốc tế')] : '',
+						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Đào tạo ngoại ngữ')] : '',
+						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Du lịch quốc tếa')] : '',
 						in_array(convert_to_slug('Xin cấp E-Visa'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Bảo hiểm du lịch quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Đầu tư, định cư'), $services) ? 'x' : '',
@@ -1239,7 +1239,7 @@ function contact_info_export_data_csv()
 				$query->the_post();
 
 				$post_data_json = get_field('post_data') ?? '';
-				$post_data = json_decode($post_data_json);
+				$post_data = json_decode($post_data_json, true);
 				$post_data = (array) $post_data;
 				$services = $post_data['services'] ?? [];
 
@@ -1250,23 +1250,23 @@ function contact_info_export_data_csv()
 						// STT và thông tin người dùng
 						$index,
 						$post_data['full_name'] ?? '',
-						$post_data['phone'] ?? '',              // Số điện thoại
+						"'" . $post_data['phone'] ?? '',              // Số điện thoại
 						$post_data['email'] ?? '',              // Email
 
 						// Các dịch vụ từ 1 đến 21
 						in_array(convert_to_slug('Hợp pháp hóa lãnh sự'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Dịch thuật công chứng'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Chứng thực lãnh sự'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Cấp visa đa quốc gia')] : '',
 						in_array(convert_to_slug('Cấp, đổi, gia hạn hộ chiếu'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Lý lịch tư pháp'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Đổi bằng lái xe quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Xin cấp, gia hạn thẻ tạm trú'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Cấp, gia hạn giấy phép lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Xuất khẩu lao động')] : '',
+						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Tư vấn du học quốc tế')] : '',
+						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Đào tạo ngoại ngữ')] : '',
+						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Du lịch quốc tếa')] : '',
 						in_array(convert_to_slug('Xin cấp E-Visa'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Bảo hiểm du lịch quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Đầu tư, định cư'), $services) ? 'x' : '',
@@ -1329,7 +1329,7 @@ function contact_info_export_data_csv()
 				$query->the_post();
 
 				$post_data_json = get_field('post_data') ?? '';
-				$post_data = json_decode($post_data_json);
+				$post_data = json_decode($post_data_json, true);
 				$post_data = (array) $post_data;
 				$services = $post_data['services'] ?? [];
 
@@ -1340,11 +1340,11 @@ function contact_info_export_data_csv()
 						// STT và thông tin người dùng
 						$index,
 						$post_data['full_name'] ?? '',
-						$post_data['phone'] ?? '',              // Số điện thoại
+						"'" . $post_data['phone'] ?? '',              // Số điện thoại
 						$post_data['email'] ?? '',              // Email
 
 						// Các dịch vụ từ 1 đến 21
-						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Cấp visa đa quốc gia')] : '',
 						in_array(convert_to_slug('Cấp, đổi, gia hạn hộ chiếu'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Bán vé máy bay'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Thủ tục hải quan'), $services) ? 'x' : '',
@@ -1355,10 +1355,10 @@ function contact_info_export_data_csv()
 						in_array(convert_to_slug('Đổi bằng lái xe quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Xin cấp, gia hạn thẻ tạm trú'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Cấp, gia hạn giấy phép lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Xuất khẩu lao động')] : '',
+						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Tư vấn du học quốc tế')] : '',
+						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Đào tạo ngoại ngữ')] : '',
+						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Du lịch quốc tếa')] : '',
 						in_array(convert_to_slug('Xin cấp E-Visa'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Bảo hiểm du lịch quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Đầu tư, định cư'), $services) ? 'x' : '',
@@ -1419,7 +1419,7 @@ function contact_info_export_data_csv()
 				$query->the_post();
 
 				$post_data_json = get_field('post_data') ?? '';
-				$post_data = json_decode($post_data_json);
+				$post_data = json_decode($post_data_json, true);
 				$post_data = (array) $post_data;
 				$services = $post_data['services'] ?? [];
 
@@ -1430,12 +1430,12 @@ function contact_info_export_data_csv()
 						// STT và thông tin người dùng
 						$index,
 						$post_data['full_name'] ?? '',
-						$post_data['phone'] ?? '',              // Số điện thoại
+						"'" . $post_data['phone'] ?? '',              // Số điện thoại
 						$post_data['email'] ?? '',              // Email
 
 						// Các dịch vụ từ 1 đến 21
 						in_array(convert_to_slug('Cấp, đổi, gia hạn hộ chiếu'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Cấp visa đa quốc gia')] : '',
 						in_array(convert_to_slug('Bán vé máy bay'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Dịch thuật công chứng'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Hợp pháp hóa lãnh sự'), $services) ? 'x' : '',
@@ -1444,10 +1444,10 @@ function contact_info_export_data_csv()
 						in_array(convert_to_slug('Đổi bằng lái xe quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Xin cấp, gia hạn thẻ tạm trú'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Cấp, gia hạn giấy phép lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Xuất khẩu lao động')] : '',
+						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Tư vấn du học quốc tế')] : '',
+						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Đào tạo ngoại ngữ')] : '',
+						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Du lịch quốc tếa')] : '',
 						in_array(convert_to_slug('Xin cấp E-Visa'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Bảo hiểm du lịch quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Đầu tư, định cư'), $services) ? 'x' : '',
@@ -1509,7 +1509,7 @@ function contact_info_export_data_csv()
 				$query->the_post();
 
 				$post_data_json = get_field('post_data') ?? '';
-				$post_data = json_decode($post_data_json);
+				$post_data = json_decode($post_data_json, true);
 				$post_data = (array) $post_data;
 				$services = $post_data['services'] ?? [];
 
@@ -1520,12 +1520,12 @@ function contact_info_export_data_csv()
 						// STT và thông tin người dùng
 						$index,
 						$post_data['full_name'] ?? '',
-						$post_data['phone'] ?? '',              // Số điện thoại
+						"'" . $post_data['phone'] ?? '',              // Số điện thoại
 						$post_data['email'] ?? '',              // Email
 
 						// Các dịch vụ từ 1 đến 21
 						in_array(convert_to_slug('Cấp, đổi, gia hạn hộ chiếu'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Cấp visa đa quốc gia')] : '',
 						in_array(convert_to_slug('Bán vé máy bay'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Dịch thuật công chứng'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Hợp pháp hóa lãnh sự'), $services) ? 'x' : '',
@@ -1534,10 +1534,10 @@ function contact_info_export_data_csv()
 						in_array(convert_to_slug('Đổi bằng lái xe quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Xin cấp, gia hạn thẻ tạm trú'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Cấp, gia hạn giấy phép lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? 'x' : '',
+						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Xuất khẩu lao động')] : '',
+						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Tư vấn du học quốc tế')] : '',
+						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Đào tạo ngoại ngữ')] : '',
+						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Du lịch quốc tếa')] : '',
 						in_array(convert_to_slug('Xin cấp E-Visa'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Bảo hiểm du lịch quốc tế'), $services) ? 'x' : '',
 						in_array(convert_to_slug('Đầu tư, định cư'), $services) ? 'x' : '',
