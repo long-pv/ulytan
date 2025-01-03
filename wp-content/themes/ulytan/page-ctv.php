@@ -750,7 +750,7 @@ get_header();
 						</div>
 					</div>
 				</div>
-				<div class="mt-4">
+				<div class="mt-4 d-flex justify-content-center">
 					<input type="submit" class="contact_submit" value="Đăng ký">
 				</div>
 			</form>
