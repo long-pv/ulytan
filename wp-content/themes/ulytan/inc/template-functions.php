@@ -1051,32 +1051,12 @@ function contact_info_export_data_csv()
 	$type_popup = 0;
 
 	$current_time = date("d.m.Y"); // get the current time
-
-	if ($type_popup == '1') {
-		$output_filename = '1.Dịch thuật công chứng_' . $current_time . '.csv';
-	} elseif (
-		$type_popup == '2'
-	) {
-		$output_filename = '2.Hợp pháp hoá lãnh sự_' . $current_time . '.csv';
-	} elseif (
-		$type_popup == '4'
-	) {
-		$output_filename = '4.Cấp Visa đa quốc gia_' . $current_time . '.csv';
-	} elseif (
-		$type_popup == '5'
-	) {
-		$output_filename = '5.Cấp đổi ra hạn Hộ chiếu_' . $current_time . '.csv';
-	} else {
-		$output_filename = 'Form liên hệ_' . $current_time . '.csv';
-	}
-
 	$output_handle = @fopen('php://output', 'w');
 	fwrite($output_handle, "\xEF\xBB\xBF"); // display Vietnamese text
 	header("Content-Type: application/force-download");
 	header("Content-Type: application/octet-stream");
 	header("Content-Type: application/download");
 	header('Content-Type: text/x-csv; charset=utf-8');
-	header('Content-Disposition: attachment;filename=' . $output_filename);
 
 	$loai_page_select = $_POST['loai_page_select'] ?? ''; // Lấy giá trị của loại page (nếu có)
 	$args = array(
@@ -1102,6 +1082,25 @@ function contact_info_export_data_csv()
 		fclose($output_handle);
 		die();
 	}
+
+	if ($type_popup == '1') {
+		$output_filename = '1.Dịch thuật công chứng_' . $current_time . '.csv';
+	} elseif (
+		$type_popup == '2'
+	) {
+		$output_filename = '2.Hợp pháp hoá lãnh sự_' . $current_time . '.csv';
+	} elseif (
+		$type_popup == '4'
+	) {
+		$output_filename = '4.Cấp Visa đa quốc gia_' . $current_time . '.csv';
+	} elseif (
+		$type_popup == '5'
+	) {
+		$output_filename = '5.Cấp đổi ra hạn Hộ chiếu_' . $current_time . '.csv';
+	} else {
+		$output_filename = 'Form liên hệ_' . $current_time . '.csv';
+	}
+	header('Content-Disposition: attachment;filename=' . $output_filename);
 
 	// Thực hiện query
 	$query = new WP_Query($args);
