@@ -62,7 +62,7 @@ get_header();
 							<label for="" class="page_ctv_form_label">
 								4. Địa chỉ Email*
 							</label>
-							<input type="text" class="page_ctv_form_input" name="email" placeholder=" Ví dụ: sales@ulytan.vn">
+							<input type="text" class="page_ctv_form_input" name="email" placeholder=" Ví dụ: sale@ulytan.com">
 						</div>
 					</div>
 					<div class="col-lg-3 page_ctv_step_5" style="display:none;">

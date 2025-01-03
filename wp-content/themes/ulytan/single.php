@@ -361,7 +361,7 @@ get_header();
 									<label class="contact_label" for="">
 										3. Địa chỉ Email*
 									</label>
-									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sales@ulytan.vn">
+									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
 								</div>
 							</div>
 						</div>
