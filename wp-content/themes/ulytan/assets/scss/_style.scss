@@ -1209,7 +1209,8 @@
     align-items: center;
     gap: 16px;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-top: 30px;
 }
 
 .reaction_button_item {
