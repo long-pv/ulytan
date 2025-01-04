@@ -34,7 +34,7 @@ array_push($arrPost, $post_id);
 get_header();
 ?>
 
-<section class="secSpace">
+<section class="secSpace pt-3">
 	<div class="container">
 		<div class="row" style="width: 100%;">
 			<div class="col-lg-3 mb-4">
@@ -156,7 +156,12 @@ get_header();
 				<div class="sidebar_lien_he">
 					<form id="page_contact_form" class="page_contact_form" enctype="multipart/form-data">
 						<div class="page_contact_title">
-							Giảm 10% khi đăng ký sử dụng từ 2 dịch vụ trở lên
+							Giảm 10% khi đăng ký sử dụng từ 2 dịch vụ
+							<span class="arrow_blink">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+									<path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+								</svg>
+							</span>
 						</div>
 
 						<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
@@ -293,75 +298,80 @@ get_header();
 							]
 						];
 						?>
-
-						<div class="page_contact_service">
-							<div class="page_contact_subtitle">
+						<div class="page_contact_scroll">
+							<div class="page_contact_service">
+								<!-- <div class="page_contact_subtitle">
 								Bạn sử dụng dịch vụ nào sau đây
-							</div>
+							</div> -->
 
-							<table class="page_contact_service_table">
-								<thead>
-									<tr>
-										<th width="30">Chọn</th>
-										<th>Dịch vụ</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									foreach ($services as $key => $service) {
-										$slug = convert_to_slug($service['raw_name']); // Chuyển đổi name thành slug
+								<table class="page_contact_service_table">
+									<thead>
+										<tr>
+											<th width="20">
+												<!-- Chọn -->
+											</th>
+											<th style="text-align: center;">
+												Dịch vụ
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php
+										foreach ($services as $key => $service) {
+											$slug = convert_to_slug($service['raw_name']); // Chuyển đổi name thành slug
 
-										echo '<tr>';
-										echo '<td class="td_checkbox">';
-										echo '<input type="checkbox" name="services[]" class="contact_checkox" value="' . esc_attr($slug) . '">';
-										echo '</td>';
+											echo '<tr>';
+											echo '<td class="td_checkbox">';
+											echo '<input type="checkbox" name="services[]" class="contact_checkox" value="' . esc_attr($slug) . '">';
+											echo '</td>';
 
-										echo '<td>';
-										echo '<strong>' . ($key + 1) . '. ' . esc_html($service['raw_name']) . '</strong>';
-										echo $service['mo_ta'] ? '<div style="font-style:italic; font-size: 14px;">(' . $service['mo_ta'] . ')</div>' : '';
+											echo '<td>';
+											echo '<strong>' . ($key + 1) . '. ' . esc_html($service['raw_name']) . '</strong>';
+											echo $service['mo_ta'] ? '<div style="font-style:italic; font-size: 14px;">(' . $service['mo_ta'] . ')</div>' : '';
 
-										// Hiển thị input bổ sung nếu show_input = true
-										if ($service['show_input']) {
-											echo '<div class="td_group mt-2" style="display:none;">';
-											echo '<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>';
-											echo '<div class="td_label mb-1">';
-											echo 'Quốc gia <span class="td_req">(*bắt buộc)</span>';
-											echo '</div>';
-											echo '<input type="text" name="quoc_gia_' . $slug . '" class="td_input ' . esc_attr($service['key_input']) . '">';
-											echo '</div>';
+											// Hiển thị input bổ sung nếu show_input = true
+											if ($service['show_input']) {
+												echo '<div class="td_group mt-2" style="display:none;">';
+												echo '<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>';
+												echo '<div class="td_label mb-1">';
+												echo 'Quốc gia <span class="td_req">(*bắt buộc)</span>';
+												echo '</div>';
+												echo '<input type="text" name="quoc_gia_' . $slug . '" class="td_input ' . esc_attr($service['key_input']) . '">';
+												echo '</div>';
+											}
+
+											echo '</td>';
+											echo '</tr>';
 										}
-
-										echo '</td>';
-										echo '</tr>';
-									}
-									?>
-								</tbody>
-							</table>
-						</div>
-
-						<div class="page_contact_info" style="display:none;">
-							<div class="page_contact_subtitle">
-								Thông tin cá nhân
+										?>
+									</tbody>
+								</table>
 							</div>
 
-							<div class="row row_16">
-								<div class="col-12">
-									<label class="contact_label" for="">
-										1. Họ và tên*
-									</label>
-									<input type="text" name="full_name" class="contact_input" placeholder="Nhập họ và tên">
+							<div class="page_contact_info" style="display:none;">
+								<div class="page_contact_subtitle">
+									Thông tin cá nhân
 								</div>
-								<div class="col-12">
-									<label class="contact_label" for="">
-										2. Số điện thoại*
-									</label>
-									<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
-								</div>
-								<div class="col-12">
-									<label class="contact_label" for="">
-										3. Địa chỉ Email*
-									</label>
-									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
+
+								<div class="row row_16">
+									<div class="col-12">
+										<label class="contact_label" for="">
+											1. Họ và tên*
+										</label>
+										<input type="text" name="full_name" class="contact_input" placeholder="Nhập họ và tên">
+									</div>
+									<div class="col-12">
+										<label class="contact_label" for="">
+											2. Số điện thoại*
+										</label>
+										<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
+									</div>
+									<div class="col-12">
+										<label class="contact_label" for="">
+											3. Địa chỉ Email*
+										</label>
+										<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
+									</div>
 								</div>
 							</div>
 						</div>

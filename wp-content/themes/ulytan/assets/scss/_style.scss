@@ -963,6 +963,13 @@
     }
 }
 
+.page_contact_scroll {
+    @include media-breakpoint-up(lg) {
+        overflow: auto;
+        max-height: calc(100vh - 280px);
+    }
+}
+
 .page_contact_service_table {
     width: 100%;
     border-collapse: collapse;
@@ -2200,10 +2207,37 @@
 
     .page_contact_title {
         background-color: #FC0D1C;
-        font-size: 18px;
+        font-size: 16px;
         color: #fff;
         font-weight: 600;
-        padding: 16px;
+        padding: 10px;
+        margin: 0px;
+
+        .arrow_blink {
+            display: inline-flex;
+            margin-left: 0px; // khoảng cách giữa chữ và mũi tên
+            vertical-align: middle;
+            animation: blink 0.8s infinite; // hiệu ứng nhấp nháy liên tục
+            margin-top: -2px;
+
+            svg {
+                fill: #FCE10D; // màu trắng cho mũi tên
+                width: 20px; // chiều rộng của mũi tên
+                height: 20px; // chiều cao của mũi tên
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
     }
 
     .page_contact_subtitle {
