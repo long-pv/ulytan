@@ -1569,8 +1569,8 @@ function form_ctv_export_data_csv()
 	// Delete cached html
 	ob_clean();
 
-	$current_time = date("Y_m_d_H_i_s"); // get the current time
-	$output_filename = 'export_data_form_2_ctv_' . $current_time . '.csv';
+	$current_time = date("d.m.Y"); // get the current time
+	$output_filename = 'Form 2 Tuyển CTV_' . $current_time . '.csv';
 	$output_handle = @fopen('php://output', 'w');
 	fwrite($output_handle, "\xEF\xBB\xBF"); // display Vietnamese text
 	header("Content-Type: application/force-download");
@@ -1581,34 +1581,38 @@ function form_ctv_export_data_csv()
 
 	// Create CSV file and write data
 	$column_title = [
-		'Họ và tên',
-		'Ngày sinh',
-		'Số Mobile',
-		'Địa chỉ Email',
-		'Bạn sẽ mời người bản địa',
-		'Trường tốt nghiệp',
-		'Năm tốt nghiệp',
-		'Đơn vị dịch thuật bạn đã từng cộng tác?',
-		'Đơn vị dịch thuật bạn đã từng cộng tác?',
-		'Bạn hay tra từ điển nào ?',
-		'Ngôn ngữ đăng ký làm CTV',
-		'Bạn biết Ulytan qua đâu?',
-		'Bạn biết dịch xuôi hay ngược?',
-		'Chuyên ngành đăng ký làm CTV',
-		'Bạn dùng phần mềm dịch thuật nào ?',
-		'Bạn dùng phần mềm dịch thuật nào ?',
-		'Bạn có thể phiên dịch không?',
-		'Bạn có thể phiên dịch không?',
-		'Mô tả tóm tắt kinh nghiệm làm việc',
-		'Bạn có hợp tác với phòng tư pháp quận, huyện nào?',
-		'Phòng tư pháp thuộc tỉnh hoặc thành phố nào?',
-		'Phòng tư pháp thuộc quận huyện nào?',
-		'Bạn có hợp tác với văn phòng công chứng tư nào ko?',
-		'Phòng công chứng thuộc tỉnh hoặc thành phố nào?',
-		'Phòng công chứng thuộc quận huyện nào?',
-		'Upload file 1',
-		'Upload file 2',
-		'Thời gian',
+		"STT",
+		"1.Họ tên",
+		"2.Ngày sinh",
+		"3.Phone",
+		"4.Email",
+		"5.Bạn sẽ mời người bản địa? (Không)",
+		"5.Bạn sẽ mời người bản địa? (Có)",
+		"6.Trường tốt nghiệp",
+		"7.Năm tốt nghiệp",
+		"8.Đơn vị dịch thuật bạn đã từng cộng tác? (Chưa từng)",
+		"8.Đơn vị dịch thuật bạn đã từng cộng tác? (Đã từng)",
+		"9.Bạn hay tra từ điển nào?",
+		"10.Ngôn ngữ đăng ký làm CTV",
+		"11.Bạn biết Ulytan qua đâu?",
+		"12.Bạn biết dịch xuôi hay ngược?",
+		"13.Chuyên ngành đăng ký làm CTV",
+		"14.Bạn có dùng phần mềm dịch thuật nào không? (Không)",
+		"14.Bạn có dùng phần mềm dịch thuật nào không? (Có)",
+		"15.Bạn có thể phiên dịch không? (Không)",
+		"15.Bạn có thể phiên dịch không? (Có)",
+		"16.Mô tả tóm tắt kinh nghiệm làm việc",
+		"17.Bạn có hợp tác với phòng tư pháp quận, huyện nào? (Không)",
+		"17.Bạn có hợp tác với phòng tư pháp quận, huyện nào? (Có)",
+		"17.1-Phòng tư pháp thuộc tỉnh hoặc thành phố nào?",
+		"17.2-Phòng tư pháp thuộc quận huyện nào?",
+		"18.Bạn có hợp tác với văn phòng công chứng tư nào không? (Không)",
+		"18.Bạn có hợp tác với văn phòng công chứng tư nào không? (Có)",
+		"18.Phòng công chứng thuộc tỉnh hoặc thành phố nào?",
+		"18.Phòng công chứng thuộc quận huyện nào?",
+		"19.Upload file 1",
+		"19.Upload file 2",
+		"20.Thời gian"
 	];
 
 	fputcsv(
@@ -1624,6 +1628,8 @@ function form_ctv_export_data_csv()
 
 	$query = new WP_Query($args);
 
+	$count = 1;
+
 	if ($query->have_posts()) {
 		while ($query->have_posts()) {
 			$query->the_post();
@@ -1631,36 +1637,55 @@ function form_ctv_export_data_csv()
 			fputcsv(
 				$output_handle,
 				[
-					get_field('full_name') ?? '',
-					"'" . get_field('birthdate') ?? '',
-					"'" . get_field('phone') ?? '',
-					get_field('email') ?? '',
-					get_field('speak_language') ?? '',
-					get_field('graduation_school') ?? '',
-					get_field('graduation_year') ?? '',
-					get_field('translation_unit') ?? '',
-					get_field('translation_unit_name') ?? '',
-					get_field('dictionary') ?? '',
-					get_field('registration_language_val') ?? '',
-					get_field('how_do_you_know_val') ?? '',
-					get_field('translation_skill_val') ?? '',
-					get_field('language_speciality_val') ?? '',
-					get_field('translation_software') ?? '',
-					get_field('translation_software_name') ?? '',
-					get_field('live_translate') ?? '',
-					get_field('live_translate_select_val') ?? '',
-					get_field('summary_description') ?? '',
-					get_field('info_17') ?? '',
-					get_field('info_17_province') ?? '',
-					get_field('info_17_district') ?? '',
-					get_field('info_18') ?? '',
-					get_field('info_18_province') ?? '',
-					get_field('info_18_district') ?? '',
-					get_field('upload_file_1') ?? '',
-					get_field('upload_file_2') ?? '',
-					"'" . get_the_date('d/m/Y H:i'),
+					$count, // "STT",
+					// hàng 1
+					get_field('full_name') ?? '', //  "Họ tên",
+					"'" . get_field('birthdate') ?? '', // "Ngày sinh",
+					"'" . get_field('phone') ?? '', // "Phone",
+					get_field('email') ?? '', // "Email",
+
+					// hàng 2
+					get_field('speak_language') == 'Không' ? 'x' : "", // "Bạn sẽ mời người bản địa? (Không)",
+					get_field('speak_language') == 'Có' ? 'x' : "", // "Bạn sẽ mời người bản địa? (Có)",
+					get_field('graduation_school') ?? '', // "Trường tốt nghiệp",
+					get_field('graduation_year') ?? '', // "Năm tốt nghiệp",
+					get_field('translation_unit') == 'Không' ? 'x' : "", // "Đơn vị dịch thuật bạn đã từng cộng tác? (Chưa từng)",
+					get_field('translation_unit') == 'Có' ? (get_field('translation_unit_name') ?? '') : "", // "Đơn vị dịch thuật bạn đã từng cộng tác? (Đã từng)",
+
+					// hàng 3
+					get_field('dictionary') ?? '', // "Bạn hay tra từ điển nào?",
+					get_field('registration_language_val') ?? '', // "Ngôn ngữ đăng ký làm CTV",
+					get_field('how_do_you_know_val') ?? '', //  "Bạn biết Ulytan qua đâu?",
+					get_field('translation_skill_val') ?? '', //  "Bạn biết dịch xuôi hay ngược?",
+
+					// hàng 4
+					get_field('language_speciality_val') ?? '', // "Chuyên ngành đăng ký làm CTV",
+					get_field('translation_software') == 'Không' ? 'x' : "", // "14.Bạn có dùng phần mềm dịch thuật nào không? (Không)",
+					get_field('translation_software') == 'Có' ? (get_field('translation_software_name') ?? '') : "", // "14.Bạn có dùng phần mềm dịch thuật nào không? (Có)",
+					get_field('live_translate') == 'Không' ? 'x' : "", //  "15.Bạn có thể phiên dịch không? (Không)",
+					get_field('live_translate') == 'Có' ? (get_field('live_translate_select_val') ?? '') : '', // "15.Bạn có thể phiên dịch không? (Có)",
+
+					// hàng 5
+					get_field('summary_description') ?? '', // "16.Mô tả tóm tắt kinh nghiệm làm việc",
+
+					// hàng 6
+					get_field('info_17') == 'Không' ? 'x' : "", // "17.Bạn có hợp tác với phòng tư pháp quận, huyện nào? (Không)",
+					get_field('info_17') == 'Có' ? 'x' : "", // "17.Bạn có hợp tác với phòng tư pháp quận, huyện nào? (Có)",
+					get_field('info_17_province') ?? '', // "17.1-Phòng tư pháp thuộc tỉnh hoặc thành phố nào?",
+					get_field('info_17_district') ?? '', // "17.2-Phòng tư pháp thuộc quận huyện nào?",
+					get_field('info_18') == 'Không' ? 'x' : "", // "18.Bạn có hợp tác với văn phòng công chứng tư nào không? (Không)",
+					get_field('info_18') == 'Không' ? 'x' : "", // "18.Bạn có hợp tác với văn phòng công chứng tư nào không? (Có)",
+					get_field('info_18_province') ?? '', //  "18.Phòng công chứng thuộc tỉnh hoặc thành phố nào?",
+					get_field('info_18_district') ?? '', // "18.Phòng công chứng thuộc quận huyện nào?",
+
+					// hàng 7
+					get_field('upload_file_1') ?? '', // "19.Upload file 1",
+					get_field('upload_file_2') ?? '', // "19.Upload file 2",
+					"'" . get_the_date('d/m/Y H:i'), // "20.Thời gian"
 				],
 			);
+
+			$count++;
 		}
 		wp_reset_postdata();
 	}
