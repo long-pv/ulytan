@@ -865,6 +865,7 @@ get_footer();
 				$('input[name="translation_unit_name"]').show();
 			} else {
 				$('input[name="translation_unit_name"]').hide();
+				$('input[name="translation_unit_name"] ~ .error').remove();
 			}
 		});
 
@@ -873,6 +874,7 @@ get_footer();
 				$('input[name="translation_software_name"]').show();
 			} else {
 				$('input[name="translation_software_name"]').hide();
+				$('input[name="translation_software_name"] ~ .error').remove();
 			}
 		});
 
@@ -881,6 +883,7 @@ get_footer();
 				$('.live_translate_select').show();
 			} else {
 				$('.live_translate_select').hide();
+				$('.live_translate_select ~ .error').remove();
 			}
 		});
 
