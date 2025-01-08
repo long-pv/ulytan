@@ -86,6 +86,7 @@
 
 								<?php
 								// if (!is_page_template('page-dich_thuat_cong_chung.php')) :
+									/*
 								?>
 								<div class="header_line">
 								</div>
@@ -104,6 +105,7 @@
 								</div>
 								<?php
 								//endif; 
+								*/
 								?>
 							</div>
 						</div>

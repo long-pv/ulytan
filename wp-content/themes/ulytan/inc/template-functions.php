@@ -115,7 +115,7 @@ function register_cpt_post_types()
 			'hierarchical' => false
 		],
 		'video_customer' => [
-			'labels' => __('Video khách hàng', 'basetheme'),
+			'labels' => __('Feedback khách hàng', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
@@ -536,6 +536,14 @@ function write_log($log = null, $title = 'Debug')
 		fclose($file_handle);
 	}
 }
+
+function enqueue_choices_js() {
+    // Tải CSS và JS của Choices.js
+    wp_enqueue_style('choices', 'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css');
+    wp_enqueue_script('choices', 'https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js', array('jquery'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_choices_js');
+
 
 // Hook để xử lý yêu cầu AJAX
 add_action('wp_ajax_save_contact_info', 'save_contact_info');

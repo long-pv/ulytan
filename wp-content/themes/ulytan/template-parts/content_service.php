@@ -11,10 +11,16 @@ $categories = get_the_category($post_id);
         </picture>
     </a>
     <div class="single_service_content">
-        <a class="d-flex" href="<?php the_permalink(); ?>">
+        <a class="d-flex mb-3" href="<?php the_permalink(); ?>">
             <h3 class="single_service_title" data-mh="single_service_title">
                 <?php the_title(); ?>
             </h3>
+        </a>
+        <p class="single_post_desc mb-2">
+            <?php echo get_the_excerpt(); ?>
+        </p>
+        <a class="d-flex mb-0" href="<?php the_permalink(); ?>">
+            Chi tiết
         </a>
     </div>
 </article>

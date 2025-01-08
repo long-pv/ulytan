@@ -44,6 +44,42 @@ if ($banner_content) :
 
 <div class="section_2_scroll"></div>
 
+
+<?php
+$use_service = get_field('use_service') ?? [];
+$use_service_title = get_field('use_service_title') ?: 'DỊCH VỤ CỦA ULYTAN SỬ DỤNG KHI NÀO?';
+if ($use_service):
+?>
+	<section class="choice_reason secSpace">
+		<div class="container">
+			<h2 class="home_news_title text-center mb-4">
+				<?php echo $use_service_title; ?>
+			</h2>
+			<div class="row row_32 justify-content-center">
+				<?php foreach ($use_service as $key => $item) : ?>
+					<div class="col-md-6 col-lg-4">
+						<div class="choice_reason_item">
+							<?php if ($item['icon']): ?>
+								<div class="choice_reason_item_img">
+									<img src="<?php echo $item['icon']; ?>" alt="<?php echo $item['title']; ?>">
+								</div>
+							<?php endif; ?>
+							<h3 class="choice_reason_item_title" data-mh="choice_reason_item_title">
+								<?php echo $item['title']; ?>
+							</h3>
+							<div class="editor choice_reason_item_content">
+								<?php echo $item['content']; ?>
+							</div>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>
+
+
+
 <?php
 $choice_reason = get_field('choice_reason') ?? [];
 $choice_reason_title = get_field('choice_reason_title') ?: 'LÝ DO CHỌN CHÚNG TÔI';
@@ -82,9 +118,9 @@ $achieve_brand_title = get_field('achieve_brand_title') ?: '“Doanh nghiệp đ
 $achieve_brand_image = get_field('achieve_brand_image') ?? [];
 if ($achieve_brand_image) :
 ?>
-	<section class="achieve_brand secSpace--bottom" id="scroll_1">
+	<section class="achieve_brand secSpace--bottom bg-primary pt-5" id="scroll_1">
 		<div class="container">
-			<h2 class="home_news_title text-center mb-4">
+			<h2 class="h4 text-white text-center mb-4">
 				<?php
 				echo $achieve_brand_title;
 				?>
@@ -110,7 +146,7 @@ if ($achieve_brand_image) :
 	</section>
 <?php endif; ?>
 
-<?php
+<?php /*
 $customer_object = get_field('customer_object') ?? [];
 $customer_object_title = get_field('customer_object_title') ?: 'ĐỐI TƯỢNG KHÁCH HÀNG CỦA ULYTAN';
 if ($customer_object):
@@ -141,7 +177,7 @@ if ($customer_object):
 			</div>
 		</div>
 	</section>
-<?php endif; ?>
+<?php endif; */ ?>
 
 
 <?php
@@ -164,12 +200,12 @@ if ($video_customer) {
 $query = new WP_Query($args);
 if ($query->have_posts()):
 ?>
-	<section class="video_customer secSpace bg-light" id="scroll_4">
+	<section class="video_customer secSpace" id="scroll_4">
 		<div class="container">
-			<h2 class="sec_title text-center">
+			<h2 class="text-center text-white mb-4">
 				<?php echo $video_customer_title; ?>
 			</h2>
-			<div class="video_customer_slider">
+			<div class="video_customer_slider mb-4">
 				<?php
 				while ($query->have_posts()):
 					$query->the_post();
@@ -179,8 +215,47 @@ if ($query->have_posts()):
 							<?php
 							$featured_image = get_field('featured_image');
 							$iframe_video = get_field('iframe_video');
-							video_popup($iframe_video, $featured_image);
+							$avatar = get_field('avatar');
+							$name = get_field('name');
+							$position = get_field('position');
+							$incorporation = get_field('incorporation');
+							$star_rating = get_field('star_rating');
+							$testimonials = get_field('testimonials');
 							?>
+							<?php if ($iframe_video || $featured_image): video_popup($iframe_video, $featured_image); endif;?>
+							<?php if ($name): ?>
+								<div class="info_customer">
+									<div class="testimonials">
+										<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#ebebed" class="bi bi-quote" viewBox="0 0 16 16">
+											<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"/>
+										</svg>
+										<div class="truncate">
+											<p class="elementor-widget-container"><?php echo $testimonials; ?></p>
+										</div>
+									</div>
+									<p class="star_rating">
+										<?php
+											for ($x = 0; $x < $star_rating; $x++) {
+												echo '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+													<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+												</svg>';
+											} 
+										?>
+									</p>
+									<div class="row no-gutters">
+										<div class="col-4">
+											<div class="avatar_box">
+												<img class="w-100 avatar object-fit-cover border rounded" src="<?php echo $avatar; ?>">
+											</div>
+										</div>
+										<div class="col-8">
+											<div class="h4"><?php echo $name; ?></div>
+											<div class="position"><?php echo $position; ?></div>
+											<div class="incorporation"><?php echo $incorporation; ?></div>
+										</div>
+									</div>
+								</div>
+							<?php endif; ?>
 						</div>
 					</div>
 				<?php
@@ -194,39 +269,6 @@ endif;
 wp_reset_postdata();
 ?>
 
-
-<?php
-$use_service = get_field('use_service') ?? [];
-$use_service_title = get_field('use_service_title') ?: 'DỊCH VỤ CỦA ULYTAN SỬ DỤNG KHI NÀO?';
-if ($use_service):
-?>
-	<section class="choice_reason secSpace">
-		<div class="container">
-			<h2 class="home_news_title text-center mb-4">
-				<?php echo $use_service_title; ?>
-			</h2>
-			<div class="row row_32 justify-content-center">
-				<?php foreach ($use_service as $key => $item) : ?>
-					<div class="col-md-6 col-lg-4">
-						<div class="choice_reason_item">
-							<?php if ($item['icon']): ?>
-								<div class="choice_reason_item_img">
-									<img src="<?php echo $item['icon']; ?>" alt="<?php echo $item['title']; ?>">
-								</div>
-							<?php endif; ?>
-							<h3 class="choice_reason_item_title" data-mh="choice_reason_item_title">
-								<?php echo $item['title']; ?>
-							</h3>
-							<div class="editor choice_reason_item_content">
-								<?php echo $item['content']; ?>
-							</div>
-						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</section>
-<?php endif; ?>
 
 <?php
 $price_table = get_field('price_table') ?? '';
@@ -371,7 +413,7 @@ if ($faqs):
 endif;
 ?>
 
-<?php
+<?php /*
 $args = array(
 	'post_type' => 'notarization',
 	'posts_per_page' => 4,
@@ -422,10 +464,10 @@ if ($query->have_posts()):
 	</section>
 <?php
 endif;
-wp_reset_postdata();
+wp_reset_postdata(); */
 ?>
 
-<?php
+<?php /*
 $related_posts_title = get_field('related_posts_title') ?: 'Bài viết liên quan';
 $related_posts = get_field('related_posts') ?? [];
 if ($related_posts) {
@@ -466,7 +508,7 @@ if ($query->have_posts()):
 	</section>
 <?php
 endif;
-wp_reset_postdata();
+wp_reset_postdata(); */
 ?>
 
 <div class="modal modal_landing fade" id="modal_landing" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

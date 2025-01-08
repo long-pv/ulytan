@@ -84,9 +84,36 @@
 		});
 	}
 
+	
+	// service_list_slider
+	$(".service_list_slider").slick({
+		dots: false,
+		arrows: true,
+		autoplay: true,
+		autoplaySpeed: 3000,
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		responsive: [
+			{
+				breakpoint: 1200,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1,
+				},
+			},
+			{
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+				},
+			},
+		],
+	});
+
 	// video customer
 	$(".video_customer_slider").slick({
-		dots: false,
+		dots: true,
 		arrows: true,
 		autoplay: true,
 		autoplaySpeed: 3000,
@@ -239,4 +266,28 @@
 		// Ẩn nút
 		staffTeamBtn.hide();
 	});
+
+
+	jQuery(document).ready(function($) {
+		// Khởi tạo Choices.js cho trường select có id country_select
+		const countrySelect = document.getElementById('country_select');
+		const choices = new Choices(countrySelect, {
+			removeItemButton: true,
+			placeholderValue: 'Quốc gia mà bạn quan tâm nhất *',
+			// maxItemCount: 5, // Số lượng tối đa các mục có thể chọn
+			itemSelectText: '', // Bỏ văn bản "Click to select" trong dropdown
+			duplicateItems: false
+		});
+		
+		// Khởi tạo Choices.js cho trường select có id country_select
+		const serviceSelect = document.getElementById('service_select');
+		const serviceChoices = new Choices(serviceSelect, {
+			removeItemButton: true,
+			placeholderValue: 'Dịch vụ mà bạn quan tâm *',
+			// maxItemCount: 5, // Số lượng tối đa các mục có thể chọn
+			itemSelectText: '', // Bỏ văn bản "Click to select" trong dropdown
+			duplicateItems: false
+		});
+	});
+	
 })(jQuery, window);
