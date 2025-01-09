@@ -1622,9 +1622,10 @@
 .banner_landing_content .editor {
     * {
         color: #fff !important;
+    }
+    p, span, div {
         font-size: 24px;
         font-weight: 600;
-
         @include media-breakpoint-down(md) {
             font-size: 18px;
         }
@@ -2554,6 +2555,7 @@ footer {
     }
     .footer_form input[type="submit"] {
         height: 45px;
+        justify-content: center;
     }
     .choices__list--multiple .choices__item {
         background-color: $primary;
@@ -2628,6 +2630,12 @@ footer {
         transform: translateY(0); /* Quay lại vị trí ban đầu */
         }
     }
-  
+    .wpcf7-not-valid-tip {
+        font-size: 12px !important;
+        position: absolute;
+    }
+    .footer_form p {
+        margin-bottom: 20px !important;
+    }
 
 }

@@ -361,7 +361,7 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                     <div class="footer_form">
                         <div class="arrow-down">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.5 0H27.5V20H39.6L20 39.6L0.400002 20H12.5V0Z" fill="#FC0D1C"/>
+                                <path d="M12.5 0H27.5V20H39.6L20 39.6L0.400002 20H12.5V0Z" fill="#FFD503"/>
                             </svg>
                         </div>
                         <?php echo do_shortcode('[contact-form-7 id="' . $form_khuyen_mai . '"]'); ?>

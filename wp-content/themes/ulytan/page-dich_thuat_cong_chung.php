@@ -973,11 +973,12 @@ wp_reset_postdata(); */
 							</div>
 						</div>
 					</div>
-
-					<div class="mt-3 d-flex justify-content-center">
-						<input type="submit" class="contact_submit" value="Đăng ký ngay">
-					</div>
 				</form>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<div class="d-flex justify-content-center">
+					<input type="submit" class="contact_submit" value="Đăng ký ngay">
+				</div>
 			</div>
 		</div>
 	</div>
