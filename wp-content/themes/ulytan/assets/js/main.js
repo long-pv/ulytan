@@ -137,6 +137,29 @@
 		],
 	});
 
+	// project_list_slider
+	$(".project_list_slider").slick({
+		dots: true,
+		arrows: true,
+		autoplay: true,
+		autoplaySpeed: 3000,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		centerMode: true,
+		centerPadding: '25%', // Mỗi bên hiển thị nửa item
+		infinite: true, // Vô hạn lặp
+		responsive: [
+			{
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					centerPadding: '25px', // Mỗi bên hiển thị nửa item
+				},
+			}
+		],
+	});
+
 	$("#sticky-navigator").stickyNavigator({
 		wrapselector: ".single_post_editor",
 		targetselector: "h2,h3",
@@ -289,5 +312,15 @@
 			duplicateItems: false
 		});
 	});
+
+
+
+	$(document).ready(function() {
+		$(".contact_submit_fake").click(function(event) {
+		  event.preventDefault();
+		  $(".contact_submit_primary").trigger('click');
+		});
+	});
+
 	
 })(jQuery, window);

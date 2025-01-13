@@ -539,6 +539,11 @@ wp_reset_postdata(); */
 				endif;
 				?>
 			</div>
+				<div class="arrow-down">
+					<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M12.5 0H27.5V20H39.6L20 39.6L0.400002 20H12.5V0Z" fill="#FC0D1C"/>
+					</svg>
+				</div>
 			<div class="modal-body">
 				<form id="page_contact_form" class="page_contact_form" enctype="multipart/form-data">
 					<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
@@ -903,7 +908,7 @@ wp_reset_postdata(); */
 							<thead>
 								<tr>
 									<th width="30">Chọn</th>
-									<th>Dịch vụ</th>
+									<th class="text-center">Dịch vụ</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -973,11 +978,14 @@ wp_reset_postdata(); */
 							</div>
 						</div>
 					</div>
+					<div class="d-none justify-content-center">
+						<input type="submit" class="contact_submit contact_submit_primary" value="Đăng ký ngay">
+					</div>
 				</form>
 			</div>
 			<div class="modal-footer justify-content-center">
 				<div class="d-flex justify-content-center">
-					<input type="submit" class="contact_submit" value="Đăng ký ngay">
+					<input type="submit" class="contact_submit contact_submit_fake" value="Đăng ký ngay">
 				</div>
 			</div>
 		</div>

@@ -423,14 +423,14 @@ if ($query->have_posts()):
     $menu_html .= '<div class="row list_dich_vu">';
     while ($query->have_posts()) : $query->the_post();
         $menu_html .= '<div class="col-lg-4" id="menu-item-' . get_the_ID() . '">';
-        $menu_html .= '<a class="dich_vu_item" href="' . get_permalink() . '">';
+        $menu_html .= '<a class="dich_vu_item" rel=”nofollow” href="' . get_permalink() . '">';
         $menu_html .= '<div class="item_title line-2">' . get_the_title() . '</div>';
         $menu_html .= '<div class="item_desc">' . (get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi') . '</div>';
         $menu_html .= '</a>';
         $menu_html .= '</div>';
 
         $menu_html_mb .= '<li>';
-        $menu_html_mb .= '<a class="dich_vu_item_link_mb" href="' . get_permalink() . '">';
+        $menu_html_mb .= '<a class="dich_vu_item_link_mb" rel=”nofollow” href="' . get_permalink() . '">';
         $menu_html_mb .= '<span class="title">';
         $menu_html_mb .= get_the_title();
         $menu_html_mb .= '</span>';
