@@ -2564,26 +2564,32 @@ footer.footer.bg-primary {
 @keyframes bounce {
     0% {
     transform: translateY(0); /* Vị trí ban đầu */
+    opacity: 0;
     }
     25% {
     transform: translateY(10px); /* Di chuyển xuống 10px */
+    opacity: 1;
     }
     50% {
     transform: translateY(0); /* Quay lại vị trí ban đầu */
+    opacity: 0;
     }
     75% {
     transform: translateY(10px); /* Di chuyển xuống 10px nữa */
+    opacity: 1;
     }
     100% {
     transform: translateY(0); /* Quay lại vị trí ban đầu */
+    opacity: 0;
     }
 }
 
 .page-template-page-dich_thuat_cong_chung {
     .arrow-down {
         position: absolute;
-        right: 10px;
-        top: 50%;
+        right: 16px;
+        top: 85%;
+        z-index: 1;
     }
 }
 
@@ -2594,6 +2600,8 @@ footer {
     .footer_form input[type="submit"] {
         height: 45px;
         justify-content: center;
+        background: #FFD503 !important;
+        color: $primary !important;
     }
     .choices__list--multiple .choices__item {
         background-color: $primary;
@@ -2645,6 +2653,37 @@ footer {
     }
     .footer_form p {
         margin-bottom: 20px !important;
+    }
+
+    .custom_dropdown_menu .wpcf7-list-item {
+        margin: 0;
+    }
+    .custom_dropdown {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    .custom_dropdown_button {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        height: 40px;
+        width: 100%;
+        border: 1px solid #CCCCCC !important;
+        border-radius: 4px;
+        outline: none !important;
+        padding: 8px 12px;
+        color: #757575 !important;
+        font-size: 13px;
+        p {
+            margin: 0 !important;
+        }
+    }
+    .wpcf7-form-control.wpcf7-checkbox {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
     }
 
 }

@@ -844,23 +844,23 @@ get_footer();
 ?>
 <script>
 	jQuery(document).ready(function($) {
-		$(".custom_dropdown_button").on("click", function(e) {
-			e.stopPropagation();
-			$(".custom_dropdown_button").removeClass('down_show');
-			var dropdownMenu = $(this).next(".custom_dropdown_menu");
-			$(".custom_dropdown_menu").not(dropdownMenu).hide();
-			$(this).toggleClass('down_show');
-			dropdownMenu.toggle();
-		});
+		// $(".custom_dropdown_button").on("click", function(e) {
+		// 	e.stopPropagation();
+		// 	$(".custom_dropdown_button").removeClass('down_show');
+		// 	var dropdownMenu = $(this).next(".custom_dropdown_menu");
+		// 	$(".custom_dropdown_menu").not(dropdownMenu).hide();
+		// 	$(this).toggleClass('down_show');
+		// 	dropdownMenu.toggle();
+		// });
 
-		$(document).on("click", function() {
-			$(".custom_dropdown_menu").hide();
-			$(".custom_dropdown_button").removeClass('down_show');
-		});
+		// $(document).on("click", function() {
+		// 	$(".custom_dropdown_menu").hide();
+		// 	$(".custom_dropdown_button").removeClass('down_show');
+		// });
 
-		$(".custom_dropdown_menu").on("click", function(e) {
-			e.stopPropagation();
-		});
+		// $(".custom_dropdown_menu").on("click", function(e) {
+		// 	e.stopPropagation();
+		// });
 
 		$('input[name="translation_unit"]').on('change', function() {
 			if ($('input[name="translation_unit"]:checked').val() === 'Có') {

@@ -291,29 +291,6 @@
 	});
 
 
-	jQuery(document).ready(function($) {
-		// Khởi tạo Choices.js cho trường select có id country_select
-		const countrySelect = document.getElementById('country_select');
-		const choices = new Choices(countrySelect, {
-			removeItemButton: true,
-			placeholderValue: 'Quốc gia mà bạn quan tâm nhất *',
-			// maxItemCount: 5, // Số lượng tối đa các mục có thể chọn
-			itemSelectText: '', // Bỏ văn bản "Click to select" trong dropdown
-			duplicateItems: false
-		});
-		
-		// Khởi tạo Choices.js cho trường select có id country_select
-		const serviceSelect = document.getElementById('service_select');
-		const serviceChoices = new Choices(serviceSelect, {
-			removeItemButton: true,
-			placeholderValue: 'Dịch vụ mà bạn quan tâm *',
-			// maxItemCount: 5, // Số lượng tối đa các mục có thể chọn
-			itemSelectText: '', // Bỏ văn bản "Click to select" trong dropdown
-			duplicateItems: false
-		});
-	});
-
-
 
 	$(document).ready(function() {
 		$(".contact_submit_fake").click(function(event) {
@@ -322,5 +299,86 @@
 		});
 	});
 
+	$(".custom_dropdown_button").on("click", function(e) {
+		e.stopPropagation();
+		$(".custom_dropdown_button").removeClass('down_show');
+		var dropdownMenu = $(this).next(".custom_dropdown_menu");
+		$(".custom_dropdown_menu").not(dropdownMenu).hide();
+		$(this).toggleClass('down_show');
+		dropdownMenu.toggle();
+	});
+
+	$(document).on("click", function() {
+		$(".custom_dropdown_menu").hide();
+		$(".custom_dropdown_button").removeClass('down_show');
+	});
+
+	$(".custom_dropdown_menu").on("click", function(e) {
+		e.stopPropagation();
+	});
+
+	jQuery(document).ready(function ($) {
+		// Lắng nghe sự kiện DOM thay đổi
+		const observer = new MutationObserver(function (mutationsList) {
+			mutationsList.forEach(function (mutation) {
+				$(mutation.addedNodes).each(function () {
+					// Kiểm tra nếu phần tử mới thêm là `wpcf7-not-valid-tip`
+					if ($(this).hasClass('wpcf7-not-valid-tip')) {
+						var $error = $(this); // Phần tử thông báo lỗi
+						var $dropdown = $error.closest('.custom_dropdown'); // Phần tử cha cần đặt thông báo lỗi bên dưới
+	
+						// Nếu thông báo lỗi nằm trong `custom_dropdown_menu`, di chuyển nó ra ngoài
+						if ($dropdown.length && $error.closest('.custom_dropdown_menu').length) {
+							$dropdown.append($error); // Di chuyển thông báo lỗi ra ngoài
+						}
+					}
+				});
+			});
+		});
+	
+		// Chỉ theo dõi những thay đổi liên quan đến `wpcf7-not-valid-tip`
+		$('footer .wpcf7-form').each(function () {
+			observer.observe(this, {
+				childList: true, // Theo dõi sự thêm hoặc bớt các phần tử con
+				subtree: true,  // Theo dõi các phần tử con bên trong
+			});
+		});
+	
+		// Xử lý khi form được submit
+		$(document).on('submit', 'footer .wpcf7-form', function (e) {
+			var isValid = true;
+	
+			// Kiểm tra và di chuyển các thông báo lỗi (nếu có)
+			$('.wpcf7-not-valid-tip').each(function () {
+				var $error = $(this); // Phần tử thông báo lỗi
+				var $dropdown = $error.closest('.custom_dropdown'); // Phần tử cha cần đặt thông báo lỗi bên dưới
+	
+				if ($dropdown.length && $error.closest('.custom_dropdown_menu').length) {
+					$dropdown.append($error); // Di chuyển thông báo lỗi ra ngoài
+				}
+	
+				// Nếu tồn tại thông báo lỗi, không cho form submit
+				isValid = false;
+			});
+	
+			// Ngăn không cho form thực hiện submit nếu có lỗi
+			if (!isValid) {
+				e.preventDefault();
+			}
+		});
+	
+		// Lắng nghe sự kiện thay đổi trên checkbox
+		$(document).on('change', '.custom_dropdown_menu input[type="checkbox"]', function () {
+			var $dropdown = $(this).closest('.custom_dropdown');
+			var $error = $dropdown.find('.wpcf7-not-valid-tip');
+	
+			// Nếu có ít nhất một checkbox được chọn, xóa thông báo lỗi
+			if ($dropdown.find('input[type="checkbox"]:checked').length > 0) {
+				$error.remove();
+			}
+		});
+	});
+	
+	
 	
 })(jQuery, window);
