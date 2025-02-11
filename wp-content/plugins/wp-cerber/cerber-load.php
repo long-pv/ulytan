@@ -77,10 +77,6 @@ const WP_COMMENT_SCRIPT = 'wp-comments-post.php';
 
 const GOO_RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
-const CERBER_REQ_PHP = '7.0';
-const CERBER_REQ_WP = '4.9';
-const CERBER_TECH = 'https://cerber.tech/';
-
 const CERBER_CIREC_LIMIT = 30; // Upper limit for allowed nested values during inspection for malware
 
 const CRB_USER_SET = 'cerber_user';
@@ -92,16 +88,18 @@ const CRB_CNTX_SAFE = 1;
 const CRB_CNTX_NEXUS = 2;
 
 const CRB_ACT_PARAMS = array(
-	'filter_activity' => 'activity',
-	'filter_status'   => 'ac_status',
-	'filter_set'      => false,
-	'filter_ip'       => 'ip',
-	'filter_login'    => 'user_login',
-	'filter_user'     => 'user_id',
-	'search_activity' => false,
-	'filter_sid'      => 'session_id',
-	'search_url'      => false,
-	'filter_country'  => 'country',
+	'filter_activity'   => 'activity',
+	'filter_status'     => 'ac_status',
+	'filter_set'        => false,
+	'filter_ip'         => 'ip',
+	'filter_login'      => 'user_login',
+	'filter_user'       => 'user_id',
+	'search_activity'   => false,
+	'filter_sid'        => 'session_id',
+	'search_url'        => false,
+	'filter_country'    => 'country',
+	'filter_time_begin' => false,
+	'filter_time_end'   => false,
 );
 
 // Note: values is not specified yet
@@ -123,6 +121,8 @@ const CRB_TRF_PARAMS = array(
 	'filter_set'            => 'to_be_specified',
 	'filter_errors'         => 'to_be_specified',
 );
+
+const CRB_ACT_HASH = 'activity_table_hash';
 
 require_once( __DIR__ . '/cerber-pluggable.php' );
 require_once( __DIR__ . '/cerber-common.php' );
@@ -405,6 +405,8 @@ class WP_Cerber {
 			}
 			else {
 				$msg = sprintf( _n( 'You have %d login attempt remaining.', 'You have %d login attempts remaining.', $remain, 'wp-cerber' ), $remain );
+
+				__( 'You have %d login attempts remaining.', 'wp-cerber' ); // registration for _n()
 			}
 
 			return apply_filters( 'cerber_msg_remain', $msg, $remain );
@@ -1260,8 +1262,8 @@ function cerber_is_app_passwords( $var, $user ) {
 /**
  * Stops (restricts) authentication of a user once the user identified (existing users)
  *
- * @param WP_User $user
- * @param bool $app If true the user is authenticated with an application password
+ * @param WP_User $user Valid WP_User object to check
+ * @param bool $app If set to true, the user has been authenticated with an application password
  *
  * @return WP_User|WP_Error
  */
@@ -1901,6 +1903,8 @@ function crb_sessions_kill( $tokens, $user_id = null, $admin = true ) {
 
 		if ( $total ) {
 			cerber_admin_message( sprintf( _n( 'User session has been terminated', '%s user sessions have been terminated', $total, 'wp-cerber' ), $total ) );
+
+            __( '%s user sessions have been terminated', 'wp-cerber' ); // registration for _n()
 		}
 		else {
 			cerber_admin_notice( 'No user sessions found.' );
@@ -6660,9 +6664,10 @@ function cerber_log( $activity, $login = '', $user_id = 0, $status = 0, $ip = nu
 	$status = absint( $status ); // Note: @since 8.9.4 $status is stored in a separate "ac_status" column
 	$login   = cerber_db_real_escape( $login );
 	$details = cerber_db_real_escape( $details );
+    $session_id = $wp_cerber->getRequestID();
 
 	$ret = cerber_db_query( 'INSERT INTO ' . CERBER_LOG_TABLE . ' (ip, ip_long, user_login, user_id, stamp, activity, session_id, country, details, ac_status, ac_bot, ac_by_user) 
-	    VALUES ("' . $ip . '",' . $ip_long . ',"' . $login . '",' . $user_id . ',"' . $stamp . '",' . $activity . ',"' . $wp_cerber->getRequestID() . '","' . $country . '","' . $details . '", ' . $status . ', ' . $ac_bot . ',' . $ac_by_user . ')' );
+	    VALUES ("' . $ip . '",' . $ip_long . ',"' . $login . '",' . $user_id . ',"' . $stamp . '",' . $activity . ',"' . $session_id . '","' . $country . '","' . $details . '", ' . $status . ', ' . $ac_bot . ',' . $ac_by_user . ')' );
 
 	if ( ! $ret ) {
 		cerber_watchdog();
@@ -6670,6 +6675,8 @@ function cerber_log( $activity, $login = '', $user_id = 0, $status = 0, $ip = nu
 	}
     else {
 	    $ret = true;
+
+	    cerber_cache_set( CRB_ACT_HASH, array( 'modified' => $stamp, 'hash' => sha1( $ip . $stamp . $session_id ) ) );
     }
 
 	// Alerts for admin ---------------------------------------------------

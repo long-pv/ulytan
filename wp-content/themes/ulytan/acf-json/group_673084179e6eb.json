@@ -364,7 +364,7 @@
         },
         {
             "key": "field_673613dd61ebc",
-            "label": "Video Khách hàng",
+            "label": "Feedback Khách hàng",
             "name": "",
             "aria-label": "",
             "type": "tab",
@@ -401,7 +401,7 @@
         },
         {
             "key": "field_673613e461ebd",
-            "label": "Video Khách hàng",
+            "label": "Feedback khách hàng",
             "name": "video_customer",
             "aria-label": "",
             "type": "relationship",
@@ -414,7 +414,7 @@
                 "id": ""
             },
             "post_type": [
-                "video_customer"
+                "feedback_customer"
             ],
             "post_status": [
                 "publish"
@@ -455,5 +455,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1732719570
+    "modified": 1737107590
 }

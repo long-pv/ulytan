@@ -39,7 +39,7 @@ const MYSQL_FETCH_OBJECT_K = 6;
 const CRB_IP_NET_RANGE = '/[^a-f\d\-\.\:\*\/]+/i';
 const CRB_TAB_ID_FILTER = '[a-z\d\_\-\.\:\*\/]+';
 const CRB_SANITIZE_KEY = '/[^a-z_\-\d.:\/]/i';
-const CRB_SANITIZE_ID = '/[^a-z\d]/i';
+const CRB_SANITIZE_ID = '/[^\w-]/i';
 const CRB_GROOVE = 'cerber_groove';
 const CRB_NEXT_LVL = 2147483647; // May not be changed ever, a marker of using role-based or global policies since 9.6
 
@@ -220,12 +220,12 @@ function cerber_admin_link( $tab = '', $args = array(), $add_nonce = false, $enc
 		$page = 'cerber-security';
 	}
 
-	$link = crb_get_admin_base() . '?page=' . crb_boring_escape( $page );
+	$link = crb_get_admin_base() . '?page=' . crb_sanitize_id( $page );
 
 	$amp = ( $encode ) ? '&amp;' : '&';
 
 	if ( $tab ) {
-		$link .= $amp . 'tab=' . $tab;
+		$link .= $amp . 'tab=' . crb_sanitize_id( $tab );
 	}
 
 	if ( $args ) {
@@ -290,12 +290,15 @@ function cerber_admin_link_add( $args = array(), $preserve = false, $add_nonce =
 }
 
 /**
- * @param array $act
- * @param int $status
+ * Generates a link to the Activity log page with an optional list of activity IDs and status filters.
+ * Those IDs will be used to filter out activities when rendering the Activity page.
  *
- * @return string
+ * @param array $act Activity IDs
+ * @param int $status Status ID
+ *
+ * @return string Full URL, safe to use in any HTML context (including attributes)
  */
-function cerber_activity_link( $act = array(), $status = null ) {
+function cerber_activity_link( array $act = array(), int $status = null ) {
 	static $link;
 
 	if ( ! $link ) {
@@ -304,19 +307,19 @@ function cerber_activity_link( $act = array(), $status = null ) {
 
 	$filter = '';
 
-	$c = $act ? count( $act ) : 0;
-
-	if ( 1 == $c ) {
-		$filter .= '&amp;filter_activity=' . crb_absint( array_shift( $act ) );
-	}
-	elseif ( $c ) {
-		foreach ( $act as $key => $item ) {
-			$filter .= '&amp;filter_activity[' . $key . ']=' . crb_absint( $item );
+	if ( $act ) {
+		if ( 1 == count( $act ) ) {
+			$filter .= '&filter_activity=' . crb_absint( array_shift( $act ) );
+		}
+		else {
+			foreach ( $act as $key => $item ) {
+				$filter .= '&filter_activity[' . crb_absint( $key ) . ']=' . crb_absint( $item );
+			}
 		}
 	}
 
 	if ( $status ) {
-		$filter .= '&amp;filter_status=' . crb_absint( $status );
+		$filter .= '&filter_status=' . crb_absint( $status );
 	}
 
 	return $link . $filter;
@@ -631,7 +634,7 @@ function cerber_pb_get_active() {
 	}
 	elseif ( $device
 	         && ( $list = cerber_pb_get_devices() )
-	         && ! is_wp_error( $list ) ) {
+	         && ! crb_is_wp_error( $list ) ) {
 		$name = crb_generic_escape( $list[ $device ] ) ?? '';
 	}
 
@@ -1311,7 +1314,7 @@ function crb_boring_escape( $val = '' ) {
 		return $val;
 	}
 
-	return preg_replace( '/[^\w\-\[\].]/', '', (string) $val );
+	return preg_replace( '/[^\w\-\[\].]/u', '', (string) $val );
 }
 
 /**
@@ -1324,7 +1327,11 @@ function crb_boring_escape( $val = '' ) {
  * @since 9.5.7.2
  */
 function crb_generic_escape( $val = '' ) {
-	return htmlentities( $val, ENT_QUOTES | ENT_SUBSTITUTE );
+	if ( ! $val ) {
+		return $val;
+	}
+
+	return htmlentities( $val, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8' );
 }
 
 /**
@@ -1363,6 +1370,35 @@ function crb_escape( $val ) {
 	// the same way as in esc_attr();
 	return _wp_specialchars( $val, ENT_QUOTES );
 }
+
+
+/**
+ * Safely escapes a URL string to prevent XSS attacks.
+ *
+ * @param string $url The URL to escape.
+ * @return string The safely escaped URL or empty string otherwise
+ */
+function crb_escape_url( $url = '' ) {
+
+	$url = trim( $url );
+
+	if ( ! $clean_url = filter_var( $url, FILTER_SANITIZE_URL ) ) {
+		return '';
+	}
+
+	if ( ! $clean_url = filter_var( $clean_url, FILTER_VALIDATE_URL ) ) {
+		return '';
+	}
+
+	// Protect from using data:, javascript: , file and so on
+
+	if ( ! preg_match( '/^(https?|mailto|ftps?):/i', $clean_url ) ) {
+		return '';
+	}
+
+	return str_replace( array( '"', "'", '<', '>', '`' ), '', $clean_url );
+}
+
 
 /**
  * Escapes single quotes, `"`, `<`, `>`, `&`, and fixes line endings.
@@ -1879,11 +1915,11 @@ function crb_user_has_role_strict( $roles, $user_id ) {
 }
 
 /**
- * Returns metadata if the user is blocked by admin
+ * Returns block metadata if the user is manually blocked
  *
  * @param int $uid User ID
  *
- * @return false|array
+ * @return false|array False if the user is not blocked
  */
 function crb_is_user_blocked( $uid ) {
 	if ( $uid
@@ -2371,26 +2407,34 @@ function crb_get_activity_label( $activity, $user_id = 0, $by_user_id = 0, $link
 	return cerber_get_labels( 'activity', $activity );
 }
 
+/**
+ * Returns predefined set of activity IDs to build URLs and generates SQL clauses
+ * Safe to use in any context.
+ *
+ * @param int $set_id The set IDs
+ *
+ * @return int[]
+ */
 function crb_get_filter_set( $set_id ) {
-	static $list = array( 1 => 'suspicious', 2 => 'login_issues' );
+	static $list = array( 1 => 'suspicious', 2 => 'login_issues', 3 => 'spam' );
 
 	if ( ! isset( $list[ $set_id ] ) ) {
 		return array();
 	}
 
 	return crb_get_activity_set( $list[ $set_id ] );
-
 }
 
 /**
- * Predefined sets of activities
+ * Returns predefined set of activity IDs.
+ * Safe to use in any context.
  *
- * @param string $slice
+ * @param string $set_id
  * @param bool $implode
  *
  * @return int[]|string
  */
-function crb_get_activity_set( $slice = 'malicious', $implode = false ) {
+function crb_get_activity_set( $set_id = 'malicious', $implode = false ) {
 
 	static $sets = array(
 		'malicious'  => array( CRB_EV_CMS, CRB_EV_SCD, CRB_EV_SFD, CRB_EV_PRD, 40, CRB_EV_PUR, 51, 52, CRB_EV_LDN, 54, 55, 56, 100 ),
@@ -2408,15 +2452,22 @@ function crb_get_activity_set( $slice = 'malicious', $implode = false ) {
 
 		'login_issues' => array( CRB_EV_LFL, CRB_EV_PRS, CRB_EV_PRD, 51, 52, CRB_EV_LDN, 152 ),
 
-		// IP or subnet was blocked
 		'blocked' => array( 10, 11 ),
+
+		'spam' => array( CRB_EV_CMS, CRB_EV_SCD, CRB_EV_SFD ),
 	);
 
-	if ( ! $implode ) {
-		return $sets[ $slice ];
+	if ( ! $set = $sets[ $set_id ] ?? false ) {
+		return false;
 	}
 
-	return implode( ',', $sets[ $slice ] );
+	$set = array_map( 'absint', $set );
+
+	if ( ! $implode ) {
+		return $set;
+	}
+
+	return implode( ',', $set );
 
 }
 
@@ -2672,25 +2723,27 @@ function cerber_is_admin_page( $params = array(), $screen_base = '' ) {
 }
 
 /**
- * Return human readable "ago" time
+ * Returns human-readable "ago" time
  *
  * @param $time integer Unix timestamp - time of an event
  *
  * @return string
  */
-function cerber_ago_time( $time ) {
-	$diff = abs( time() - (int) $time );
+function cerber_ago_time( int $time ) {
+
+	$diff = abs( time() - $time );
 	if ( $diff < MINUTE_IN_SECONDS ) {
 		$secs = ( $diff <= 1 ) ? 1 : $diff;
 		/* translators: Time difference between two dates, in seconds. %s: number of seconds. */
 		$dt = sprintf( _n( '%s sec', '%s secs', $secs, 'wp-cerber' ), $secs );
+
+		__( '%s secs', 'wp-cerber' ); // registration for _n()
 	}
 	else {
 		$dt = human_time_diff( $time );
 	}
 
-	// _x( 'at', 'preposition of time',
-	return ( $time <= time() ) ? sprintf( __( '%s ago' ), $dt ) : sprintf( _x( 'in %s', 'Preposition of a period of time like: in 6 hours', 'wp-cerber' ), $dt );
+	return ( $time <= time() ) ? sprintf( __( '%s ago' ), $dt )	: sprintf( _x( 'in %s', 'Preposition of a period of time, for instance: in 6 hours', 'wp-cerber' ), $dt );
 }
 
 function cerber_auto_date( $time, $purify = true ) {
@@ -3208,6 +3261,12 @@ function cerber_db_get_affected() {
 	return  $aff;
 }
 
+/**
+ * @param string $query
+ * @param int $type
+ *
+ * @return array
+ */
 function cerber_db_get_results( $query, $type = MYSQLI_ASSOC ) {
 
 	if ( ! $result = cerber_db_query( $query ) ) {
@@ -5199,6 +5258,16 @@ final class CRB_Cache {
 		return array( self::$stat, $entries );
 	}
 
+	/**
+	 * Checks if the WordPress persistent cache is functional by using a marker stored between HTTP requests.
+	 *
+	 * On the first call or if the cache is not operational, it initializes the marker and returns 0.
+	 * If the cache works correctly, it will return the timestamp (`t`) that was set during the first successful check.
+	 *
+	 * @return int Returns 0 on the first call or if the cache is non-operational.
+	 *             On subsequent requests, it returns the previously set timestamp from the first cache check,
+	 *             confirming that the cache retains data across HTTP requests.
+	 */
 	static function checker() {
 
 		$sid = get_wp_cerber()->getRequestID();
@@ -5222,9 +5291,13 @@ final class CRB_Cache {
 }
 
 /**
+ * Saves data to the WordPress persistent object cache if it's available.
+ * Note: if no persistent object cache is available, any cached data will be lost between HTTP requests.
+ * @see CRB_Cache::checker()
+ *
  * @param $key string
- * @param $value mixed
- * @param $expire integer Element will expire in X seconds, 0 = never expires
+ * @param $value mixed|array
+ * @param $expire integer Cached data will expire in X seconds, 0 = never expires
  *
  * @return bool
  */
@@ -5233,6 +5306,9 @@ function cerber_cache_set( $key, $value, $expire = 0 ) {
 }
 
 /**
+ * Retrieves data from the WordPress persistent object cache if it's available.
+ * Note: if no persistent object cache is available, the data will be lost between HTTP requests.
+ *
  * @param $key string
  * @param $default mixed
  *
@@ -5263,13 +5339,14 @@ function cerber_cache_is_enabled() {
 }
 
 /**
- * Retrieve and cache data from the DB. Make sense for heavy queries.
+ * Retrieve data from the DB using SQL query and cache the results.
+ * Return data from the cache if the table has not been changed.
  *
- * @param array|string $sql One or more SQL queries with optional data format
- * @param string $table DB table we're caching data from
- * @param bool $cache_only
- * @param string[] $hash_fields Fields to calculate hash
- * @param int $order_by The key of the ORDER BY field in the $fieldset
+ * @param array|string $sql One or more SQL queries with optional data format of returning results
+ * @param string $table DB table we're caching data for
+ * @param bool $cache_only If true, returns data from the cache strictly
+ * @param string[] $hash_fields Fields to calculate hash to detect changes in the table
+ * @param int $order_by The ID of the table field in the $hash_fields to use for ORDER BY condition
  *
  * @return array|false
  *
@@ -5389,7 +5466,10 @@ function cerber_check_for_update( $update, $plugin_data, $plugin_file, $locales 
 
 	$update = crb_array_get( $package_data, $plugin_file, $update );
 
-	//$update['requires_php'] = CERBER_REQ_PHP;
+	if ( isset( $update['requires_wp'] ) ) {
+		$update['requires'] = $update['requires_wp'];
+	}
+
 	$update['tested'] = cerber_get_wp_version(); // The last version of WP Cerber is always tested with the last version of WP
 
 	// This mess is for WP

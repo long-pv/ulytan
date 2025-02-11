@@ -115,6 +115,11 @@ function register_cpt_post_types()
 			'hierarchical' => false
 		],
 		'video_customer' => [
+			'labels' => __('Video khách hàng', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
+		'feedback_customer' => [
 			'labels' => __('Feedback khách hàng', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false

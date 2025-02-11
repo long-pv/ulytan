@@ -182,17 +182,17 @@ if ($customer_object):
 
 <?php
 $video_customer_title = get_field('video_customer_title') ?: 'KHÁCH HÀNG NÓI VỀ ULYTAN';
-$video_customer = get_field('video_customer') ?? [];
-if ($video_customer) {
+$feedback_customer = get_field('feedback_customer') ?? [];
+if ($feedback_customer) {
 	$args = array(
-		'post_type' => 'video_customer',
+		'post_type' => 'feedback_customer',
 		'posts_per_page' => -1,
-		'post__in' => $video_customer,
+		'post__in' => $feedback_customer,
 		'orderby' => 'post__in',
 	);
 } else {
 	$args = array(
-		'post_type' => 'video_customer',
+		'post_type' => 'feedback_customer',
 		'posts_per_page' => 6,
 	);
 }
@@ -213,8 +213,8 @@ if ($query->have_posts()):
 					<div>
 						<div class="video_customer_item">
 							<?php
-							$featured_image = get_field('featured_image');
-							$iframe_video = get_field('iframe_video');
+							// $featured_image = get_field('featured_image');
+							// $iframe_video = get_field('iframe_video');
 							$avatar = get_field('avatar');
 							$name = get_field('name');
 							$position = get_field('position');
@@ -222,7 +222,6 @@ if ($query->have_posts()):
 							$star_rating = get_field('star_rating');
 							$testimonials = get_field('testimonials');
 							?>
-							<?php if ($iframe_video || $featured_image): video_popup($iframe_video, $featured_image); endif;?>
 							<?php if ($name): ?>
 								<div class="info_customer">
 									<div class="testimonials">
@@ -935,12 +934,13 @@ wp_reset_postdata(); */
 
 									// Hiển thị input bổ sung nếu show_input = true
 									if (in_array($service['raw_name'], $services_with_input)) {
+										$key_input_class = isset($service['key_input']) ? esc_attr($service['key_input']) : ''; // Kiểm tra key_input
 										echo '<div class="td_group mt-2" style="display:none;">';
 										echo '<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>';
 										echo '<div class="td_label mb-1">';
 										echo 'Quốc gia <span class="td_req">(*bắt buộc)</span>';
 										echo '</div>';
-										echo '<input type="text" name="quoc_gia_' . $slug . '" class="td_input ' . esc_attr($service['key_input']) . '">';
+										echo '<input type="text" name="quoc_gia_' . $slug . '" class="td_input ' . $key_input_class . '">';
 										echo '</div>';
 									}
 

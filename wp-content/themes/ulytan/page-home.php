@@ -158,17 +158,17 @@ wp_reset_postdata();
 
 <?php
 $title_customer = get_field('title_customer') ?? 'KHÁCH HÀNG NÓI VỀ ULYTAN';
-$video_customer = get_field('video_customer') ?? [];
-if ($video_customer) {
+$feedback_customer = get_field('feedback_customer') ?? [];
+if ($feedback_customer) {
 	$args = array(
-		'post_type' => 'video_customer',
+		'post_type' => 'feedback_customer',
 		'posts_per_page' => -1,
-		'post__in' => $video_customer,
+		'post__in' => $feedback_customer,
 		'orderby' => 'post__in',
 	);
 } else {
 	$args = array(
-		'post_type' => 'video_customer',
+		'post_type' => 'feedback_customer',
 		'posts_per_page' => 6,
 	);
 }
@@ -189,8 +189,8 @@ if ($query->have_posts()):
 					<div>
 						<div class="video_customer_item">
 							<?php
-							$featured_image = get_field('featured_image');
-							$iframe_video = get_field('iframe_video');
+							// $featured_image = get_field('featured_image');
+							// $iframe_video = get_field('iframe_video');
 							$avatar = get_field('avatar');
 							$name = get_field('name');
 							$position = get_field('position');
@@ -198,7 +198,6 @@ if ($query->have_posts()):
 							$star_rating = get_field('star_rating');
 							$testimonials = get_field('testimonials');
 							?>
-							<?php if ($iframe_video || $featured_image): video_popup($iframe_video, $featured_image); endif;?>
 							<?php if ($name): ?>
 								<div class="info_customer">
 									<div class="testimonials">

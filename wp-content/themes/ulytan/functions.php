@@ -10,7 +10,7 @@
 
 if (! defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
-	define('_S_VERSION', '1.0.16');
+	define('_S_VERSION', '1.0.22');
 }
 
 /**
@@ -195,7 +195,7 @@ add_action('widgets_init', 'ulytan_widgets_init');
  */
 function ulytan_scripts()
 {
-	wp_enqueue_style('ulytan-style', get_stylesheet_uri(), array(), _S_VERSION);
+	// wp_enqueue_style('ulytan-style', get_stylesheet_uri(), array(), _S_VERSION);
 
 	// add vendor js
 	wp_enqueue_script('ulytan-script-vendor', get_template_directory_uri() . '/assets/js/vendor.js', array(), _S_VERSION, true);
@@ -210,10 +210,27 @@ function ulytan_scripts()
 	wp_enqueue_script('ulytan-script-stickyNavigator', get_template_directory_uri() . '/assets/js/jquery-stickyNavigator.js', array(), _S_VERSION, true);
 
 	//add custom main css/js
-	wp_enqueue_style('ulytan-style-main', get_template_directory_uri() . '/assets/css/main.css', array(), _S_VERSION);
+	// wp_enqueue_style('ulytan-style-main', get_template_directory_uri() . '/assets/css/main.css', array(), _S_VERSION);
 	wp_enqueue_script('ulytan-script-main', get_template_directory_uri() . '/assets/js/main.js', array(), _S_VERSION, true);
 }
 add_action('wp_enqueue_scripts', 'ulytan_scripts');
+
+function ullytan_enqueue_styles() {
+    // Đường dẫn đầy đủ đến file CSS trong thư mục theme
+    $css_file_path = get_template_directory() . '/assets/css/main.css';
+
+    // Lấy phiên bản tự động dựa trên thời gian chỉnh sửa file
+    $version = file_exists($css_file_path) ? filemtime($css_file_path) : '1.0.0';
+
+    // Đăng ký file CSS
+    wp_enqueue_style(
+        'ulytan-style-main',
+        get_template_directory_uri() . '/assets/css/main.css',
+        array(),
+        $version
+    );
+}
+add_action('wp_enqueue_scripts', 'ullytan_enqueue_styles');
 
 /**
  * Functions which enhance the theme by hooking into WordPress.

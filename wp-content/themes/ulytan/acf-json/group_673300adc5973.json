@@ -65,6 +65,7 @@
                     "collapsed": "",
                     "button_label": "Add Row",
                     "rows_per_page": 20,
+                    "parent_repeater": "field_673300adbb29a",
                     "sub_fields": [
                         {
                             "key": "field_6733011d3790c",
@@ -108,8 +109,7 @@
                             "new_lines": "",
                             "parent_repeater": "field_677e9f78fd17c"
                         }
-                    ],
-                    "parent_repeater": "field_673300adbb29a"
+                    ]
                 }
             ]
         }
@@ -132,5 +132,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1736354580
+    "modified": 1736354709
 }

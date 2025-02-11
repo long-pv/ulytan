@@ -378,6 +378,89 @@
 			}
 		});
 	});
+
+
+	document.addEventListener('DOMContentLoaded', function () {
+		const form = document.querySelector('.wpcf7');
+		if (form) {
+			form.addEventListener('wpcf7invalid', function () {
+				console.log('wpcf7invalid event triggered'); // Xác nhận sự kiện
+				setTimeout(() => {
+					// Lấy tất cả các thông báo lỗi
+					const errors = form.querySelectorAll('.wpcf7-not-valid-tip');
+					// console.log(errors);
+					errors.forEach((error) => {
+						const input = error.parentElement;
+						console.log(input);
+						if (input) {
+							const name = input.getAttribute('data-name');
+							// Thay đổi thông báo tùy chỉnh
+							if (name === 'footer-name') {
+								error.textContent = 'Vui lòng nhập họ và tên của bạn.';
+							} else if (name === 'footer-email') {
+								error.textContent = 'Vui lòng nhập email hợp lệ.';
+							} else if (name === 'footer-phone') {
+								error.textContent = 'Vui lòng nhập số điện thoại của bạn.';
+							} else if (name === 'footer-country') {
+								error.textContent = 'Vui lòng chọn quốc gia.';
+							} else if (name === 'footer-service') {
+								error.textContent = 'Vui lòng chọn ít nhất một dịch vụ.';
+							}
+						}
+					});
+				}, 100); // Thời gian chờ để đảm bảo các thông báo lỗi mặc định đã được áp dụng.
+			});
+		}
+	});
+
+	jQuery(document).ready(function ($) {
+		setTimeout(function () {
+			$('.custom_dropdown_service .wpcf7-checkbox label .wpcf7-list-item-label').each(function () {
+				var text = $(this).text();
+				// Gắn HTML lại, chèn <br> giữa phần đầu và phần cuối
+				$(this).html('<strong>' + text.split('(')[0].trim() + '</strong><br><em>(' + text.split('(')[1]);
+			});
+		}, 1000);
+	});
+
+
+	jQuery(document).ready(function ($) {
+		// Lắng nghe sự kiện wpcf7mailsent
+		$(document).on('wpcf7mailsent', function (event) {
+			// Kiểm tra nếu form nằm trong thẻ div có class 'footer-form-wrapper'
+			if ($(event.target).closest('.footer_form').length > 0) {
+				// Kích hoạt modal Bootstrap
+				$('#modal_form_footer').modal('show');
+			}
+		});
+	});
+	
+	
+	
+	jQuery(document).ready(function ($) {
+		// Đảm bảo phần tử được ẩn khi xuất hiện
+		setInterval(function () {
+			$('.grecaptcha-badge').css('display', 'none');
+		}, 500);
+	});
+
+	jQuery(document).ready(function ($) {
+		// Chờ phần tử xuất hiện và ẩn nó
+		var observer = new MutationObserver(function () {
+			$('.grecaptcha-badge').hide();
+		});
+	
+		// Theo dõi sự thay đổi của body
+		observer.observe(document.body, {
+			childList: true,
+			subtree: true,
+		});
+	});
+	
+	
+	
+	
+	
 	
 	
 	

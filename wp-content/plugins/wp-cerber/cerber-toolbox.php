@@ -211,6 +211,8 @@ function crb_log_maintainer() {
 		cerber_db_query( 'DELETE FROM ' . CERBER_LOG_TABLE . ' WHERE user_id !=0 AND stamp < ' . ( $time - $days_auth * 24 * 3600 ) );
 	}
 
+	cerber_cache_set( CRB_ACT_HASH, array() );
+
 	$days = absint( $settings['tikeeprec'] ) ?: cerber_get_defaults( 'tikeeprec' );  // @since 8.5.6
 	$days_auth = absint( $settings['tikeeprec_auth'] ?? false ) ?: $days; // It may be not configured by the admin yet, since it's introduced in 8.5.6
 
@@ -356,7 +358,7 @@ class CRB_Plugin {
 
 		$fresh_data = self::get_plugin_authors( $slug );
 
-		if ( is_wp_error( $fresh_data ) ) {
+		if ( crb_is_wp_error( $fresh_data ) ) {
 			return $fresh_data;
 		}
 
@@ -399,7 +401,7 @@ class CRB_Plugin {
 
 		$plugin_info = plugins_api( 'plugin_information', array( 'slug' => $slug ) );
 
-		if ( is_wp_error( $plugin_info ) ) {
+		if ( crb_is_wp_error( $plugin_info ) ) {
 			return $plugin_info;
 		}
 
@@ -545,7 +547,7 @@ class CRB_Plugin {
 
 		$result = self::retrieve_plugin_repo_data( $slug );
 
-		if ( is_wp_error( $result ) ) {
+		if ( crb_is_wp_error( $result ) ) {
 			$repo_data['err_code'] = $result->get_error_code();
 		}
 		else {
@@ -682,7 +684,7 @@ class CRB_Plugin {
 			),
 			true );
 
-		if ( is_wp_error( $result ) ) {
+		if ( crb_is_wp_error( $result ) ) {
 
 			if ( $network->is_host_rate_limited() ) {
 				$err_code = CRB_PL722;
@@ -710,7 +712,7 @@ class CRB_Plugin {
 
 		$json = self::extract_ld_json( $html );
 
-		if ( is_wp_error( $json ) ) {
+		if ( crb_is_wp_error( $json ) ) {
 			return $json;
 		}
 

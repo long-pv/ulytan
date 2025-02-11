@@ -193,7 +193,7 @@ add_action( 'edit_user_profile_update', function ( $user_id ) {
 
 	$b = absint( cerber_get_post( 'crb_user_blocked' ) );
 	if ( ! $b ) {
-		delete_user_meta( $user_id, CERBER_BUKEY );
+		cerber_unblock_user( $user_id );
 	}
 	else {
 		cerber_block_user( $user_id, strip_tags( stripslashes( $_POST['crb_blocked_msg'] ) ), strip_tags( stripslashes( $_POST['crb_blocked_note'] ) ) );
@@ -335,12 +335,22 @@ add_filter( "handle_bulk_actions-users", function ( $url ) {
 	return $url;
 } );
 
-function cerber_block_user( $user_id, $msg = '', $note = '' ) {
-	if ( ! is_super_admin() ) {
-		return;
+/**
+ * Blocks the given user. Blocked users are not allowed to log into the website
+ *
+ * @param int $user_id User ID
+ * @param string $msg Optional message to be shown when a user is trying to log in.
+ * @param string $note Optional note for the website admin
+ *
+ * @return bool True on success, false on failure.
+ */
+function cerber_block_user( int $user_id, string $msg = '', string $note = '' ) {
+	if ( ! cerber_can_block_user( $user_id ) ) {
+		return false;
 	}
+
 	if ( $user_id == get_current_user_id() ) {
-		return;
+		return false;
 	}
 
 	if ( ( $m = get_user_meta( $user_id, CERBER_BUKEY, true ) )
@@ -348,7 +358,7 @@ function cerber_block_user( $user_id, $msg = '', $note = '' ) {
 	     && $m[ 'u' . $user_id ] == $user_id
 	     && $m['blocked_msg'] == $msg
 	     && $m['blocked_note'] == $note ) {
-		return;
+		return false;
 	}
 
 	if ( ! $m || ! is_array( $m ) ) {
@@ -366,8 +376,41 @@ function cerber_block_user( $user_id, $msg = '', $note = '' ) {
 	$m['blocked_msg']  = $msg;
 	$m['blocked_note'] = $note;
 
-	update_user_meta( $user_id, CERBER_BUKEY, $m );
 	crb_destroy_user_sessions( $user_id );
+
+	return (bool) update_user_meta( $user_id, CERBER_BUKEY, $m );
+}
+
+/**
+ * Unblocks the given user.
+ *
+ * @return bool True on success, false on failure.
+ *
+ * @since 9.6.4.9
+ */
+function cerber_unblock_user( int $user_id ) {
+	if ( ! cerber_can_block_user( $user_id ) ) {
+		return false;
+	}
+
+    return delete_user_meta( $user_id, CERBER_BUKEY );
+}
+
+/**
+ * Checks if the current user can block the given user
+ *
+ * @return bool True if the current user can block the given user
+ *
+ * @since 9.6.4.9
+ */
+function cerber_can_block_user( int $user_id ) {
+	if ( ! is_super_admin()
+	     && ! current_user_can( 'edit_users', $user_id )
+	     && ! current_user_can( 'delete_users', $user_id ) ) {
+		return false;
+	}
+
+	return true;
 }
 
 function crb_admin_show_role_policies() {
@@ -1009,6 +1052,8 @@ function crb_pdata_eraser( $email_address, $page = 1 ) {
 	     && $user->ID ) {
 
 		cerber_db_query( 'DELETE FROM ' . CERBER_LOG_TABLE . ' WHERE user_id = ' . $user->ID );
+		cerber_cache_set( CRB_ACT_HASH, array() );
+
 		cerber_db_query( 'DELETE FROM ' . CERBER_TRAF_TABLE . ' WHERE user_id = ' . $user->ID );
 
 		if ( ( $reg = get_user_meta( $user->ID, '_crb_reg_', true ) )

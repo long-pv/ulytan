@@ -2231,7 +2231,7 @@ function crb_check_ownership( int &$stage_progress, int $num = 2 ) {
 
 		$ownership = CRB_Plugin::get_plugin_owner_status( $slug );
 
-		if ( is_wp_error( $ownership ) ) {
+		if ( crb_is_wp_error( $ownership ) ) {
 			$error = $ownership->get_error_message();
 
 			if ( $error == 'Plugin not found.' ) { // Plugin no hosted on wp.org
