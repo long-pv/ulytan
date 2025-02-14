@@ -1,0 +1,276 @@
+.gioithieu_banner {
+	background-color: transparent;
+	background-image: linear-gradient(-90deg, #721326 0%, #d82448 100%);
+	color: white;
+	text-align: center;
+	padding: 100px 0px;
+
+	.row {
+		justify-content: center;
+	}
+
+	.gioithieu_banner__title {
+		font-size: 28px;
+		font-weight: bold;
+		margin-bottom: 21px;
+	}
+
+	.gioithieu_banner__desc {
+		margin-bottom: 0px;
+	}
+}
+
+//
+.thuong_hieu {
+	background-color: #f4f5f7;
+	padding: 50px 0px 66px;
+
+	.thuong_hieu_subtitle {
+		margin-bottom: 42px;
+	}
+
+	.thuong_hieu_title {
+		margin-bottom: 50px;
+	}
+
+	.thuong_hieu_content {
+		margin: 0px 0px 0px 30px;
+		padding: 0px 0px 0px 20px;
+		border-style: solid;
+		border-width: 0px 0px 0px 1px;
+		border-color: #c7c4c4;
+	}
+}
+
+//
+.gia_tri {
+	background-color: #f4f5f7;
+	padding: 50px 0px 60px;
+
+	.gia_tri_subtitle {
+		margin-bottom: 42px;
+	}
+
+	.gia_tri_title {
+		margin-bottom: 42px;
+	}
+
+	.gia_tri_desc {
+		margin-bottom: 26px;
+	}
+
+	.gia_tri_row {
+		justify-content: center;
+	}
+
+	.gia_tri_content_item {
+		background: #fff;
+		border-radius: 10px;
+		padding: 34px 30px 30px;
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 34px;
+		margin-bottom: 20px;
+
+		.gia_tri_content_item_img {
+			width: 40px;
+			height: 40px;
+		}
+
+		.gia_tri_content_item_title {
+			font-size: 20px;
+			font-weight: bold;
+			color: #000;
+		}
+
+		.gia_tri_content_item_desc {
+			font-size: 14px;
+			color: #333;
+			line-height: 1.6;
+			margin-bottom: 0px;
+		}
+	}
+}
+
+//
+.doi_ngu {
+	padding: 50px 0px 86px;
+
+	.doi_ngu_subtitle {
+		margin-bottom: 42px;
+	}
+
+	.doi_ngu_title {
+		margin-bottom: 62px;
+	}
+
+	.doi_ngu_row {
+		justify-content: center;
+	}
+
+	.team-member {
+		text-align: center;
+		margin: auto;
+
+		.team-member_wrapper {
+			position: relative;
+		}
+
+		&__image-wrapper {
+			position: relative;
+			width: 100%;
+			height: 0px;
+			padding-bottom: 100%;
+		}
+
+		&__circle {
+			position: absolute;
+			border-radius: 50%;
+			width: 100%;
+			height: 100%;
+		}
+
+		&__circle--light {
+			background: #d89aa0; // Vòng tròn đỏ nhạt
+		}
+
+		&__circle--dark {
+			background: #8e2c3f; // Vòng tròn đỏ đậm
+			width: calc(100% - 32px);
+			height: calc(100% - 32px);
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.team_memeber__image {
+			position: absolute;
+			bottom: 36px;
+			left: 50%;
+			transform: translateX(-50%); // Đẩy ảnh lên trên 36px
+			width: auto;
+			height: calc(100% + 38px - 36px);
+			object-fit: cover;
+		}
+
+		&__content {
+			position: relative;
+			margin-top: -43px;
+			z-index: 10;
+		}
+
+		&__name {
+			background: white;
+			border: 3px solid #8e2c3f;
+			border-radius: 30px;
+			padding: 14px 60px;
+			font-weight: bold;
+			color: #8e2c3f;
+			display: block;
+			font-size: 16px;
+			z-index: 2; // Đảm bảo không bị che khuất
+			margin-bottom: 13px;
+		}
+
+		&__position {
+			font-size: 14px;
+			color: #333;
+		}
+	}
+}
+
+//
+.van_hoa {
+	background-color: #f4f5f7;
+	padding: 50px 0px 60px;
+
+	.van_hoa_subtitle {
+		margin-bottom: 42px;
+	}
+
+	.van_hoa_title {
+		margin-bottom: 42px;
+	}
+
+	.van_hoa_desc {
+		margin-bottom: 26px;
+	}
+
+	.van_hoa_row {
+		justify-content: center;
+	}
+
+	.van_hoa_content_item {
+		background: #fff;
+		border-radius: 10px;
+		padding: 34px 30px 30px;
+		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 34px;
+		margin-bottom: 20px;
+
+		.van_hoa_content_item_img {
+			width: 40px;
+			height: 40px;
+		}
+
+		.van_hoa_content_item_title {
+			font-size: 20px;
+			font-weight: bold;
+			color: #000;
+		}
+
+		.van_hoa_content_item_desc {
+			font-size: 14px;
+			color: #333;
+			line-height: 1.6;
+			margin-bottom: 0px;
+		}
+	}
+}
+
+//
+.thanh_tuu {
+	padding: 62px 0px 36px;
+	background-image: url("http://localhost/2025ulytan/wp-content/uploads/2024/12/ParagraphBackground-1.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	.thanh_tuu_row {
+		justify-content: center;
+	}
+
+	.thanh_tuu_title {
+		font-family: "Roboto", Sans-serif;
+		font-size: 51px;
+		font-weight: 700;
+		color: #ffffff;
+		text-align: center;
+		margin-bottom: 62px;
+	}
+
+	.thanh_tuu_content_item {
+		text-align: center;
+		margin-bottom: 50px;
+	}
+
+	.thanh_tuu_content_item_title {
+		font-family: "Roboto", Sans-serif;
+		font-size: 48px;
+		font-weight: 700;
+		color: #ffffff;
+		margin-bottom: 18px;
+	}
+
+	.thanh_tuu_content_item_desc {
+		font-family: "Roboto", Sans-serif;
+		font-size: 16px;
+		font-weight: 400;
+		color: #ffffff;
+	}
+}
