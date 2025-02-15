@@ -2948,6 +2948,18 @@ footer {
 }
 
 
-.single_post_share_facebook {
-    
+.single_post_share_mxh_icon {
+    background-color: #fff;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    box-shadow: 0px 8px 28px rgba(20, 20, 43, 0.3);
+    position: relative;
+    padding: 2px 0px !important;
+    justify-content: center;
+
+    svg {
+        width: auto;
+        height: 16px;
+    }
 }
