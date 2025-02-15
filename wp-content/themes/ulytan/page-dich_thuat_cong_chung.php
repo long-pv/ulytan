@@ -366,7 +366,7 @@ endif;
 ?>
 
 
-<section class="secSpace">
+<section class="secSpace--top">
 	<div class="container">
 		<?php
 		$post_id = get_the_ID();
