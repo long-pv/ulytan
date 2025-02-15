@@ -226,7 +226,7 @@ if ($query->have_posts()):
 								<div class="info_customer">
 									<div class="testimonials">
 										<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#ebebed" class="bi bi-quote" viewBox="0 0 16 16">
-											<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"/>
+											<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z" />
 										</svg>
 										<div class="truncate">
 											<p class="elementor-widget-container"><?php echo $testimonials; ?></p>
@@ -234,11 +234,11 @@ if ($query->have_posts()):
 									</div>
 									<p class="star_rating">
 										<?php
-											for ($x = 0; $x < $star_rating; $x++) {
-												echo '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+										for ($x = 0; $x < $star_rating; $x++) {
+											echo '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 													<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 												</svg>';
-											} 
+										}
 										?>
 									</p>
 									<div class="row no-gutters">
@@ -331,53 +331,6 @@ endif;
 ?>
 
 <?php
-$services_title = get_field('services_title') ?: 'CÁC DỊCH VỤ BỔ SUNG';
-$services = get_field('services') ?? [];
-if ($services) {
-	$args = array(
-		'post_type' => 'service',
-		'posts_per_page' => -1,
-		'post__in' => $services,
-		'orderby' => 'post__in',
-	);
-} else {
-	$args = array(
-		'post_type' => 'service',
-		'posts_per_page' => '3',
-	);
-}
-
-$query = new WP_Query($args);
-if ($query->have_posts()):
-?>
-	<section class="service secSpace" id="scroll_3">
-		<div class="container">
-			<h2 class="sec_title text-center">
-				<?php echo $services_title; ?>
-			</h2>
-
-			<div class="service_list">
-				<div class="row row_24">
-					<?php
-					while ($query->have_posts()):
-						$query->the_post();
-					?>
-						<div class="col-md-6 col-lg-4">
-							<?php get_template_part('template-parts/content_service'); ?>
-						</div>
-					<?php
-					endwhile;
-					?>
-				</div>
-			</div>
-		</div>
-	</section>
-<?php
-endif;
-wp_reset_postdata();
-?>
-
-<?php
 $faqs = get_field('faqs') ?? [];
 if ($faqs):
 	$args = array(
@@ -412,92 +365,41 @@ if ($faqs):
 endif;
 ?>
 
-<?php /*
-$args = array(
-	'post_type' => 'notarization',
-	'posts_per_page' => 4,
-	'paged' => 1,
-);
-$query = new WP_Query($args);
-if ($query->have_posts()):
-?>
-	<section class="secSpace notarized_translation_news" id="scroll_5">
-		<div class="container">
-			<h2 class="home_news_title mb-4">
-				Tin tức dịch công chứng
-			</h2>
-			<div class="row">
-				<div class="col-lg-6">
-					<ul class="notarized_translation_news_list">
-						<?php
-						while ($query->have_posts()):
-							$query->the_post();
-						?>
-							<li>
-								<a class="notarized_translation_news_item" href="<?php the_permalink(); ?>">
-									<?php the_title(); ?>
-								</a>
-							</li>
-						<?php
-						endwhile;
-						?>
-					</ul>
-				</div>
-			</div>
-
-			<?php
-			echo '<div class="pagination justify-content-start pagination_ajax">';
-			echo paginate_links(
-				array(
-					'total'   => $query->max_num_pages,
-					'current' => 1,
-					'end_size' => 2,
-					'mid_size' => 1,
-					'prev_text' => __('Trước', 'basetheme'),
-					'next_text' => __('Sau', 'basetheme'),
-				)
-			);
-			echo '</div>';
-			?>
-		</div>
-	</section>
 <?php
-endif;
-wp_reset_postdata(); */
-?>
-
-<?php /*
-$related_posts_title = get_field('related_posts_title') ?: 'Bài viết liên quan';
-$related_posts = get_field('related_posts') ?? [];
-if ($related_posts) {
+$services_title = get_field('services_title') ?: 'CÁC DỊCH VỤ BỔ SUNG';
+$services = get_field('services') ?? [];
+if ($services) {
 	$args = array(
-		'post_type' => 'post',
+		'post_type' => 'service',
 		'posts_per_page' => -1,
-		'post__in' => $related_posts,
+		'post__in' => $services,
 		'orderby' => 'post__in',
 	);
 } else {
 	$args = array(
-		'post_type' => 'post',
-		'posts_per_page' => 6,
+		'post_type' => 'service',
+		'posts_per_page' => '3',
 	);
 }
 
 $query = new WP_Query($args);
 if ($query->have_posts()):
 ?>
-	<section class="secSpace--bottom related_posts">
+	<section class="service service_list secSpace" id="scroll_3">
 		<div class="container">
-			<h2 class="home_news_title mb-4">
-				<?php echo $related_posts_title; ?>
+			<h2 class="sec_title text-center">
+				<?php echo $services_title; ?>
 			</h2>
-			<div class="row row_24">
+
+			<div class="service_list_slider">
 				<?php
 				while ($query->have_posts()):
 					$query->the_post();
 				?>
-					<div class="col-md-6 col-lg-4">
-						<?php get_template_part('template-parts/content_post'); ?>
+					<div>
+						<div class="service_item">
+							<?php get_template_part('template-parts/content_service'); ?>
+						</div>
 					</div>
 				<?php
 				endwhile;
@@ -507,7 +409,7 @@ if ($query->have_posts()):
 	</section>
 <?php
 endif;
-wp_reset_postdata(); */
+wp_reset_postdata();
 ?>
 
 <div class="modal modal_landing fade" id="modal_landing" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -538,11 +440,11 @@ wp_reset_postdata(); */
 				endif;
 				?>
 			</div>
-				<div class="arrow-down">
-					<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M12.5 0H27.5V20H39.6L20 39.6L0.400002 20H12.5V0Z" fill="#FC0D1C"/>
-					</svg>
-				</div>
+			<div class="arrow-down">
+				<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M12.5 0H27.5V20H39.6L20 39.6L0.400002 20H12.5V0Z" fill="#FC0D1C" />
+				</svg>
+			</div>
 			<div class="modal-body">
 				<form id="page_contact_form" class="page_contact_form" enctype="multipart/form-data">
 					<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
@@ -985,7 +887,7 @@ wp_reset_postdata(); */
 			</div>
 			<div class="modal-footer justify-content-center">
 				<div class="d-flex justify-content-center">
-					<input type="submit" class="contact_submit contact_submit_fake" value="Đăng ký ngay">
+					<input type="submit" class="contact_submit contact_submit_fake landingpage_popup_btn_submit" value="Đăng ký ngay">
 				</div>
 			</div>
 		</div>

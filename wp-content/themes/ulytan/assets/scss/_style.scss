@@ -487,6 +487,7 @@
 
 .video_customer {
     background-color: $primary;
+
     .slick {
         &-slider {
             @include media-breakpoint-up(md) {
@@ -578,10 +579,12 @@
             }
         }
     }
+
     .info_customer {
         padding: 20px;
         background-color: #FFF;
         border-radius: 20px;
+
         .avatar_box {
             border-radius: 50% !important;
             border: 1px #FCE10D solid !important;
@@ -589,6 +592,7 @@
             position: relative;
             aspect-ratio: 1;
             margin-right: 20px;
+
             img {
                 display: block;
                 width: 100%;
@@ -597,18 +601,22 @@
                 object-fit: cover;
             }
         }
+
         .incorporation {
             color: #ff2b80;
             font-size: 14px;
             font-weight: 600;
             line-height: 1.5em;
         }
+
         .position {
             font-size: 13px;
         }
+
         .star_rating {
             color: #ffc20d;
         }
+
         .truncate {
             max-height: 100px;
             overflow: hidden;
@@ -616,6 +624,7 @@
             width: 100%;
             transition: max-height .5s;
         }
+
         .truncate:after {
             transition: opacity .5s;
             opacity: 1;
@@ -637,12 +646,15 @@
             width: 100%;
             box-sizing: border-box;
         }
+
         .truncate:hover:after {
             opacity: 0;
         }
+
         .truncate:hover {
             max-height: 2000px;
         }
+
         .elementor-element .elementor-widget-container {
             transition: background .3s, border .3s, border-radius .3s, box-shadow .3s, transform var(--e-transform-transition-duration, .4s);
         }
@@ -1623,9 +1635,13 @@
     * {
         color: #fff !important;
     }
-    p, span, div {
+
+    p,
+    span,
+    div {
         font-size: 24px;
         font-weight: 600;
+
         @include media-breakpoint-down(md) {
             font-size: 18px;
         }
@@ -1836,13 +1852,15 @@
 
 footer.footer.bg-primary {
     color: #FFF;
+
     .footer_title {
         color: #FFF;
     }
-    
+
     .footer_item_link {
         color: #FFF !important;
     }
+
     hr {
         border-top: 1px solid rgba(255, 255, 255, 1);
     }
@@ -2551,10 +2569,13 @@ footer.footer.bg-primary {
 
 /* Đặt kiểu cho icon mũi tên xuống */
 .arrow-down {
-    font-size: 30px; /* Cỡ chữ của mũi tên */
+    font-size: 30px;
+    /* Cỡ chữ của mũi tên */
     display: inline-block;
-    animation: bounce 1.5s infinite; /* Áp dụng animation bounce */
-    color: #333; /* Màu sắc của icon */
+    animation: bounce 1.5s infinite;
+    /* Áp dụng animation bounce */
+    color: #333;
+    /* Màu sắc của icon */
     text-align: center;
     margin-top: -40px;
     float: right;
@@ -2563,24 +2584,33 @@ footer.footer.bg-primary {
 /* Animation nháy nháy xuống xuống */
 @keyframes bounce {
     0% {
-    transform: translateY(0); /* Vị trí ban đầu */
-    opacity: 0;
+        transform: translateY(0);
+        /* Vị trí ban đầu */
+        opacity: 0;
     }
+
     25% {
-    transform: translateY(10px); /* Di chuyển xuống 10px */
-    opacity: 1;
+        transform: translateY(10px);
+        /* Di chuyển xuống 10px */
+        opacity: 1;
     }
+
     50% {
-    transform: translateY(0); /* Quay lại vị trí ban đầu */
-    opacity: 0;
+        transform: translateY(0);
+        /* Quay lại vị trí ban đầu */
+        opacity: 0;
     }
+
     75% {
-    transform: translateY(10px); /* Di chuyển xuống 10px nữa */
-    opacity: 1;
+        transform: translateY(10px);
+        /* Di chuyển xuống 10px nữa */
+        opacity: 1;
     }
+
     100% {
-    transform: translateY(0); /* Quay lại vị trí ban đầu */
-    opacity: 0;
+        transform: translateY(0);
+        /* Quay lại vị trí ban đầu */
+        opacity: 0;
     }
 }
 
@@ -2594,52 +2624,67 @@ footer.footer.bg-primary {
 }
 
 footer {
-    .footer_form input[type="text"], .footer_form input[type="tel"], .footer_form input[type="email"] {
+
+    .footer_form input[type="text"],
+    .footer_form input[type="tel"],
+    .footer_form input[type="email"] {
         font-size: 13px;
     }
+
     .footer_form input[type="submit"] {
         height: 45px;
         justify-content: center;
         background: #FFD503 !important;
         color: $primary !important;
     }
+
     .choices__list--multiple .choices__item {
         background-color: $primary;
         border: 1px solid $primary;
     }
-    .choices__list--dropdown .choices__item--selectable.is-highlighted, .choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
+
+    .choices__list--dropdown .choices__item--selectable.is-highlighted,
+    .choices__list[aria-expanded] .choices__item--selectable.is-highlighted {
         background-color: $primary;
         color: #FFF;
     }
-    .choices__list--dropdown, .choices__list[aria-expanded] {
+
+    .choices__list--dropdown,
+    .choices__list[aria-expanded] {
         color: #333;
     }
+
     .choices__inner {
         padding: 8px 12px;
         background-color: #FFF;
         border-radius: 4px;
         min-height: 40px;
     }
+
     .choices__input {
         padding: 0;
         font-size: 13px;
         background-color: #FFF;
         margin: 0;
     }
+
     /* Tạo mũi tên xổ xuống trong dropdown */
     .choices__inner {
         position: relative;
-        padding-right: 30px; /* Tạo không gian cho mũi tên */
+        padding-right: 30px;
+        /* Tạo không gian cho mũi tên */
     }
 
     .choices__inner::after {
-        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'/%3E%3C/svg%3E"); /* Mã Unicode cho icon mũi tên xuống */
+        content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'/%3E%3C/svg%3E");
+        /* Mã Unicode cho icon mũi tên xuống */
         position: absolute;
         right: 10px;
         top: 50%;
         transform: translateY(-50%);
         font-size: 18px;
-        color: #333; /* Màu sắc của mũi tên */
+        color: #333;
+        /* Màu sắc của mũi tên */
     }
 
     /* Thêm hiệu ứng khi dropdown mở (xoay mũi tên) */
@@ -2651,6 +2696,7 @@ footer {
         font-size: 12px !important;
         position: absolute;
     }
+
     .footer_form p {
         margin-bottom: 20px !important;
     }
@@ -2658,10 +2704,12 @@ footer {
     .custom_dropdown_menu .wpcf7-list-item {
         margin: 0;
     }
+
     .custom_dropdown {
         color: #333;
         margin-bottom: 20px;
     }
+
     .custom_dropdown_button {
         cursor: pointer;
         display: flex;
@@ -2676,10 +2724,12 @@ footer {
         padding: 8px 12px;
         color: #757575 !important;
         font-size: 13px;
+
         p {
             margin: 0 !important;
         }
     }
+
     .wpcf7-form-control.wpcf7-checkbox {
         display: flex;
         flex-wrap: nowrap;
@@ -2694,16 +2744,20 @@ footer {
     .item_post {
         border-radius: 20px;
         overflow: hidden;
+
         h3 {
             a {
                 color: #333;
                 text-decoration: none;
+
                 &:hover {
                     color: $primary;
                 }
             }
         }
-        p, i  {
+
+        p,
+        i {
             color: #777;
         }
     }
@@ -2782,9 +2836,11 @@ footer {
 
         &-prev {
             left: 25%;
+
             @include media-breakpoint-down(md) {
                 left: 15px;
             }
+
             &::before {
                 content: '‹' !important;
             }
@@ -2792,22 +2848,27 @@ footer {
 
         &-next {
             right: 25%;
+
             @include media-breakpoint-down(md) {
                 right: 15px;
             }
+
             &::before {
                 content: '›' !important;
             }
         }
     }
+
     .item {
         position: relative;
+
         .image_bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+
             &:after {
                 content: '';
                 position: absolute;
@@ -2817,6 +2878,7 @@ footer {
                 height: 100%;
                 background-color: rgba(0, 0, 0, 0.3);
             }
+
             img {
                 display: block;
                 width: 100%;
@@ -2825,15 +2887,18 @@ footer {
                 object-fit: cover;
             }
         }
+
         .wrap-content {
             position: relative;
             text-align: center;
             color: #FFF;
             padding: 20px 0;
+
             .editor {
                 padding: 15px 60px;
                 background-color: rgba(39, 106, 230, 0.7);
             }
+
             a {
                 color: #FFF;
             }
@@ -2846,6 +2911,7 @@ footer {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
+
         .item {
             color: #276AE6;
             background-color: #FFF;
@@ -2855,15 +2921,28 @@ footer {
             display: block;
             padding: 40px 60px;
             margin: 15px;
+
             .icon {
                 margin-bottom: 25px;
             }
-            a { 
+
+            a {
                 color: #276AE6;
+
                 &:hover {
                     color: $primary;
                 }
             }
         }
+    }
+}
+
+.landingpage_popup_btn_submit {
+    transition: all 0.3s;
+    border: 1px solid $primary !important;
+
+    &:hover {
+        background-color: #fff !important;
+        color: $primary !important;
     }
 }

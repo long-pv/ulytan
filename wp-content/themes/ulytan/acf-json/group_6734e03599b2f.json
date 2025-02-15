@@ -3,6 +3,26 @@
     "title": "Contact information",
     "fields": [
         {
+            "key": "field_67b07589d9e8a",
+            "label": "Họ và tên",
+            "name": "full_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_6734e0369cd3a",
             "label": "Phone",
             "name": "phone",
@@ -61,106 +81,6 @@
             "rows": 4,
             "placeholder": "",
             "new_lines": ""
-        },
-        {
-            "key": "field_674dd1d244149",
-            "label": "Quốc gia (2. Dịch vụ xin cấp visa đa quốc gia)",
-            "name": "services_2",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_674dd1f24414c",
-            "label": "Quốc gia (10. Dịch vụ xuất khẩu lao động)",
-            "name": "services_10",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_674dd1fa4414d",
-            "label": "Quốc gia (11. Dịch vụ du học quốc tế)",
-            "name": "services_11",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_674dd2014414e",
-            "label": "Quốc gia (12. Dịch vụ đào tạo ngoại ngữ)",
-            "name": "services_12",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_675f0b190190b",
-            "label": "Quốc gia (13. Dịch vụ du lịch quốc tế)",
-            "name": "services_13",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
         },
         {
             "key": "field_675fec4260a39",
@@ -227,5 +147,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1736354709
+    "modified": 1739617706
 }
