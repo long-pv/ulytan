@@ -18,6 +18,15 @@ get_header();
 ?>
 
 <?php
+$tieu_de_h1 = get_field('tieu_de_h1') ?? '';
+if ($tieu_de_h1) :
+?>
+	<h1 class="homepage_title_h1">
+		<?php echo $tieu_de_h1; ?>
+	</h1>
+<?php endif; ?>
+
+<?php
 $banner = get_field('banner') ?? '';
 if ($banner):
 ?>
@@ -117,7 +126,7 @@ if ($query->have_posts()):
 			<h2 class="sec_title text-center">
 				<?php echo $title_services; ?>
 			</h2>
-			
+
 			<div class="service_list">
 				<div class="row row_24">
 					<?php /*
@@ -132,7 +141,7 @@ if ($query->have_posts()):
 					?>
 				</div>
 			</div>
- 
+
 			<div class="service_list_slider">
 				<?php
 				while ($query->have_posts()):
@@ -202,7 +211,7 @@ if ($query->have_posts()):
 								<div class="info_customer">
 									<div class="testimonials">
 										<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#ebebed" class="bi bi-quote" viewBox="0 0 16 16">
-											<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"/>
+											<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z" />
 										</svg>
 										<div class="truncate">
 											<p class="elementor-widget-container"><?php echo $testimonials; ?></p>
@@ -210,11 +219,11 @@ if ($query->have_posts()):
 									</div>
 									<p class="star_rating">
 										<?php
-											for ($x = 0; $x < $star_rating; $x++) {
-												echo '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+										for ($x = 0; $x < $star_rating; $x++) {
+											echo '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 													<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 												</svg>';
-											} 
+										}
 										?>
 									</p>
 									<div class="row no-gutters">

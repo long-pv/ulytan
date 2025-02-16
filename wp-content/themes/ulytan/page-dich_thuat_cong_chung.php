@@ -226,7 +226,7 @@ if ($query->have_posts()):
 								<div class="info_customer">
 									<div class="testimonials">
 										<svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#ebebed" class="bi bi-quote" viewBox="0 0 16 16">
-											<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z"/>
+											<path d="M12 12a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1h-1.388q0-.527.062-1.054.093-.558.31-.992t.559-.683q.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 9 7.558V11a1 1 0 0 0 1 1zm-6 0a1 1 0 0 0 1-1V8.558a1 1 0 0 0-1-1H4.612q0-.527.062-1.054.094-.558.31-.992.217-.434.559-.683.34-.279.868-.279V3q-.868 0-1.52.372a3.3 3.3 0 0 0-1.085.992 4.9 4.9 0 0 0-.62 1.458A7.7 7.7 0 0 0 3 7.558V11a1 1 0 0 0 1 1z" />
 										</svg>
 										<div class="truncate">
 											<p class="elementor-widget-container"><?php echo $testimonials; ?></p>
@@ -234,11 +234,11 @@ if ($query->have_posts()):
 									</div>
 									<p class="star_rating">
 										<?php
-											for ($x = 0; $x < $star_rating; $x++) {
-												echo '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+										for ($x = 0; $x < $star_rating; $x++) {
+											echo '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
 													<path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 												</svg>';
-											} 
+										}
 										?>
 									</p>
 									<div class="row no-gutters">
@@ -331,53 +331,6 @@ endif;
 ?>
 
 <?php
-$services_title = get_field('services_title') ?: 'CÁC DỊCH VỤ BỔ SUNG';
-$services = get_field('services') ?? [];
-if ($services) {
-	$args = array(
-		'post_type' => 'service',
-		'posts_per_page' => -1,
-		'post__in' => $services,
-		'orderby' => 'post__in',
-	);
-} else {
-	$args = array(
-		'post_type' => 'service',
-		'posts_per_page' => '3',
-	);
-}
-
-$query = new WP_Query($args);
-if ($query->have_posts()):
-?>
-	<section class="service secSpace" id="scroll_3">
-		<div class="container">
-			<h2 class="sec_title text-center">
-				<?php echo $services_title; ?>
-			</h2>
-
-			<div class="service_list">
-				<div class="row row_24">
-					<?php
-					while ($query->have_posts()):
-						$query->the_post();
-					?>
-						<div class="col-md-6 col-lg-4">
-							<?php get_template_part('template-parts/content_service'); ?>
-						</div>
-					<?php
-					endwhile;
-					?>
-				</div>
-			</div>
-		</div>
-	</section>
-<?php
-endif;
-wp_reset_postdata();
-?>
-
-<?php
 $faqs = get_field('faqs') ?? [];
 if ($faqs):
 	$args = array(
@@ -412,92 +365,120 @@ if ($faqs):
 endif;
 ?>
 
-<?php /*
-$args = array(
-	'post_type' => 'notarization',
-	'posts_per_page' => 4,
-	'paged' => 1,
-);
-$query = new WP_Query($args);
-if ($query->have_posts()):
-?>
-	<section class="secSpace notarized_translation_news" id="scroll_5">
-		<div class="container">
-			<h2 class="home_news_title mb-4">
-				Tin tức dịch công chứng
-			</h2>
-			<div class="row">
-				<div class="col-lg-6">
-					<ul class="notarized_translation_news_list">
-						<?php
-						while ($query->have_posts()):
-							$query->the_post();
-						?>
-							<li>
-								<a class="notarized_translation_news_item" href="<?php the_permalink(); ?>">
-									<?php the_title(); ?>
-								</a>
-							</li>
-						<?php
-						endwhile;
-						?>
-					</ul>
-				</div>
-			</div>
 
-			<?php
-			echo '<div class="pagination justify-content-start pagination_ajax">';
-			echo paginate_links(
-				array(
-					'total'   => $query->max_num_pages,
-					'current' => 1,
-					'end_size' => 2,
-					'mid_size' => 1,
-					'prev_text' => __('Trước', 'basetheme'),
-					'next_text' => __('Sau', 'basetheme'),
-				)
-			);
-			echo '</div>';
-			?>
+<section class="secSpace--top">
+	<div class="container">
+		<?php
+		$post_id = get_the_ID();
+		$session_key = "reaction_$post_id";
+		$current_reaction = isset($_COOKIE[$session_key]) ? $_COOKIE[$session_key] : '';
+		?>
+		<div class="reaction_buttons landingpage_share_mxh_wrap">
+			<button class="reaction_button_item like_button <?php echo $current_reaction === 'like' ? 'active' : ''; ?>" data-post-id="<?php echo $post_id; ?>">
+				<span class="reaction_buttons_icon">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+						<path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2l144 0c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48l-97.5 0c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3l0-38.3 0-48 0-24.9c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192l64 0c17.7 0 32 14.3 32 32l0 224c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32L0 224c0-17.7 14.3-32 32-32z" />
+					</svg>
+				</span>
+				(<span class="like_count">
+					<?php echo get_post_meta($post_id, 'likes', true) ?: 0; ?>
+				</span>)
+			</button>
+
+			<!-- facebook -->
+			<a class="reaction_button_item single_post_share_mxh_icon" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+					<path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
+				</svg>
+			</a>
+
+			<!-- Twitter (X) -->
+			<a class="reaction_button_item single_post_share_mxh_icon" href="https://twitter.com/home?status=<?php echo the_permalink(); ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+					<path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+				</svg>
+			</a>
+
+			<!-- linkedin -->
+			<a class="reaction_button_item single_post_share_mxh_icon" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $share_link; ?>&title=text" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+					<path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" />
+				</svg>
+			</a>
+
+			<!-- zalo -->
+			<a class="reaction_button_item single_post_share_mxh_icon" href="https://zalo.me/share?url=<?php echo $share_link; ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;">
+				<svg width="60" height="52" viewBox="0 0 60 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g clip-path="url(#clip0_2548_12)">
+						<path d="M9.44623 51.4406H5.31347L8.23583 48.5182C9.81154 46.9425 10.7955 44.8931 11.0601 42.6698C6.94829 39.9715 3.94159 36.4215 2.3321 32.3502C0.723758 28.282 0.521645 23.8037 1.74768 19.3992C3.21873 14.1143 6.66903 9.29725 11.4628 5.83531C16.6721 2.07345 23.1571 0.0849609 30.2168 0.0849609C39.1101 0.0849609 46.6062 2.64007 51.8943 7.47389C56.6583 11.8287 59.282 17.7028 59.282 24.0142C59.282 27.0804 58.6576 30.064 57.4263 32.8819C56.1521 35.7979 54.2863 38.3943 51.8807 40.5988C46.5855 45.4517 39.0941 48.0169 30.2166 48.0169C26.9211 48.0169 23.4822 47.5769 20.4119 46.7696C17.5058 49.7509 13.5677 51.4406 9.44623 51.4406Z" fill="black" />
+						<path d="M16.0936 27.9243C18.0397 27.9243 19.8698 27.9115 21.6871 27.9243C22.7053 27.9372 23.2594 28.3611 23.3626 29.1703C23.4785 30.1851 22.8857 30.8659 21.7773 30.8788C19.6894 30.9044 17.6144 30.8916 15.5265 30.8916C14.9207 30.8916 14.3279 30.9173 13.7221 30.8788C12.9746 30.8402 12.24 30.6861 11.8791 29.9154C11.5182 29.1446 11.776 28.451 12.2658 27.8216C14.2506 25.3039 16.2482 22.7734 18.2459 20.2557C18.3619 20.1016 18.4779 19.9474 18.5939 19.8061C18.465 19.5878 18.2846 19.6905 18.1299 19.6777C16.738 19.6648 15.3332 19.6777 13.9412 19.6648C13.619 19.6648 13.2968 19.6263 12.9875 19.5621C12.2529 19.3951 11.8018 18.6629 11.9693 17.9436C12.0853 17.4555 12.472 17.0573 12.9617 16.9416C13.271 16.8646 13.5933 16.826 13.9155 16.826C16.2096 16.8132 18.5166 16.8132 20.8107 16.826C21.2231 16.8132 21.6226 16.8646 22.0222 16.9673C22.8986 17.2628 23.2723 18.072 22.9244 18.9198C22.615 19.652 22.1253 20.2814 21.6355 20.9108C19.9472 23.056 18.2588 25.1883 16.5704 27.3078C16.4287 27.4748 16.2998 27.6418 16.0936 27.9243Z" fill="white" />
+						<path d="M31.02 21.1544C31.3288 20.7539 31.6504 20.3791 32.178 20.2757C33.1944 20.069 34.1466 20.728 34.1594 21.7618C34.198 24.3462 34.1852 26.9307 34.1594 29.5151C34.1594 30.187 33.722 30.7815 33.0915 30.9753C32.4482 31.2208 31.7148 31.027 31.2902 30.4713C31.0714 30.2 30.9814 30.1483 30.6726 30.3938C29.5017 31.35 28.1764 31.518 26.7482 31.0528C24.4579 30.3033 23.5187 28.5072 23.2613 26.3233C22.9911 23.9586 23.776 21.9427 25.8861 20.7022C27.636 19.6555 29.4116 19.7459 31.02 21.1544ZM26.4651 25.871C26.4909 26.4396 26.671 26.9823 27.0055 27.4346C27.7003 28.365 29.0256 28.5589 29.9649 27.8611C30.1193 27.7448 30.2608 27.6026 30.3895 27.4346C31.11 26.4525 31.11 24.8373 30.3895 23.8552C30.0292 23.3512 29.4631 23.054 28.8584 23.0411C27.443 22.9506 26.4523 24.049 26.4651 25.871ZM39.9366 25.9486C39.8337 22.6276 42.0082 20.1465 45.0962 20.0561C48.3772 19.9527 50.7704 22.1624 50.8733 25.3929C50.9763 28.6622 48.9819 30.9753 45.9068 31.2854C42.5486 31.6214 39.8851 29.1791 39.9366 25.9486ZM43.1662 25.6384C43.1404 26.2846 43.3334 26.9177 43.7194 27.4475C44.4271 28.3779 45.7524 28.5589 46.6788 27.8352C46.8203 27.7318 46.9361 27.6026 47.0519 27.4734C47.7982 26.4913 47.7982 24.8373 47.0648 23.8552C46.7045 23.3641 46.1384 23.054 45.5336 23.0411C44.144 22.9636 43.1662 24.0232 43.1662 25.6384ZM38.8043 23.3771C38.8043 25.38 38.8172 27.3829 38.8043 29.3859C38.8172 30.3033 38.0967 31.0658 37.1831 31.0916C37.0287 31.0916 36.8615 31.0787 36.7071 31.0399C36.0637 30.8719 35.5748 30.187 35.5748 29.3729V19.0998C35.5748 18.4925 35.5619 17.8981 35.5748 17.2907C35.5877 16.2957 36.2181 15.6496 37.1703 15.6496C38.1481 15.6367 38.8043 16.2828 38.8043 17.3166C38.8172 19.3324 38.8043 21.3612 38.8043 23.3771Z" fill="white" />
+					</g>
+					<defs>
+						<clipPath id="clip0_2548_12">
+							<rect width="60" height="52" fill="white" />
+						</clipPath>
+					</defs>
+				</svg>
+			</a>
+
+			<!-- copy link -->
+			<a href="javascript:void(0);" onclick="copyToClipboard('#copy2')" class="reaction_button_item single_post_share_mxh_icon">
+				<span id="copy2" style="display:none"><?php the_permalink(); ?></span>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+					<path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z" />
+				</svg>
+			</a>
+
+			<button class="reaction_button_item dislike_button <?php echo $current_reaction === 'dislike' ? 'active' : ''; ?>" data-post-id="<?php echo $post_id; ?>">
+				<span class="reaction_buttons_icon">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+						<path d="M313.4 479.1c26-5.2 42.9-30.5 37.7-56.5l-2.3-11.4c-5.3-26.7-15.1-52.1-28.8-75.2l144 0c26.5 0 48-21.5 48-48c0-18.5-10.5-34.6-25.9-42.6C497 236.6 504 223.1 504 208c0-23.4-16.8-42.9-38.9-47.1c4.4-7.3 6.9-15.8 6.9-24.9c0-21.3-13.9-39.4-33.1-45.6c.7-3.3 1.1-6.8 1.1-10.4c0-26.5-21.5-48-48-48l-97.5 0c-19 0-37.5 5.6-53.3 16.1L202.7 73.8C176 91.6 160 121.6 160 153.7l0 38.3 0 48 0 24.9c0 29.2 13.3 56.7 36 75l7.4 5.9c26.5 21.2 44.6 51 51.2 84.2l2.3 11.4c5.2 26 30.5 42.9 56.5 37.7zM32 384l64 0c17.7 0 32-14.3 32-32l0-224c0-17.7-14.3-32-32-32L32 96C14.3 96 0 110.3 0 128L0 352c0 17.7 14.3 32 32 32z" />
+					</svg>
+				</span>
+				(<span class="dislike_count">
+					<?php echo get_post_meta($post_id, 'dislikes', true) ?: 0; ?>
+				</span>)
+			</button>
 		</div>
-	</section>
-<?php
-endif;
-wp_reset_postdata(); */
-?>
+	</div>
+</section>
 
-<?php /*
-$related_posts_title = get_field('related_posts_title') ?: 'Bài viết liên quan';
-$related_posts = get_field('related_posts') ?? [];
-if ($related_posts) {
+<?php
+$services_title = get_field('services_title') ?: 'CÁC DỊCH VỤ BỔ SUNG';
+$services = get_field('services') ?? [];
+if ($services) {
 	$args = array(
-		'post_type' => 'post',
+		'post_type' => 'service',
 		'posts_per_page' => -1,
-		'post__in' => $related_posts,
+		'post__in' => $services,
 		'orderby' => 'post__in',
 	);
 } else {
 	$args = array(
-		'post_type' => 'post',
-		'posts_per_page' => 6,
+		'post_type' => 'service',
+		'posts_per_page' => '3',
 	);
 }
 
 $query = new WP_Query($args);
 if ($query->have_posts()):
 ?>
-	<section class="secSpace--bottom related_posts">
+	<section class="service service_list secSpace" id="scroll_3">
 		<div class="container">
-			<h2 class="home_news_title mb-4">
-				<?php echo $related_posts_title; ?>
+			<h2 class="sec_title text-center">
+				<?php echo $services_title; ?>
 			</h2>
-			<div class="row row_24">
+
+			<div class="service_list_slider">
 				<?php
 				while ($query->have_posts()):
 					$query->the_post();
 				?>
-					<div class="col-md-6 col-lg-4">
-						<?php get_template_part('template-parts/content_post'); ?>
+					<div>
+						<div class="service_item">
+							<?php get_template_part('template-parts/content_service'); ?>
+						</div>
 					</div>
 				<?php
 				endwhile;
@@ -507,7 +488,7 @@ if ($query->have_posts()):
 	</section>
 <?php
 endif;
-wp_reset_postdata(); */
+wp_reset_postdata();
 ?>
 
 <div class="modal modal_landing fade" id="modal_landing" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -538,11 +519,11 @@ wp_reset_postdata(); */
 				endif;
 				?>
 			</div>
-				<div class="arrow-down">
-					<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M12.5 0H27.5V20H39.6L20 39.6L0.400002 20H12.5V0Z" fill="#FC0D1C"/>
-					</svg>
-				</div>
+			<div class="arrow-down">
+				<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M12.5 0H27.5V20H39.6L20 39.6L0.400002 20H12.5V0Z" fill="#FC0D1C" />
+				</svg>
+			</div>
 			<div class="modal-body">
 				<form id="page_contact_form" class="page_contact_form" enctype="multipart/form-data">
 					<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
@@ -985,7 +966,7 @@ wp_reset_postdata(); */
 			</div>
 			<div class="modal-footer justify-content-center">
 				<div class="d-flex justify-content-center">
-					<input type="submit" class="contact_submit contact_submit_fake" value="Đăng ký ngay">
+					<input type="submit" class="contact_submit contact_submit_fake landingpage_popup_btn_submit" value="Đăng ký ngay">
 				</div>
 			</div>
 		</div>
@@ -1255,6 +1236,49 @@ get_footer();
 			} else {
 				$('.page_contact_info').show();
 			}
+		});
+
+		// chức năng like và dislike
+		$(document).on('click', '.reaction_buttons button', function(e) {
+			e.preventDefault();
+
+			var button = $(this);
+
+			if (button.hasClass('active')) {
+				return 0;
+			}
+
+			var post_id = button.data('post-id');
+			var reaction_type = button.hasClass('like_button') ? 'like' : 'dislike';
+
+			$.ajax({
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				type: 'POST',
+				data: {
+					action: 'handle_reaction',
+					post_id: post_id,
+					reaction_type: reaction_type,
+				},
+				beforeSend: function() {
+					$("#ajax-loader").show();
+				},
+				success: function(response) {
+					if (response.success) {
+						$('.like_count').text(response.data.likes);
+						$('.dislike_count').text(response.data.dislikes);
+						button.addClass('active');
+						button.siblings().removeClass('active');
+					} else {
+						alert(response.data.message || 'Đã xảy ra lỗi!');
+					}
+				},
+				error: function() {
+					alert('Có lỗi xảy ra khi gửi dữ liệu.');
+				},
+				complete: function() {
+					$("#ajax-loader").hide();
+				},
+			});
 		});
 	});
 </script>

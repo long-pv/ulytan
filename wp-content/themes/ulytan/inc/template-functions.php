@@ -555,10 +555,23 @@ function save_contact_info()
 		$subject = 'Form 1 - Liên hệ';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
+		$message .= 'Họ và tên: ' . $data['full_name'] . '<br>';
 		$message .= 'Email: ' . $data['email'] . '<br>';
 		$message .= 'Số điện thoại: ' . $data['phone'] . '<br>';
+
+		// các dịch vụ
+		if ($data['services']) {
+			$message .= 'Dịch vụ: <br>';
+			$services = (array) $data['services'];
+
+			foreach ($services as $item) {
+				$text = str_replace("_", " ", $item);
+				$message .= ' - ' . $text . '<br>';
+			}
+		}
+
 		wp_mail('Sales@ulytan.com', $subject, $message, $headers);
-		wp_mail('xuandxop@gmail.com', $subject, $message, $headers);
+		// wp_mail('xuandxop@gmail.com', $subject, $message, $headers);
 
 		$new_post = array(
 			'post_type'   => 'contact_info',
@@ -570,6 +583,7 @@ function save_contact_info()
 		if ($post_id) {
 			if (function_exists('update_field')) {
 				$services =  implode(', ', $data['services']) ?? '';
+				update_field('full_name', sanitize_text_field($data['full_name']), $post_id);
 				update_field('phone', sanitize_text_field($data['phone']), $post_id);
 				update_field('email', sanitize_text_field($data['email']), $post_id);
 				update_field('services_list',   sanitize_text_field((string) $services), $post_id);
@@ -648,10 +662,12 @@ function save_form_ctv()
 		$subject = 'Form 2 - Cộng tác viên';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
+		$message .= 'Họ và tên: ' . $data['full_name'] . '<br>';
 		$message .= 'Email: ' . $data['email'] . '<br>';
 		$message .= 'Số điện thoại: ' . $data['phone'] . '<br>';
+
 		wp_mail('hr@ulytan.com', $subject, $message, $headers);
-		wp_mail('xuandxop@gmail.com', $subject, $message, $headers);
+		// wp_mail('xuandxop@gmail.com', $subject, $message, $headers);
 
 		$new_post = array(
 			'post_type'   => 'form_ctv',
