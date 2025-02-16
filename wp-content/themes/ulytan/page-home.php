@@ -68,7 +68,6 @@ if ($about_us_content || ($about_us_iframe_video && $about_us_video_image)) :
 					<div class="about_us_video">
 						<?php
 						if ($about_us_iframe_video && $about_us_video_image) {
-							// video_popup($about_us_iframe_video, $about_us_video_image);
 							$about_us_iframe_video = getYoutubeEmbedUrl($about_us_iframe_video);
 						?>
 							<div class="videoBlock">
@@ -126,21 +125,6 @@ if ($query->have_posts()):
 			<h2 class="sec_title text-center">
 				<?php echo $title_services; ?>
 			</h2>
-
-			<div class="service_list">
-				<div class="row row_24">
-					<?php /*
-					while ($query->have_posts()):
-						$query->the_post();
-					?>
-						<div class="col-md-6 col-lg-4">
-							<?php get_template_part('template-parts/content_service'); ?>
-						</div>
-					<?php
-					endwhile; */
-					?>
-				</div>
-			</div>
 
 			<div class="service_list_slider">
 				<?php
@@ -253,7 +237,105 @@ endif;
 wp_reset_postdata();
 ?>
 
+<!-- Khách hàng tiêu biểu -->
+<?php
+$args = array(
+	'post_type' => 'typical_customers',
+	'posts_per_page' => -1,
+);
 
+$query = new WP_Query($args);
+if ($query->have_posts()):
+?>
+	<section class="secSpace kh_tieu_bieu">
+		<div class="container">
+			<h2 class="sec_title text-center">
+				<span class="kh_tieu_bieu_hightlight">5000+</span> Khách hàng tiêu biểu
+			</h2>
+
+			<div class="row kh_tieu_bieu_row">
+				<?php
+				while ($query->have_posts()):
+					$query->the_post();
+					$link_website = get_field('link_website') ?? '';
+					$logo_cong_ty = get_field('logo_cong_ty') ?? '';
+					if ($link_website && $logo_cong_ty):
+				?>
+						<div class="col-12 col-md-6 kh_tieu_bieu_col">
+							<a class="kh_tieu_bieu_link" href="<?php echo get_field('link_website'); ?>">
+								<img class="kh_tieu_bieu_img" src="<?php echo get_field('logo_cong_ty'); ?>" alt="<?php echo get_the_title(); ?>">
+							</a>
+						</div>
+				<?php
+					endif;
+				endwhile;
+				?>
+			</div>
+		</div>
+	</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
+<!-- end -->
+
+<!-- Đối tác của chúng tôi -->
+<?php
+$args = array(
+	'post_type' => 'our_partners',
+	'posts_per_page' => -1,
+);
+$query = new WP_Query($args);
+if ($query->have_posts()):
+?>
+	<section class="secSpace doi_tac_ulytan bg-light">
+		<div class="container">
+			<h2 class="sec_title text-center">
+				Đối tác của chúng tôi
+			</h2>
+
+			<div class="doi_tac_ulytan_slider">
+				<?php
+				while ($query->have_posts()):
+					$query->the_post();
+				?>
+					<div>
+						<div class="about_us_video doi_tac_ulytan_item">
+							<?php
+							$image = get_field('image') ?? '';
+							$iframe = get_field('iframe_youtube') ?? '';
+							if ($image && $iframe) :
+								$iframe_url = getYoutubeEmbedUrl($iframe);
+							?>
+								<div class="videoBlock">
+									<div class="videoBlock__inner" data-mh="videoBlock__inner">
+										<img class="videoBlock__img" src="<?php echo $image; ?>">
+										<div class="videoBlock__overlay"></div>
+										<div class="videoBlock__videoAction">
+											<a href="javascript:void(0);" class="videoBlock__playAction" data-toggle="modal" data-target="#videoUrl" data-src="<?php echo $iframe_url; ?>">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+													<path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path>
+												</svg>
+											</a>
+										</div>
+									</div>
+								</div>
+							<?php
+							endif;
+							?>
+						</div>
+					</div>
+				<?php
+				endwhile;
+				?>
+			</div>
+		</div>
+	</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
+<!-- end -->
 
 <section class="home_news secSpace">
 	<div class="container">

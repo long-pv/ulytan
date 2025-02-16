@@ -13,7 +13,7 @@ $post_id = get_the_ID();
 
 $post_type = get_post_type($post_id);
 
-if (in_array($post_type, ['form_ctv', 'contact_info', 'form_contribute', 'faqs'])) {
+if (in_array($post_type, ['form_ctv', 'contact_info', 'form_contribute', 'faqs', 'typical_customers', 'our_partners'])) {
 	wp_redirect(home_url());
 	exit;
 }
