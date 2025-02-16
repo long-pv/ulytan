@@ -16,11 +16,13 @@
 
 get_header();
 ?>
+
+<!-- Banner Đội ngũ -->
 <?php
 $image_banner_team = get_field('image_banner_team') ?? null;
 $title_banner_team = get_field('title_banner_team') ?? null;
 ?>
-<!-- Banner Đội ngũ -->
+
 <section class="banner_doingu">
 	<div class="banner_doingu_inner">
 		<?php if ($image_banner_team): ?>
@@ -39,12 +41,16 @@ $title_banner_team = get_field('title_banner_team') ?? null;
 </section>
 
 <!-- Đội ngũ nhân viên -->
+<?php
+$title_member = get_field('title_member') ?? null;
+?>
+
 <section class="team">
 	<div class="container">
-		<h2 class="team__title">Đội ngũ nhân viên</h2>
+		<h2 class="team__title"><?php echo $title_member; ?></h2>
 		<div class="row team_row">
 			<?php for ($i = 0; $i < 10; $i++): ?>
-				<div class="col-3">
+				<div class="team_col col-12 col-md-6 col-lg-3">
 					<div class="team__member">
 						<div class="team__image_wrapper">
 							<img class="team__image"

@@ -19,6 +19,13 @@
 		margin-bottom: 0px;
 	}
 }
+//
+.file_pdf {
+	.file_pdf_inner {
+		width: 100%;
+		max-width: 100%;
+	}
+}
 
 //
 .thuong_hieu {
@@ -45,38 +52,84 @@
 //
 .gia_tri {
 	background-color: #f4f5f7;
-	padding: 50px 0px 60px;
+
+	.gia_tri_container {
+		padding: 36px 0px 36px;
+
+		@include media-breakpoint-up(lg) {
+			padding: 50px 0px 60px;
+		}
+	}
 
 	.gia_tri_subtitle {
-		margin-bottom: 42px;
+		margin-bottom: 28px;
+
+		@include media-breakpoint-up(lg) {
+			margin-bottom: 42px;
+		}
 	}
 
 	.gia_tri_title {
-		margin-bottom: 42px;
+		margin-bottom: 28px;
+
+		@include media-breakpoint-up(lg) {
+			margin-bottom: 42px;
+		}
 	}
 
 	.gia_tri_desc {
-		margin-bottom: 26px;
+		margin-bottom: 20px;
+
+		@include media-breakpoint-up(lg) {
+			margin-bottom: 26px;
+		}
 	}
 
 	.gia_tri_row {
 		justify-content: center;
+		row-gap: 20px;
+
+		@include media-breakpoint-up(lg) {
+			margin-left: -10px;
+			margin-right: -10px;
+			row-gap: 20px;
+		}
+	}
+
+	.gia_tri_col {
+		@include media-breakpoint-up(lg) {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+
+		//
+		// margin-top: 20px;
 	}
 
 	.gia_tri_content_item {
 		background: #fff;
 		border-radius: 10px;
-		padding: 34px 30px 30px;
+		padding: 28px 24px 24px;
 		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 34px;
-		margin-bottom: 20px;
+		gap: 24px;
+		// margin-bottom: 20px;
+
+		@include media-breakpoint-up(lg) {
+			padding: 34px 30px 30px;
+			gap: 34px;
+		}
 
 		.gia_tri_content_item_img {
-			width: 40px;
-			height: 40px;
+			width: 34px;
+			height: 34px;
+
+			@include media-breakpoint-up(lg) {
+				width: 40px;
+				height: 40px;
+			}
 		}
 
 		.gia_tri_content_item_title {
@@ -96,18 +149,36 @@
 
 //
 .doi_ngu {
-	padding: 50px 0px 86px;
+	padding: 36px 0px 36px;
+
+	@include media-breakpoint-up(lg) {
+		padding: 50px 0px 50px;
+	}
 
 	.doi_ngu_subtitle {
 		margin-bottom: 42px;
 	}
 
 	.doi_ngu_title {
-		margin-bottom: 62px;
+		margin-bottom: 100px;
 	}
 
 	.doi_ngu_row {
 		justify-content: center;
+		row-gap: 36px;
+
+		@include media-breakpoint-up(lg) {
+			margin-left: -30px;
+			margin-right: -30px;
+			row-gap: 50px;
+		}
+	}
+
+	.doi_ngu_col {
+		@include media-breakpoint-up(lg) {
+			padding-right: 30px;
+			padding-left: 30px;
+		}
 	}
 
 	.team-member {
@@ -184,38 +255,77 @@
 //
 .van_hoa {
 	background-color: #f4f5f7;
-	padding: 50px 0px 60px;
+
+	.van_hoa_container {
+		padding: 36px 0px 36px;
+
+		@include media-breakpoint-up(lg) {
+			padding: 50px 0px 60px;
+		}
+	}
 
 	.van_hoa_subtitle {
-		margin-bottom: 42px;
+		margin-bottom: 28px;
+
+		@include media-breakpoint-up(lg) {
+			margin-bottom: 42px;
+		}
 	}
 
 	.van_hoa_title {
-		margin-bottom: 42px;
+		margin-bottom: 28px;
+
+		@include media-breakpoint-up(lg) {
+			margin-bottom: 42px;
+		}
 	}
 
 	.van_hoa_desc {
-		margin-bottom: 26px;
+		margin-bottom: 20px;
+
+		@include media-breakpoint-up(lg) {
+			margin-bottom: 26px;
+		}
 	}
 
 	.van_hoa_row {
+		margin-right: -10px;
+		margin-left: -10px;
 		justify-content: center;
+		//
+		margin-top: -20px;
+	}
+
+	.van_hoa_col {
+		padding-right: 10px;
+		padding-left: 10px;
+		margin-top: 20px;
 	}
 
 	.van_hoa_content_item {
 		background: #fff;
 		border-radius: 10px;
-		padding: 34px 30px 30px;
 		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		gap: 34px;
-		margin-bottom: 20px;
+		//
+		padding: 28px 24px 24px;
+
+		@include media-breakpoint-up(lg) {
+			padding: 34px 30px 30px;
+			gap: 34px;
+		}
 
 		.van_hoa_content_item_img {
-			width: 40px;
-			height: 40px;
+			width: 34px;
+			height: 34px;
+
+			@include media-breakpoint-up(lg) {
+				width: 40px;
+				height: 40px;
+			}
 		}
 
 		.van_hoa_content_item_title {
@@ -235,14 +345,35 @@
 
 //
 .thanh_tuu {
-	padding: 62px 0px 36px;
 	background-image: url("http://localhost/2025ulytan/wp-content/uploads/2024/12/ParagraphBackground-1.png");
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
 
+	.thanh_tuu_container {
+		padding: 36px 0px;
+
+		@include media-breakpoint-up(lg) {
+			padding: 50px 0px;
+		}
+	}
+
 	.thanh_tuu_row {
 		justify-content: center;
+		row-gap: 36px;
+
+		@include media-breakpoint-up(lg) {
+			margin-left: -25px;
+			margin-right: -25px;
+			row-gap: 50px;
+		}
+	}
+
+	.thanh_tuu_col {
+		@include media-breakpoint-up(lg) {
+			padding-left: 25px;
+			padding-right: 25px;
+		}
 	}
 
 	.thanh_tuu_title {
@@ -251,12 +382,15 @@
 		font-weight: 700;
 		color: #ffffff;
 		text-align: center;
-		margin-bottom: 62px;
+		margin-bottom: 36px;
+
+		@include media-breakpoint-up(lg) {
+			margin-bottom: 62px;
+		}
 	}
 
 	.thanh_tuu_content_item {
 		text-align: center;
-		margin-bottom: 50px;
 	}
 
 	.thanh_tuu_content_item_title {
@@ -272,5 +406,78 @@
 		font-size: 16px;
 		font-weight: 400;
 		color: #ffffff;
+	}
+}
+
+//
+.kien_thuc {
+	//
+	padding: 63px 0px 53px;
+	// Active Event
+	.nav-tabs .nav-link.active,
+	.nav-tabs .nav-item.show .nav-link {
+		color: $primary;
+		font-weight: 700;
+		background-color: #fff;
+		// tách riêng
+		border-color: #d5d8dc #d5d8dc #fff !important;
+	}
+
+	//
+	.nav-tabs .nav-link:hover {
+		border-color: $white;
+		// background-color: $primary;
+		// border-color: #d5d8dc #d5d8dc #fff !important;
+		color: $primary;
+	}
+
+	//
+	.nav-tabs .nav-link:focus {
+	}
+
+	//
+	.nav-tabs .nav-link {
+		color: #333333;
+		font-weight: 700;
+		font-style: italic;
+		font-size: 16px;
+
+		// border: 1px solid transparent;
+		// border-top-left-radius: 0.25rem;
+		// border-top-right-radius: 0.25rem;
+	}
+
+	//
+	.tab-content {
+		border-width: 0px 0.8px 0.8px 0.8px;
+		border-style: solid;
+		border-color: #d5d8dc;
+	}
+
+	//
+	.kien_thuc_button {
+		display: flex;
+		gap: 24px;
+		flex-direction: column;
+
+		@include media-breakpoint-up(lg) {
+			flex-direction: row;
+			gap: 40px;
+		}
+
+		.button {
+			padding: 14px 32px;
+			color: #f4f5f7;
+			text-decoration: none !important;
+			// background-color: #721326;
+			border-radius: 5px;
+		}
+		.button_1 {
+			background-color: #721326;
+		}
+
+		.button_2 {
+			background-color: rgba(144, 1, 1, 0.8);
+		}
 	}
 }

@@ -29,9 +29,9 @@ $banner_desc = get_field('banner_desc') ?? null;
 					<div class="col-10">
 						<h1 class="gioithieu_banner__title"><?php echo $banner_title; ?></h1>
 						<?php if ($banner_desc): ?>
-							<p class="gioithieu_banner__desc">
+							<div class="gioithieu_banner__desc">
 								<?php echo $banner_desc; ?>
-							</p>
+							</div>
 						<?php endif; ?>
 					</div>
 				</div>
@@ -44,6 +44,18 @@ $banner_desc = get_field('banner_desc') ?? null;
 <?php
 $link_pdf = get_field('link_pdf') ?? null;
 ?>
+<section class="file_pdf">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-lg-8">
+				<div class="file_pdf_inner">
+					<?php echo $link_pdf;
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
 <!-- Câu truyện thương hiệu -->
 <?php
@@ -72,25 +84,27 @@ $content_business = get_field('content_business') ?? null;
 ?>
 <section class="gia_tri">
 	<div class="container">
-		<h6 class="gia_tri_subtitle"><?php echo $subtitle_business; ?></h6>
-		<h2 class="gia_tri_title"><?php echo $title_business; ?></h2>
-		<p class="gia_tri_desc editor">
-			<?php echo $desc_business; ?>
-		</p>
-		<div class="row gia_tri_row">
-			<?php foreach ($content_business as $content_item): ?>
-				<div class="col-lg-4">
-					<div class="gia_tri_content_item" data-mh="gia_tri_content_item">
-						<img class="gia_tri_content_item_img" src="<?php echo $content_item['image'] ?>" alt="">
-						<div class="gia_tri_content_item_title">
-							<?php echo $content_item['title'] ?>
+		<div class="gia_tri_container">
+			<h6 class="gia_tri_subtitle"><?php echo $subtitle_business; ?></h6>
+			<h2 class="gia_tri_title"><?php echo $title_business; ?></h2>
+			<p class="gia_tri_desc editor">
+				<?php echo $desc_business; ?>
+			</p>
+			<div class="row gia_tri_row">
+				<?php foreach ($content_business as $content_item): ?>
+					<div class="gia_tri_col col-12 col-md-6 col-lg-4">
+						<div class="gia_tri_content_item" data-mh="gia_tri_content_item">
+							<img class="gia_tri_content_item_img" src="<?php echo $content_item['image'] ?>" alt="">
+							<div class="gia_tri_content_item_title">
+								<?php echo $content_item['title'] ?>
+							</div>
+							<p class="gia_tri_content_item_desc">
+								<?php echo $content_item['content'] ?>
+							</p>
 						</div>
-						<p class="gia_tri_content_item_desc">
-							<?php echo $content_item['content'] ?>
-						</p>
 					</div>
-				</div>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	</div>
 </section>
@@ -108,7 +122,7 @@ $members = get_field('members') ?? null;
 		<h2 class="doi_ngu_title"><?php echo $title_team; ?></h2>
 		<div class="row doi_ngu_row">
 			<?php foreach ($members as $member): ?>
-				<div class="col-4 mb-5">
+				<div class="doi_ngu_col col-12 col-md-6 col-lg-4">
 					<div class="team-member">
 						<div class="team-member_wrapper">
 							<div class="team-member__image-wrapper">
@@ -140,27 +154,29 @@ $content_cultures = get_field('content_culture') ?? null;
 ?>
 <section class="van_hoa">
 	<div class="container">
-		<h6 class="van_hoa_subtitle"><?php echo $subtitle_culture; ?></h6>
-		<h2 class="van_hoa_title"><?php echo $title_culture; ?></h2>
-		<p class="van_hoa_desc">
-			<?php echo $desc_culture; ?>
-		</p>
-		<div class="row van_hoa_row">
-			<?php foreach ($content_cultures as $content_culture): ?>
-				<div class="col-lg-4">
-					<div class="van_hoa_content_item" data-mh="van_hoa_content_item">
-						<div class="van_hoa_content_item_img">
-							<img src="<?php echo $content_culture['image'] ?>" alt="">
+		<div class="van_hoa_container">
+			<h6 class="van_hoa_subtitle"><?php echo $subtitle_culture; ?></h6>
+			<h2 class="van_hoa_title"><?php echo $title_culture; ?></h2>
+			<p class="van_hoa_desc">
+				<?php echo $desc_culture; ?>
+			</p>
+			<div class="row van_hoa_row">
+				<?php foreach ($content_cultures as $content_culture): ?>
+					<div class="van_hoa_col col-12 col-md-6 col-lg-4">
+						<div class="van_hoa_content_item" data-mh="van_hoa_content_item">
+							<div class="van_hoa_content_item_img">
+								<img src="<?php echo $content_culture['image'] ?>" alt="">
+							</div>
+							<div class="van_hoa_content_item_title">
+								<?php echo $content_culture['title'] ?>
+							</div>
+							<p class="van_hoa_content_item_desc">
+								<?php echo $content_culture['content'] ?>
+							</p>
 						</div>
-						<div class="van_hoa_content_item_title">
-							<?php echo $content_culture['title'] ?>
-						</div>
-						<p class="van_hoa_content_item_desc">
-							<?php echo $content_culture['content'] ?>
-						</p>
 					</div>
-				</div>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	</div>
 </section>
@@ -172,20 +188,22 @@ $content_achievements = get_field('content_achievement') ?? null;
 ?>
 <section class="thanh_tuu">
 	<div class="container">
-		<h2 class="thanh_tuu_title"><?php echo $title_achievement; ?></h2>
-		<div class="row thanh_tuu_row">
-			<?php foreach ($content_achievements as $content_achievement): ?>
-				<div class="col-lg-4">
-					<div class="thanh_tuu_content_item" data-mh="thanh_tuu_content_item">
-						<div class="thanh_tuu_content_item_title">
-							<?php echo $content_achievement['title'] ?>
-						</div>
-						<div class="thanh_tuu_content_item_desc">
-							<?php echo $content_achievement['desc'] ?>
+		<div class="thanh_tuu_container">
+			<h2 class="thanh_tuu_title"><?php echo $title_achievement; ?></h2>
+			<div class="row thanh_tuu_row">
+				<?php foreach ($content_achievements as $content_achievement): ?>
+					<div class="thanh_tuu_col col-12 col-md-6 col-lg-4">
+						<div class="thanh_tuu_content_item" data-mh="thanh_tuu_content_item">
+							<div class="thanh_tuu_content_item_title">
+								<?php echo $content_achievement['title'] ?>
+							</div>
+							<div class="thanh_tuu_content_item_desc">
+								<?php echo $content_achievement['desc'] ?>
+							</div>
 						</div>
 					</div>
-				</div>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
+			</div>
 		</div>
 	</div>
 </section>
@@ -196,28 +214,61 @@ $title_knowledge = get_field('title_knowledge') ?? null;
 $content_knowledge = get_field('content_knowledge') ?? null;
 ?>
 <section class="kien_thuc">
-	<div class="container text-center">
-		<h2><?php echo $title_knowledge; ?></h2>
-		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-			<li class="nav-item" role="presentation">
-				<button class="nav-link active" id="pills-home-tab" data-toggle="pill" data-target="#pills-home"
-					type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="pills-profile-tab" data-toggle="pill" data-target="#pills-profile"
-					type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="pills-contact-tab" data-toggle="pill" data-target="#pills-contact"
-					type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
-			</li>
-		</ul>
-		<div class="tab-content" id="pills-tabContent">
-			<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...
+	<div class="container">
+		<h2 class="text-center mb-4 mb-lg-5"><?php echo $title_knowledge; ?></h2>
+		<?php
+		if ($content_knowledge): ?>
+			<!-- Tab Titles -->
+			<ul class="nav nav-tabs justify-content-center" role="tablist">
+				<?php $tab_index = 1; ?>
+				<?php foreach ($content_knowledge as $index => $tab): ?>
+					<li class="nav-item">
+						<a class="nav-link <?php echo ($index === 0) ? 'active' : ''; ?>" data-toggle="tab"
+							href="#tab-<?php echo $tab_index; ?>" role="tab">
+							<?php echo esc_html($tab['title_tab']); ?>
+						</a>
+					</li>
+					<?php $tab_index++; ?>
+				<?php endforeach; ?>
+			</ul>
+
+			<!-- Tab Content -->
+			<div class="tab-content">
+				<?php $tab_index = 1; ?>
+				<?php foreach ($content_knowledge as $index => $tab): ?>
+					<div class="tab-pane p-3 <?php echo ($index === 0) ? 'active' : ''; ?>" id="tab-<?php echo $tab_index; ?>"
+						role="tabpanel">
+						<div class="row">
+							<div class="col-12 col-lg-9">
+								<div class="content editor">
+									<?php echo $tab['content']; ?>
+								</div>
+								<div class="kien_thuc_button">
+									<?php if (!empty($tab['button_1']["url"]) && !empty($tab['button_1']["title"])): ?>
+										<a class="button button_1" href="<?php echo $tab['button_1']["url"]; ?>">
+											<?php echo $tab['button_1']["title"]; ?>
+										</a>
+									<?php endif; ?>
+
+									<?php if (!empty($tab['button_2']["url"]) && !empty($tab['button_2']["title"])): ?>
+										<a class="button button_2" href="<?php echo $tab['button_2']["url"]; ?>">
+											<?php echo $tab['button_2']["title"]; ?>
+										</a>
+										<!--  -->
+									<?php endif; ?>
+								</div>
+							</div>
+							<div class="col-12 col-lg-3 mt-4 mt-lg-0">
+								<?php if (!empty($tab['image'])): ?>
+									<img src="<?php echo esc_url($tab['image']); ?>" class="img-fluid">
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+					<?php $tab_index++; ?>
+				<?php endforeach; ?>
 			</div>
-			<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-			<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
-		</div>
+		<?php endif; ?>
 	</div>
 </section>
 

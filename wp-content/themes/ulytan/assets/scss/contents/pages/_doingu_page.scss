@@ -34,7 +34,21 @@
 .team {
 	.team__title {
 		text-align: center;
-		margin-bottom: 40px;
+		margin-bottom: 28px;
+
+		@include media-breakpoint-up(lg) {
+			margin-bottom: 50px;
+		}
+	}
+
+	.team_row {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+
+	.team_col {
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 
 	.team__member {
@@ -83,6 +97,10 @@
 	.team__button {
 		text-align: center;
 		margin-top: 10px;
+
+		@include media-breakpoint-down(sm) {
+			margin-top: 0px;
+		}
 
 		.button {
 			border: none;
