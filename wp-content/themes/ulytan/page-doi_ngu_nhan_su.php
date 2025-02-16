@@ -47,7 +47,9 @@ $title_member = get_field('title_member') ?? null;
 
 <section class="team">
 	<div class="container">
-		<h2 class="team__title"><?php echo $title_member; ?></h2>
+		<h2 class="team__title">
+			<?php echo $title_member; ?>
+		</h2>
 		<div class="row team_row">
 			<?php for ($i = 0; $i < 10; $i++): ?>
 				<div class="team_col col-12 col-md-6 col-lg-3">

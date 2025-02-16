@@ -420,98 +420,6 @@
             "append": ""
         },
         {
-            "key": "field_67ada24b0bbcb",
-            "label": "Thành viên đội ngũ",
-            "name": "members",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "table",
-            "pagination": 0,
-            "min": 0,
-            "max": 0,
-            "collapsed": "",
-            "button_label": "Add Row",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_67ada1e00bbca",
-                    "label": "Ảnh đại diện",
-                    "name": "img_member",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "url",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "preview_size": "medium",
-                    "parent_repeater": "field_67ada24b0bbcb"
-                },
-                {
-                    "key": "field_67ada2b60bbcc",
-                    "label": "Tên thành viên",
-                    "name": "name_member",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_67ada24b0bbcb"
-                },
-                {
-                    "key": "field_67ada2c70bbcd",
-                    "label": "Chức vụ",
-                    "name": "member_role",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_67ada24b0bbcb"
-                }
-            ]
-        },
-        {
             "key": "field_67ad5323d515c",
             "label": "Văn hóa",
             "name": "",
@@ -971,5 +879,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1739679705
+    "modified": 1739722787
 }

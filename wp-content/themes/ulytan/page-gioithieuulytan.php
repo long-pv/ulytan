@@ -82,10 +82,10 @@ $brand_content = get_field('brand_content') ?? null;
 
 <!-- Giá trị doanh nghiệp -->
 <?php
-$subtitle_business = get_field('subtitle_business') ?? null;
-$title_business = get_field('title_business') ?? null;
-$desc_business = get_field('desc_business') ?? null;
-$content_business = get_field('content_business') ?? null;
+$subtitle_business = get_field('subtitle_business') ?? '';
+$title_business = get_field('title_business') ?? '';
+$desc_business = get_field('desc_business') ?? '';
+$content_business = get_field('content_business') ?? [];
 ?>
 <section class="gia_tri">
 	<div class="container">
@@ -96,19 +96,24 @@ $content_business = get_field('content_business') ?? null;
 				<?php echo $desc_business; ?>
 			</p>
 			<div class="row gia_tri_row">
-				<?php foreach ($content_business as $content_item): ?>
-					<div class="gia_tri_col col-12 col-md-6 col-lg-4">
-						<div class="gia_tri_content_item" data-mh="gia_tri_content_item">
-							<img class="gia_tri_content_item_img" src="<?php echo $content_item['image'] ?>" alt="">
-							<div class="gia_tri_content_item_title">
-								<?php echo $content_item['title'] ?>
+				<?php
+				if ($content_business && is_array($content_business)):
+					foreach ($content_business as $content_item): ?>
+						<div class="gia_tri_col col-12 col-md-6 col-lg-4">
+							<div class="gia_tri_content_item" data-mh="gia_tri_content_item">
+								<img class="gia_tri_content_item_img" src="<?php echo $content_item['image'] ?>" alt="">
+								<div class="gia_tri_content_item_title">
+									<?php echo $content_item['title'] ?>
+								</div>
+								<p class="gia_tri_content_item_desc">
+									<?php echo $content_item['content'] ?>
+								</p>
 							</div>
-							<p class="gia_tri_content_item_desc">
-								<?php echo $content_item['content'] ?>
-							</p>
 						</div>
-					</div>
-				<?php endforeach; ?>
+				<?php
+					endforeach;
+				endif;
+				?>
 			</div>
 		</div>
 	</div>
@@ -119,43 +124,61 @@ $content_business = get_field('content_business') ?? null;
 $subtitle_team = get_field('subtitle_team') ?? null;
 $title_team = get_field('title_team') ?? null;
 $members = get_field('members') ?? null;
-?>
 
-<section class="doi_ngu">
-	<div class="container">
-		<h6 class="doi_ngu_subtitle"><?php echo $subtitle_team; ?></h6>
-		<h2 class="doi_ngu_title"><?php echo $title_team; ?></h2>
-		<div class="row doi_ngu_row">
-			<?php foreach ($members as $member): ?>
-				<div class="doi_ngu_col col-12 col-md-6 col-lg-4">
-					<div class="team-member">
-						<div class="team-member_wrapper">
-							<div class="team-member__image-wrapper">
-								<div class="team-member__circle team-member__circle--light"></div>
-								<div class="team-member__circle team-member__circle--dark"></div>
-								<?php if (!empty($member['img_member'])): ?>
-									<img class="team_memeber__image" src="<?php echo $member['img_member']; ?>"
-										alt="Đỗ Anh Việt">
-								<?php endif; ?>
-							</div>
-							<div class="team-member__content">
-								<div class="team-member__name">Đỗ Anh Việt</div>
-								<div class="team-member__position">CEO & Head of Product</div>
+$args = array(
+	'post_type' => 'executive_board',
+	'posts_per_page' => -1,
+);
+$query = new WP_Query($args);
+if ($query->have_posts()):
+?>
+	<section class="doi_ngu">
+		<div class="container">
+			<h6 class="doi_ngu_subtitle"><?php echo $subtitle_team; ?></h6>
+			<h2 class="doi_ngu_title"><?php echo $title_team; ?></h2>
+			<div class="row doi_ngu_row">
+				<?php
+				while ($query->have_posts()):
+					$query->the_post();
+					$image = get_field('image') ?? '';
+					$chuc_vu = get_field('chuc_vu') ?? '';
+				?>
+					<div class="doi_ngu_col col-12 col-md-6 col-lg-4">
+						<div class="team-member">
+							<div class="team-member_wrapper">
+								<div class="team-member__image-wrapper">
+									<div class="team-member__circle team-member__circle--light"></div>
+									<div class="team-member__circle team-member__circle--dark"></div>
+									<img class="team_memeber__image" src="<?php echo $image; ?>" alt="<?php the_title(); ?>">
+								</div>
+								<div class="team-member__content">
+									<div class="team-member__name">
+										<?php the_title(); ?>
+									</div>
+									<div class="team-member__position">
+										<?php echo $chuc_vu; ?>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			<?php endforeach; ?>
+				<?php
+				endwhile;
+				?>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
 
 <!-- Văn hóa công ty -->
 <?php
 $subtitle_culture = get_field('subtitle_culture') ?? null;
 $title_culture = get_field('title_culture') ?? null;
 $desc_culture = get_field('desc_culture') ?? null;
-$content_cultures = get_field('content_culture') ?? null;
+$content_cultures = get_field('content_culture') ?? [];
 ?>
 <section class="van_hoa">
 	<div class="container">
@@ -166,21 +189,27 @@ $content_cultures = get_field('content_culture') ?? null;
 				<?php echo $desc_culture; ?>
 			</p>
 			<div class="row van_hoa_row">
-				<?php foreach ($content_cultures as $content_culture): ?>
-					<div class="van_hoa_col col-12 col-md-6 col-lg-4">
-						<div class="van_hoa_content_item" data-mh="van_hoa_content_item">
-							<div class="van_hoa_content_item_img">
-								<img src="<?php echo $content_culture['image'] ?>" alt="">
+				<?php
+				if ($content_cultures && is_array($content_cultures)):
+					foreach ($content_cultures as $content_culture):
+				?>
+						<div class="van_hoa_col col-12 col-md-6 col-lg-4">
+							<div class="van_hoa_content_item" data-mh="van_hoa_content_item">
+								<div class="van_hoa_content_item_img">
+									<img src="<?php echo $content_culture['image'] ?>" alt="">
+								</div>
+								<div class="van_hoa_content_item_title">
+									<?php echo $content_culture['title'] ?>
+								</div>
+								<p class="van_hoa_content_item_desc">
+									<?php echo $content_culture['content'] ?>
+								</p>
 							</div>
-							<div class="van_hoa_content_item_title">
-								<?php echo $content_culture['title'] ?>
-							</div>
-							<p class="van_hoa_content_item_desc">
-								<?php echo $content_culture['content'] ?>
-							</p>
 						</div>
-					</div>
-				<?php endforeach; ?>
+				<?php
+					endforeach;
+				endif;
+				?>
 			</div>
 		</div>
 	</div>

@@ -108,6 +108,16 @@ function getYoutubeEmbedUrl($input)
 function register_cpt_post_types()
 {
 	$cpt_list = [
+		'executive_board' => [
+			'labels' => __('Ban điều hành', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
+		'staff' => [
+			'labels' => __('Đội ngũ nhân viên', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
 		'typical_customers' => [
 			'labels' => __('Khách hàng tiêu biểu', 'basetheme'),
 			'cap' => false,
