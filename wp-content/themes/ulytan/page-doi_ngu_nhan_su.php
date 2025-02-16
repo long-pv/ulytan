@@ -72,8 +72,32 @@ $title_member = get_field('title_member') ?? null;
 </section>
 
 <!-- Tìm hiểu về chúng tôi -->
-<section class="tim_hieu_them">
+<?php
+$title_about_us = get_field('title_about_us') ?? null;
+$link_about_us = get_field('link_about_us') ?? null;
+$image_about_us = get_field('image_about_us') ?? null;
+?>
 
+<section class="tim_hieu_them">
+	<div class="container">
+		<div class="tim_hieu_them_inner">
+			<div class="row">
+				<div class="col-lg-6">
+					<h2 class="tim_hieu_them_title"><?php echo $title_about_us; ?></h2>
+					<?php if (!empty($link_about_us["url"]) && !empty($link_about_us["title"])): ?>
+						<a class="tim_hieu_them_button" href="<?php echo $link_about_us["url"]; ?>">
+							<?php echo $link_about_us["title"]; ?>
+						</a>
+					<?php endif; ?>
+				</div>
+				<div class="col-lg-6">
+					<?php if (!empty($image_about_us)): ?>
+						<img src="<?php echo esc_url($image_about_us); ?>" class="img-fluid">
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <?php

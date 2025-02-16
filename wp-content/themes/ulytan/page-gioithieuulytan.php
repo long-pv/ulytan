@@ -42,10 +42,15 @@ $banner_desc = get_field('banner_desc') ?? null;
 
 <!-- PDF -->
 <?php
+$title_pdf = get_field('title_pdf') ?? null;
+
 $link_pdf = get_field('link_pdf') ?? null;
 ?>
 <section class="file_pdf">
 	<div class="container">
+		<h6 class="file_pdf_title text-center">
+			<?php echo $title_pdf; ?>
+		</h6>
 		<div class="row justify-content-center">
 			<div class="col-12 col-lg-8">
 				<div class="file_pdf_inner">
@@ -215,7 +220,7 @@ $content_knowledge = get_field('content_knowledge') ?? null;
 ?>
 <section class="kien_thuc">
 	<div class="container">
-		<h2 class="text-center mb-4 mb-lg-5"><?php echo $title_knowledge; ?></h2>
+		<h2 class="kien_thuc_title text-center mb-4 mb-lg-5"><?php echo $title_knowledge; ?></h2>
 		<?php
 		if ($content_knowledge): ?>
 			<!-- Tab Titles -->
@@ -236,7 +241,7 @@ $content_knowledge = get_field('content_knowledge') ?? null;
 			<div class="tab-content">
 				<?php $tab_index = 1; ?>
 				<?php foreach ($content_knowledge as $index => $tab): ?>
-					<div class="tab-pane p-3 <?php echo ($index === 0) ? 'active' : ''; ?>" id="tab-<?php echo $tab_index; ?>"
+					<div class="tab-pane <?php echo ($index === 0) ? 'active' : ''; ?>" id="tab-<?php echo $tab_index; ?>"
 						role="tabpanel">
 						<div class="row">
 							<div class="col-12 col-lg-9">

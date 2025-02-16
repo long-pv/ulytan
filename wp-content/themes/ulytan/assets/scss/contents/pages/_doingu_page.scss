@@ -22,9 +22,14 @@
 			align-items: center;
 
 			.banner_doingu_title {
-				text-align: center;
+				font-weight: 700;
 				color: $white;
+				text-align: center;
 				margin-bottom: 0px;
+
+				@include media-breakpoint-up(lg) {
+					font-size: 59.2px;
+				}
 			}
 		}
 	}
@@ -32,6 +37,12 @@
 
 //
 .team {
+	padding: 36px 0px;
+
+	@include media-breakpoint-up(lg) {
+		padding: 50px 0px;
+	}
+
 	.team__title {
 		text-align: center;
 		margin-bottom: 28px;
@@ -42,21 +53,26 @@
 	}
 
 	.team_row {
-		margin-left: -10px;
-		margin-right: -10px;
+		row-gap: 20px;
+
+		@include media-breakpoint-up(lg) {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
 	}
 
 	.team_col {
-		padding-left: 10px;
-		padding-right: 10px;
+		@include media-breakpoint-up(lg) {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
 	}
 
 	.team__member {
-		background: #fff;
+		background: $white;
 		box-shadow: 0px 2px 12px 0px rgba(20, 20, 43, 0.08);
-		border-radius: 10px 10px 10px 10px;
+		border-radius: 10px;
 		padding: 10px 14px 16px;
-		margin-bottom: 20px;
 
 		.team__image_wrapper {
 			position: relative;
@@ -81,14 +97,16 @@
 			text-align: center;
 
 			.team__name {
+				font-weight: 700;
 				font-size: 18px;
-				font-weight: bold;
 				color: #222;
 				margin-bottom: 7px;
 			}
 
 			.team__position {
-				color: #666;
+				font-weight: 400;
+				font-size: 14px;
+				color: #6e6e73;
 				margin-bottom: 0px;
 			}
 		}
@@ -96,22 +114,70 @@
 
 	.team__button {
 		text-align: center;
-		margin-top: 10px;
+		margin-top: 20px;
 
-		@include media-breakpoint-down(sm) {
-			margin-top: 0px;
+		@include media-breakpoint-up(lg) {
+			margin-top: 30px;
 		}
 
 		.button {
 			border: none;
+			outline: none;
 			background-color: #721326;
-			font-family: "Roboto", Sans-serif;
 			font-size: 16px;
 			font-weight: 400;
-			fill: #ffffff;
-			color: #ffffff;
-			border-radius: 8px 8px 8px 8px;
-			padding: 12px 20px 12px 20px;
+			color: $white;
+			border-radius: 8px;
+			padding: 8px 20px;
+		}
+	}
+}
+
+//
+.tim_hieu_them {
+	padding: 36px 0px 36px;
+
+	@include media-breakpoint-up(lg) {
+		padding: 70px 0px 70px;
+	}
+
+	.tim_hieu_them_inner {
+		background: linear-gradient(
+			90deg,
+			#721326 0%,
+			rgba(144, 1, 1, 0.5) 100%
+		);
+		border-radius: 15px;
+		padding: 36px 64px;
+
+		@include media-breakpoint-up(lg) {
+			padding: 56px 114px;
+		}
+
+		.tim_hieu_them_title {
+			font-weight: 700;
+			font-size: 36px;
+			color: $white;
+			margin-bottom: 20px;
+
+			@include media-breakpoint-up(lg) {
+				font-size: 41.6px;
+			}
+		}
+		.tim_hieu_them_button {
+			display: inline-flex;
+			padding: 12px 20px;
+			background: $white;
+			border: none;
+			outline: none;
+			border-radius: 8px;
+			box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+			//
+			font-weight: 400;
+			font-size: 16px;
+			color: #4169e1;
+			text-decoration: underline;
 		}
 	}
 }
