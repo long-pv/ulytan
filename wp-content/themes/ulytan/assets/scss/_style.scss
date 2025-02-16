@@ -2968,3 +2968,14 @@ footer {
     margin: 0px !important;
     justify-content: center;
 }
+
+.homepage_title_h1 {
+    position: fixed;
+    left: -9999px;
+    top: 0px;
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 99;
+}
