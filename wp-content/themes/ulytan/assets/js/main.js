@@ -84,7 +84,6 @@
 		});
 	}
 
-	
 	// service_list_slider
 	$(".service_list_slider").slick({
 		dots: false,
@@ -146,7 +145,7 @@
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		centerMode: true,
-		centerPadding: '25%', // Mỗi bên hiển thị nửa item
+		centerPadding: "25%", // Mỗi bên hiển thị nửa item
 		infinite: true, // Vô hạn lặp
 		responsive: [
 			{
@@ -154,9 +153,9 @@
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
-					centerPadding: '25px', // Mỗi bên hiển thị nửa item
+					centerPadding: "25px", // Mỗi bên hiển thị nửa item
 				},
-			}
+			},
 		],
 	});
 
@@ -290,30 +289,28 @@
 		staffTeamBtn.hide();
 	});
 
-
-
-	$(document).ready(function() {
-		$(".contact_submit_fake").click(function(event) {
-		  event.preventDefault();
-		  $(".contact_submit_primary").trigger('click');
+	$(document).ready(function () {
+		$(".contact_submit_fake").click(function (event) {
+			event.preventDefault();
+			$(".contact_submit_primary").trigger("click");
 		});
 	});
 
-	$(".custom_dropdown_button").on("click", function(e) {
+	$(".custom_dropdown_button").on("click", function (e) {
 		e.stopPropagation();
-		$(".custom_dropdown_button").removeClass('down_show');
+		$(".custom_dropdown_button").removeClass("down_show");
 		var dropdownMenu = $(this).next(".custom_dropdown_menu");
 		$(".custom_dropdown_menu").not(dropdownMenu).hide();
-		$(this).toggleClass('down_show');
+		$(this).toggleClass("down_show");
 		dropdownMenu.toggle();
 	});
 
-	$(document).on("click", function() {
+	$(document).on("click", function () {
 		$(".custom_dropdown_menu").hide();
-		$(".custom_dropdown_button").removeClass('down_show');
+		$(".custom_dropdown_button").removeClass("down_show");
 	});
 
-	$(".custom_dropdown_menu").on("click", function(e) {
+	$(".custom_dropdown_menu").on("click", function (e) {
 		e.stopPropagation();
 	});
 
@@ -323,55 +320,55 @@
 			mutationsList.forEach(function (mutation) {
 				$(mutation.addedNodes).each(function () {
 					// Kiểm tra nếu phần tử mới thêm là `wpcf7-not-valid-tip`
-					if ($(this).hasClass('wpcf7-not-valid-tip')) {
+					if ($(this).hasClass("wpcf7-not-valid-tip")) {
 						var $error = $(this); // Phần tử thông báo lỗi
-						var $dropdown = $error.closest('.custom_dropdown'); // Phần tử cha cần đặt thông báo lỗi bên dưới
-	
+						var $dropdown = $error.closest(".custom_dropdown"); // Phần tử cha cần đặt thông báo lỗi bên dưới
+
 						// Nếu thông báo lỗi nằm trong `custom_dropdown_menu`, di chuyển nó ra ngoài
-						if ($dropdown.length && $error.closest('.custom_dropdown_menu').length) {
+						if ($dropdown.length && $error.closest(".custom_dropdown_menu").length) {
 							$dropdown.append($error); // Di chuyển thông báo lỗi ra ngoài
 						}
 					}
 				});
 			});
 		});
-	
+
 		// Chỉ theo dõi những thay đổi liên quan đến `wpcf7-not-valid-tip`
-		$('footer .wpcf7-form').each(function () {
+		$("footer .wpcf7-form").each(function () {
 			observer.observe(this, {
 				childList: true, // Theo dõi sự thêm hoặc bớt các phần tử con
-				subtree: true,  // Theo dõi các phần tử con bên trong
+				subtree: true, // Theo dõi các phần tử con bên trong
 			});
 		});
-	
+
 		// Xử lý khi form được submit
-		$(document).on('submit', 'footer .wpcf7-form', function (e) {
+		$(document).on("submit", "footer .wpcf7-form", function (e) {
 			var isValid = true;
-	
+
 			// Kiểm tra và di chuyển các thông báo lỗi (nếu có)
-			$('.wpcf7-not-valid-tip').each(function () {
+			$(".wpcf7-not-valid-tip").each(function () {
 				var $error = $(this); // Phần tử thông báo lỗi
-				var $dropdown = $error.closest('.custom_dropdown'); // Phần tử cha cần đặt thông báo lỗi bên dưới
-	
-				if ($dropdown.length && $error.closest('.custom_dropdown_menu').length) {
+				var $dropdown = $error.closest(".custom_dropdown"); // Phần tử cha cần đặt thông báo lỗi bên dưới
+
+				if ($dropdown.length && $error.closest(".custom_dropdown_menu").length) {
 					$dropdown.append($error); // Di chuyển thông báo lỗi ra ngoài
 				}
-	
+
 				// Nếu tồn tại thông báo lỗi, không cho form submit
 				isValid = false;
 			});
-	
+
 			// Ngăn không cho form thực hiện submit nếu có lỗi
 			if (!isValid) {
 				e.preventDefault();
 			}
 		});
-	
+
 		// Lắng nghe sự kiện thay đổi trên checkbox
-		$(document).on('change', '.custom_dropdown_menu input[type="checkbox"]', function () {
-			var $dropdown = $(this).closest('.custom_dropdown');
-			var $error = $dropdown.find('.wpcf7-not-valid-tip');
-	
+		$(document).on("change", '.custom_dropdown_menu input[type="checkbox"]', function () {
+			var $dropdown = $(this).closest(".custom_dropdown");
+			var $error = $dropdown.find(".wpcf7-not-valid-tip");
+
 			// Nếu có ít nhất một checkbox được chọn, xóa thông báo lỗi
 			if ($dropdown.find('input[type="checkbox"]:checked').length > 0) {
 				$error.remove();
@@ -379,32 +376,31 @@
 		});
 	});
 
-
-	document.addEventListener('DOMContentLoaded', function () {
-		const form = document.querySelector('.wpcf7');
+	document.addEventListener("DOMContentLoaded", function () {
+		const form = document.querySelector(".wpcf7");
 		if (form) {
-			form.addEventListener('wpcf7invalid', function () {
-				console.log('wpcf7invalid event triggered'); // Xác nhận sự kiện
+			form.addEventListener("wpcf7invalid", function () {
+				console.log("wpcf7invalid event triggered"); // Xác nhận sự kiện
 				setTimeout(() => {
 					// Lấy tất cả các thông báo lỗi
-					const errors = form.querySelectorAll('.wpcf7-not-valid-tip');
+					const errors = form.querySelectorAll(".wpcf7-not-valid-tip");
 					// console.log(errors);
 					errors.forEach((error) => {
 						const input = error.parentElement;
 						console.log(input);
 						if (input) {
-							const name = input.getAttribute('data-name');
+							const name = input.getAttribute("data-name");
 							// Thay đổi thông báo tùy chỉnh
-							if (name === 'footer-name') {
-								error.textContent = 'Vui lòng nhập họ và tên của bạn.';
-							} else if (name === 'footer-email') {
-								error.textContent = 'Vui lòng nhập email hợp lệ.';
-							} else if (name === 'footer-phone') {
-								error.textContent = 'Vui lòng nhập số điện thoại của bạn.';
-							} else if (name === 'footer-country') {
-								error.textContent = 'Vui lòng chọn quốc gia.';
-							} else if (name === 'footer-service') {
-								error.textContent = 'Vui lòng chọn ít nhất một dịch vụ.';
+							if (name === "footer-name") {
+								error.textContent = "Vui lòng nhập họ và tên của bạn.";
+							} else if (name === "footer-email") {
+								error.textContent = "Vui lòng nhập email hợp lệ.";
+							} else if (name === "footer-phone") {
+								error.textContent = "Vui lòng nhập số điện thoại của bạn.";
+							} else if (name === "footer-country") {
+								error.textContent = "Vui lòng chọn quốc gia.";
+							} else if (name === "footer-service") {
+								error.textContent = "Vui lòng chọn ít nhất một dịch vụ.";
 							}
 						}
 					});
@@ -415,53 +411,81 @@
 
 	jQuery(document).ready(function ($) {
 		setTimeout(function () {
-			$('.custom_dropdown_service .wpcf7-checkbox label .wpcf7-list-item-label').each(function () {
+			$(".custom_dropdown_service .wpcf7-checkbox label .wpcf7-list-item-label").each(function () {
 				var text = $(this).text();
 				// Gắn HTML lại, chèn <br> giữa phần đầu và phần cuối
-				$(this).html('<strong>' + text.split('(')[0].trim() + '</strong><br><em>(' + text.split('(')[1]);
+				$(this).html("<strong>" + text.split("(")[0].trim() + "</strong><br><em>(" + text.split("(")[1]);
 			});
 		}, 1000);
 	});
 
-
 	jQuery(document).ready(function ($) {
 		// Lắng nghe sự kiện wpcf7mailsent
-		$(document).on('wpcf7mailsent', function (event) {
+		$(document).on("wpcf7mailsent", function (event) {
 			// Kiểm tra nếu form nằm trong thẻ div có class 'footer-form-wrapper'
-			if ($(event.target).closest('.footer_form').length > 0) {
+			if ($(event.target).closest(".footer_form").length > 0) {
 				// Kích hoạt modal Bootstrap
-				$('#modal_form_footer').modal('show');
+				$("#modal_form_footer").modal("show");
 			}
 		});
 	});
-	
-	
-	
+
 	jQuery(document).ready(function ($) {
 		// Đảm bảo phần tử được ẩn khi xuất hiện
 		setInterval(function () {
-			$('.grecaptcha-badge').css('display', 'none');
+			$(".grecaptcha-badge").css("display", "none");
 		}, 500);
 	});
 
 	jQuery(document).ready(function ($) {
 		// Chờ phần tử xuất hiện và ẩn nó
 		var observer = new MutationObserver(function () {
-			$('.grecaptcha-badge').hide();
+			$(".grecaptcha-badge").hide();
 		});
-	
+
 		// Theo dõi sự thay đổi của body
 		observer.observe(document.body, {
 			childList: true,
 			subtree: true,
 		});
 	});
-	
-	
-	
-	
-	
-	
-	
-	
+
+	// slider Đối tác của chúng tôi
+	function addCustomSlickAttributes() {
+		$(".doi_tac_ulytan_slider [data-my-slick-attr]").removeAttr("data-my-slick-attr");
+
+		$(".doi_tac_ulytan_slider .slick-active").each(function (index, el) {
+			$(el).attr("data-my-slick-attr", index);
+		});
+	}
+
+	$(".doi_tac_ulytan_slider").on("init", function (event, slick) {
+		addCustomSlickAttributes();
+	});
+
+	$(".doi_tac_ulytan_slider").slick({
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		dots: false,
+		autoplay: true,
+		autoplaySpeed: 2000,
+		centerMode: true,
+		centerPadding: "0px",
+
+		responsive: [
+			{
+				breakpoint: 1200,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					centerMode: false,
+				},
+			},
+		],
+	});
+
+	$(".doi_tac_ulytan_slider").on("afterChange", function (event, slick, current_slide_index, next_slide_index) {
+		addCustomSlickAttributes();
+	});
+	// end
 })(jQuery, window);

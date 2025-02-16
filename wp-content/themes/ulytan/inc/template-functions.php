@@ -108,6 +108,16 @@ function getYoutubeEmbedUrl($input)
 function register_cpt_post_types()
 {
 	$cpt_list = [
+		'typical_customers' => [
+			'labels' => __('Khách hàng tiêu biểu', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
+		'our_partners' => [
+			'labels' => __('Đối tác của chúng tôi', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
 		'service' => [
 			'labels' => __('Dịch vụ', 'basetheme'),
 			'slug' => 'dich-vu',
