@@ -143,7 +143,7 @@ if ($query->have_posts()):
 				?>
 			</div>
 			<?php
-			if ($index >= 9) :
+			if ($index > 9) :
 			?>
 				<div class="team__button">
 					<button type="button" class="button staff_btn_xem_them">

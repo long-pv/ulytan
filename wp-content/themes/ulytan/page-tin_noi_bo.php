@@ -136,7 +136,7 @@ get_header();
 			</div>
 
 			<?php
-			if ($index >= 15) :
+			if ($index > 15) :
 			?>
 				<div class="hinh_anh_hoat_dong_btn_block">
 					<button type="button" class="hinh_anh_hoat_dong_btn">

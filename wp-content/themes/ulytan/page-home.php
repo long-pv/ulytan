@@ -259,11 +259,11 @@ if ($query->have_posts()):
 					$query->the_post();
 					$link_website = get_field('link_website') ?? '';
 					$logo_cong_ty = get_field('logo_cong_ty') ?? '';
-					if ($link_website && $logo_cong_ty):
+					if ($logo_cong_ty):
 				?>
 						<div class="col-12 col-md-6 kh_tieu_bieu_col">
-							<a class="kh_tieu_bieu_link" href="<?php echo get_field('link_website'); ?>">
-								<img class="kh_tieu_bieu_img" src="<?php echo get_field('logo_cong_ty'); ?>" alt="<?php echo get_the_title(); ?>">
+							<a class="kh_tieu_bieu_link" href="<?php echo $link_website ?: 'javascript:void(0);'; ?>">
+								<img class="kh_tieu_bieu_img" src="<?php echo $logo_cong_ty; ?>" alt="<?php echo get_the_title(); ?>">
 							</a>
 						</div>
 				<?php
