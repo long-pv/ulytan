@@ -134,6 +134,11 @@ function register_cpt_post_types()
 			'cap' => false,
 			'hierarchical' => false
 		],
+		'activity_videos' => [
+			'labels' => __('Video hoạt động', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
 		'video_customer' => [
 			'labels' => __('Video khách hàng', 'basetheme'),
 			'cap' => false,
