@@ -215,28 +215,95 @@ $content_cultures = get_field('content_culture') ?? [];
 	</div>
 </section>
 
+<!-- Đối tác của chúng tôi -->
+<?php
+$args = array(
+	'post_type' => 'our_partners',
+	'posts_per_page' => -1,
+);
+$query = new WP_Query($args);
+if ($query->have_posts()):
+?>
+	<section class="secSpace doi_tac_ulytan bg-light">
+		<div class="container">
+			<h2 class="sec_title text-center">
+				Đối tác của chúng tôi
+			</h2>
+
+			<div class="doi_tac_ulytan_slider">
+				<?php
+				while ($query->have_posts()):
+					$query->the_post();
+				?>
+					<div>
+						<div class="about_us_video doi_tac_ulytan_item">
+							<?php
+							$image = get_field('image') ?? '';
+							$iframe = get_field('iframe_youtube') ?? '';
+							if ($image && $iframe) :
+								$iframe_url = getYoutubeEmbedUrl($iframe);
+							?>
+								<div class="videoBlock">
+									<div class="videoBlock__inner" data-mh="videoBlock__inner">
+										<img class="videoBlock__img" src="<?php echo $image; ?>">
+										<div class="videoBlock__overlay"></div>
+										<div class="videoBlock__videoAction">
+											<a href="javascript:void(0);" class="videoBlock__playAction" data-toggle="modal" data-target="#videoUrl" data-src="<?php echo $iframe_url; ?>">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+													<path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path>
+												</svg>
+											</a>
+										</div>
+									</div>
+								</div>
+							<?php
+							endif;
+							?>
+						</div>
+					</div>
+				<?php
+				endwhile;
+				?>
+			</div>
+		</div>
+	</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
+<!-- end -->
+
 <!-- Thành tựu -->
 <?php
 $title_achievement = get_field('title_achievement') ?? null;
-$content_achievements = get_field('content_achievement') ?? null;
+$thanh_tuu_bg = get_field('thanh_tuu_bg') ?? '';
+$content_achievements = get_field('content_achievement') ?? [];
 ?>
-<section class="thanh_tuu">
+<section class="thanh_tuu" style="background-image: url('<?php echo $thanh_tuu_bg; ?>');">
 	<div class="container">
 		<div class="thanh_tuu_container">
 			<h2 class="thanh_tuu_title"><?php echo $title_achievement; ?></h2>
 			<div class="row thanh_tuu_row">
-				<?php foreach ($content_achievements as $content_achievement): ?>
-					<div class="thanh_tuu_col col-12 col-md-6 col-lg-4">
-						<div class="thanh_tuu_content_item" data-mh="thanh_tuu_content_item">
-							<div class="thanh_tuu_content_item_title">
-								<?php echo $content_achievement['title'] ?>
+				<?php
+				if ($content_achievements && is_array($content_achievements)) :
+					foreach ($content_achievements as $item):
+						if ($item['title'] && $item['desc']):
+				?>
+							<div class="thanh_tuu_col col-12 col-md-6 col-lg-4">
+								<div class="thanh_tuu_content_item" data-mh="thanh_tuu_content_item">
+									<div class="thanh_tuu_content_item_title">
+										<?php echo $item['title']; ?>
+									</div>
+									<div class="thanh_tuu_content_item_desc">
+										<?php echo $item['desc']; ?>
+									</div>
+								</div>
 							</div>
-							<div class="thanh_tuu_content_item_desc">
-								<?php echo $content_achievement['desc'] ?>
-							</div>
-						</div>
-					</div>
-				<?php endforeach; ?>
+				<?php
+						endif;
+					endforeach;
+				endif;
+				?>
 			</div>
 		</div>
 	</div>
@@ -245,13 +312,14 @@ $content_achievements = get_field('content_achievement') ?? null;
 <!-- Kiến thức nhận được -->
 <?php
 $title_knowledge = get_field('title_knowledge') ?? null;
-$content_knowledge = get_field('content_knowledge') ?? null;
+$content_knowledge = get_field('content_knowledge') ?? [];
 ?>
 <section class="kien_thuc">
 	<div class="container">
 		<h2 class="kien_thuc_title text-center mb-4 mb-lg-5"><?php echo $title_knowledge; ?></h2>
 		<?php
-		if ($content_knowledge): ?>
+		if ($content_knowledge && is_array($content_knowledge)) :
+		?>
 			<!-- Tab Titles -->
 			<ul class="nav nav-tabs justify-content-center" role="tablist">
 				<?php $tab_index = 1; ?>

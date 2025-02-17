@@ -190,7 +190,7 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 1,
+            "media_upload": 0,
             "delay": 0
         },
         {
@@ -344,7 +344,7 @@
                     "label": "Nội dung",
                     "name": "content",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "textarea",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -355,9 +355,9 @@
                     },
                     "default_value": "",
                     "maxlength": "",
+                    "rows": 4,
                     "placeholder": "",
-                    "prepend": "",
-                    "append": "",
+                    "new_lines": "",
                     "parent_repeater": "field_67ad7899b482b"
                 }
             ]
@@ -514,7 +514,7 @@
             "pagination": 0,
             "min": 0,
             "max": 0,
-            "collapsed": "",
+            "collapsed": "field_67adccf85ea89",
             "button_label": "Add Row",
             "rows_per_page": 20,
             "sub_fields": [
@@ -570,7 +570,7 @@
                     "label": "Nội dung",
                     "name": "content",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "textarea",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -581,9 +581,9 @@
                     },
                     "default_value": "",
                     "maxlength": "",
+                    "rows": 4,
                     "placeholder": "",
-                    "prepend": "",
-                    "append": "",
+                    "new_lines": "",
                     "parent_repeater": "field_67adccf85ea87"
                 }
             ]
@@ -626,6 +626,31 @@
             "append": ""
         },
         {
+            "key": "field_67b349956a046",
+            "label": "Background",
+            "name": "thanh_tuu_bg",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
             "key": "field_67adde87f0517",
             "label": "Nội dung thành tựu",
             "name": "content_achievement",
@@ -639,7 +664,7 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "table",
+            "layout": "row",
             "pagination": 0,
             "min": 0,
             "max": 0,
@@ -673,7 +698,7 @@
                     "label": "Mô tả",
                     "name": "desc",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "textarea",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -684,9 +709,9 @@
                     },
                     "default_value": "",
                     "maxlength": "",
+                    "rows": 4,
                     "placeholder": "",
-                    "prepend": "",
-                    "append": "",
+                    "new_lines": "",
                     "parent_repeater": "field_67adde87f0517"
                 }
             ]
@@ -860,7 +885,7 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "page-gioithieuulytan.php"
+                "value": "page-gioi_thieu_ulytan.php"
             }
         ]
     ],
@@ -879,5 +904,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1739722787
+    "modified": 1739803064
 }

@@ -142,13 +142,11 @@
 	}
 
 	.tim_hieu_them_inner {
-		background: linear-gradient(
-			90deg,
-			#721326 0%,
-			rgba(144, 1, 1, 0.5) 100%
-		);
+		background: linear-gradient(90deg,
+				#721326 0%,
+				rgba(144, 1, 1, 0.5) 100%);
 		border-radius: 15px;
-		padding: 36px 64px;
+		padding: 24px;
 
 		@include media-breakpoint-up(lg) {
 			padding: 56px 114px;
@@ -156,7 +154,7 @@
 
 		.tim_hieu_them_title {
 			font-weight: 700;
-			font-size: 36px;
+			font-size: 32px;
 			color: $white;
 			margin-bottom: 20px;
 
@@ -164,6 +162,7 @@
 				font-size: 41.6px;
 			}
 		}
+
 		.tim_hieu_them_button {
 			display: inline-flex;
 			padding: 12px 20px;

@@ -3047,3 +3047,32 @@ footer {
         }
     }
 }
+
+.tim_hieu_them_img {
+    max-width: 100%;
+    height: auto;
+
+    @include media-breakpoint-up(lg) {
+        margin-top: -120px;
+        width: 100%;
+    }
+}
+
+.tim_hieu_them_inner {
+    @include media-breakpoint-down(md) {
+        padding: 24px;
+    }
+}
+
+.staff_item_inner {
+    height: 100%;
+}
+
+.staff_item_img_block {
+    padding-bottom: 118% !important;
+}
+
+.doi_ngu_title_h2 {
+    margin-bottom: 80px;
+    text-align: center;
+}

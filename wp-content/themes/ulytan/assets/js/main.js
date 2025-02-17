@@ -488,4 +488,9 @@
 		addCustomSlickAttributes();
 	});
 	// end
+
+	$(".staff_btn_xem_them").on("click", function () {
+		$(this).parents(".staff_section").find(".staff_item").removeClass("d-none");
+		$(this).hide();
+	});
 })(jQuery, window);
