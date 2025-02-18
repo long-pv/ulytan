@@ -1,11 +1,11 @@
 {
-    "key": "group_67b1e6c45b16f",
-    "title": "Khách hàng tiêu biểu",
+    "key": "group_67b20c742909b",
+    "title": "Nhân viên",
     "fields": [
         {
-            "key": "field_67b1e6c41223f",
-            "label": "Logo công ty",
-            "name": "logo_cong_ty",
+            "key": "field_67b20c74c78a0",
+            "label": "Image",
+            "name": "image",
             "aria-label": "",
             "type": "image",
             "instructions": "",
@@ -28,13 +28,13 @@
             "preview_size": "medium"
         },
         {
-            "key": "field_67b1e71372e2b",
-            "label": "Link website",
-            "name": "link_website",
+            "key": "field_67b20c86c78a1",
+            "label": "Chức vụ",
+            "name": "chuc_vu",
             "aria-label": "",
             "type": "text",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -53,7 +53,14 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "typical_customers"
+                "value": "executive_board"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "staff"
             }
         ]
     ],
@@ -72,5 +79,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1739815931
+    "modified": 1739721916
 }

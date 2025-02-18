@@ -488,4 +488,22 @@
 		addCustomSlickAttributes();
 	});
 	// end
+
+	$(".staff_btn_xem_them").on("click", function () {
+		$(this).parents(".staff_section").find(".staff_item").removeClass("d-none");
+		$(this).hide();
+	});
+
+	$(".hinh_anh_hoat_dong_btn").on("click", function () {
+		$(this).parents(".hinh_anh_hoat_dong").find(".hinh_anh_hoat_dong_col").removeClass("d-none");
+		$(this).hide();
+	});
+
+	$(".video_hoat_dong_slider").slick({
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		autoplay: true,
+		arrows: true,
+		autoplaySpeed: 5000,
+	});
 })(jQuery, window);

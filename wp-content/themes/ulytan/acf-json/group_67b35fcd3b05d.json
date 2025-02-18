@@ -1,11 +1,11 @@
 {
-    "key": "group_67b1e6c45b16f",
-    "title": "Khách hàng tiêu biểu",
+    "key": "group_67b35fcd3b05d",
+    "title": "Video hoạt động",
     "fields": [
         {
-            "key": "field_67b1e6c41223f",
-            "label": "Logo công ty",
-            "name": "logo_cong_ty",
+            "key": "field_67b35fcd2234c",
+            "label": "Image",
+            "name": "image",
             "aria-label": "",
             "type": "image",
             "instructions": "",
@@ -25,16 +25,16 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "",
-            "preview_size": "medium"
+            "preview_size": "thumbnail"
         },
         {
-            "key": "field_67b1e71372e2b",
-            "label": "Link website",
-            "name": "link_website",
+            "key": "field_67b35ff175b20",
+            "label": "Mô tả",
+            "name": "mo_ta",
             "aria-label": "",
-            "type": "text",
+            "type": "textarea",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -43,9 +43,29 @@
             },
             "default_value": "",
             "maxlength": "",
+            "rows": 4,
             "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "new_lines": ""
+        },
+        {
+            "key": "field_67b360c0f48b6",
+            "label": "Iframe youtube",
+            "name": "iframe_youtube",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": ""
         }
     ],
     "location": [
@@ -53,7 +73,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "typical_customers"
+                "value": "activity_videos"
             }
         ]
     ],
@@ -72,5 +92,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1739815931
+    "modified": 1739808992
 }

@@ -82,10 +82,10 @@ $brand_content = get_field('brand_content') ?? null;
 
 <!-- Giá trị doanh nghiệp -->
 <?php
-$subtitle_business = get_field('subtitle_business') ?? null;
-$title_business = get_field('title_business') ?? null;
-$desc_business = get_field('desc_business') ?? null;
-$content_business = get_field('content_business') ?? null;
+$subtitle_business = get_field('subtitle_business') ?? '';
+$title_business = get_field('title_business') ?? '';
+$desc_business = get_field('desc_business') ?? '';
+$content_business = get_field('content_business') ?? [];
 ?>
 <section class="gia_tri">
 	<div class="container">
@@ -96,19 +96,24 @@ $content_business = get_field('content_business') ?? null;
 				<?php echo $desc_business; ?>
 			</p>
 			<div class="row gia_tri_row">
-				<?php foreach ($content_business as $content_item): ?>
-					<div class="gia_tri_col col-12 col-md-6 col-lg-4">
-						<div class="gia_tri_content_item" data-mh="gia_tri_content_item">
-							<img class="gia_tri_content_item_img" src="<?php echo $content_item['image'] ?>" alt="">
-							<div class="gia_tri_content_item_title">
-								<?php echo $content_item['title'] ?>
+				<?php
+				if ($content_business && is_array($content_business)):
+					foreach ($content_business as $content_item): ?>
+						<div class="gia_tri_col col-12 col-md-6 col-lg-4">
+							<div class="gia_tri_content_item" data-mh="gia_tri_content_item">
+								<img class="gia_tri_content_item_img" src="<?php echo $content_item['image'] ?>" alt="">
+								<div class="gia_tri_content_item_title">
+									<?php echo $content_item['title'] ?>
+								</div>
+								<p class="gia_tri_content_item_desc">
+									<?php echo $content_item['content'] ?>
+								</p>
 							</div>
-							<p class="gia_tri_content_item_desc">
-								<?php echo $content_item['content'] ?>
-							</p>
 						</div>
-					</div>
-				<?php endforeach; ?>
+				<?php
+					endforeach;
+				endif;
+				?>
 			</div>
 		</div>
 	</div>
@@ -119,43 +124,61 @@ $content_business = get_field('content_business') ?? null;
 $subtitle_team = get_field('subtitle_team') ?? null;
 $title_team = get_field('title_team') ?? null;
 $members = get_field('members') ?? null;
-?>
 
-<section class="doi_ngu">
-	<div class="container">
-		<h6 class="doi_ngu_subtitle"><?php echo $subtitle_team; ?></h6>
-		<h2 class="doi_ngu_title"><?php echo $title_team; ?></h2>
-		<div class="row doi_ngu_row">
-			<?php foreach ($members as $member): ?>
-				<div class="doi_ngu_col col-12 col-md-6 col-lg-4">
-					<div class="team-member">
-						<div class="team-member_wrapper">
-							<div class="team-member__image-wrapper">
-								<div class="team-member__circle team-member__circle--light"></div>
-								<div class="team-member__circle team-member__circle--dark"></div>
-								<?php if (!empty($member['img_member'])): ?>
-									<img class="team_memeber__image" src="<?php echo $member['img_member']; ?>"
-										alt="Đỗ Anh Việt">
-								<?php endif; ?>
-							</div>
-							<div class="team-member__content">
-								<div class="team-member__name">Đỗ Anh Việt</div>
-								<div class="team-member__position">CEO & Head of Product</div>
+$args = array(
+	'post_type' => 'executive_board',
+	'posts_per_page' => -1,
+);
+$query = new WP_Query($args);
+if ($query->have_posts()):
+?>
+	<section class="doi_ngu">
+		<div class="container">
+			<h6 class="doi_ngu_subtitle"><?php echo $subtitle_team; ?></h6>
+			<h2 class="doi_ngu_title"><?php echo $title_team; ?></h2>
+			<div class="row doi_ngu_row">
+				<?php
+				while ($query->have_posts()):
+					$query->the_post();
+					$image = get_field('image') ?? '';
+					$chuc_vu = get_field('chuc_vu') ?? '';
+				?>
+					<div class="doi_ngu_col col-12 col-md-6 col-lg-4">
+						<div class="team-member">
+							<div class="team-member_wrapper">
+								<div class="team-member__image-wrapper">
+									<div class="team-member__circle team-member__circle--light"></div>
+									<div class="team-member__circle team-member__circle--dark"></div>
+									<img class="team_memeber__image" src="<?php echo $image; ?>" alt="<?php the_title(); ?>">
+								</div>
+								<div class="team-member__content">
+									<div class="team-member__name">
+										<?php the_title(); ?>
+									</div>
+									<div class="team-member__position">
+										<?php echo $chuc_vu; ?>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			<?php endforeach; ?>
+				<?php
+				endwhile;
+				?>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
 
 <!-- Văn hóa công ty -->
 <?php
 $subtitle_culture = get_field('subtitle_culture') ?? null;
 $title_culture = get_field('title_culture') ?? null;
 $desc_culture = get_field('desc_culture') ?? null;
-$content_cultures = get_field('content_culture') ?? null;
+$content_cultures = get_field('content_culture') ?? [];
 ?>
 <section class="van_hoa">
 	<div class="container">
@@ -166,48 +189,121 @@ $content_cultures = get_field('content_culture') ?? null;
 				<?php echo $desc_culture; ?>
 			</p>
 			<div class="row van_hoa_row">
-				<?php foreach ($content_cultures as $content_culture): ?>
-					<div class="van_hoa_col col-12 col-md-6 col-lg-4">
-						<div class="van_hoa_content_item" data-mh="van_hoa_content_item">
-							<div class="van_hoa_content_item_img">
-								<img src="<?php echo $content_culture['image'] ?>" alt="">
+				<?php
+				if ($content_cultures && is_array($content_cultures)):
+					foreach ($content_cultures as $content_culture):
+				?>
+						<div class="van_hoa_col col-12 col-md-6 col-lg-4">
+							<div class="van_hoa_content_item" data-mh="van_hoa_content_item">
+								<div class="van_hoa_content_item_img">
+									<img src="<?php echo $content_culture['image'] ?>" alt="">
+								</div>
+								<div class="van_hoa_content_item_title">
+									<?php echo $content_culture['title'] ?>
+								</div>
+								<p class="van_hoa_content_item_desc">
+									<?php echo $content_culture['content'] ?>
+								</p>
 							</div>
-							<div class="van_hoa_content_item_title">
-								<?php echo $content_culture['title'] ?>
-							</div>
-							<p class="van_hoa_content_item_desc">
-								<?php echo $content_culture['content'] ?>
-							</p>
 						</div>
-					</div>
-				<?php endforeach; ?>
+				<?php
+					endforeach;
+				endif;
+				?>
 			</div>
 		</div>
 	</div>
 </section>
 
+<!-- Đối tác của chúng tôi -->
+<?php
+$args = array(
+	'post_type' => 'our_partners',
+	'posts_per_page' => -1,
+);
+$query = new WP_Query($args);
+if ($query->have_posts()):
+?>
+	<section class="secSpace doi_tac_ulytan bg-light">
+		<div class="container">
+			<h2 class="sec_title text-center">
+				Đối tác của chúng tôi
+			</h2>
+
+			<div class="doi_tac_ulytan_slider">
+				<?php
+				while ($query->have_posts()):
+					$query->the_post();
+				?>
+					<div>
+						<div class="about_us_video doi_tac_ulytan_item">
+							<?php
+							$image = get_field('image') ?? '';
+							$iframe = get_field('iframe_youtube') ?? '';
+							if ($image && $iframe) :
+								$iframe_url = getYoutubeEmbedUrl($iframe);
+							?>
+								<div class="videoBlock">
+									<div class="videoBlock__inner" data-mh="videoBlock__inner">
+										<img class="videoBlock__img" src="<?php echo $image; ?>">
+										<div class="videoBlock__overlay"></div>
+										<div class="videoBlock__videoAction">
+											<a href="javascript:void(0);" class="videoBlock__playAction" data-toggle="modal" data-target="#videoUrl" data-src="<?php echo $iframe_url; ?>">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+													<path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path>
+												</svg>
+											</a>
+										</div>
+									</div>
+								</div>
+							<?php
+							endif;
+							?>
+						</div>
+					</div>
+				<?php
+				endwhile;
+				?>
+			</div>
+		</div>
+	</section>
+<?php
+endif;
+wp_reset_postdata();
+?>
+<!-- end -->
+
 <!-- Thành tựu -->
 <?php
 $title_achievement = get_field('title_achievement') ?? null;
-$content_achievements = get_field('content_achievement') ?? null;
+$thanh_tuu_bg = get_field('thanh_tuu_bg') ?? '';
+$content_achievements = get_field('content_achievement') ?? [];
 ?>
-<section class="thanh_tuu">
+<section class="thanh_tuu" style="background-image: url('<?php echo $thanh_tuu_bg; ?>');">
 	<div class="container">
 		<div class="thanh_tuu_container">
 			<h2 class="thanh_tuu_title"><?php echo $title_achievement; ?></h2>
 			<div class="row thanh_tuu_row">
-				<?php foreach ($content_achievements as $content_achievement): ?>
-					<div class="thanh_tuu_col col-12 col-md-6 col-lg-4">
-						<div class="thanh_tuu_content_item" data-mh="thanh_tuu_content_item">
-							<div class="thanh_tuu_content_item_title">
-								<?php echo $content_achievement['title'] ?>
+				<?php
+				if ($content_achievements && is_array($content_achievements)) :
+					foreach ($content_achievements as $item):
+						if ($item['title'] && $item['desc']):
+				?>
+							<div class="thanh_tuu_col col-12 col-md-6 col-lg-4">
+								<div class="thanh_tuu_content_item" data-mh="thanh_tuu_content_item">
+									<div class="thanh_tuu_content_item_title">
+										<?php echo $item['title']; ?>
+									</div>
+									<div class="thanh_tuu_content_item_desc">
+										<?php echo $item['desc']; ?>
+									</div>
+								</div>
 							</div>
-							<div class="thanh_tuu_content_item_desc">
-								<?php echo $content_achievement['desc'] ?>
-							</div>
-						</div>
-					</div>
-				<?php endforeach; ?>
+				<?php
+						endif;
+					endforeach;
+				endif;
+				?>
 			</div>
 		</div>
 	</div>
@@ -216,13 +312,14 @@ $content_achievements = get_field('content_achievement') ?? null;
 <!-- Kiến thức nhận được -->
 <?php
 $title_knowledge = get_field('title_knowledge') ?? null;
-$content_knowledge = get_field('content_knowledge') ?? null;
+$content_knowledge = get_field('content_knowledge') ?? [];
 ?>
 <section class="kien_thuc">
 	<div class="container">
 		<h2 class="kien_thuc_title text-center mb-4 mb-lg-5"><?php echo $title_knowledge; ?></h2>
 		<?php
-		if ($content_knowledge): ?>
+		if ($content_knowledge && is_array($content_knowledge)) :
+		?>
 			<!-- Tab Titles -->
 			<ul class="nav nav-tabs justify-content-center" role="tablist">
 				<?php $tab_index = 1; ?>

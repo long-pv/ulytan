@@ -190,7 +190,7 @@
             "default_value": "",
             "tabs": "all",
             "toolbar": "full",
-            "media_upload": 1,
+            "media_upload": 0,
             "delay": 0
         },
         {
@@ -344,7 +344,7 @@
                     "label": "Nội dung",
                     "name": "content",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "textarea",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -355,9 +355,9 @@
                     },
                     "default_value": "",
                     "maxlength": "",
+                    "rows": 4,
                     "placeholder": "",
-                    "prepend": "",
-                    "append": "",
+                    "new_lines": "",
                     "parent_repeater": "field_67ad7899b482b"
                 }
             ]
@@ -418,98 +418,6 @@
             "placeholder": "",
             "prepend": "",
             "append": ""
-        },
-        {
-            "key": "field_67ada24b0bbcb",
-            "label": "Thành viên đội ngũ",
-            "name": "members",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "table",
-            "pagination": 0,
-            "min": 0,
-            "max": 0,
-            "collapsed": "",
-            "button_label": "Add Row",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_67ada1e00bbca",
-                    "label": "Ảnh đại diện",
-                    "name": "img_member",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "url",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "preview_size": "medium",
-                    "parent_repeater": "field_67ada24b0bbcb"
-                },
-                {
-                    "key": "field_67ada2b60bbcc",
-                    "label": "Tên thành viên",
-                    "name": "name_member",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_67ada24b0bbcb"
-                },
-                {
-                    "key": "field_67ada2c70bbcd",
-                    "label": "Chức vụ",
-                    "name": "member_role",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_67ada24b0bbcb"
-                }
-            ]
         },
         {
             "key": "field_67ad5323d515c",
@@ -606,7 +514,7 @@
             "pagination": 0,
             "min": 0,
             "max": 0,
-            "collapsed": "",
+            "collapsed": "field_67adccf85ea89",
             "button_label": "Add Row",
             "rows_per_page": 20,
             "sub_fields": [
@@ -662,7 +570,7 @@
                     "label": "Nội dung",
                     "name": "content",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "textarea",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -673,9 +581,9 @@
                     },
                     "default_value": "",
                     "maxlength": "",
+                    "rows": 4,
                     "placeholder": "",
-                    "prepend": "",
-                    "append": "",
+                    "new_lines": "",
                     "parent_repeater": "field_67adccf85ea87"
                 }
             ]
@@ -718,6 +626,31 @@
             "append": ""
         },
         {
+            "key": "field_67b349956a046",
+            "label": "Background",
+            "name": "thanh_tuu_bg",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
             "key": "field_67adde87f0517",
             "label": "Nội dung thành tựu",
             "name": "content_achievement",
@@ -731,7 +664,7 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "table",
+            "layout": "row",
             "pagination": 0,
             "min": 0,
             "max": 0,
@@ -765,7 +698,7 @@
                     "label": "Mô tả",
                     "name": "desc",
                     "aria-label": "",
-                    "type": "text",
+                    "type": "textarea",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -776,9 +709,9 @@
                     },
                     "default_value": "",
                     "maxlength": "",
+                    "rows": 4,
                     "placeholder": "",
-                    "prepend": "",
-                    "append": "",
+                    "new_lines": "",
                     "parent_repeater": "field_67adde87f0517"
                 }
             ]
@@ -952,7 +885,7 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "page-gioithieuulytan.php"
+                "value": "page-gioi_thieu_ulytan.php"
             }
         ]
     ],
@@ -971,5 +904,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1739679705
+    "modified": 1739803064
 }
