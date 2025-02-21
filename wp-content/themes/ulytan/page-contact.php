@@ -23,6 +23,78 @@ get_header();
 		?>
 
 		<div class="secSpace--bottom">
+			<div class="row row_24">
+				<div class="col-12 col-lg-4">
+					<div class="page_contact_main_address_title">
+						Địa chỉ trụ sở chính
+					</div>
+					<div class="editor">
+						<?php
+						$noi_dung_dia_chi_chinh = get_field('noi_dung_dia_chi_chinh') ?? "";
+						echo $noi_dung_dia_chi_chinh;
+						?>
+					</div>
+
+				</div>
+
+				<div class="col-12 col-lg-4">
+					<div class="page_contact_main_address_maps">
+						<?php
+						$iframe_google_maps = get_field('iframe_google_maps') ?? '';
+						echo $iframe_google_maps;
+						?>
+					</div>
+				</div>
+
+				<div class="col-12 col-lg-4">
+					<div class="page_contact_danh_gia_inner">
+						<div class="page_contact_diem_danh_gia">
+							<?php
+							$diem_danh_gia = get_field('diem_danh_gia') ?? '';
+							echo $diem_danh_gia;
+							?>
+						</div>
+
+						<div class="page_contact_so_luot_danh_gia">
+							<?php
+							$so_luot_danh_gia = get_field('so_luot_danh_gia') ?? '0';
+							echo "Số lượt đánh giá: " . $so_luot_danh_gia;
+							?>
+						</div>
+
+						<div class="page_contact_danh_gia_list">
+							<?php
+							$danh_sach_danh_gia = get_field('danh_sach_danh_gia') ?? "";
+							if ($danh_sach_danh_gia):
+								foreach ($danh_sach_danh_gia as $item):
+							?>
+									<div class="page_contact_danh_gia_item">
+										<div class="page_contact_danh_gia_item_img">
+											<img src="<?php echo $item['anh']; ?>" alt="<?php echo $item['ten'] ?>">
+										</div>
+										<div class="page_contact_danh_gia_item_content">
+											<div class="page_contact_danh_gia_item_name">
+												<?php echo $item['ten'] ?> <span class="page_contact_danh_gia_item_date"><?php echo $item['thoi_gian']; ?></span>
+											</div>
+											<div class="page_contact_danh_gia_item_desc">
+												<?php echo $item['danh_gia']; ?>
+											</div>
+										</div>
+									</div>
+							<?php
+								endforeach;
+							endif;
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="secSpace">
+			<h2 class="page_contact_maps_title">
+				Danh sách địa chỉ văn phòng
+			</h2>
 			<?php the_content(); ?>
 		</div>
 

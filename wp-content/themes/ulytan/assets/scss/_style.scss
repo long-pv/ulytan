@@ -3271,3 +3271,86 @@ footer {
 .kien_thuc_button {
     margin-top: 20px;
 }
+
+.page_contact_maps_title {
+    font-size: 28px;
+    font-weight: 600;
+    color: $primary;
+    margin-bottom: 40px;
+}
+
+.page_contact_main_address_title {
+    font-size: 28px;
+    font-weight: 600;
+    color: $primary;
+    margin-bottom: 24px;
+}
+
+.page_contact_main_address_maps {
+    position: relative;
+    height: 220px;
+
+    iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+    }
+}
+
+.page_contact_diem_danh_gia {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.page_contact_so_luot_danh_gia {
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+
+.page_contact_danh_gia_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.page_contact_danh_gia_item {
+    display: flex;
+    gap: 10px;
+}
+
+.page_contact_danh_gia_item_img {
+    img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+
+.page_contact_danh_gia_item_content {
+    width: 100%;
+}
+
+.page_contact_danh_gia_item_name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.page_contact_danh_gia_item_date {
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.page_contact_danh_gia_item_desc {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.page_contact_danh_gia_inner {
+    height: 220px;
+    overflow-y: auto;
+}
