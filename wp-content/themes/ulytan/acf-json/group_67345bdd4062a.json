@@ -75,7 +75,6 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": [
-        "the_content",
         "excerpt",
         "discussion",
         "comments",
@@ -84,5 +83,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1736354709
+    "modified": 1740113214
 }

@@ -16,7 +16,7 @@
 <!-- end main body -->
 
 <?php
-if (is_page_template('page-contact.php')) :
+if (is_page_template('page-contact-test.php')) :
 ?>
     <div class="headquarters secSpace">
         <div class="container">
