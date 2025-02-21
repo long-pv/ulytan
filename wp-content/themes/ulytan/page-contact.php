@@ -21,9 +21,14 @@ get_header();
 		<?php
 		wp_breadcrumbs();
 		?>
+
+		<div class="secSpace--bottom">
+			<?php the_content(); ?>
+		</div>
+
 		<div class="page_contact">
 			<div class="row">
-				<div class="col-lg-8">
+				<div class="col-lg-12">
 					<form id="page_contact_form" class="page_contact_form" enctype="multipart/form-data">
 						<h2 class="page_contact_title">
 							XIN MỜI ĐIỀN THÔNG TIN ĐỂ NHẬN ĐƯỢC GIÁ KHUYẾN MÃI.
@@ -241,7 +246,7 @@ get_header();
 						</div>
 					</form>
 				</div>
-				<div class="col-lg-4 mt-4 mt-lg-0">
+				<!-- <div class="col-lg-4 mt-4 mt-lg-0 d-none">
 					<div class="page_contact_sidebar">
 						<h2 class="page_contact_sidebar_head">
 							GIỚI THIỆU CHUNG VỀ ULYTAN
@@ -278,7 +283,7 @@ get_header();
 							</a>
 						<?php endif; ?>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
