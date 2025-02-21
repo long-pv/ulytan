@@ -961,6 +961,31 @@
             "endpoint": 0
         },
         {
+            "key": "field_67b8acafe61b5",
+            "label": "Hiển thị popup",
+            "name": "hien_thi_popup",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": [
+                "Ẩn",
+                "Hiện"
+            ],
+            "default_value": 1,
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "horizontal",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_67758cfd51ce3",
             "label": "Loại popup hiển thị",
             "name": "type_popup",
@@ -1058,5 +1083,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1737107235
+    "modified": 1740156147
 }
