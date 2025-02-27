@@ -1004,6 +1004,9 @@ get_footer();
 				info_18: {
 					required: true,
 				},
+				summary_description: {
+					required: true,
+				},
 			},
 			messages: {
 				full_name: {
@@ -1087,6 +1090,9 @@ get_footer();
 				},
 				info_18: {
 					required: 'Bạn chưa nhập lựa chọn nào',
+				},
+				summary_description: {
+					required: 'Bạn chưa nhập nội dung',
 				},
 			},
 			errorPlacement: function(error, element) {

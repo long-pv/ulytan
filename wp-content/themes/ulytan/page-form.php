@@ -28,53 +28,67 @@ get_header();
 					<form class="page_form_form" id="page_form_form">
 						<div class="wrap-input" style="height: calc(100vh - 260px); overflow: auto;">
 							<?php
+							$index = 1;
 							if (get_field('ho_va_ten') != '0'):
 							?>
 								<div class="page_form_group">
 									<div class="page_form_label">
-										1. Họ và tên của quý khách <span class="page_form_req">*</span>
+										<?php echo $index; ?>. Họ và tên <span class="page_form_no_req">(Không bắt buộc)</span>
 									</div>
-									<input type="text" name="ho_va_ten" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
+									<input type="text" name="ho_va_ten" class="page_form_input" placeholder="Nhập họ và tên">
 								</div>
-							<?php endif; ?>
+							<?php
+								$index++;
+							endif; ?>
 
 							<?php
 							if (get_field('so_dien_thoai') != '0'):
 							?>
 								<div class="page_form_group">
 									<div class="page_form_label">
-										2. Nhập số điện thoại của quý khách <span class="page_form_req">*</span>
+										<?php echo $index; ?>. Số điện thoại <span class="page_form_req">*</span>
 									</div>
-									<input type="text" name="so_dien_thoai" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
+									<input type="text" name="so_dien_thoai" class="page_form_input" placeholder="Nhập số điện thoại">
 								</div>
-							<?php endif; ?>
+							<?php
+								$index++;
+							endif;
+							?>
 
 							<?php
 							if (get_field('email') != '0'):
 							?>
 								<div class="page_form_group">
 									<div class="page_form_label">
-										3. Email của quý khách
+										<?php echo $index; ?>. Email <span class="page_form_no_req">(Không bắt buộc)</span>
 									</div>
-									<input type="text" name="email" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
+									<input type="text" name="email" class="page_form_input" placeholder="Nhập email">
 								</div>
-							<?php endif; ?>
+							<?php
+								$index++;
+							endif;
+							?>
 
 							<?php
 							if (get_field('ma_don_hang') != '0'):
 							?>
 								<div class="page_form_group">
 									<div class="page_form_label">
-										4. Mã đơn hàng của quý khách <span class="page_form_req">*</span>
+										<?php echo $index; ?>. Mã đơn hàng <span class="page_form_req">*</span>
 									</div>
-									<input type="text" name="ma_don_hang" class="page_form_input" placeholder="Nhập câu trả lời của bạn">
+									<input type="text" name="ma_don_hang" class="page_form_input" placeholder="Nhập mã đơn hàng">
 								</div>
-							<?php endif; ?>
+							<?php
+								$index++;
+							endif;
+							?>
 
 							<div class="page_form_rating">
 								<div class="page_form_label">
-									5. Đánh giá thái độ của nhân viên tại Ulytan <span class="page_form_req">*</span>
+									<?php echo $index; ?>. Đánh giá <span class="page_form_req">*</span>
 								</div>
+
+								<?php $index++; ?>
 
 								<div class="question_group" id="question_group">
 									<div class="question" data-question="1">
@@ -117,7 +131,7 @@ get_header();
 
 							<div class="page_form_group">
 								<div class="page_form_label">
-									6. Lý do <span class="page_form_no_req">(Không bắt buộc)</span>
+									<?php echo $index; ?>. Lý do <span class="page_form_no_req">(Không bắt buộc)</span>
 								</div>
 								<textarea name="ly_do" class="page_form_area"></textarea>
 							</div>
@@ -172,19 +186,21 @@ get_footer();
 			required: "Vui lòng nhập giá trị."
 		});
 
+		// Thêm phương thức kiểm tra tùy chỉnh
+		$.validator.addMethod("phoneVN", function(value, element) {
+			return this.optional(element) || /^0\d{9}$/.test(value);
+		}, "Số điện thoại phải bắt đầu bằng số 0.");
+
 		$("#page_form_form").validate({
 			rules: {
-				ho_va_ten: {
-					required: true,
-				},
 				so_dien_thoai: {
 					required: true,
 					digits: true,
-					minlength: 1,
-					maxlength: 11
+					minlength: 10,
+					maxlength: 10,
+					phoneVN: true,
 				},
 				email: {
-					required: false,
 					customEmail: true
 				},
 				ma_don_hang: {
@@ -203,8 +219,8 @@ get_footer();
 			messages: {
 				so_dien_thoai: {
 					digits: "Chỉ được phép chứa các chữ số",
-					minlength: "Số điện thoại phải có ít nhất 1 ký tự",
-					maxlength: "Số điện thoại không được vượt quá 11 ký tự"
+					minlength: "Số điện thoại phải có đủ 10 ký tự",
+					maxlength: "Số điện thoại không được vượt quá 10 ký tự"
 				},
 			},
 			errorPlacement: function(error, element) {

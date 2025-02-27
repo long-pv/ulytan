@@ -212,7 +212,7 @@
         },
         {
             "key": "field_673f391c2a95a",
-            "label": "Achieve brand title",
+            "label": "Tiêu đề đạt thương hiệu",
             "name": "achieve_brand_title",
             "aria-label": "",
             "type": "text",
@@ -232,7 +232,7 @@
         },
         {
             "key": "field_673f38e32a958",
-            "label": "Achieve brand image",
+            "label": "Hình ảnh thương hiệu",
             "name": "achieve_brand_image",
             "aria-label": "",
             "type": "repeater",
@@ -276,6 +276,27 @@
                     "max_size": "",
                     "mime_types": "",
                     "preview_size": "thumbnail",
+                    "parent_repeater": "field_673f38e32a958"
+                },
+                {
+                    "key": "field_67c08af180674",
+                    "label": "Tiêu đề ảnh",
+                    "name": "tieu_de_anh",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "placeholder": "",
+                    "new_lines": "br",
                     "parent_repeater": "field_673f38e32a958"
                 }
             ]
@@ -1083,5 +1104,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1740156147
+    "modified": 1740672149
 }

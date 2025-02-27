@@ -541,6 +541,26 @@
             },
             "default_value": "",
             "placeholder": ""
+        },
+        {
+            "key": "field_67c0855282d02",
+            "label": "Danh sách văn phòng (plugins)",
+            "name": "danh_sach_van_phong_plugins",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
         }
     ],
     "location": [
@@ -561,5 +581,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1737554029
+    "modified": 1740670838
 }

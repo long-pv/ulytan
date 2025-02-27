@@ -44,42 +44,6 @@ if ($banner_content) :
 
 <div class="section_2_scroll"></div>
 
-
-<?php
-$use_service = get_field('use_service') ?? [];
-$use_service_title = get_field('use_service_title') ?: 'DỊCH VỤ CỦA ULYTAN SỬ DỤNG KHI NÀO?';
-if ($use_service):
-?>
-	<section class="choice_reason secSpace">
-		<div class="container">
-			<h2 class="home_news_title text-center mb-4">
-				<?php echo $use_service_title; ?>
-			</h2>
-			<div class="row row_32 justify-content-center">
-				<?php foreach ($use_service as $key => $item) : ?>
-					<div class="col-md-6 col-lg-4">
-						<div class="choice_reason_item">
-							<?php if ($item['icon']): ?>
-								<div class="choice_reason_item_img">
-									<img src="<?php echo $item['icon']; ?>" alt="<?php echo $item['title']; ?>">
-								</div>
-							<?php endif; ?>
-							<h3 class="choice_reason_item_title" data-mh="choice_reason_item_title">
-								<?php echo $item['title']; ?>
-							</h3>
-							<div class="editor choice_reason_item_content">
-								<?php echo $item['content']; ?>
-							</div>
-						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</section>
-<?php endif; ?>
-
-
-
 <?php
 $choice_reason = get_field('choice_reason') ?? [];
 $choice_reason_title = get_field('choice_reason_title') ?: 'LÝ DO CHỌN CHÚNG TÔI';
@@ -130,13 +94,20 @@ if ($achieve_brand_image) :
 					<div class="row justify-content-center row_24">
 						<?php
 						foreach ($achieve_brand_image as $item):
-							if ($item['image']):
+							if ($item['image']) {
 						?>
 								<div class="col-md-6">
-									<img class="achieve_brand_img" src="<?php echo $item['image']; ?>" alt="">
+									<img class="achieve_brand_img" src="<?php echo $item['image']; ?>" alt="<?php echo $item['tieu_de_anh']; ?>">
+									<?php
+									if ($item['tieu_de_anh']) {
+									?>
+										<div class="achieve_brand_img_tieu_de"><?php echo $item['tieu_de_anh']; ?></div>
+									<?php
+									}
+									?>
 								</div>
 						<?php
-							endif;
+							}
 						endforeach;
 						?>
 					</div>
@@ -146,18 +117,18 @@ if ($achieve_brand_image) :
 	</section>
 <?php endif; ?>
 
-<?php /*
-$customer_object = get_field('customer_object') ?? [];
-$customer_object_title = get_field('customer_object_title') ?: 'ĐỐI TƯỢNG KHÁCH HÀNG CỦA ULYTAN';
-if ($customer_object):
+<?php
+$use_service = get_field('use_service') ?? [];
+$use_service_title = get_field('use_service_title') ?: 'DỊCH VỤ CỦA ULYTAN SỬ DỤNG KHI NÀO?';
+if ($use_service):
 ?>
-	<section class="choice_reason secSpace--bottom">
+	<section class="choice_reason secSpace">
 		<div class="container">
 			<h2 class="home_news_title text-center mb-4">
-				<?php echo $customer_object_title; ?>
+				<?php echo $use_service_title; ?>
 			</h2>
 			<div class="row row_32 justify-content-center">
-				<?php foreach ($customer_object as $key => $item) : ?>
+				<?php foreach ($use_service as $key => $item) : ?>
 					<div class="col-md-6 col-lg-4">
 						<div class="choice_reason_item">
 							<?php if ($item['icon']): ?>
@@ -168,8 +139,8 @@ if ($customer_object):
 							<h3 class="choice_reason_item_title" data-mh="choice_reason_item_title">
 								<?php echo $item['title']; ?>
 							</h3>
-							<div class="choice_reason_item_desc">
-								<?php echo $item['description']; ?>
+							<div class="editor choice_reason_item_content">
+								<?php echo $item['content']; ?>
 							</div>
 						</div>
 					</div>
@@ -177,8 +148,7 @@ if ($customer_object):
 			</div>
 		</div>
 	</section>
-<?php endif; */ ?>
-
+<?php endif; ?>
 
 <?php
 $video_customer_title = get_field('video_customer_title') ?: 'KHÁCH HÀNG NÓI VỀ ULYTAN';
