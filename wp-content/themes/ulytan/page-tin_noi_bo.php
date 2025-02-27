@@ -126,8 +126,17 @@ get_header();
 				?>
 					<div class="col-12 col-md-6 hinh_anh_hoat_dong_col <?php echo ($index > 15) ? 'd-none' : ''; ?>">
 						<div class="hinh_anh_hoat_dong_img_block">
-							<img src="<?php echo $item; ?>" alt="hình ảnh <?php echo $key + 1; ?>">
+							<img src="<?php echo $item['url']; ?>" alt="hình ảnh <?php echo $key + 1; ?>">
 						</div>
+						<?php
+						if ($item['caption']) {
+						?>
+							<div class="hinh_anh_hoat_dong_img_desc">
+								<?php echo $item['caption']; ?>
+							</div>
+						<?php
+						}
+						?>
 					</div>
 				<?php
 					$index++;

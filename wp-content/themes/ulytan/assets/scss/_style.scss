@@ -3366,3 +3366,16 @@ footer {
 .page_form_rating .rating {
     width: 60%;
 }
+
+.hinh_anh_hoat_dong_img_desc {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 0px 10px;
+    @include line-clamp(2);
+}
+
+.page-template-page-dich_thuat_cong_chung .arrow-down {
+    top: 50%;
+    transform: translateY(-50%);
+}
