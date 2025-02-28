@@ -108,6 +108,11 @@ function getYoutubeEmbedUrl($input)
 function register_cpt_post_types()
 {
 	$cpt_list = [
+		'download_documents' => [
+			'labels' => __('Download Documents', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
 		'executive_board' => [
 			'labels' => __('Ban điều hành', 'basetheme'),
 			'cap' => false,
@@ -425,7 +430,7 @@ add_filter('comments_open', 'force_comments_open', 10, 2);
 
 function custom_comment_form_fields($fields)
 {
-	$fields['author'] = '<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label>' .
+	$fields['author'] = '<p class="comment-form-author"><label for="author">Họ và tên <span class="required">*</span></label>' .
 		'<input id="author" name="author" type="text" value="" size="30" required="required" /></p>';
 
 	$fields['email'] = '<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label>' .

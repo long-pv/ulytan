@@ -1018,6 +1018,12 @@ endif;
 	</div>
 </div>
 
+<style>
+	#ajax-loader {
+		z-index: 100000000 !important;
+	}
+</style>
+
 <?php
 get_footer();
 ?>
