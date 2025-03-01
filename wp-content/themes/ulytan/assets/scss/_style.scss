@@ -2594,19 +2594,6 @@ footer.footer.bg-primary {
     }
 }
 
-/* Đặt kiểu cho icon mũi tên xuống */
-.arrow-down {
-    font-size: 30px;
-    /* Cỡ chữ của mũi tên */
-    display: inline-block;
-    animation: bounce 1.5s infinite;
-    /* Áp dụng animation bounce */
-    color: #333;
-    /* Màu sắc của icon */
-    text-align: center;
-    margin-top: -16px;
-    float: right;
-}
 
 /* Animation nháy nháy xuống xuống */
 @keyframes bounce {
@@ -3613,4 +3600,23 @@ footer {
     50% {
         transform: translateY(-10px);
     }
+}
+
+.footer_form {
+    .arrow-down {
+        font-size: 30px;
+        /* Cỡ chữ của mũi tên */
+        display: inline-block;
+        animation: bounce 1.5s infinite;
+        /* Áp dụng animation bounce */
+        color: #333;
+        /* Màu sắc của icon */
+        text-align: center;
+        margin-top: -16px;
+        float: right;
+    }
+}
+
+.page-template-page-dich_thuat_cong_chung .arrow-down {
+    animation: bounce 1.5s infinite;
 }
