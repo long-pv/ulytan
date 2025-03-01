@@ -185,6 +185,11 @@ function register_cpt_post_types()
 			'cap' => false,
 			'hierarchical' => false
 		],
+		'signup_download' => [
+			'labels' => __('Form 5 - Đăng ký tải xuống', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
 	];
 
 	foreach ($cpt_list as $post_type => $data) {
@@ -931,7 +936,7 @@ function handle_reaction()
 
 add_filter('acf/prepare_field', function ($field) {
 	// Danh sách post type muốn áp dụng
-	$restricted_post_types = ['form_ctv', 'contact_info', 'form_contribute'];
+	$restricted_post_types = ['form_ctv', 'contact_info', 'form_contribute', 'signup_download'];
 
 	// Kiểm tra nếu đang trong trang chỉnh sửa bài viết
 	if (is_admin() && isset($_GET['post'])) {
@@ -1922,4 +1927,53 @@ function custom_comments_format($comment, $args, $depth)
 		</div>
 	</li>
 <?php
+}
+
+// Hook để xử lý yêu cầu AJAX
+add_action('wp_ajax_dang_ky_tai_xuong', 'dang_ky_tai_xuong');
+add_action('wp_ajax_nopriv_dang_ky_tai_xuong', 'dang_ky_tai_xuong');
+
+function dang_ky_tai_xuong()
+{
+	// Lấy dữ liệu từ AJAX
+	if (!empty($_POST)) {
+		$data = $_POST;
+
+		if (isset($data['email']) && is_email($data['email'])) {
+			$to = $data['email'];
+			$subject = 'Thư cảm ơn.';
+			$headers = array('Content-Type: text/html; charset=UTF-8');
+			$message = 'Cảm ơn quý khách đã đăng ký tải xuống.';
+
+			wp_mail($to, $subject, $message, $headers);
+		}
+
+		$new_post = array(
+			'post_type'   => 'signup_download',
+			'post_title'  => sanitize_text_field($data['email'] ?? 'No Email'),
+			'post_status' => 'publish',
+		);
+		$post_id = wp_insert_post($new_post);
+
+		if ($post_id) {
+			// Cập nhật ACF fields
+			update_field('ho_va_ten', sanitize_text_field($data['full_name'] ?? ''), $post_id);
+			update_field('so_dien_thoai', sanitize_text_field($data['phone'] ?? ''), $post_id);
+			update_field('email', sanitize_text_field($data['email'] ?? ''), $post_id);
+			update_field('muc_dich_su_dung', sanitize_text_field($data['purpose'] ?? ''), $post_id);
+
+			// set cookie để lưu thông tin khách hàng
+			$cookie_name = "user_dang_ky_tai_xuong";
+			$cookie_value = "da_dang_ky";
+			$expiration = time() + (30 * 24 * 60 * 60); // 30 ngày
+			setcookie($cookie_name, $cookie_value, $expiration, "/");
+
+			wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
+		} else {
+			wp_send_json_error(array('message' => 'Không thể lưu thông tin'));
+		}
+	} else {
+		wp_send_json_error(array('message' => 'Dữ liệu không hợp lệ'));
+	}
+	wp_die();
 }

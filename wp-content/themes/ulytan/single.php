@@ -22,6 +22,8 @@ if (in_array($post_type, [
 	'our_partners',
 	'staff',
 	'activity_videos',
+	'download_documents',
+	'signup_download',
 ])) {
 	wp_redirect(home_url());
 	exit;
@@ -113,6 +115,72 @@ get_header();
 						</div>
 					</div>
 					<?php the_content(); ?>
+
+					<?php
+					if ($post_type == 'news_documents') {
+						$danh_sach_tai_lieu = get_field('danh_sach_tai_lieu') ?? [];
+						if ($danh_sach_tai_lieu) {
+					?>
+							<div class="news_documents_list">
+								<?php
+								foreach ($danh_sach_tai_lieu as $key => $item) {
+									if ($item['file_tai_xuong']) {
+										$post_id = $item['file_tai_xuong'];
+										$file_tai_lieu = get_field('file_tai_lieu', $post_id) ?? '';
+										$mo_ta = get_field('mo_ta', $post_id) ?? '';
+										$type = $file_tai_lieu['subtype'] ?? '';
+										$url = $file_tai_lieu["url"] ?? '';
+								?>
+										<div class="news_documents_item">
+											<div class="news_documents_item_title">
+												<?php echo get_the_title($post_id); ?>
+											</div>
+											<?php
+											if ($type == "pdf") {
+											?>
+												<div class="news_documents_item_file">
+													<?php
+													echo do_shortcode('[pdf-embedder url="' . $url . '"]');
+													?>
+												</div>
+											<?php
+											}
+											?>
+
+											<div class="news_documents_item_btn">
+												<?php
+												if (!empty($_COOKIE["user_dang_ky_tai_xuong"]) && $_COOKIE["user_dang_ky_tai_xuong"] == 'da_dang_ky') {
+												?>
+													<a download href="<?php echo $url; ?>" class="btn_tai_xuong_modal_download btn_tai_xuong_modal">
+														Tải xuống
+													</a>
+												<?php
+												} else {
+												?>
+													<a data-url="<?php echo $url; ?>" href="javascript:void(0);" class="btn_tai_xuong_modal_popup btn_tai_xuong_modal" data-toggle="modal" data-target="#popup_tai_xuong_file">
+														Tải xuống
+													</a>
+													<a download href="<?php echo $url; ?>" class="btn_tai_xuong_modal_download btn_tai_xuong_modal" style="display: none;">
+														Tải xuống
+													</a>
+												<?php
+												}
+												?>
+											</div>
+
+											<div class="news_documents_item_btn editor">
+												<?php echo $mo_ta; ?>
+											</div>
+										</div>
+								<?php
+									}
+								}
+								?>
+							</div>
+					<?php
+						}
+					}
+					?>
 				</div>
 
 				<section class="bg-light-1 secSpace--bottom-1 single_post_mxh_1">
@@ -471,7 +539,6 @@ if (comments_open() || get_comments_number()) :
 				<div class="col-lg-6">
 					<?php
 					// comment_form();
-
 					// Kiểm tra xem bài viết có cho phép bình luận không
 					if (comments_open() || get_comments_number()) {
 						comments_template(); // Gọi file comments.php
@@ -640,11 +707,80 @@ wp_reset_postdata();
 	}
 </script>
 
+<div class="modal fade popup_tai_xuong_file" id="popup_tai_xuong_file" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+					<path d="M15 9L9 15" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+					<path d="M9 9L15 15" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+				</svg>
+			</button>
+			<div class="modal-body">
+				<div class="popup_tai_xuong_file_title">
+					Bạn vui lòng điền thông tin để tải xuống
+
+					<div class="svg-container">
+						<svg width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M11.9114 0.319336H26.0894V24.986H37.5264L19.0004 49.1593L0.474365 24.986H11.9114V0.319336Z" fill="#E94235" />
+						</svg>
+					</div>
+				</div>
+				<form id="form_tai_xuong_file" action="" method="post">
+					<div class="page_contact_info">
+						<div class="row row_16">
+							<div class="col-lg-4">
+								<label class="contact_label" for="">
+									1. Họ và tên *
+								</label>
+								<input type="text" name="full_name" class="contact_input" placeholder="Nhập họ và tên">
+							</div>
+							<div class="col-lg-4">
+								<label class="contact_label" for="">
+									2. Số điện thoại *
+								</label>
+								<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
+							</div>
+							<div class="col-lg-4">
+								<label class="contact_label" for="">
+									3. Địa chỉ Email *
+								</label>
+								<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
+							</div>
+							<div class="col-12 page_ctv_step_16">
+								<div class="page_ctv_form_group">
+									<label for="" class="page_ctv_form_label">
+										4. Mục đích sử dụng *
+									</label>
+									<textarea name="purpose" class="page_ctv_form_textarea" placeholder="- Để đi Du học Đức
+- Để xin visa
+- Để hợp pháp hoá lãnh sự"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<div class="mt-3 d-flex justify-content-center">
+							<input type="submit" class="contact_submit" value="Gửi">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	#ajax-loader {
+		z-index: 100000000 !important;
+	}
+</style>
+
 <?php
 get_footer();
 ?>
 <script>
-	jQuery(document).ready(function($) {
+	$(document).ready(function() {
 		$(document).on('click', '.pagination_ajax .page-numbers', function(e) {
 			e.preventDefault();
 
@@ -864,6 +1000,97 @@ get_footer();
 				$('.page_contact_info').find('input').val('');
 			} else {
 				$('.page_contact_info').show();
+			}
+		});
+
+		// Thêm phương thức kiểm tra tùy chỉnh
+		$.validator.addMethod("phoneVN", function(value, element) {
+			return this.optional(element) || /^0\d{9}$/.test(value);
+		}, "Số điện thoại phải bắt đầu bằng số 0.");
+
+		var data_download_btn = '';
+		$('.btn_tai_xuong_modal_popup').on('click', function() {
+			data_download_btn = $(this).data('url');
+		});
+
+		$("#form_tai_xuong_file").validate({
+			rules: {
+				full_name: {
+					required: true,
+				},
+				phone: {
+					required: true,
+					digits: true,
+					minlength: 10,
+					maxlength: 10,
+					phoneVN: true,
+				},
+				email: {
+					required: true,
+					customEmail: true,
+				},
+				purpose: {
+					required: true,
+				}
+			},
+			messages: {
+				full_name: {
+					required: "Vui lòng nhập họ và tên",
+				},
+				phone: {
+					required: "Vui lòng nhập số điện thoại",
+					digits: "Chỉ được phép chứa các chữ số",
+					minlength: "Số điện thoại phải có đủ 10 ký tự",
+					maxlength: "Số điện thoại không được vượt quá 10 ký tự"
+				},
+				email: {
+					required: "Vui lòng nhập địa chỉ email",
+					email: "Vui lòng nhập một địa chỉ email hợp lệ"
+				},
+				purpose: {
+					required: "Vui lòng nhập mục đích sử dụng",
+				}
+			},
+			submitHandler: function(form) {
+				// Gửi AJAX request
+				var formData = new FormData(form);
+				formData.append("action", "dang_ky_tai_xuong");
+
+				$.ajax({
+					url: '<?php echo admin_url('admin-ajax.php'); ?>',
+					type: 'POST',
+					data: formData,
+					contentType: false,
+					processData: false,
+					beforeSend: function() {
+						$("#ajax-loader").show();
+					},
+					success: function(response) {
+						if (response.success) {
+							$('.btn_tai_xuong_modal_download').show();
+							$('.btn_tai_xuong_modal_popup').remove();
+							$('#popup_tai_xuong_file').modal('hide');
+							// Tạo thẻ `a` ẩn và kích hoạt tải xuống
+							var link = document.createElement("a");
+							link.href = data_download_btn;
+							link.download = data_download_btn.split('/').pop();
+							document.body.appendChild(link);
+							link.click();
+							document.body.removeChild(link);
+						} else {
+							alert(response.data.message);
+						}
+					},
+					error: function() {
+						alert('Có lỗi xảy ra khi gửi dữ liệu.');
+					},
+					complete: function() {
+						$("#ajax-loader").hide();
+					}
+				});
+
+				// ngăn không submit
+				return false;
 			}
 		});
 	});
