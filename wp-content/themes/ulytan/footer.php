@@ -150,11 +150,25 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                     <?php echo 'Danh sách văn phòng'; ?>
                 </h3>
                 <?php
-                $danh_sach_van_phong_plugins = get_field('danh_sach_van_phong_plugins', 'option') ?? '';
-                if ($danh_sach_van_phong_plugins) {
-                    echo '<div class="danh_sach_van_phong_plugins">';
-                    echo $danh_sach_van_phong_plugins;
-                    echo '</div>';
+                $trang_lien_he = get_field('trang_lien_he', 'option') ?? '';
+                if ($trang_lien_he) {
+                    $args = array(
+                        'post_type'      => 'page',
+                        'posts_per_page' => -1,
+                        'post__in'       => [$trang_lien_he],
+                    );
+
+                    $query = new WP_Query($args);
+
+                    if ($query->have_posts()) {
+                        while ($query->have_posts()) {
+                            $query->the_post();
+                            echo '<div class="footer_danh_sach_van_phong">';
+                            the_content();
+                            echo '</div>';
+                        }
+                    }
+                    wp_reset_postdata();
                 }
                 ?>
             </div>
