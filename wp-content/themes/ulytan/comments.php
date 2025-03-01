@@ -1,77 +1,47 @@
 <?php
-/**
- * The template for displaying comments
- *
- * This is the template that displays the area of the page that contains both the current comments
- * and the comment form.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package ulytan
- */
-
-/*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password we will
- * return early without loading the comments.
- */
-if ( post_password_required() ) {
+if (post_password_required()) {
 	return;
 }
 ?>
 
-<div id="comments" class="comments-area">
+<div id="comments" class="comments_area">
+	<?php if (have_comments()) : ?>
+		<h2 class="so_luong_cmt"><?php echo get_comments_number() . ' Comments'; ?></h2>
+		<ul class="comment_list">
+			<?php
+			wp_list_comments(array(
+				'style'       => 'ul', // Chuyển từ 'ol' sang 'ul'
+				'short_ping'  => true,
+				'callback'    => 'custom_comments_format',
+				'avatar_size' => 50,
+				'depth'       => 3 // Giới hạn mức phân cấp
+			));
+			?>
+		</ul>
+
+		<!-- Phân trang bình luận -->
+		<div class="comment_pagination pagination">
+			<?php
+			paginate_comments_links(array(
+				'prev_text'    => '←',               // Nút quay lại
+				'next_text'    => '→',               // Nút tiếp theo
+				'type'         => 'plain',           // Hiển thị phân trang dạng số
+				'end_size'     => 2,                 // Số trang đầu và cuối luôn hiển thị
+				'mid_size'     => 2,                 // Số trang hiển thị xung quanh trang hiện tại
+				'show_all'     => false,             // Không hiển thị tất cả các trang nếu có quá nhiều
+			));
+			?>
+		</div>
+	<?php endif; ?>
 
 	<?php
-	// You can start editing here -- including this comment!
-	if ( have_comments() ) :
-		?>
-		<h2 class="comments-title">
-			<?php
-			$ulytan_comment_count = get_comments_number();
-			if ( '1' === $ulytan_comment_count ) {
-				printf(
-					/* translators: 1: title. */
-					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'ulytan' ),
-					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
-				);
-			} else {
-				printf( 
-					/* translators: 1: comment count number, 2: title. */
-					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $ulytan_comment_count, 'comments title', 'ulytan' ) ),
-					number_format_i18n( $ulytan_comment_count ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
-				);
-			}
-			?>
-		</h2><!-- .comments-title -->
-
-		<?php the_comments_navigation(); ?>
-
-		<ol class="comment-list">
-			<?php
-			wp_list_comments(
-				array(
-					'style'      => 'ol',
-					'short_ping' => true,
-				)
-			);
-			?>
-		</ol><!-- .comment-list -->
-
-		<?php
-		the_comments_navigation();
-
-		// If comments are closed and there are comments, let's leave a little note, shall we?
-		if ( ! comments_open() ) :
-			?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'ulytan' ); ?></p>
-			<?php
-		endif;
-
-	endif; // Check for have_comments().
-
-	comment_form();
+	comment_form(array(
+		'title_reply'       => 'Bình luận',
+		'title_reply_to'    => 'Trả lời cho %s',
+		// 'comment_notes_after' => 'Nhớ lựa chọn captcha',
+		'label_submit'      => 'Gửi',
+		'cancel_reply_link'   => 'Hủy trả lời',
+		// 'comment_notes_before'   => 'Vui lòng để lại bình luận',
+	));
 	?>
-
-</div><!-- #comments -->
+</div>

@@ -215,20 +215,21 @@ function ulytan_scripts()
 }
 add_action('wp_enqueue_scripts', 'ulytan_scripts');
 
-function ullytan_enqueue_styles() {
-    // Đường dẫn đầy đủ đến file CSS trong thư mục theme
-    $css_file_path = get_template_directory() . '/assets/css/main.css';
+function ullytan_enqueue_styles()
+{
+	// Đường dẫn đầy đủ đến file CSS trong thư mục theme
+	$css_file_path = get_template_directory() . '/assets/css/main.css';
 
-    // Lấy phiên bản tự động dựa trên thời gian chỉnh sửa file
-    $version = file_exists($css_file_path) ? filemtime($css_file_path) : '1.0.0';
+	// Lấy phiên bản tự động dựa trên thời gian chỉnh sửa file
+	$version = file_exists($css_file_path) ? filemtime($css_file_path) : '1.0.0';
 
-    // Đăng ký file CSS
-    wp_enqueue_style(
-        'ulytan-style-main',
-        get_template_directory_uri() . '/assets/css/main.css',
-        array(),
-        $version
-    );
+	// Đăng ký file CSS
+	wp_enqueue_style(
+		'ulytan-style-main',
+		get_template_directory_uri() . '/assets/css/main.css',
+		array(),
+		$version
+	);
 }
 add_action('wp_enqueue_scripts', 'ullytan_enqueue_styles');
 
@@ -237,3 +238,19 @@ add_action('wp_enqueue_scripts', 'ullytan_enqueue_styles');
  */
 require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/security.php';
+
+// Hide notification in admin
+function remove_plugin_notices()
+{
+	$turn_off_admin_notifications = get_field('turn_off_admin_notifications', 'option') ?? false;
+	if ($turn_off_admin_notifications) {
+		global $wp_filter;
+		if (isset($wp_filter['admin_notices'])) {
+			unset($wp_filter['admin_notices']);
+		}
+		if (isset($wp_filter['all_admin_notices'])) {
+			unset($wp_filter['all_admin_notices']);
+		}
+	}
+}
+add_action('admin_init', 'remove_plugin_notices');

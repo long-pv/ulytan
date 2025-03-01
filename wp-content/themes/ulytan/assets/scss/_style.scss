@@ -3379,3 +3379,136 @@ footer {
     top: 50%;
     transform: translateY(-50%);
 }
+
+.comments_area {
+
+    ul {
+        padding-left: 16px;
+    }
+
+    .so_luong_cmt {
+        font-size: 24px !important;
+        color: #900101 !important;
+        margin-bottom: 24px;
+    }
+
+    /* Tổng thể từng bình luận */
+    .comment_item {
+        display: flex;
+        gap: 15px;
+        padding: 15px;
+        background: #fdfdfd;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        transition: background-color 0.3s;
+    }
+
+    .comment_item:hover {
+        background-color: #f4faff;
+    }
+
+    /* Avatar người dùng */
+    .comment_avatar img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #900101;
+    }
+
+    /* Nội dung bình luận */
+    .comment_content {
+        flex: 1;
+    }
+
+    /* Thông tin meta */
+    .comment_meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    /* Tên tác giả */
+    .comment_author {
+        font-weight: bold;
+        color: #900101;
+        font-size: 16px;
+    }
+
+    /* Ngày đăng */
+    .comment_date {
+        font-size: 13px;
+        color: #666;
+        font-style: italic;
+    }
+
+    /* Nội dung bình luận */
+    .comment_text {
+        margin: 10px 0;
+        font-size: 15px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    /* Nút trả lời */
+    .comment_reply a {
+        display: inline-block;
+        background-color: #900101;
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        text-decoration: none;
+        transition: background 0.3s ease;
+    }
+
+    /* Hiệu ứng thụt lề cho bình luận trả lời */
+    .comment_item.depth-2 {
+        margin-left: 30px;
+        background-color: #eef7ff;
+    }
+
+    .comment_item.depth-3 {
+        margin-left: 60px;
+        background-color: #e0f3ff;
+    }
+
+    /* Link hủy trả lời */
+    #cancel-comment-reply-link {
+        font-size: 14px;
+        color: #d9534f;
+        text-decoration: none;
+        margin-left: 10px;
+        font-weight: 700;
+    }
+
+    #cancel-comment-reply-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Input và textarea */
+    .comment-form-author,
+    .comment-form-email,
+    .comment-form-comment {
+        margin-bottom: 15px;
+    }
+
+    .comment_pagination {
+        display: flex;
+        justify-content: flex-start !important;
+        margin: 20px 0px !important;
+    }
+
+    #respond {
+        .g-recaptcha {
+            order: 10;
+        }
+
+        .form-submit {
+            order: 11;
+            margin-top: 16px;
+        }
+    }
+}

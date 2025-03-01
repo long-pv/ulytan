@@ -108,8 +108,13 @@ function getYoutubeEmbedUrl($input)
 function register_cpt_post_types()
 {
 	$cpt_list = [
+		'news_documents' => [
+			'labels' => __('Tin tức tài liệu', 'basetheme'),
+			'cap' => false,
+			'hierarchical' => false
+		],
 		'download_documents' => [
-			'labels' => __('Download Documents', 'basetheme'),
+			'labels' => __('Tài liệu tải xuống', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
@@ -1074,7 +1079,7 @@ function add_export_button_with_jquery()
 				}
 			});
 		</script>
-<?php
+	<?php
 	}
 }
 add_action('admin_footer', 'add_export_button_with_jquery');
@@ -1877,4 +1882,44 @@ function stripVN($str)
 	$str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
 	$str = preg_replace("/(Đ)/", 'D', $str);
 	return $str;
+}
+
+// Bật lại trạng thái bình luận
+add_filter('comments_open', '__return_true');
+add_filter('pings_open', '__return_true');
+
+add_action('wp_enqueue_scripts', function () {
+	if (is_singular() && comments_open() && get_option('thread_comments')) {
+		wp_enqueue_script('comment-reply');
+	}
+});
+
+function custom_comments_format($comment, $args, $depth)
+{
+	$GLOBALS['comment'] = $comment;
+	?>
+	<li <?php comment_class('mb-3'); ?> id="comment-<?php comment_ID(); ?>">
+		<div class="comment_body" id="div-comment-<?php comment_ID(); ?>">
+			<div class="comment_author">
+				<?php echo get_comment_author(); ?>
+			</div>
+			<div class="comment_date">
+				<?php echo get_comment_date('d/m/Y h:i:s'); ?>
+			</div>
+			<div class="comment_text">
+				<?php echo '=> ' . get_comment_text(); ?>
+			</div>
+
+			<div class="comment_meta">
+				<?php
+				comment_reply_link(array_merge($args, array(
+					'reply_text' => 'Trả lời',
+					'depth'      => $depth,
+					'max_depth'  => $args['max_depth']
+				)));
+				?>
+			</div>
+		</div>
+	</li>
+<?php
 }

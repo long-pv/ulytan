@@ -469,7 +469,14 @@ if (comments_open() || get_comments_number()) :
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
-					<?php comment_form(); ?>
+					<?php
+					// comment_form();
+
+					// Kiểm tra xem bài viết có cho phép bình luận không
+					if (comments_open() || get_comments_number()) {
+						comments_template(); // Gọi file comments.php
+					}
+					?>
 				</div>
 			</div>
 		</div>
