@@ -1021,12 +1021,29 @@
                 "id": ""
             },
             "choices": {
-                "1": "1. Dịch thuật công chứng",
-                "2": "2. Hợp pháp hoá lãnh sự",
-                "4": "4. Cấp Visa đa quốc gia",
-                "5": "5. Cấp đổi ra hạn Hộ chiếu"
+                "1": "1.Dịch thuật công chứng",
+                "2": "2.Hợp pháp hoá lãnh sự",
+                "3": "3.Chứng thực lãnh sự",
+                "4": "4.Cấp Visa đa quốc gia",
+                "5": "5. Cấp đổi ra hạn Hộ chiếu",
+                "6": "6.Lý lịch tư pháp",
+                "7": "7.Đổi bằng lái xe quốc tế",
+                "8": "8.Xin cấp, gia hạn thẻ tạm trú",
+                "9": "9.Cấp, gia hạn giấy phép lao độ",
+                "10": "10.Xuất khẩu lao động",
+                "11": "11.Tư vấn du học quốc tế",
+                "12": "12.Đào tạo ngoại ngữ",
+                "13": "13.Du lịch quốc tế",
+                "14": "14.Xin cấp E-Visa",
+                "15": "15.Bảo hiểm du lịch quốc tế",
+                "16": "16.Đầu tư, định cư",
+                "17": "17.Thẻ APEC",
+                "18": "18.Chứng minh tài chính",
+                "19": "19.Thủ tục hải quan",
+                "20": "20.Bán vé máy bay",
+                "21": "21.Giấy khám sức khoẻ"
             },
-            "default_value": false,
+            "default_value": 1,
             "return_format": "value",
             "multiple": 0,
             "allow_null": 0,
@@ -1041,7 +1058,7 @@
             "aria-label": "",
             "type": "image",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -1066,7 +1083,7 @@
             "aria-label": "",
             "type": "text",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -1104,5 +1121,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1740672149
+    "modified": 1740930758
 }

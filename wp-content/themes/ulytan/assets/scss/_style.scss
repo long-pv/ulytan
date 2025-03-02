@@ -3612,7 +3612,9 @@ footer {
         color: #333;
         /* Màu sắc của icon */
         text-align: center;
-        margin-top: -16px;
+        margin-top: -16px !important;
+        right: 20px;
+        top: 40px;
         float: right;
     }
 }
