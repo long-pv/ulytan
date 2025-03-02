@@ -1147,19 +1147,49 @@ function contact_info_export_data_csv()
 
 	if ($type_popup == '1') {
 		$output_filename = '1.Dịch thuật công chứng_' . $current_time . '.csv';
-	} elseif (
-		$type_popup == '2'
-	) {
+	} elseif ($type_popup == '2') {
 		$output_filename = '2.Hợp pháp hoá lãnh sự_' . $current_time . '.csv';
-	} elseif (
-		$type_popup == '4'
-	) {
+	} elseif ($type_popup == '3') {
+		$output_filename = '3.Chứng thực lãnh sự_' . $current_time . '.csv';
+	} elseif ($type_popup == '4') {
 		$output_filename = '4.Cấp Visa đa quốc gia_' . $current_time . '.csv';
-	} elseif (
-		$type_popup == '5'
-	) {
+	} elseif ($type_popup == '5') {
 		$output_filename = '5.Cấp đổi ra hạn Hộ chiếu_' . $current_time . '.csv';
-	} else {
+	} elseif ($type_popup == '6') {
+		$output_filename = '6.Lý lịch tư pháp_' . $current_time . '.csv';
+	} elseif ($type_popup == '7') {
+		$output_filename = '7.Đổi bằng lái xe quốc tế_' . $current_time . '.csv';
+	} elseif ($type_popup == '8') {
+		$output_filename = '8.Xin cấp, gia hạn thẻ tạm trú_' . $current_time . '.csv';
+	} elseif ($type_popup == '9') {
+		$output_filename = '9.Cấp, gia hạn giấy phép lao động_' . $current_time . '.csv';
+	} elseif ($type_popup == '10') {
+		$output_filename = '10.Xuất khẩu lao động_' . $current_time . '.csv';
+	} elseif ($type_popup == '11') {
+		$output_filename = '11.Tư vấn du học quốc tế_' . $current_time . '.csv';
+	} elseif ($type_popup == '12') {
+		$output_filename = '12.Đào tạo ngoại ngữ_' . $current_time . '.csv';
+	} elseif ($type_popup == '13') {
+		$output_filename = '13.Du lịch quốc tế_' . $current_time . '.csv';
+	} elseif ($type_popup == '14') {
+		$output_filename = '14.Xin cấp E-Visa_' . $current_time . '.csv';
+	} elseif ($type_popup == '15') {
+		$output_filename = '15.Bảo hiểm du lịch quốc tế_' . $current_time . '.csv';
+	} elseif ($type_popup == '16') {
+		$output_filename = '16.Đầu tư, định cư_' . $current_time . '.csv';
+	} elseif ($type_popup == '17') {
+		$output_filename = '17.Thẻ APEC_' . $current_time . '.csv';
+	} elseif ($type_popup == '18') {
+		$output_filename = '18.Chứng minh tài chính_' . $current_time . '.csv';
+	} elseif ($type_popup == '19') {
+		$output_filename = '19.Thủ tục hải quan_' . $current_time . '.csv';
+	} elseif ($type_popup == '20') {
+		$output_filename = '20.Bán vé máy bay_' . $current_time . '.csv';
+	} elseif ($type_popup == '21') {
+		$output_filename = '21.Giấy khám sức khoẻ_' . $current_time . '.csv';
+	}
+	// không thuộc trường hợp nào
+	else {
 		$output_filename = 'Form liên hệ_' . $current_time . '.csv';
 	}
 	header('Content-Disposition: attachment;filename=' . $output_filename);
@@ -1528,7 +1558,519 @@ function contact_info_export_data_csv()
 			}
 		}
 		wp_reset_postdata();
-	} else {
+	} elseif ($type_popup == '3') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'6. Chứng thực lãnh sự',
+			'5. Hợp pháp hóa lãnh sự',
+			'4. Dịch thuật công chứng',
+			'2. Cấp visa đa quốc gia',
+			'1. Cấp, đổi, gia hạn hộ chiếu',
+			'7. Lý lịch tư pháp',
+			'8. Đổi bằng lái xe quốc tế',
+			'9. Xin cấp, gia hạn thẻ tạm trú',
+			'10. Cấp, gia hạn giấy phép lao động',
+			'11. Xuất khẩu lao động',
+			'12. Tư vấn du học quốc tế',
+			'13. Đào tạo ngoại ngữ',
+			'14. Du lịch quốc tế',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Đầu tư, định cư',
+			'18. Thẻ APEC',
+			'19. Chứng minh tài chính',
+			'20. Thủ tục hải quan',
+			'3. Bán vé máy bay',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '6') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Lý lịch tư pháp',
+			'2. Cấp visa đa quốc gia',
+			'3. Cấp, đổi, gia hạn hộ chiếu',
+			'4. Bán vé máy bay',
+			'5. Dịch thuật công chứng',
+			'6. Hợp pháp hóa lãnh sự',
+			'7. Chứng thực lãnh sự',
+			'8. Đổi bằng lái xe quốc tế',
+			'9. Xin cấp, gia hạn thẻ tạm trú',
+			'10. Cấp, gia hạn giấy phép lao động',
+			'11. Xuất khẩu lao động',
+			'12. Tư vấn du học quốc tế',
+			'13. Đào tạo ngoại ngữ',
+			'14. Du lịch quốc tế',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Đầu tư, định cư',
+			'18. Thẻ APEC',
+			'19. Chứng minh tài chính',
+			'20. Thủ tục hải quan',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '7') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Đổi bằng lái xe quốc tế',
+			'2. Dịch thuật công chứng',
+			'3. Hợp pháp hóa lãnh sự',
+			'4. Chứng thực lãnh sự',
+			'5. Cấp visa đa quốc gia',
+			'6. Cấp, đổi, gia hạn hộ chiếu',
+			'7. Lý lịch tư pháp',
+			'8. Xin cấp, gia hạn thẻ tạm trú',
+			'9. Cấp, gia hạn giấy phép lao động',
+			'10. Xuất khẩu lao động',
+			'11. Tư vấn du học quốc tế',
+			'12. Đào tạo ngoại ngữ',
+			'13. Du lịch quốc tế',
+			'14. Xin cấp E-Visa',
+			'15. Bảo hiểm du lịch quốc tế',
+			'16. Đầu tư, định cư',
+			'17. Thẻ APEC',
+			'18. Chứng minh tài chính',
+			'19. Thủ tục hải quan',
+			'20. Bán vé máy bay',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '8') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Xin cấp, gia hạn thẻ tạm trú',
+			'2. Lý lịch tư pháp',
+			'3. Cấp, gia hạn giấy phép lao động',
+			'4. Giấy khám sức khoẻ',
+			'5. Dịch thuật công chứng',
+			'6. Hợp pháp hóa lãnh sự',
+			'7. Chứng thực lãnh sự',
+			'8. Cấp visa đa quốc gia',
+			'9. Cấp, đổi, gia hạn hộ chiếu',
+			'10. Đổi bằng lái xe quốc tế',
+			'11. Xuất khẩu lao động',
+			'12. Tư vấn du học quốc tế',
+			'13. Đào tạo ngoại ngữ',
+			'14. Du lịch quốc tế',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Đầu tư, định cư',
+			'18. Thẻ APEC',
+			'19. Chứng minh tài chính',
+			'20. Thủ tục hải quan',
+			'21. Bán vé máy bay',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '9') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Cấp, gia hạn giấy phép lao động',
+			'2. Lý lịch tư pháp',
+			'3. Xin cấp, gia hạn thẻ tạm trú',
+			'4. Giấy khám sức khoẻ',
+			'5. Dịch thuật công chứng',
+			'6. Hợp pháp hóa lãnh sự',
+			'7. Chứng thực lãnh sự',
+			'8. Cấp visa đa quốc gia',
+			'9. Cấp, đổi, gia hạn hộ chiếu',
+			'10. Đổi bằng lái xe quốc tế',
+			'11. Xuất khẩu lao động',
+			'12. Tư vấn du học quốc tế',
+			'13. Đào tạo ngoại ngữ',
+			'14. Du lịch quốc tế',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Đầu tư, định cư',
+			'18. Thẻ APEC',
+			'19. Chứng minh tài chính',
+			'20. Thủ tục hải quan',
+			'21. Bán vé máy bay',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '10') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Xuất khẩu lao động',
+			'2. Cấp, đổi, gia hạn hộ chiếu',
+			'3. Giấy khám sức khoẻ',
+			'4. Bán vé máy bay',
+			'5. Hợp pháp hóa lãnh sự',
+			'6. Chứng thực lãnh sự',
+			'7. Cấp visa đa quốc gia',
+			'8. Lý lịch tư pháp',
+			'9. Đổi bằng lái xe quốc tế',
+			'10. Xin cấp, gia hạn thẻ tạm trú',
+			'11. Cấp, gia hạn giấy phép lao động',
+			'12. Dịch thuật công chứng',
+			'13. Tư vấn du học quốc tế',
+			'14. Đào tạo ngoại ngữ',
+			'15. Du lịch quốc tế',
+			'16. Xin cấp E-Visa',
+			'17. Bảo hiểm du lịch quốc tế',
+			'18. Đầu tư, định cư',
+			'19. Thẻ APEC',
+			'20. Chứng minh tài chính',
+			'21. Thủ tục hải quan',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '11') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Tư vấn du học quốc tế',
+			'2. Cấp, đổi, gia hạn hộ chiếu',
+			'3. Cấp visa đa quốc gia',
+			'4. Hợp pháp hóa lãnh sự',
+			'5. Chứng thực lãnh sự',
+			'6. Giấy khám sức khoẻ',
+			'7. Dịch thuật công chứng',
+			'8. Bán vé máy bay',
+			'9. Lý lịch tư pháp',
+			'10. Đổi bằng lái xe quốc tế',
+			'11. Xin cấp, gia hạn thẻ tạm trú',
+			'12. Cấp, gia hạn giấy phép lao động',
+			'13. Xuất khẩu lao động',
+			'14. Đào tạo ngoại ngữ',
+			'15. Du lịch quốc tế',
+			'16. Xin cấp E-Visa',
+			'17. Bảo hiểm du lịch quốc tế',
+			'18. Đầu tư, định cư',
+			'19. Thẻ APEC',
+			'20. Chứng minh tài chính',
+			'21. Thủ tục hải quan',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '12') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Đào tạo ngoại ngữ',
+			'2. Cấp, đổi, gia hạn hộ chiếu',
+			'3. Tư vấn du học quốc tế',
+			'4. Cấp visa đa quốc gia',
+			'5. Hợp pháp hóa lãnh sự',
+			'6. Chứng thực lãnh sự',
+			'7. Dịch thuật công chứng',
+			'8. Lý lịch tư pháp',
+			'9. Đổi bằng lái xe quốc tế',
+			'10. Xin cấp, gia hạn thẻ tạm trú',
+			'11. Cấp, gia hạn giấy phép lao động',
+			'12. Xuất khẩu lao động',
+			'13. Du lịch quốc tế',
+			'14. Xin cấp E-Visa',
+			'15. Bảo hiểm du lịch quốc tế',
+			'16. Đầu tư, định cư',
+			'17. Thẻ APEC',
+			'18. Chứng minh tài chính',
+			'19. Thủ tục hải quan',
+			'20. Bán vé máy bay',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '13') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Du lịch quốc tế',
+			'2. Cấp, đổi, gia hạn hộ chiếu',
+			'3. Cấp visa đa quốc gia',
+			'4. Bán vé máy bay',
+			'5. Hợp pháp hóa lãnh sự',
+			'6. Chứng thực lãnh sự',
+			'7. Dịch thuật công chứng',
+			'8. Lý lịch tư pháp',
+			'9. Đổi bằng lái xe quốc tế',
+			'10. Xin cấp, gia hạn thẻ tạm trú',
+			'11. Cấp, gia hạn giấy phép lao động',
+			'12. Xuất khẩu lao động',
+			'13. Tư vấn du học quốc tế',
+			'14. Đào tạo ngoại ngữ',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Đầu tư, định cư',
+			'18. Thẻ APEC',
+			'19. Chứng minh tài chính',
+			'20. Thủ tục hải quan',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '14') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Xin cấp E-Visa',
+			'2. Xin cấp, gia hạn thẻ tạm trú',
+			'3. Cấp, gia hạn giấy phép lao động',
+			'4. Bán vé máy bay',
+			'5. Thủ tục hải quan',
+			'6. Dịch thuật công chứng',
+			'7. Hợp pháp hóa lãnh sự',
+			'8. Chứng thực lãnh sự',
+			'9. Cấp visa đa quốc gia',
+			'10. Cấp, đổi, gia hạn hộ chiếu',
+			'11. Lý lịch tư pháp',
+			'12. Đổi bằng lái xe quốc tế',
+			'13. Xuất khẩu lao động',
+			'14. Tư vấn du học quốc tế',
+			'15. Đào tạo ngoại ngữ',
+			'16. Du lịch quốc tế',
+			'17. Bảo hiểm du lịch quốc tế',
+			'18. Đầu tư, định cư',
+			'19. Thẻ APEC',
+			'20. Chứng minh tài chính',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '15') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Bảo hiểm du lịch quốc tế',
+			'2. Chứng minh tài chính',
+			'3. Du lịch quốc tế',
+			'4. Cấp, đổi, gia hạn hộ chiếu',
+			'5. Cấp visa đa quốc gia',
+			'6. Bán vé máy bay',
+			'7. Hợp pháp hóa lãnh sự',
+			'8. Chứng thực lãnh sự',
+			'9. Dịch thuật công chứng',
+			'10. Lý lịch tư pháp',
+			'11. Đổi bằng lái xe quốc tế',
+			'12. Xin cấp, gia hạn thẻ tạm trú',
+			'13. Cấp, gia hạn giấy phép lao động',
+			'14. Xuất khẩu lao động',
+			'15. Tư vấn du học quốc tế',
+			'16. Đào tạo ngoại ngữ',
+			'17. Xin cấp E-Visa',
+			'18. Đầu tư, định cư',
+			'19. Thẻ APEC',
+			'20. Thủ tục hải quan',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '16') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Đầu tư, định cư',
+			'2. Dịch thuật công chứng',
+			'3. Hợp pháp hóa lãnh sự',
+			'4. Chứng thực lãnh sự',
+			'5. Cấp visa đa quốc gia',
+			'6. Cấp, đổi, gia hạn hộ chiếu',
+			'7. Lý lịch tư pháp',
+			'8. Đổi bằng lái xe quốc tế',
+			'9. Xin cấp, gia hạn thẻ tạm trú',
+			'10. Cấp, gia hạn giấy phép lao động',
+			'11. Xuất khẩu lao động',
+			'12. Tư vấn du học quốc tế',
+			'13. Đào tạo ngoại ngữ',
+			'14. Du lịch quốc tế',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Thẻ APEC',
+			'18. Chứng minh tài chính',
+			'19. Thủ tục hải quan',
+			'20. Bán vé máy bay',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '17') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Thẻ APEC',
+			'2. Cấp, đổi, gia hạn hộ chiếu',
+			'3. Cấp visa đa quốc gia',
+			'4. Dịch thuật công chứng',
+			'5. Hợp pháp hóa lãnh sự',
+			'6. Chứng thực lãnh sự',
+			'7. Lý lịch tư pháp',
+			'8. Đổi bằng lái xe quốc tế',
+			'9. Xin cấp, gia hạn thẻ tạm trú',
+			'10. Cấp, gia hạn giấy phép lao động',
+			'11. Xuất khẩu lao động',
+			'12. Tư vấn du học quốc tế',
+			'13. Đào tạo ngoại ngữ',
+			'14. Du lịch quốc tế',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Đầu tư, định cư',
+			'18. Chứng minh tài chính',
+			'19. Thủ tục hải quan',
+			'20. Bán vé máy bay',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '18') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Chứng minh tài chính',
+			'2. Xuất khẩu lao động',
+			'3. Tư vấn du học quốc tế',
+			'4. Cấp visa đa quốc gia',
+			'5. Cấp, đổi, gia hạn hộ chiếu',
+			'6. Chứng thực lãnh sự',
+			'7. Hợp pháp hóa lãnh sự',
+			'8. Dịch thuật công chứng',
+			'9. Lý lịch tư pháp',
+			'10. Đổi bằng lái xe quốc tế',
+			'11. Xin cấp, gia hạn thẻ tạm trú',
+			'12. Cấp, gia hạn giấy phép lao động',
+			'13. Đào tạo ngoại ngữ',
+			'14. Du lịch quốc tế',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Đầu tư, định cư',
+			'18. Thẻ APEC',
+			'19. Thủ tục hải quan',
+			'20. Bán vé máy bay',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '19') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Thủ tục hải quan',
+			'2. Dịch thuật công chứng',
+			'3. Hợp pháp hóa lãnh sự',
+			'4. Chứng thực lãnh sự',
+			'5. Cấp visa đa quốc gia',
+			'6. Cấp, đổi, gia hạn hộ chiếu',
+			'7. Lý lịch tư pháp',
+			'8. Đổi bằng lái xe quốc tế',
+			'9. Xin cấp, gia hạn thẻ tạm trú',
+			'10. Cấp, gia hạn giấy phép lao động',
+			'11. Xuất khẩu lao động',
+			'12. Tư vấn du học quốc tế',
+			'13. Đào tạo ngoại ngữ',
+			'14. Du lịch quốc tế',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Đầu tư, định cư',
+			'18. Thẻ APEC',
+			'19. Chứng minh tài chính',
+			'20. Bán vé máy bay',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '20') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Bán vé máy bay',
+			'2. Cấp visa đa quốc gia',
+			'3. Cấp, đổi, gia hạn hộ chiếu',
+			'4. Du lịch quốc tế',
+			'5. Dịch thuật công chứng',
+			'6. Hợp pháp hóa lãnh sự',
+			'7. Chứng thực lãnh sự',
+			'8. Thủ tục hải quan',
+			'9. Lý lịch tư pháp',
+			'10. Đổi bằng lái xe quốc tế',
+			'11. Xin cấp, gia hạn thẻ tạm trú',
+			'12. Cấp, gia hạn giấy phép lao động',
+			'13. Xuất khẩu lao động',
+			'14. Tư vấn du học quốc tế',
+			'15. Đào tạo ngoại ngữ',
+			'16. Xin cấp E-Visa',
+			'17. Bảo hiểm du lịch quốc tế',
+			'18. Đầu tư, định cư',
+			'19. Thẻ APEC',
+			'20. Chứng minh tài chính',
+			'21. Giấy khám sức khoẻ',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	} elseif ($type_popup == '21') {
+		$column_title = [
+			'STT',
+			'Họ tên',
+			'Phone',
+			'Email',
+			'1. Giấy khám sức khoẻ',
+			'2. Lý lịch tư pháp',
+			'3. Xuất khẩu lao động',
+			'4. Xin cấp, gia hạn thẻ tạm trú',
+			'5. Cấp, gia hạn giấy phép lao động',
+			'6. Dịch thuật công chứng',
+			'7. Hợp pháp hóa lãnh sự',
+			'8. Chứng thực lãnh sự',
+			'9. Cấp visa đa quốc gia',
+			'10. Cấp, đổi, gia hạn hộ chiếu',
+			'11. Đổi bằng lái xe quốc tế',
+			'12. Tư vấn du học quốc tế',
+			'13. Đào tạo ngoại ngữ',
+			'14. Du lịch quốc tế',
+			'15. Xin cấp E-Visa',
+			'16. Bảo hiểm du lịch quốc tế',
+			'17. Đầu tư, định cư',
+			'18. Thẻ APEC',
+			'19. Chứng minh tài chính',
+			'20. Bán vé máy bay',
+			'21. Thủ tục hải quan',
+			'Trang đã gửi',
+			'Thời gian',
+		];
+	}
+	// không gặp trường hợp nào 
+	else {
 		$column_title = [
 			'STT',
 			'Họ tên',
