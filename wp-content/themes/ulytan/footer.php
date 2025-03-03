@@ -27,13 +27,13 @@ if (is_page_template('page-contact-test.php')) :
                     foreach ($headquarters as $index_item => $item):
                 ?>
                         <div class="headquarters_item">
-
+                            
                             <h3 class="headquarters_item_title">
                                 <a class="d-flex justify-content-between" data-toggle="collapse" href="#headquarters<?php echo $index_item; ?>" role="button" aria-expanded="false" aria-controls="headquarters<?php echo $index_item; ?>">
                                     <span><?php echo $item['title']; ?></span>
                                     <span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                                            <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                                         </svg>
                                     </span>
                                 </a>
@@ -41,23 +41,22 @@ if (is_page_template('page-contact-test.php')) :
                             <div class="collapse multi-collapse" id="headquarters<?php echo $index_item; ?>">
                                 <div class="headquarters_item_content">
                                     <?php
-                                    if ($item['address_maps']):
+                                        if ($item['address_maps']):
                                         foreach ($item['address_maps'] as $address_maps_item):
                                     ?>
-                                            <div class="row mb-5">
-                                                <div class="col-lg-7">
-                                                    <div class="editor">
-                                                        <?php echo $address_maps_item['content']; ?>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <div class="headquarters_item_iframe">
-                                                        <?php echo $address_maps_item['google_map']; ?>
-                                                    </div>
-                                                </div>
+                                    <div class="row mb-5">
+                                        <div class="col-lg-7">
+                                            <div class="editor">
+                                                <?php echo $address_maps_item['content']; ?>
                                             </div>
-                                    <?php endforeach;
-                                    endif; ?>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="headquarters_item_iframe">
+                                                <?php echo $address_maps_item['google_map']; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; endif; ?>
                                 </div>
                             </div>
                         </div>
@@ -104,8 +103,8 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                         ?>
                             <a href="<?php echo $facebook; ?>" target=" _blank" class="footer_mxh_item">
                                 <svg width="35" height="35" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="24" cy="24" r="20" fill="#3B5998" />
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M29.315 16.9578C28.6917 16.8331 27.8498 16.74 27.3204 16.74C25.8867 16.74 25.7936 17.3633 25.7936 18.3607V20.1361H29.3774L29.065 23.8137H25.7936V35H21.3063V23.8137H19V20.1361H21.3063V17.8613C21.3063 14.7453 22.7708 13 26.4477 13C27.7252 13 28.6602 13.187 29.8753 13.4363L29.315 16.9578Z" fill="white" />
+                                    <circle cx="24" cy="24" r="20" fill="#3B5998"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M29.315 16.9578C28.6917 16.8331 27.8498 16.74 27.3204 16.74C25.8867 16.74 25.7936 17.3633 25.7936 18.3607V20.1361H29.3774L29.065 23.8137H25.7936V35H21.3063V23.8137H19V20.1361H21.3063V17.8613C21.3063 14.7453 22.7708 13 26.4477 13C27.7252 13 28.6602 13.187 29.8753 13.4363L29.315 16.9578Z" fill="white"/>
                                 </svg>
                             </a>
                         <?php endif; ?>
@@ -145,31 +144,117 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
 
             </div>
 
+            <?php /* ?>
+            <div class="col-lg-6">
+                <div class="dich_vu_block">
+                    <h3 class="footer_title">
+                        <?php echo $tieu_de_2; ?>
+                    </h3>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <?php
+                                $dich_vu_cot_1 = get_field('dich_vu_cot_1', 'option') ?? [];
+
+                                if ($dich_vu_cot_1):
+                                    $args = array(
+                                        'post_type' => 'service',
+                                        'posts_per_page' => -1,
+                                        'post__in' => $dich_vu_cot_1,
+                                        'orderby' => 'post__in',
+                                    );
+
+                                    $query = new WP_Query($args);
+                                    if ($query->have_posts()):
+                                ?>
+                                        <div class="footer_list">
+                                            <?php
+                                            while ($query->have_posts()):
+                                                $query->the_post();
+                                            ?>
+                                                <a href="<?php the_permalink(); ?>" class="footer_item_link">
+                                                    <span class="icon">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" />
+                                                        </svg>
+                                                    </span>
+
+                                                    <?php the_title(); ?>
+                                                </a>
+                                            <?php
+                                            endwhile;
+                                            ?>
+                                        </div>
+                                <?php
+                                    endif;
+                                endif;
+                                wp_reset_postdata();
+                                ?>
+                            </div>
+                            <div class="col-lg-6 mt-3 mt-lg-0">
+                                <?php
+                                $dich_vu_cot_2 = get_field('dich_vu_cot_2', 'option') ?? [];
+
+                                if ($dich_vu_cot_2):
+                                    $args = array(
+                                        'post_type' => 'service',
+                                        'posts_per_page' => -1,
+                                        'post__in' => $dich_vu_cot_2,
+                                        'orderby' => 'post__in',
+                                    );
+
+                                    $query = new WP_Query($args);
+                                    if ($query->have_posts()):
+                                ?>
+                                        <div class="footer_list">
+                                            <?php
+                                            while ($query->have_posts()):
+                                                $query->the_post();
+                                            ?>
+                                                <a href="<?php the_permalink(); ?>" class="footer_item_link">
+                                                    <span class="icon">
+                                                        <svg width="15" height="15" viewBox="0 0 15 15" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M13.2358 4.29053C13.3817 4.43636 13.4546 4.61344 13.4546 4.82178C13.4546 5.03011 13.3817 5.20719 13.2358 5.35303L7.57959 11.0093L6.51709 12.0718C6.37126 12.2176 6.19417 12.2905 5.98584 12.2905C5.77751 12.2905 5.60042 12.2176 5.45459 12.0718L4.39209 11.0093L1.56396 8.18115C1.41813 8.03532 1.34521 7.85824 1.34521 7.6499C1.34521 7.44157 1.41813 7.26449 1.56396 7.11865L2.62646 6.05615C2.7723 5.91032 2.94938 5.8374 3.15771 5.8374C3.36605 5.8374 3.54313 5.91032 3.68896 6.05615L5.98584 8.36084L11.1108 3.22803C11.2567 3.08219 11.4338 3.00928 11.6421 3.00928C11.8504 3.00928 12.0275 3.08219 12.1733 3.22803L13.2358 4.29053Z" />
+                                                        </svg>
+                                                    </span>
+
+                                                    <?php the_title(); ?>
+                                                </a>
+                                            <?php
+                                            endwhile;
+                                            ?>
+                                        </div>
+                                <?php
+                                    endif;
+                                endif;
+                                wp_reset_postdata();
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php */ ?>
+
             <div class="col-lg-4">
-                <h3 class="footer_title">
-                    <?php echo 'Danh sách văn phòng'; ?>
-                </h3>
                 <?php
-                $trang_lien_he = get_field('trang_lien_he', 'option') ?? '';
-                if ($trang_lien_he) {
-                    $args = array(
-                        'post_type'      => 'page',
-                        'posts_per_page' => -1,
-                        'post__in'       => [$trang_lien_he],
-                    );
-
-                    $query = new WP_Query($args);
-
-                    if ($query->have_posts()) {
-                        while ($query->have_posts()) {
-                            $query->the_post();
-                            echo '<div class="footer_danh_sach_van_phong">';
-                            the_content();
-                            echo '</div>';
-                        }
-                    }
-                    wp_reset_postdata();
-                }
+                $danh_sach_van_phong = get_field('danh_sach_van_phong', 'option') ?? [];
+                if ($danh_sach_van_phong):
+                    foreach ($danh_sach_van_phong as $item):
+                ?>
+                        <div class="danh_sach_van_phong_item mb-4">
+                            <h3 class="footer_title">
+                                <?php echo $item['title']; ?>
+                            </h3>
+                            <div class="headquarters_item_content editor">
+                                <?php echo $item['content']; ?>
+                            </div>
+                        </div>
+                <?php
+                    endforeach;
+                endif;
                 ?>
             </div>
 
@@ -276,7 +361,7 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                     <div class="footer_form">
                         <div class="arrow-down">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.5 0H27.5V20H39.6L20 39.6L0.400002 20H12.5V0Z" fill="#FFD503" />
+                                <path d="M12.5 0H27.5V20H39.6L20 39.6L0.400002 20H12.5V0Z" fill="#FFD503"/>
                             </svg>
                         </div>
                         <?php echo do_shortcode('[contact-form-7 id="' . $form_khuyen_mai . '" class="footer-form"]'); ?>
@@ -317,87 +402,87 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
 
 
 <?php
-$popup_thanh_cong_form = get_field('popup_thanh_cong_form', 'option') ?? [];
-$popup_tieude = $popup_thanh_cong_form['tieu_de'] ?: 'ULYTAN - SIÊU NHANH, THỦ TỤC SIÊU ĐƠN GIẢN';
-$popup_noidung = $popup_thanh_cong_form['noi_dung'] ?: 'Thành công! Bộ phận tư vấn của chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất. Chúc hợp tác thành công!';
-$popup_mxh = $popup_thanh_cong_form['mxh'] ?: [];
+    $popup_thanh_cong_form = get_field('popup_thanh_cong_form', 'option') ?? [];
+    $popup_tieude = $popup_thanh_cong_form['tieu_de'] ?: 'ULYTAN - SIÊU NHANH, THỦ TỤC SIÊU ĐƠN GIẢN';
+    $popup_noidung = $popup_thanh_cong_form['noi_dung'] ?: 'Thành công! Bộ phận tư vấn của chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất. Chúc hợp tác thành công!';
+    $popup_mxh = $popup_thanh_cong_form['mxh'] ?: [];
 ?>
 <div class="modal modal_lien_he modal_form_footer fade" id="modal_form_footer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-body">
-                <div class="modal_title">
-                    <?php echo $popup_tieude; ?>
-                </div>
-                <div class="editor">
-                    <?php echo $popup_noidung; ?>
-                </div>
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<div class="modal-body">
+				<div class="modal_title">
+					<?php echo $popup_tieude; ?>
+				</div>
+				<div class="editor">
+					<?php echo $popup_noidung; ?>
+				</div>
 
-                <div class="chia_se_mxh">
-                    <?php
-                    $tiktok = $popup_mxh['mxh_tiktok'] ?? '';
-                    $facebook = $popup_mxh['mxh_facebook'] ?? '';
-                    $youtube = $popup_mxh['mxh_youtube'] ?? '';
+				<div class="chia_se_mxh">
+					<?php
+					$tiktok = $popup_mxh['mxh_tiktok'] ?? '';
+					$facebook = $popup_mxh['mxh_facebook'] ?? '';
+					$youtube = $popup_mxh['mxh_youtube'] ?? '';
 
-                    if ($tiktok || $facebook || $youtube) :
-                    ?>
-                        <div class="title">
-                            Tìm hiểu thêm về ULYTAN
-                        </div>
-                        <div class="list_link">
-                            <?php if ($tiktok): ?>
-                                <a href="<?php echo $tiktok; ?>" target="_blank" class="mxh_tiktok">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                        <path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z" />
-                                    </svg>
-                                </a>
-                            <?php endif; ?>
+					if ($tiktok || $facebook || $youtube) :
+					?>
+						<div class="title">
+							Tìm hiểu thêm về ULYTAN
+						</div>
+						<div class="list_link">
+							<?php if ($tiktok): ?>
+								<a href="<?php echo $tiktok; ?>" target="_blank" class="mxh_tiktok">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+										<path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z" />
+									</svg>
+								</a>
+							<?php endif; ?>
 
-                            <?php if ($facebook): ?>
-                                <a href="<?php echo $facebook; ?>" target="_blank" class="mxh_fb">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                        <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
-                                    </svg>
-                                </a>
-                            <?php endif; ?>
+							<?php if ($facebook): ?>
+								<a href="<?php echo $facebook; ?>" target="_blank" class="mxh_fb">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+										<path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
+									</svg>
+								</a>
+							<?php endif; ?>
 
-                            <?php if ($youtube): ?>
-                                <a href="<?php echo $youtube; ?>" target="_blank" class="mxh_yt">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                        <path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z" />
-                                    </svg>
-                                </a>
-                            <?php endif; ?>
-                        </div>
-                    <?php endif; ?>
+							<?php if ($youtube): ?>
+								<a href="<?php echo $youtube; ?>" target="_blank" class="mxh_yt">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+										<path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z" />
+									</svg>
+								</a>
+							<?php endif; ?>
+						</div>
+					<?php endif; ?>
 
 
-                    <div class="title">
-                        Chia sẻ điều này với mọi người trên
-                    </div>
-                    <?php
-                    $share_link = get_permalink();
-                    ?>
-                    <div class="social_share_post">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $share_link; ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;" class="social_share_post_facebook mxh_fb">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
-                            </svg>
-                        </a>
+					<div class="title">
+						Chia sẻ điều này với mọi người trên
+					</div>
+					<?php
+					$share_link = get_permalink();
+					?>
+					<div class="social_share_post">
+						<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo $share_link; ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;" class="social_share_post_facebook mxh_fb">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+								<path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
+							</svg>
+						</a>
 
-                        <a href="https://twitter.com/home?status=<?php echo $share_link; ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;" class="social_share_post_twitter mxh_tw">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						<a href="https://twitter.com/home?status=<?php echo $share_link; ?>" onclick="window.open(this.href, this.target, 'width=500,height=500'); return false;" class="social_share_post_twitter mxh_tw">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+								<path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <?php wp_footer(); ?>
