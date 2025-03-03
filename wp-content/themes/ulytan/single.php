@@ -135,17 +135,16 @@ get_header();
 											<div class="news_documents_item_title">
 												<?php echo get_the_title($post_id); ?>
 											</div>
-											<?php
-											if ($type == "pdf") {
-											?>
-												<div class="news_documents_item_file">
-													<?php
+
+											<div class="news_documents_item_file">
+												<?php
+												if ($type == "pdf") {
 													echo do_shortcode('[pdf-embedder url="' . $url . '"]');
-													?>
-												</div>
-											<?php
-											}
-											?>
+												} elseif ($type == "vnd.openxmlformats-officedocument.wordprocessingml.document" || $type == "vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+													echo do_shortcode('[embeddoc url="' . $url . '" viewer="microsoft"]');
+												}
+												?>
+											</div>
 
 											<div class="news_documents_item_btn">
 												<?php
