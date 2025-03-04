@@ -254,3 +254,5 @@ function remove_plugin_notices()
 	}
 }
 add_action('admin_init', 'remove_plugin_notices');
+
+add_filter('enable_local_store', '__return_true');
