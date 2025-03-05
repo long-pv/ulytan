@@ -1160,7 +1160,7 @@ function contact_info_export_data_csv()
 	} elseif ($type_popup == '7') {
 		$output_filename = '7.Đổi bằng lái xe quốc tế_' . $current_time . '.csv';
 	} elseif ($type_popup == '8') {
-		$output_filename = '8.Xin cấp, gia hạn thẻ tạm trú_' . $current_time . '.csv';
+		$output_filename = '8.Xin cấp gia hạn thẻ tạm trú_' . $current_time . '.csv';
 	} elseif ($type_popup == '9') {
 		$output_filename = '9.Cấp, gia hạn giấy phép lao động_' . $current_time . '.csv';
 	} elseif ($type_popup == '10') {
@@ -1176,7 +1176,7 @@ function contact_info_export_data_csv()
 	} elseif ($type_popup == '15') {
 		$output_filename = '15.Bảo hiểm du lịch quốc tế_' . $current_time . '.csv';
 	} elseif ($type_popup == '16') {
-		$output_filename = '16.Đầu tư, định cư_' . $current_time . '.csv';
+		$output_filename = '16.Đầu tư định cư_' . $current_time . '.csv';
 	} elseif ($type_popup == '17') {
 		$output_filename = '17.Thẻ APEC_' . $current_time . '.csv';
 	} elseif ($type_popup == '18') {
