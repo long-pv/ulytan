@@ -477,7 +477,7 @@ get_header();
 									</div>
 									<div class="col-12">
 										<label class="contact_label" for="">
-											3. Địa chỉ Email*
+											3. Địa chỉ Email
 										</label>
 										<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
 									</div>
@@ -747,7 +747,7 @@ if (in_array($post_type, $allowed_post_types)) {
 								</div>
 								<div class="col-lg-4">
 									<label class="contact_label" for="">
-										3. Địa chỉ Email *
+										3. Địa chỉ Email
 									</label>
 									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
 								</div>
@@ -821,7 +821,7 @@ if (in_array($post_type, $allowed_post_types)) {
 									</div>
 								</div>
 
-								<div class="mt-3 d-flex justify-content-center">
+								<div class="col-12 mt-3 d-flex justify-content-center">
 									<input type="submit" class="contact_submit" value="Gửi">
 								</div>
 							</div>
@@ -965,7 +965,7 @@ get_footer();
 					maxlength: 10
 				},
 				email: {
-					required: true,
+					// required: true,
 					customEmail: true
 				},
 			},
@@ -1090,7 +1090,7 @@ get_footer();
 					phoneVN: true,
 				},
 				email: {
-					required: true,
+					// required: true,
 					customEmail: true,
 				},
 				purpose: {

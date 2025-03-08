@@ -60,7 +60,7 @@ get_header();
 					<div class="col-lg-3">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
-								4. Địa chỉ Email*
+								4. Địa chỉ Email
 							</label>
 							<input type="text" class="page_ctv_form_input" name="email" placeholder=" Ví dụ: sale@ulytan.com">
 						</div>
@@ -923,7 +923,7 @@ get_footer();
 					maxlength: 10
 				},
 				email: {
-					required: true,
+					// required: true,
 					email: true
 				},
 				speak_language: {

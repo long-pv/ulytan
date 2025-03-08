@@ -2406,7 +2406,7 @@ if ($hien_thi_popup != "0"):
 								</div>
 								<div class="col-lg-4">
 									<label class="contact_label" for="">
-										3. Địa chỉ Email*
+										3. Địa chỉ Email
 									</label>
 									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
 								</div>
@@ -2597,7 +2597,7 @@ get_footer();
 					maxlength: 10
 				},
 				email: {
-					required: true,
+					// required: true,
 					customEmail: true
 				},
 			},

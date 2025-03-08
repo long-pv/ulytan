@@ -61,7 +61,8 @@ get_header();
 							?>
 								<div class="page_form_group">
 									<div class="page_form_label">
-										<?php echo $index; ?>. Email <span class="page_form_no_req">(Không bắt buộc)</span>
+										<?php echo $index; ?>. Email 
+										<!-- <span class="page_form_no_req">(Không bắt buộc)</span> -->
 									</div>
 									<input type="text" name="email" class="page_form_input" placeholder="Nhập email">
 								</div>
