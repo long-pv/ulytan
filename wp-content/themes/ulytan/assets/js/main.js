@@ -390,13 +390,22 @@
 						console.log(input);
 						if (input) {
 							const name = input.getAttribute("data-name");
+							const inputField = input.querySelector("input");
 							// Thay đổi thông báo tùy chỉnh
 							if (name === "footer-name") {
 								error.textContent = "Vui lòng nhập họ và tên của bạn.";
 							} else if (name === "footer-email") {
 								error.textContent = "Vui lòng nhập email hợp lệ.";
 							} else if (name === "footer-phone") {
-								error.textContent = "Vui lòng nhập số điện thoại của bạn.";
+								if (inputField) {
+									const phoneValue = inputField.value.trim();
+									const phoneRegex = /^0\d{9}$/; // Kiểm tra số điện thoại Việt Nam
+									if (phoneValue === "") {
+										error.textContent = "Vui lòng nhập số điện thoại của bạn."; // Nếu không nhập gì
+									} else if (!phoneRegex.test(phoneValue)) {
+										error.textContent = "Số điện thoại không đúng định dạng."; // Nếu nhập sai định dạng
+									}
+								}
 							} else if (name === "footer-country") {
 								error.textContent = "Vui lòng chọn quốc gia.";
 							} else if (name === "footer-service") {

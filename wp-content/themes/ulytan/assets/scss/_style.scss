@@ -1296,6 +1296,20 @@
     &+.error {
         color: $danger;
     }
+
+    &.error {
+        border: 2px solid $danger;
+    }
+}
+
+.page_ctv_form_group input[type="radio"].error {
+    outline: 2px solid $danger;
+    outline-offset: 2px;
+}
+
+.page_ctv_form_group .custom_dropdown:has(input.error) .custom_dropdown_button,
+.page_ctv_form_group .page_ctv_form_textarea.error {
+    border: 2px solid $danger;
 }
 
 .page_ctv_form_textarea {

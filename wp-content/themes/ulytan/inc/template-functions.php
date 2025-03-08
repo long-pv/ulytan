@@ -108,8 +108,21 @@ function getYoutubeEmbedUrl($input)
 function register_cpt_post_types()
 {
 	$cpt_list = [
-		'news_documents' => [
-			'labels' => __('Tin tức tài liệu', 'basetheme'),
+		'form_nga' => [
+			'labels' => __('Tài liệu - Form Nga', 'basetheme'),
+			'slug' => 'form-nga',
+			'cap' => false,
+			'hierarchical' => false
+		],
+		'form_trung_quoc' => [
+			'labels' => __('Tài liệu - Form Trung Quốc', 'basetheme'),
+			'slug' => 'form-trung-quoc',
+			'cap' => false,
+			'hierarchical' => false
+		],
+		'form_cac_nuoc_khac' => [
+			'labels' => __('Tài liệu - Form Các Nước Khác', 'basetheme'),
+			'slug' => 'form-cac-nuoc-khac',
 			'cap' => false,
 			'hierarchical' => false
 		],
@@ -171,25 +184,25 @@ function register_cpt_post_types()
 			'hierarchical' => false
 		],
 		'contact_info' => [
-			'labels' => __('Form 1 - Liên hệ (ulytan.com/lien-he/)', 'basetheme'),
+			'labels' => __('1.Form liên hệ', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
 		'form_ctv' => [
-			'labels' => __('Form 2 - Cộng tác viên (ulytan.com/tuyen-cong-tac-vien/)', 'basetheme'),
+			'labels' => __('2.Form Cộng tác viên', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
 		'form_contribute' => [
-			'labels' => __('Form 3 - Đóng góp ý kiến', 'basetheme'),
+			'labels' => __('3.Form đánh giá cho mỗi nhân viên', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
-		'signup_download' => [
-			'labels' => __('Form 5 - Đăng ký tải xuống', 'basetheme'),
-			'cap' => false,
-			'hierarchical' => false
-		],
+		// 'signup_download' => [
+		// 	'labels' => __('Form 5 - Đăng ký tải xuống', 'basetheme'),
+		// 	'cap' => false,
+		// 	'hierarchical' => false
+		// ],
 	];
 
 	foreach ($cpt_list as $post_type => $data) {
@@ -973,7 +986,7 @@ add_action('admin_footer', function () {
 	?>
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
-			$('#toplevel_page_cfdb7-list .wp-menu-name').text('Form 4 - Tài liệu/ Tư vấn / Khuyến mãi');
+			$('#toplevel_page_cfdb7-list .wp-menu-name').text('4. Form chân trang');
 			$('#menu-pages .wp-menu-name').text('Loại trang');
 			$('#menu-posts a[href="edit-tags.php?taxonomy=category"]').text('Danh mục - Tin hữu ích');
 		});
@@ -1190,6 +1203,9 @@ function contact_info_export_data_csv()
 	}
 	// không thuộc trường hợp nào
 	else {
+		if ($page_id == 'trang_tai_lieu') {
+			$output_filename = 'Form trang tài liệu_' . $current_time . '.csv';
+		}
 		$output_filename = 'Form liên hệ_' . $current_time . '.csv';
 	}
 	header('Content-Disposition: attachment;filename=' . $output_filename);
@@ -3502,29 +3518,91 @@ function dang_ky_tai_xuong()
 	// Lấy dữ liệu từ AJAX
 	if (!empty($_POST)) {
 		$data = $_POST;
+		$subject = 'Tài liệu tải xuống';
+		$headers = array('Content-Type: text/html; charset=UTF-8');
+		$message = 'Thông tin cá nhân:<br>';
+		$message .= 'Họ và tên: ' . $data['full_name'] . '<br>';
+		$message .= 'Email: ' . $data['email'] . '<br>';
+		$message .= 'Số điện thoại: ' . $data['phone'] . '<br>';
 
-		if (isset($data['email']) && is_email($data['email'])) {
-			$to = $data['email'];
-			$subject = 'Thư cảm ơn.';
-			$headers = array('Content-Type: text/html; charset=UTF-8');
-			$message = 'Cảm ơn quý khách đã đăng ký tải xuống.';
+		// các dịch vụ
+		if ($data['services']) {
+			$message .= 'Mục đích: <br>';
+			$services = (array) $data['services'];
 
-			wp_mail($to, $subject, $message, $headers);
+			foreach ($services as $item) {
+				$text = str_replace("_", " ", $item);
+				$message .= ' - Để ' . $text . '<br>';
+			}
 		}
 
+		wp_mail('Sales@ulytan.com', $subject, $message, $headers);
+
 		$new_post = array(
-			'post_type'   => 'signup_download',
-			'post_title'  => sanitize_text_field($data['email'] ?? 'No Email'),
+			'post_type'   => 'contact_info',
+			'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['ten_trang']),
 			'post_status' => 'publish',
 		);
 		$post_id = wp_insert_post($new_post);
 
 		if ($post_id) {
-			// Cập nhật ACF fields
-			update_field('ho_va_ten', sanitize_text_field($data['full_name'] ?? ''), $post_id);
-			update_field('so_dien_thoai', sanitize_text_field($data['phone'] ?? ''), $post_id);
-			update_field('email', sanitize_text_field($data['email'] ?? ''), $post_id);
-			update_field('muc_dich_su_dung', sanitize_text_field($data['purpose'] ?? ''), $post_id);
+			if (function_exists('update_field')) {
+				$services =  implode(', ', $data['services']) ?? '';
+				update_field('full_name', sanitize_text_field($data['full_name']), $post_id);
+				update_field('phone', sanitize_text_field($data['phone']), $post_id);
+				update_field('email', sanitize_text_field($data['email']), $post_id);
+				update_field('services_list',   sanitize_text_field((string) $services), $post_id);
+				update_field('services_2', sanitize_text_field($data['services_2']), $post_id);
+				update_field('services_10', sanitize_text_field($data['services_10']), $post_id);
+				update_field('services_11', sanitize_text_field($data['services_11']), $post_id);
+				update_field('services_12', sanitize_text_field($data['services_12']), $post_id);
+				update_field('services_13', sanitize_text_field($data['services_13']), $post_id);
+				update_field('trang_da_gui', sanitize_text_field($data['trang_da_gui']), $post_id);
+
+				if (!empty($data)) {
+					// Chuyển mảng thành chuỗi JSON (nếu cần thiết, bạn có thể lưu trực tiếp mảng tùy theo loại trường trong ACF)
+					$json_data = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+					// Sử dụng hàm update_field của ACF để lưu dữ liệu vào trường meta của bài viết với ID 123
+					update_field('post_data', $json_data, $post_id);
+				}
+
+				$ten_trang = $data['ten_trang']; // Tên term cần xử lý
+				$id_trang = $data['id_trang']; // Tên term cần xử lý
+
+				if (!empty($ten_trang) && !empty($post_id)) {
+					// Kiểm tra xem term đã tồn tại hay chưa
+					$term = get_term_by('name', $ten_trang, 'loai_page'); // 'loai_page' là taxonomy
+
+					if (!$term) {
+						// Nếu term chưa tồn tại, tiến hành tạo mới
+						$result = wp_insert_term(
+							$ten_trang, // Tên của term
+							'loai_page' // Taxonomy
+						);
+
+						if (is_wp_error($result)) {
+							return;
+						} else {
+							// Lấy ID của term vừa tạo thành công
+							$term_id = $result['term_id'];
+							update_term_meta($term_id, 'page_id', $id_trang);
+						}
+					} else {
+						// Nếu term đã tồn tại, lấy ID của term đó
+						$term_id = $term->term_id;
+						update_term_meta($term_id, 'page_id', $id_trang);
+					}
+
+					// Gắn bài viết vào term
+					$update_result = wp_set_post_terms(
+						$post_id, // ID bài viết
+						$term_id, // ID của term hoặc mảng ID
+						'loai_page', // Taxonomy
+						false // False để thay thế các term hiện tại
+					);
+				}
+			}
 
 			// set cookie để lưu thông tin khách hàng
 			$cookie_name = "user_dang_ky_tai_xuong";

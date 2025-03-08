@@ -33,7 +33,8 @@ get_header();
 							?>
 								<div class="page_form_group">
 									<div class="page_form_label">
-										<?php echo $index; ?>. Họ và tên <span class="page_form_no_req">(Không bắt buộc)</span>
+										<?php echo $index; ?>. Họ và tên 
+										<!-- <span class="page_form_no_req">(Không bắt buộc)</span> -->
 									</div>
 									<input type="text" name="ho_va_ten" class="page_form_input" placeholder="Nhập họ và tên">
 								</div>
@@ -92,7 +93,7 @@ get_header();
 
 								<div class="question_group" id="question_group">
 									<div class="question" data-question="1">
-										<label>1. Nhân viên tư vấn</label>
+										<!-- <label>1. Nhân viên tư vấn</label> -->
 										<div class="rating">
 											<span class="star" data-value="5">&#9733;</span>
 											<span class="star" data-value="4">&#9733;</span>
@@ -103,7 +104,7 @@ get_header();
 										<input type="text" name="nhan_vien_tu_van" class="rating_value">
 									</div>
 
-									<div class="question" data-question="2">
+									<!-- <div class="question" data-question="2">
 										<label>2. Kế toán</label>
 										<div class="rating">
 											<span class="star" data-value="5">&#9733;</span>
@@ -113,9 +114,9 @@ get_header();
 											<span class="star" data-value="1">&#9733;</span>
 										</div>
 										<input type="text" name="ke_toan" class="rating_value">
-									</div>
+									</div> -->
 
-									<div class="question" data-question="3">
+									<!-- <div class="question" data-question="3">
 										<label>3. Nhân viên xử lý đơn hàng</label>
 										<div class="rating">
 											<span class="star" data-value="5">&#9733;</span>
@@ -125,13 +126,14 @@ get_header();
 											<span class="star" data-value="1">&#9733;</span>
 										</div>
 										<input type="text" name="nhan_vien_xu_ly_don_hang" class="rating_value">
-									</div>
+									</div> -->
 								</div>
 							</div>
 
 							<div class="page_form_group">
 								<div class="page_form_label">
-									<?php echo $index; ?>. Lý do <span class="page_form_no_req">(Không bắt buộc)</span>
+									<?php echo $index; ?>. Lý do 
+									<!-- <span class="page_form_no_req">(Không bắt buộc)</span> -->
 								</div>
 								<textarea name="ly_do" class="page_form_area"></textarea>
 							</div>
@@ -209,12 +211,12 @@ get_footer();
 				nhan_vien_tu_van: {
 					required: true,
 				},
-				ke_toan: {
-					required: true,
-				},
-				nhan_vien_xu_ly_don_hang: {
-					required: true,
-				},
+				// ke_toan: {
+				// 	required: true,
+				// },
+				// nhan_vien_xu_ly_don_hang: {
+				// 	required: true,
+				// },
 			},
 			messages: {
 				so_dien_thoai: {

@@ -501,43 +501,56 @@ $popup_mxh = $popup_thanh_cong_form['mxh'] ?: [];
 <?php wp_footer(); ?>
 
 <?php
-$args = array(
-    'post_type'      => 'service',
-    'posts_per_page' => 40,
-    'post_status'    => 'publish',
-    // 'order'          => 'ASC',
-);
+$menu_dich_vu = get_field('menu_dich_vu', 'option') ?? [];
+// $args = array(
+//     'post_type'      => 'service',
+//     'posts_per_page' => 40,
+//     'post_status'    => 'publish',
+// );
 
-$query = new WP_Query($args);
+// $query = new WP_Query($args);
 $menu_html = '';
 $menu_html_mb = '';
 
-if ($query->have_posts()):
+// if ($query->have_posts()):
+if ($menu_dich_vu):
     $menu_html_mb .= '<ul class="sub-menu">';
 
     $menu_html .= '<div class="sub_menu_dich_vu">';
     $menu_html .= '<div class="title">Dịch vụ</div>';
     $menu_html .= '<div class="desc">ULYTAN cung cấp dịch vụ dịch thuật cho rất nhiều thứ tiếng với 63 quốc gia hiện nay, cùng với nhiều dịch vụ khác như đổi bằng lái xe, xin visa quốc tế, ...</div>';
     $menu_html .= '<div class="row list_dich_vu">';
-    while ($query->have_posts()) : $query->the_post();
-        $menu_html .= '<div class="col-lg-4" id="menu-item-' . get_the_ID() . '">';
-        $menu_html .= '<a class="dich_vu_item" rel=”nofollow” href="' . get_permalink() . '">';
-        $menu_html .= '<div class="item_title line-2">' . get_the_title() . '</div>';
-        $menu_html .= '<div class="item_desc">' . (get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi') . '</div>';
+    // while ($query->have_posts()) : $query->the_post();
+    // $menu_html .= '<div class="col-lg-4" id="menu-item-' . get_the_ID() . '">';
+    // $menu_html .= '<a class="dich_vu_item" rel=”nofollow” href="' . get_permalink() . '">';
+    // $menu_html .= '<div class="item_title line-2">' . get_the_title() . '</div>';
+    // $menu_html .= '<div class="item_desc">' . (get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi') . '</div>';
+    foreach ($menu_dich_vu as $key => $item) {
+        // $menu_html .= '<div class="col-lg-4" id="menu-item-' . get_the_ID() . '">';
+        $menu_html .= '<div class="col-lg-4" id="menu-item-' . $key . '">';
+        $menu_html .= '<a class="dich_vu_item" rel=”nofollow” href="' . $item['link'] . '">';
+        $menu_html .= '<div class="item_title line-2">' . $item['tieu_de'] . '</div>';
+        $menu_html .= '<div class="item_desc">' . ($item['mo_ta'] ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi') . '</div>';
+
         $menu_html .= '</a>';
         $menu_html .= '</div>';
 
         $menu_html_mb .= '<li>';
-        $menu_html_mb .= '<a class="dich_vu_item_link_mb" rel=”nofollow” href="' . get_permalink() . '">';
+        // $menu_html_mb .= '<a class="dich_vu_item_link_mb" rel=”nofollow” href="' . get_permalink() . '">';
+        $menu_html_mb .= '<a class="dich_vu_item_link_mb" rel=”nofollow” href="' . $item['link'] . '">';
         $menu_html_mb .= '<span class="title">';
-        $menu_html_mb .= get_the_title();
+        // $menu_html_mb .= get_the_title();
+        $menu_html_mb .= $item['tieu_de'];
         $menu_html_mb .= '</span>';
         $menu_html_mb .= '<span class="desc">';
-        $menu_html_mb .= get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi';
+        // $menu_html_mb .= get_field('mo_ta_tren_menu') ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi';
+        $menu_html_mb .= $item['mo_ta'] ?: 'Dịch thuật công chứng lấy ngay, lấy tận nơi';
         $menu_html_mb .= '</span>';
         $menu_html_mb .= '</a>';
         $menu_html_mb .= '</li>';
-    endwhile;
+    }
+    // endwhile;
+
     $menu_html .= '</div>';
     $menu_html .= '</div>';
 

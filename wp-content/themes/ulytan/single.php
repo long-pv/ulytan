@@ -117,7 +117,8 @@ get_header();
 					<?php the_content(); ?>
 
 					<?php
-					if ($post_type == 'news_documents') {
+					$allowed_post_types = ['form_nga', 'form_trung_quoc', 'form_cac_nuoc_khac'];
+					if (in_array($post_type, $allowed_post_types)) {
 						$danh_sach_tai_lieu = get_field('danh_sach_tai_lieu') ?? [];
 						if ($danh_sach_tai_lieu) {
 					?>
@@ -273,8 +274,8 @@ get_header();
 						</div>
 
 						<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
-						<input type="hidden" name="ten_trang" value="<?php the_title(); ?>">
-						<input type="hidden" name="id_trang" value="<?php echo get_the_ID(); ?>">
+						<input type="hidden" name="ten_trang" value="Trang bài viết">
+						<input type="hidden" name="id_trang" value="trang_bai_viet">
 
 						<?php
 						$services = [
@@ -706,68 +707,119 @@ wp_reset_postdata();
 	}
 </script>
 
-<div class="modal fade popup_tai_xuong_file" id="popup_tai_xuong_file" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-					<path d="M15 9L9 15" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-					<path d="M9 9L15 15" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-				</svg>
-			</button>
-			<div class="modal-body">
-				<div class="popup_tai_xuong_file_title">
-					Bạn vui lòng điền thông tin để tải xuống
+<?php
+if (in_array($post_type, $allowed_post_types)) {
+?>
+	<div class="modal fade popup_tai_xuong_file" id="popup_tai_xuong_file" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M15 9L9 15" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M9 9L15 15" stroke="#757575" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</button>
+				<div class="modal-body">
+					<div class="popup_tai_xuong_file_title">
+						Bạn vui lòng điền thông tin để tải xuống
 
-					<div class="svg-container">
-						<svg width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M11.9114 0.319336H26.0894V24.986H37.5264L19.0004 49.1593L0.474365 24.986H11.9114V0.319336Z" fill="#E94235" />
-						</svg>
+						<div class="svg-container">
+							<svg width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M11.9114 0.319336H26.0894V24.986H37.5264L19.0004 49.1593L0.474365 24.986H11.9114V0.319336Z" fill="#E94235" />
+							</svg>
+						</div>
 					</div>
-				</div>
-				<form id="form_tai_xuong_file" action="" method="post">
-					<div class="page_contact_info">
-						<div class="row row_16">
-							<div class="col-lg-4">
-								<label class="contact_label" for="">
-									1. Họ và tên *
-								</label>
-								<input type="text" name="full_name" class="contact_input" placeholder="Nhập họ và tên">
-							</div>
-							<div class="col-lg-4">
-								<label class="contact_label" for="">
-									2. Số điện thoại *
-								</label>
-								<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
-							</div>
-							<div class="col-lg-4">
-								<label class="contact_label" for="">
-									3. Địa chỉ Email *
-								</label>
-								<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
-							</div>
-							<div class="col-12 page_ctv_step_16">
-								<div class="page_ctv_form_group">
-									<label for="" class="page_ctv_form_label">
-										4. Mục đích sử dụng *
+					<form id="form_tai_xuong_file" action="" method="post">
+						<div class="page_contact_info">
+							<div class="row row_16">
+								<div class="col-lg-4">
+									<label class="contact_label" for="">
+										1. Họ và tên *
 									</label>
-									<textarea name="purpose" class="page_ctv_form_textarea" placeholder="- Để đi Du học Đức
-- Để xin visa
-- Để hợp pháp hoá lãnh sự"></textarea>
+									<input type="text" name="full_name" class="contact_input" placeholder="Nhập họ và tên">
+								</div>
+								<div class="col-lg-4">
+									<label class="contact_label" for="">
+										2. Số điện thoại *
+									</label>
+									<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
+								</div>
+								<div class="col-lg-4">
+									<label class="contact_label" for="">
+										3. Địa chỉ Email *
+									</label>
+									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
+								</div>
+								<div class="col-12 page_ctv_step_16">
+									<div class="page_ctv_form_group">
+										<label for="" class="page_ctv_form_label">
+											4. Mục đích sử dụng *
+										</label>
+
+										<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
+										<input type="hidden" name="ten_trang" value="Trang tài liệu">
+										<input type="hidden" name="id_trang" value="trang_tai_lieu">
+
+										<div class="page_contact_service">
+											<table class="page_contact_service_table">
+												<thead>
+													<tr>
+														<th width="20">
+															<!-- Chọn -->
+														</th>
+														<th style="text-align: center;">
+															Dịch vụ
+														</th>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+													foreach ($services as $key => $service) {
+														$slug = convert_to_slug($service['raw_name']); // Chuyển đổi name thành slug
+
+														echo '<tr>';
+														echo '<td class="td_checkbox">';
+														echo '<input type="checkbox" name="services[]" class="contact_checkox" value="' . esc_attr($slug) . '">';
+														echo '</td>';
+
+														echo '<td>';
+														echo '<strong>Để ' . esc_html($service['raw_name']) . '</strong>';
+														echo $service['mo_ta'] ? '<div style="font-style:italic; font-size: 14px;">(' . $service['mo_ta'] . ')</div>' : '';
+
+														// Hiển thị input bổ sung nếu show_input = true
+														if ($service['show_input']) {
+															echo '<div class="td_group mt-2" style="display:none;">';
+															echo '<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>';
+															echo '<div class="td_label mb-1">';
+															echo 'Quốc gia <span class="td_req">(*bắt buộc)</span>';
+															echo '</div>';
+															echo '<input type="text" name="quoc_gia_' . $slug . '" class="td_input ' . esc_attr($service['key_input']) . '">';
+															echo '</div>';
+														}
+
+														echo '</td>';
+														echo '</tr>';
+													}
+													?>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+
+								<div class="mt-3 d-flex justify-content-center">
+									<input type="submit" class="contact_submit" value="Gửi">
 								</div>
 							</div>
-						</div>
-
-						<div class="mt-3 d-flex justify-content-center">
-							<input type="submit" class="contact_submit" value="Gửi">
-						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+<?php
+}
+?>
 
 <style>
 	#ajax-loader {
@@ -920,13 +972,13 @@ get_footer();
 				},
 			},
 			submitHandler: function(form) {
-				if ($('input[name="services[]"]:checked').length == 0) {
+				if ($('#page_contact_form input[name="services[]"]:checked').length == 0) {
 					alert("Vui lòng chọn ít nhất một dịch vụ.");
 					return false;
 				}
 
 				var hasError = false;
-				$('.td_group .td_input').each(function() {
+				$('#page_contact_form .td_group .td_input').each(function() {
 					var input = $(this);
 					var inputValue = input.val(); // Lấy giá trị của input
 					var checkbox = input.closest('tr').find('input[name="services[]"]:checked');
@@ -1051,6 +1103,36 @@ get_footer();
 				}
 			},
 			submitHandler: function(form) {
+				if ($('#form_tai_xuong_file input[name="services[]"]:checked').length == 0) {
+					alert("Vui lòng chọn ít nhất một dịch vụ.");
+					return false;
+				}
+
+				var hasError = false;
+				$('#form_tai_xuong_file .td_group .td_input').each(function() {
+					var input = $(this);
+					var inputValue = input.val(); // Lấy giá trị của input
+					var checkbox = input.closest('tr').find('input[name="services[]"]:checked');
+
+					// Nếu input chưa có giá trị
+					if (inputValue.trim() === '' && checkbox.length > 0) {
+						hasError = true;
+						// Nếu chưa có lỗi, thêm span.error
+						if (input.next('.error').length === 0) {
+							input.after('<span class="error" >Vui lòng nhập quốc gia</span>');
+							input.focus();
+						}
+					} else {
+						// Nếu đã có giá trị và có lỗi, xóa span.error
+						input.next('.error').remove();
+					}
+				});
+
+				// Nếu có lỗi, ngừng submit form
+				if (hasError) {
+					return false;
+				}
+
 				// Gửi AJAX request
 				var formData = new FormData(form);
 				formData.append("action", "dang_ky_tai_xuong");

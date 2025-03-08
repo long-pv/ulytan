@@ -61,7 +61,21 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "news_documents"
+                "value": "form_nga"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "form_trung_quoc"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "form_cac_nuoc_khac"
             }
         ]
     ],
@@ -74,5 +88,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1740759260
+    "modified": 1741407199
 }
