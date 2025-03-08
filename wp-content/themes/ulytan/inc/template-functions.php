@@ -3418,7 +3418,7 @@ function form_contribute_export_data_csv()
 	ob_clean();
 
 	$current_time = date("Y_m_d_H_i_s"); // get the current time
-	$output_filename = 'export_data_form_3_dong_gop_y_kien_' . $current_time . '.csv';
+	$output_filename = 'Form đánh giá_' . $current_time . '.csv';
 	$output_handle = @fopen('php://output', 'w');
 	fwrite($output_handle, "\xEF\xBB\xBF"); // display Vietnamese text
 	header("Content-Type: application/force-download");
@@ -3431,7 +3431,7 @@ function form_contribute_export_data_csv()
 	$column_title = [
 		'Họ và tên',
 		'Số điện thoại',
-		'Email',
+		// 'Email',
 		// 'Mã đơn hàng',
 		'Đánh giá',
 		// 'Kế toán',
@@ -3462,7 +3462,7 @@ function form_contribute_export_data_csv()
 				[
 					get_field('ho_va_ten') ?? '',
 					"'" . get_field('so_dien_thoai') ?? '',
-					get_field('email') ?? '',
+					// get_field('email') ?? '',
 					// "'" . get_field('ma_don_hang') ?? '',
 					get_field('nhan_vien_tu_van') ?? '',
 					// get_field('ke_toan') ?? '',
