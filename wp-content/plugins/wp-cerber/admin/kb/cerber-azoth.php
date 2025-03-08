@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -47,7 +47,7 @@ final class CRB_Explainer {
 	 * @param int $activity Activity ID
 	 * @param int $status Status ID
 	 * @param int $user_id User ID
-	 * @param string $set_list Comma-separated list of settings from the log entry
+	 * @param string $settings Comma-separated list of settings from the log entry
 	 * @param string $ip IP address
 	 * @param string $control Link text to open the popup
 	 * @param string $closing_html To be displayed bellow the explainer text, no block-level HTML tags are allowed
@@ -57,11 +57,9 @@ final class CRB_Explainer {
 	 *
 	 * @since 9.6.1.3
 	 */
-	static function create_popup( $activity, $status, $user_id, $set_list, $ip = '', $control = '', $closing_html = '', $footer = '' ) {
+	static function create_popup( int $activity, int $status, int $user_id, string $settings, string $ip = '', string $control = '', string $closing_html = '', string $footer = '' ): string {
 
-		if ( $set_list ) {
-			$set_list = explode( ',', $set_list );
-		}
+		$set_list = $settings ? explode( ',', $settings ) : array();
 
 		self::$activity = $activity;
 		self::$closing_html = $closing_html;
@@ -279,7 +277,7 @@ final class CRB_Explainer {
 				if ( ( $setting = cerber_settings_config( array( 'setting' => $sts ) ) )
 				     && $title = $setting['title'] ?? '' ) {
 
-					$settings[ $sts ] = array( $title, $setting['tab_id'] );
+					$settings[ $sts ] = array( $title, $setting['page_tab_id'] );
 				}
 
 				$settings[ $sts ] = self::get_setting_desc( $sts );
@@ -317,7 +315,7 @@ final class CRB_Explainer {
 
 		if ( $setting = cerber_settings_config( array( 'setting' => $setting_id ) ) ) {
 			if ( $title = $setting['title'] ?? '' ) {
-				$tab = $setting['tab_id'];
+				$tab = $setting['page_tab_id'];
 				$bm = '#' . CRB_SETTING_PREFIX . 'global-' . $setting_id;
 			}
 		}
@@ -362,7 +360,10 @@ final class CRB_Explainer {
 		}
 
 		if ( $show ) {
-			return crb_get_icon( 'activity' ) . '<a href="' . cerber_admin_link( 'activity' ) . '&filter_set=1&filter_ip=' . self::$ip . '">' . __( 'View log of suspicious and malicious activity from this IP address', 'wp-cerber' ) . '</a>';
+			return crb_get_icon( 'activity' ) . '<a href="' . cerber_admin_link( 'activity', [
+					'filter_set' => 1,
+					'filter_ip'  => self::$ip
+				] ) . '">' . __( 'View log of suspicious and malicious activity from this IP address', 'wp-cerber' ) . '</a>';
 		}
 
 		return false;
@@ -427,6 +428,7 @@ final class CRB_Wisdom {
 	 * @since 9.6.1.3
 	 */
 	static function load_local_file() {
+
 		if ( ! $json_text = file_get_contents( __DIR__ . '/data/azoth_data.json' ) ) {
 			return false;
 		}
@@ -546,4 +548,25 @@ final class CRB_Wisdom {
 		return $user_locale;
 	}
 
+	/**
+	 * Clears all cached data.
+	 * Typically, we use it when we need fresh data loaded from the disk or, if it's missing, from WP Cerber's cloud.
+	 *
+	 * @param bool $remote If true, forces to reload data from the cloud instantly. Should be used on installing a new version of WP Cerber.
+	 *
+	 * @return void
+	 *
+	 * @since 9.6.5.14
+	 */
+	static function clear_cache( $remote = false ) {
+		cerber_cache_delete( 'azoth_data' . self::determine_locale() );
+		cerber_delete_set( 'azoth_loaded' . self::determine_locale() );
+
+		if ( $remote ) {
+			delete_site_transient( 'cerber_update_kb' );
+		}
+		else {
+			set_site_transient( 'cerber_update_kb', 1, 120 );
+		}
+	}
 }

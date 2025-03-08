@@ -6,14 +6,14 @@
 	Author: Cerber Tech Inc.
 	Author URI: https://talk.wpcerber.com
 	Update URI: https://downloads.wpcerber.com/versions/wp-cerber.json
-	Version: 9.6.5
-	Requires PHP: 7.0
-	Requires at least: 5.5
+	Version: 9.6.6
+	Requires PHP: 7.2
+	Requires at least: 5.8
 	Text Domain: wp-cerber
 	Domain Path: /languages
 	Network: true
 
-	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -33,11 +33,11 @@
 
 */
 
-const CERBER_VER = '9.6.5';
+const CERBER_VER = '9.6.6';
 
 // Must be also updated in the header above
-const CERBER_REQ_PHP = '7.0';
-const CERBER_REQ_WP = '5.5';
+const CERBER_REQ_PHP = '7.2';
+const CERBER_REQ_WP = '5.8';
 
 const CERBER_PLUGIN_ID = 'wp-cerber/wp-cerber.php';
 

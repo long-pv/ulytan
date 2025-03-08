@@ -1,5 +1,5 @@
 /**
- *	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+ *	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
  */
 jQuery( function( $ ) {
 
@@ -197,7 +197,7 @@ jQuery( function( $ ) {
                 cerber_scan_load_data(); // Refresh issues
             }
 
-            cerber_popup_show('The scan has finished', '<p style="text-align: center;">The scan has finished. Please review the results.</p><p style="text-align: center;"><a href="https://wpcerber.com/wordpress-integrity-checker/" target="_blank">Scanner documentation on wpcerber.com</a></p>');
+            cerber_popup_show(crb_scan_msg_misc.finished, '<p style="text-align: center;">' + crb_scan_msg_misc.finished_desc + '</p><p style="text-align: center;"><a href="https://wpcerber.com/wordpress-integrity-checker/" target="_blank">Scanner Documentation</a></p>');
         }
     }
 
@@ -210,7 +210,7 @@ jQuery( function( $ ) {
         crb_all_rows = null;
 
         if (scanner_data.old) {
-            alert(crb_scan_msg_misc['rerun_needed']);
+            alert(crb_scan_msg_misc.rerun_needed);
         }
 
         let smode = scanner_data.mode;
@@ -597,16 +597,19 @@ jQuery( function( $ ) {
             processData: false,
             dataType: 'json'
         }).done(function (server_response) {
-            var msg = '', title = '';
+            let msg = '', title = '';
+
             if (server_response.errors && server_response.errors.length) {
-                title = crb_scan_msg_misc['file_error'];
-                msg = '<div style="color: #c91619;"><p><b>' + crb_scan_msg_misc['file_error'] + '</b></p><p>' + server_response.errors.join('</p><p>') + '</p></div>';
+                title = crb_scan_msg_misc.file_error;
+                msg = '<div style="color: #c91619;"><p><b>' + title + '</b></p><p>' + server_response.errors.join('</p><p>') + '</p></div>';
             }
+
             if (server_response.processed && server_response.processed.length) {
                 msg = msg + '<div><p><b>' + crb_scan_msg_misc[operation][1] + '</b></p><p>' + server_response.processed.join('</p><p>') + '</p></div>';
             }
+
             if (!title) {
-                title = crb_scan_msg_misc['all_ok'];
+                title = crb_scan_msg_misc.all_ok;
             }
 
             if (server_response.processed && server_response.processed.length) {

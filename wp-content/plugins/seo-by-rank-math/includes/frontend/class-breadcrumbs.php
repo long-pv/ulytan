@@ -16,6 +16,8 @@ namespace RankMath\Frontend;
 use RankMath\Helper;
 use RankMath\Traits\Hooker;
 use RankMath\Helpers\Security;
+use WP_Error;
+use WP_Term;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -446,6 +448,10 @@ class Breadcrumbs {
 		global $author;
 
 		$userdata = get_userdata( $author );
+		if ( ! $userdata || ! is_object( $userdata ) || ! isset( $userdata->ID ) ) {
+			return;
+		}
+
 		$this->add_crumb( sprintf( $this->strings['archive_format'], $this->get_breadcrumb_title( 'user', $userdata->ID, $userdata->display_name ) ) );
 	}
 
@@ -509,7 +515,7 @@ class Breadcrumbs {
 	/**
 	 * Get the primary term.
 	 *
-	 * @param array $terms Terms attached to the current post.
+	 * @param WP_Term[]|false|WP_Error $terms Terms attached to the current post.
 	 */
 	private function maybe_add_primary_term( $terms ) {
 		// Early Bail!

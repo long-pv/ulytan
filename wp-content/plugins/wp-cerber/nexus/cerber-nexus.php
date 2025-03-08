@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -75,13 +75,9 @@ function nexus_admin_page() {
 		echo '<h2 style="margin-bottom: 2em;">' . __( 'To proceed, please select the mode for this website', 'wp-cerber' ) . '</h2>';
 
 		foreach ( $roles as $r => $d ) {
-			echo '<div style="padding-bottom: 1em;"><p><a href="' . wp_nonce_url( add_query_arg( array(
-					'cerber_admin_do' => 'nexus_set_role',
-					'nexus_set_role'  => $r,
-				) ), 'control', 'cerber_nonce' ) . '" class="button button-primary cerber-button">' . $d[0] . '</a></p>';
+			echo '<div style="padding-bottom: 1em;"><p><a href="' . cerber_admin_link_add( [ 'cerber_admin_do' => 'nexus_set_role', 'nexus_set_role' => $r ] ) . '" class="button button-primary cerber-button">' . $d[0] . '</a></p>';
 			echo '<p>' . $d[1] . '</p></div>';
 		}
-
 
 		echo '<p style="margin-top: 3rem">Know more: <a href="https://wpcerber.com/manage-multiple-websites/" target="_blank">Managing multiple WP Cerber instances from one dashboard</a></p></div>';
 
@@ -135,17 +131,15 @@ function nexus_site_manager() {
 
 		$token = nexus_the_token();
 
-		$no_client = wp_nonce_url( add_query_arg( array(
-			'cerber_admin_do' => 'nexus_set_role',
-			'nexus_set_role'  => 'none',
-		) ), 'control', 'cerber_nonce' );
+		$no_client = cerber_admin_link_add( [ 'cerber_admin_do' => 'nexus_set_role', 'nexus_set_role' => 'none' ] );
 
-		echo '<div class="crb-admin-form" style="padding-bottom: 1em; font-size: 2em;"><p style="font-weight: 600;">' . __( 'Secret Access Token', 'wp-cerber' ) . '</p>';
+		echo '<div class="crb-admin-form" style=""><p style="font-weight: 600;">' . __( 'Secret Access Token', 'wp-cerber' ) . '</p>';
 
-		echo '<p>' . __( 'The token is unique to this website. Keep it secret. Install the token on your main website to grant access to this website.', 'wp-cerber' ) . ' </p>';
-		echo '<p class="crb-monospace" style="padding:1em; background-color: #fff; border: solid 1px #d6d6d6; word-break: break-all;">' . $token . '</p>';
-		$confirm = ' onclick="return confirm(\'' . __( 'Are you sure? This permanently invalidates the token.', 'wp-cerber' ) . '\');"';
-		echo '<p>' . __( 'To disable remote management and revoke the token, click here:', 'wp-cerber' ) . ' <a href="' . $no_client . '" ' . $confirm . '>' . __( 'Disable managed mode', 'wp-cerber' ) . '</a>.</p>';
+		echo crb_generate_html_flex( array( __( 'To grant access to this website, install this token on the main website. Keep the token secret.', 'wp-cerber' ), crb_copy_to_clipboard('crb-secret-token') ) );
+
+		echo '<div class="crb-monospace crb-secret-token">' . $token . '</div>';
+
+		echo '<p>' . __( 'To disable remote management and revoke the token, click here:', 'wp-cerber' ) . ' ' . crb_confirmation_link( $no_client, __( 'Disable managed mode', 'wp-cerber' ), __( 'Are you sure? This permanently invalidates the token.', 'wp-cerber' ) ) . '.</p>';
 
 		echo '</div>';
 

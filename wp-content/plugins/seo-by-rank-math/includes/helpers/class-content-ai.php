@@ -12,6 +12,7 @@ namespace RankMath\Helpers;
 
 use RankMath\Admin\Admin_Helper;
 use RankMath\Helpers\Str;
+use WP_Error;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -194,7 +195,7 @@ trait Content_AI {
 	/**
 	 * Function to get Default Schema type by post_type.
 	 *
-	 * @return string Default Schema Type.
+	 * @return array Default Schema Type.
 	 */
 	public static function get_chats() {
 		return array_values( get_option( self::$chat_key, [] ) );
@@ -235,7 +236,7 @@ trait Content_AI {
 		$outputs = self::get_outputs();
 
 		$output = array_map(
-			function( $item ) use ( $endpoint ) {
+			function ( $item ) use ( $endpoint ) {
 				return [
 					'key'    => $endpoint,
 					'output' => $item,
@@ -323,7 +324,7 @@ trait Content_AI {
 	public static function save_default_prompts( $prompts ) {
 		$saved_prompts  = self::get_prompts();
 		$custom_prompts = ! is_array( $saved_prompts ) || ! empty( $saved_prompts['error'] ) ? [] : array_map(
-			function( $prompt ) {
+			function ( $prompt ) {
 				return $prompt['PromptCategory'] === 'custom' ? $prompt : false;
 			},
 			$saved_prompts
@@ -487,8 +488,8 @@ trait Content_AI {
 	/**
 	 * Function to return the error message.
 	 *
-	 * @param array $response      API response.
-	 * @param int   $response_code API response code.
+	 * @param array|WP_Error $response      API response.
+	 * @param int            $response_code API response code.
 	 */
 	public static function is_content_ai_error( $response, $response_code ) {
 		$data = wp_remote_retrieve_body( $response );

@@ -656,7 +656,7 @@ get_header();
 					<div class="col-12 page_ctv_step_16" style="display:none;">
 						<div class="page_ctv_form_group">
 							<label for="" class="page_ctv_form_label">
-								16. Mô tả tóm tắt kinh nghiệm làm việc.
+								16. Mô tả tóm tắt kinh nghiệm làm việc*
 							</label>
 							<textarea name="summary_description" class="page_ctv_form_textarea" placeholder="- Năm 2012 Tốt nghiệp đại học Công Đoàn
 - Năm 2014 Làm việc tại công ty Ulytan

@@ -2,7 +2,7 @@
 /*
 	Cerber Laboratory (cerberlab.net) specific routines.
 
-	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -228,19 +228,11 @@ function lab_api_send_request( $workload = array(), $payload_key = null ) {
 function lab_send_request( $request, $node_id = null, $scheme = null ) {
 	global $node_delay, $cerber_lab_last_net_error, $cerber_lab_last_node_id;
 
-	$node = lab_get_node( $node_id );
-
-	if ( ! $scheme ) {
-		if ( crb_get_settings( 'cerberproto' ) ) {
-			$scheme = 'https';
-		}
-		else {
-			$scheme = 'http';
-		}
-	}
-	elseif ( $scheme != 'http' || $scheme != 'https' ) {
+	if ( $scheme != 'http' && $scheme != 'https' ) {
 		$scheme = 'https';
 	}
+
+	$node = lab_get_node( $node_id );
 
 	$body = array();
 	$body['container'] = $request;

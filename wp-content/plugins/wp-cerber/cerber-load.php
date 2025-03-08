@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -405,8 +405,6 @@ class WP_Cerber {
 			}
 			else {
 				$msg = sprintf( _n( 'You have %d login attempt remaining.', 'You have %d login attempts remaining.', $remain, 'wp-cerber' ), $remain );
-
-				__( 'You have %d login attempts remaining.', 'wp-cerber' ); // registration for _n()
 			}
 
 			return apply_filters( 'cerber_msg_remain', $msg, $remain );
@@ -806,8 +804,9 @@ function cerber_init() {
 
 	cerber_error_control();
 
-	if ( crb_get_settings( 'tiphperr' ) ) {
-		set_error_handler( 'cerber_catch_error' );
+	if ( crb_get_settings( 'tiphperr' )
+	     || crb_get_settings( 'log_crb_errors' ) ) {
+		CRB_Globals::$prev_handler = set_error_handler( 'cerber_catch_error' );
 	}
 
 	cerber_upgrade_all();
@@ -1112,13 +1111,25 @@ add_filter( 'authenticate', function ( $user, $username, $password ) {
 	return cerber_authenticate( $user, $username, $password );
 }, PHP_INT_MAX, 3 ); // PHP_INT_MAX @since 8.8
 /**
- * @param WP_User|WP_Error $user
+ * Authenticates the user, performing various security checks.
+ *
+ * @param null|WP_User|WP_Error $user
  * @param string $username
  * @param string $password
  *
  * @return WP_User|WP_Error
  */
 function cerber_authenticate( $user, $username, $password = '' ) {
+
+	if ( is_wp_error( $user ) ) {
+		// This allows a previous third-party filter on the 'authenticate' hook to determine
+		// that the user must be blocked from logging in. Since WP Cerber 9.6.6.
+
+		CRB_Globals::$act_status = 55;
+		cerber_log( CRB_EV_LDN, $username );
+
+		return $user;
+	}
 
 	if ( $username
          && ( crb_get_settings( 'loginnowp' ) == 2 )
@@ -1307,7 +1318,7 @@ function cerber_restrict_auth( $user, $app = false ) {
 		if ( ! $user_msg ) {
 			$user_msg = get_wp_cerber()->getErrorMsg();
 		}
-		$error->add( 'cerber_wp_error', $user_msg, array( 'user_id' => $user->ID ) );
+		$error->add( 'cerber_auth_error', $user_msg, array( 'user_id' => $user->ID ) );
 
 		return $error;
 	}
@@ -1902,9 +1913,8 @@ function crb_sessions_kill( $tokens, $user_id = null, $admin = true ) {
 		}
 
 		if ( $total ) {
-			cerber_admin_message( sprintf( _n( 'User session has been terminated', '%s user sessions have been terminated', $total, 'wp-cerber' ), $total ) );
-
-            __( '%s user sessions have been terminated', 'wp-cerber' ); // registration for _n()
+			/* translators: Placeholder %d will be replaced by the number of terminated user sessions. */
+			cerber_admin_message( sprintf( _n( 'User session has been terminated', '%d user sessions have been terminated', $total, 'wp-cerber' ), $total ) );
 		}
 		else {
 			cerber_admin_notice( 'No user sessions found.' );
@@ -2073,21 +2083,31 @@ function cerber_parse_redir( $url, $user ) {
 	return $url;
 }
 
-function crb_redirect_by_policy( $user, $policy ) {
+/**
+ * Generates a redirection URL for the given user.
+ * It's based on the user role and requested user policy.
+ *
+ * @param int | WP_User $user
+ * @param string $policy_id
+ *
+ * @return string Full redirection URL if any configured, empty string otherwise.
+ */
+function crb_redirect_by_policy( $user, string $policy_id ): string {
 
 	if ( $user
 	     && ! crb_is_wp_error( $user )
-	     && ( $to = cerber_get_user_policy( $policy, $user ) ) ) {
+	     && ( $to = cerber_get_user_policy( $policy_id, $user ) ) ) {
 
-	    $force_redirect_to = cerber_parse_redir( $to, $user );
+		$force_redirect_to = cerber_parse_redir( $to, $user );
+
 		if ( ! strpos( $force_redirect_to, '://' ) ) {
-			$force_redirect_to = cerber_get_site_url() . '/' . ltrim( $force_redirect_to, '/' );
+			$force_redirect_to = cerber_get_home_url() . '/' . ltrim( $force_redirect_to, '/' );
 		}
 
 		return $force_redirect_to;
 	}
 
-	return false;
+	return '';
 }
 
 function cerber_user_logout( $status = null ) {
@@ -2514,112 +2534,6 @@ add_filter( 'comment_form_submit_field', function ( $value ) {
 } );
 
 
-// Messages ----------------------------------------------------------------------
-
-/**
- * Add an error message for displaying on the login pages and other pages based on it (reset, register, etc.).
- * Ugly wrapper for the global variable $error.
- *
- * @param string $message One plain error message
- *
- * @return void
- *
- * @since 9.5.8
- */
-function crb_add_wp_login_form_error( $message ) {
-	global $error; // This is a global WP variable that is used at login_header() in wp-login.php
-
-	if ( $error ) {
-		$error .= "<br />\n" . $message; // This is the only divider we can use - see login_header()
-	}
-    else {
-	    $error = $message;
-    }
-
-}
-
-// Login page part 1
-add_action( 'login_head', 'cerber_login_head' );
-function cerber_login_head() {
-
-	if ( ! $allowed = cerber_is_ip_allowed() )  :
-		?>
-        <style>
-            form#loginform,
-            form#lostpasswordform,
-            #login p#nav {
-                display: none;
-            }
-        </style>
-		<?php
-	endif;
-
-	if ( crb_get_settings( 'no_rememberme' ) || crb_get_settings( 'auth_expire' ) )  :
-		?>
-        <style>
-            p.forgetmenot {
-                display: none;
-            }
-        </style>
-	<?php
-	endif;
-
-	$wp_cerber = get_wp_cerber();
-
-	$wp_cerber->reCaptcha( 'style' );
-
-	// Add an error message above the login form
-
-	if ( ! cerber_is_http_get() ) {
-		return;
-	}
-
-	if ( ! cerber_can_msg() ) {
-		return;
-	}
-
-	$error_msg = '';
-
-	if ( ! $allowed ) {
-		$error_msg = $wp_cerber->getErrorMsg();
-	}
-    elseif ( $msg = $wp_cerber->getRemainMsg() ) {
-		$error_msg = $msg;
-	}
-    elseif ( crb_get_settings( 'authonly' ) && ( $msg = crb_get_settings( 'authonlymsg' ) ) ) {
-		$error_msg = $msg;
-	}
-
-	if ( $error_msg ) {
-        crb_add_wp_login_form_error( $error_msg );
-	}
-}
-
-// Login page part 2, if credentials were wrong - after login form has been submitted (POST request)
-add_filter( 'login_errors', 'cerber_login_form_errors' );
-function cerber_login_form_errors( $errors ) {
-	global $error; // This global WP variable is used at login_header() in wp-login.php
-
-	if ( cerber_can_msg() ) {
-		$wp_cerber = get_wp_cerber();
-		if ( ! cerber_is_ip_allowed() ) {
-			$errors = $wp_cerber->getErrorMsg(); // Replace any error messages
-		}
-        elseif ( ! $error && ( $msg = $wp_cerber->getRemainMsg() ) ) {
-			$errors .= '<p>&nbsp;</p><p>' . $msg . '</p>';
-		}
-	}
-
-	return $errors;
-}
-
-add_filter( 'shake_error_codes', 'cerber_login_failure_shake' ); // Shake it, baby!
-function cerber_login_failure_shake( $shake_error_codes ) {
-	$shake_error_codes[] = 'cerber_wp_error';
-
-	return $shake_error_codes;
-}
-
 /*
 	Replace default login/logout URL with Custom login page URL
 */
@@ -2642,7 +2556,7 @@ function cerber_login_redirect( $location, $status ) {
 
 	if ( ( $path = crb_get_settings( 'loginpath' ) ) && ( 0 === strpos( $location, WP_LOGIN_SCRIPT . '?' ) ) ) {
 		$loc      = explode( '?', $location );
-		$location = cerber_get_home_url() . '/' . $path . '/?' . $loc[1];
+		$location = cerber_get_site_url() . '/' . $path . '/?' . $loc[1];
 	}
 
 	return $location;
@@ -2696,12 +2610,13 @@ add_action( 'init', function () {
 	}
 	else {
 
+		// Force WP to load translations from the WP Cerber folder
+
+        /*
 		add_filter( 'load_textdomain_mofile', function ( $mofile, $domain ) {
 
 			if ( $domain == 'wp-cerber'
 			     && strpos( $mofile, WP_LANG_DIR . '/plugins/' ) === 0 ) {
-
-				// Force WP to load translations from the WP Cerber folder
 
 				$cerber_mofile = cerber_plugin_dir() . '/languages/' . basename( $mofile );
 
@@ -2711,9 +2626,9 @@ add_action( 'init', function () {
 			}
 
 			return $mofile;
-		}, PHP_INT_MAX, 2 );
+		}, PHP_INT_MAX, 2 ); */
 
-        // Now load the translations from a file
+        // Now load the translations from file
 
 		load_plugin_textdomain( 'wp-cerber', false, 'wp-cerber/languages' );
 	}
@@ -3216,7 +3131,7 @@ if ( crb_get_settings( 'nouserpages_bylogin' ) ) {
 			return $d->user_url;
 		}*/
 
-		return cerber_get_site_url();
+		return cerber_get_home_url();
 
 	}, PHP_INT_MAX, 2 );
 
@@ -3804,18 +3719,117 @@ function crb_is_woo_reset() {
 	         && class_exists( 'WooCommerce' ) );
 }
 
+add_action( 'login_head', 'cerber_login_head' );
+function cerber_login_head() {
+
+	if ( ! cerber_is_ip_allowed() )  :
+		?>
+        <style>
+            form#loginform,
+            form#lostpasswordform,
+            #login p#nav {
+                display: none;
+            }
+        </style>
+	<?php
+	endif;
+
+	if ( crb_get_settings( 'no_rememberme' ) || crb_get_settings( 'auth_expire' ) )  :
+		?>
+        <style>
+            p.forgetmenot {
+                display: none;
+            }
+        </style>
+	<?php
+	endif;
+
+	$wp_cerber = get_wp_cerber();
+
+	$wp_cerber->reCaptcha( 'style' );
+}
+
+add_filter( 'shake_error_codes', 'cerber_login_failure_shake' );
+function cerber_login_failure_shake( $shake_error_codes ) {
+	$shake_error_codes[] = 'cerber_auth_error';
+
+	return $shake_error_codes;
+}
+
+add_filter( 'wp_login_errors', 'cerber_login_form_errors', PHP_INT_MAX );
 /**
- * Validate reCAPTCHA for the WordPress lost password form
+ * Add error messages to show them on the WordPress login form
+ *
+ * @param WP_Error $errors
+ *
+ * @return WP_Error
+ *
+ * @since 9.6.5.3
  */
-add_action( 'login_form_lostpassword', 'cerber_lost_password_form' );
-function cerber_lost_password_form() {
+function cerber_login_form_errors( $errors ) {
+	if ( ! is_wp_error( $errors ) ) {
+		$errors = new WP_Error();
+	}
+
+	if ( CRB_Globals::$login_form_errors ) {
+		foreach ( CRB_Globals::$login_form_errors as $id => $msg ) {
+			$errors->add( 'cerber_login_form_' . $id, $msg );
+		}
+	}
+
+	if ( $msg = cerber_check_login_errors() ) {
+		$errors->add( 'cerber_login_form_error', $msg );
+	}
+
+	return $errors;
+}
+
+/**
+ * Check for possible error messages for displaying on the WordPress login form
+ *
+ * @return string
+ *
+ * @since 9.6.5.3
+ */
+function cerber_check_login_errors(): string {
+
+	if ( cerber_is_http_post() // Error messages for POST requests are processed in cerber_restrict_auth()
+         || ! cerber_can_msg() ) {
+		return '';
+	}
+
+	$error_msg = '';
+	$wp_cerber = get_wp_cerber();
+
+	if ( ! cerber_is_ip_allowed() ) {
+		$error_msg = $wp_cerber->getErrorMsg();
+	}
+    elseif ( $msg = $wp_cerber->getRemainMsg() ) {
+		$error_msg = $msg;
+	}
+    elseif ( crb_get_settings( 'authonly' ) && ( $msg = crb_get_settings( 'authonlymsg' ) ) ) {
+		$error_msg = $msg;
+	}
+
+	return $error_msg;
+}
+
+add_action( 'login_form_lostpassword', 'cerber_lost_pwd_form_checks' );
+/**
+ * Checks before rendering the WordPress lost password (password reset) form
+ *
+ * @return void
+ *
+ * @since 9.6.5.3
+ */
+function cerber_lost_pwd_form_checks() {
 
 	if ( ! cerber_is_ip_allowed() ) {
 		add_filter( 'login_message', function ( $message ) {
 			return ''; // Remove the default reset password message
 		} );
 
-        crb_add_wp_login_form_error( __( 'You are not allowed to proceed. Ask your administrator for assistance.', 'wp-cerber' ) );
+		CRB_Globals::$reset_pwd_msg = __( 'You are not allowed to proceed. Ask your administrator for assistance.', 'wp-cerber' );
 	}
 
 	$wp_cerber = get_wp_cerber();
@@ -3826,46 +3840,65 @@ function cerber_lost_password_form() {
 		$_POST['user_login'] = null;
 
 		cerber_log( CRB_EV_PRD, crb_get_user_login_field() );
+
 		CRB_Globals::$reset_pwd_denied = true;
-		CRB_Globals::$reset_pwd_msg = '<strong>' . __( 'ERROR:', 'wp-cerber' ) . ' </strong>' . $wp_cerber->reCaptchaMsg( 'lostpassword' );
-		// TODO: crb_add_wp_login_form_error(CRB_Globals::$reset_pwd_msg);
+		CRB_Globals::$reset_pwd_msg = '<strong>' . __( 'Error:', 'wp-cerber' ) . ' </strong>' . $wp_cerber->reCaptchaMsg( 'lostpassword' );
 	}
 }
 
+add_action( 'lost_password', 'cerber_lost_pwd_form_errors', PHP_INT_MAX );
 /**
- * Display message on the WordPress lost password form screen
+ * Add error messages to the WordPress lost password (password reset) form
  *
- * TODO: Replace with crb_add_wp_login_form_error()
+ * @param WP_Error $errors
+ *
+ * @return void
+ *
+ * @since 9.6.5.3
  */
-add_action( 'lostpassword_form', 'cerber_lost_show_msg' );
-function cerber_lost_show_msg() {
-	if ( ! CRB_Globals::$reset_pwd_msg ) {
-		return;
+function cerber_lost_pwd_form_errors( $errors ) {
+
+	if ( CRB_Globals::$reset_pwd_msg
+         && is_wp_error( $errors ) ) {
+		$errors->add( 'cerber_lost_pwd', CRB_Globals::$reset_pwd_msg );
 	}
+}
 
-	?>
+add_action( 'woocommerce_before_customer_login_form', 'cerber_wc_login_errors');
+/**
+ * Check for possible error messages and display them on the standard WooCommerce login form
+ *
+ * @return void
+ *
+ * @since 9.6.5.5
+ */
+function cerber_wc_login_errors() {
 
-    <script type="text/javascript">
+	$errors = new WP_Error();
+	cerber_login_form_errors( $errors );
 
-        let ErrorMsgElem = document.getElementById('login_error');
+	if ( is_wp_error( $errors ) && $errors->has_errors() ) {
+		foreach ( $errors->get_error_messages() as $message ) {
+			wc_add_notice( $message, 'error' );
+		}
+	}
+}
 
-        if (!ErrorMsgElem) {
-            ErrorMsgElem = document.createElement('div');
-            ErrorMsgElem.id = 'login_error';
+add_action( 'woocommerce_before_lost_password_form', 'cerber_wc_lost_pwd_errors' );
+/**
+ * Check for possible error messages and display them on the standard WooCommerce lost password form
+ *
+ * @return void
+ *
+ * @since 9.6.5.5
+ */
+function cerber_wc_lost_pwd_errors() {
 
-            let forms = document.getElementsByTagName('form');
-            if (forms.length > 0) {
-                let firstForm = forms[0];
-                firstForm.parentNode.insertBefore(ErrorMsgElem, firstForm);
-            } else {
-                document.body.insertBefore(ErrorMsgElem, document.body.firstChild);
-            }
-        }
+	cerber_lost_pwd_form_checks();
 
-        ErrorMsgElem.innerHTML = "<?php echo CRB_Globals::$reset_pwd_msg; ?>";
-    </script>
-
-	<?php
+	if ( $msg = CRB_Globals::$reset_pwd_msg ) {
+		wc_add_notice( $msg, 'error' );
+	}
 }
 
 add_action( 'lostpassword_post', function ( $errors ) {
@@ -5336,7 +5369,6 @@ class CRB_Messaging {
 				$max = cerber_db_get_var( 'SELECT MAX(stamp) FROM ' . CERBER_LOG_TABLE . ' WHERE  activity = ' . CRB_EV_LFL );
 				if ( $max ) {
 					$last_date = cerber_date( $max, false );
-					//$last      = $wpdb->get_row( 'SELECT * FROM ' . CERBER_LOG_TABLE . ' WHERE stamp = ' . $max . ' AND activity = 7' );
 					$last = cerber_db_get_row( 'SELECT * FROM ' . CERBER_LOG_TABLE . ' WHERE stamp = ' . $max . ' AND activity = ' . CRB_EV_LFL, MYSQL_FETCH_OBJECT );
 				}
 
@@ -5565,6 +5597,8 @@ class CRB_Messaging {
 
 	/**
 	 * Sends emails. Acts as a go_send_email() wrapper.
+     *
+     * @see self::go_send_email()
 	 *
 	 * @param string $type
 	 * @param bool $html_mode
@@ -6338,6 +6372,8 @@ function cerber_daily_run() {
     }
 
 	cerber_upgrade_deferred();
+
+	crb_truncate_log_file( crb_get_diag_dir() . 'cerber-errors.log' );
 
 	// TODO: implement holding previous values for a while
 	// cerber_antibot_gene();
@@ -7224,7 +7260,10 @@ function cerber_upgrade_all( $force = false ) {
 	crb_raise_limits();
 
 	CRB_Globals::$doing_upgrade = true;
-	@define( 'CRB_DOING_UPGRADE', 1 );
+
+	if ( ! defined( 'CRB_DOING_UPGRADE' ) ) {
+		define( 'CRB_DOING_UPGRADE', 1 );
+	}
 
 	crb_clear_admin_msg();
 	cerber_remove_issues();
@@ -7956,6 +7995,10 @@ register_shutdown_function( function () {
 
 	cerber_push_lab();
 	cerber_traffic_log();
+
+    if ( crb_get_settings( 'log_crb_errors' ) ) {
+		cerber_save_errors();
+	}
 } );
 
 /**
@@ -8053,10 +8096,10 @@ function cerber_error_shield() {
 /**
  * Error handler collects PHP errors for logging
  *
- * @param $errno
- * @param $errstr
- * @param $errfile
- * @param $errline
+ * @param int $errno
+ * @param string $errstr
+ * @param string $errfile
+ * @param int $errline
  *
  * @return false
  */
@@ -9223,6 +9266,111 @@ function cerber_error_control() {
 		@ini_set( 'display_startup_errors', 0 );
 		@ini_set( 'display_errors', 0 );
 	}
+}
+
+/**
+ * Saves PHP errors thrown in the WP Cerber code to a file
+ *
+ * @return void
+ *
+ * @since 9.6.5.10
+ */
+function cerber_save_errors() {
+	if ( ! $errors = CRB_Globals::get_errors() ) {
+		return;
+	}
+
+	$crb_errors = [];
+	$php = phpversion();
+	$wp = cerber_get_wp_version();
+
+	foreach ( $errors as $error_info ) {
+		$msg = $error_info[1];
+		$file = $error_info[2];
+
+		if ( strpos( $file, '/wp-cerber/' ) ) {
+
+			$msg = mb_substr( $msg, 0, 2048 );
+			$file = substr( $file, 0, 1024 );
+
+			$crb_errors[] = array( $error_info[0], $msg, $file, $error_info[3], CERBER_VER, $php, $wp );
+		}
+	}
+
+	if ( ! $crb_errors ) {
+		return;
+	}
+
+	$log_entry = [
+		'time'   => time(),
+		'errors' => $crb_errors,
+	];
+
+	if ( ! $json = json_encode( $log_entry, JSON_UNESCAPED_UNICODE ) ) {
+		return;
+	}
+
+	$dir = crb_get_diag_dir();
+
+	if ( ! $dir
+	     || ( ! $log = @fopen( $dir . 'cerber-errors.log', 'a' ) ) ) {
+		return;
+	}
+
+	if ( @flock( $log, LOCK_EX ) ) {
+		@fwrite( $log, $json . PHP_EOL );
+		@flock( $log, LOCK_UN );
+	}
+
+	@fclose( $log );
+}
+
+
+/**
+ * Truncate a log file, keeping only the last N lines.
+ * Note: Do not use for huge files as the entire file is loaded into memory.
+ *
+ * This function removes lines from the beginning of the log file, keeping
+ * only the specified number of lines at the end.
+ *
+ * @param string $file_path Path to the log file.
+ * @param int    $lines_to_keep Number of lines to keep (default: 10).
+ *
+ * @return void
+ *
+ * @since 9.6.5.10
+ */
+function crb_truncate_log_file( string $file_path, $lines_to_keep = 10 ) {
+	if ( ! file_exists( $file_path ) ) {
+		return;
+	}
+
+	$lines = file( $file_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+
+	if ( ! $lines
+         || count( $lines ) <= $lines_to_keep ) {
+		return;
+	}
+
+	$lines_to_keep = max( 1, $lines_to_keep );
+	$lines = array_slice( $lines, - $lines_to_keep );
+
+	$log = @fopen( $file_path, 'w' );
+
+	if ( ! $log ) {
+		return;
+	}
+
+	if ( @flock( $log, LOCK_EX ) ) {
+
+        foreach ( $lines as $line ) {
+			@fwrite( $log, $line . PHP_EOL );
+		}
+
+        @flock( $log, LOCK_UN );
+	}
+
+	@fclose( $log );
 }
 
 /**

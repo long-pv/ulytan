@@ -954,7 +954,8 @@ td.crb-traffic-details table td:nth-child(2) {
 .crb-req-status-502,
 .crb-req-status-503,
 .crb-req-status-504,
-.crb-req-status-505 {
+.crb-req-status-505,
+.crb-req-status-509 {
     background-color: #2db05a;
     color: #fff;
 }

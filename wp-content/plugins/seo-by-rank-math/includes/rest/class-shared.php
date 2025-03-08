@@ -19,6 +19,7 @@ use RankMath\Rest\Rest_Helper;
 use RankMath\Rest\Sanitize;
 use RankMath\Traits\Meta;
 use RankMath\Schema\DB;
+use WP_Error;
 use WP_REST_Controller;
 use WP_REST_Request;
 use WP_REST_Server;
@@ -371,7 +372,7 @@ class Shared extends WP_REST_Controller {
 		}
 
 		$meta_id = absint( \str_replace( 'rank_math_delete_schema-', '', $meta_key ) );
-		$schemas = DB::get_schemas( $object_id );
+		$schemas = DB::get_schemas( $object_id, "{$object_type}meta" );
 		// Early bail if meta_id doesn't match with the schema data of the current post.
 		if ( empty( $schemas ) || ! in_array( "schema-{$meta_id}", array_keys( $schemas ), true ) ) {
 			return;

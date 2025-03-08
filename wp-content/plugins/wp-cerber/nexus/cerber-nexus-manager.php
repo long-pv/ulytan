@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -703,9 +703,8 @@ function nexus_add_client( $token ) {
 		$edit = cerber_admin_link( 'nexus_sites', array( 'site_id' => $site_id ) );
 		cerber_admin_message( __( 'The website has been added successfully', 'wp-cerber' )
                               . '&nbsp; [ <a href="' . $edit . '">' . __( 'Click to edit', 'wp-cerber' ) . '</a> | '
-		                      . ' <a href="' . wp_nonce_url( cerber_admin_link() . '&amp;cerber_admin_do=nexus_switch&nexus_site_id=' . $site_id, 'control', 'cerber_nonce' ) . '">' . __( 'Switch to the Dashboard', 'wp-cerber' ) . '</a> ]' );
+		                      . ' <a href="' . cerber_admin_link_add( [ 'cerber_admin_do' => 'nexus_switch', 'nexus_site_id' => $site_id ] ) . '">' . __( 'Switch to the Dashboard', 'wp-cerber' ) . '</a> ]' );
 		if ( $no_https ) {
-			//cerber_admin_notice( __( 'Note: No SSL encryption is enabled on the website this can lead to data leakage.', 'wp-cerber' ) );
 			cerber_admin_notice( __( 'Keep in mind: You have added the website that does not support SSL encryption. This may lead to data leakage.', 'wp-cerber' ) );
 		}
 
@@ -827,9 +826,8 @@ function nexus_delete_client( $ids ) {
 
 	if ( $ret ) {
 		$num = cerber_db_get_var( 'SELECT ROW_COUNT()' );
-		cerber_admin_message( sprintf( _n( 'Website has been deleted', '%s websites have been deleted', $num, 'wp-cerber' ), $num ) );
-
-		__( '%s websites have been deleted', 'wp-cerber' ); // registration for _n()
+		/* translators: Placeholder %d will be replaced by the number of deleted websites. */
+		cerber_admin_message( sprintf( _n( 'Website has been deleted', '%d websites have been deleted', $num, 'wp-cerber' ), $num ) );
 
 		foreach ( $ids as $id ) {
 			nexus_delete_list( $id );
@@ -1064,10 +1062,12 @@ function nexus_update_updates( $pl_updates ) {
 
 function nexus_get_update( $plugin, $version = null ) {
 
-	$update = cerber_get_set( 'nexus_upd_' . sha1( $plugin ) );
+	if ( ! $update = cerber_get_set( 'nexus_upd_' . sha1( $plugin ) ) ) {
+		return false;
+	}
 
 	if ( $version
-         && version_compare( $version, $update['new_version'], '>=' ) ) {
+	     && version_compare( $version, $update['new_version'], '>=' ) ) {
 		return false;
 	}
 

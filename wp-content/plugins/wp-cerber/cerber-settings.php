@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -308,6 +308,7 @@ function cerber_get_defaults( $setting = null, $dynamic = true ) {
 			'main_use_proxy'   => 0,
 			'cerber_sw_repo'   => 1,
 			'cerber_sw_auto'   => 0,
+			'log_crb_errors'   => 1,
 
 			'loginpath'     => '',
 			'loginnowp'     => 0,
@@ -323,7 +324,6 @@ function cerber_get_defaults( $setting = null, $dynamic = true ) {
 			'keeplog_auth'   => 90,
 			'ip_extra'       => 1,
 			'cerberlab'      => 1,
-			'cerberproto'    => 1,
 			'usefile'        => 0,
 			'dateformat'     => '',
 			'plain_date'     => 0,

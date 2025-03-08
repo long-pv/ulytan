@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -33,6 +33,9 @@ if ( ! defined( 'WPINC' ) || ! defined( 'CERBER_VER' ) ) {
 	exit;
 }
 
+/**
+ * Exceptions Tab/Page => Setting screen ID
+ */
 const CRB_WP_SETTING_MAP = array(
 	'scan_settings'    => 'scanner',
 	'scan_schedule'    => 'schedule', // see const CERBER_OPT_E = 'cerber-schedule';
@@ -207,14 +210,14 @@ function cerber_settings_config( $args = array() ) {
 						'enabler' => array( 'nologinhint' ),
 					),
 					'nopasshint'      => array(
-						'title'       => __( 'Disable the default reset password error message', 'wp-cerber' ),
-						'label'       => __( 'Do not reveal non-existing usernames and emails in the reset password error message', 'wp-cerber' ),
+						'title'       => __( 'Disable the default password reset error message', 'wp-cerber' ),
+						'label'       => __( 'Do not reveal non-existing usernames and emails in the password reset error message', 'wp-cerber' ),
 						'type'        => 'checkbox',
 						'requires_wp' => '5.5'
 					),
 					'nopasshint_msg'  => array(
-						'title'       => __( 'Custom password reset error message', 'wp-cerber' ),
-						'label'       => __( 'An optional error message to be displayed when attempting to reset password for a non-existing username or non-existing email address', 'wp-cerber' ),
+						'title'       => __( 'Custom password reset confirmation message', 'wp-cerber' ),
+						'label'       => __( 'An optional message displayed when attempting to reset the password for both existing and non-existing usernames or email addresses.', 'wp-cerber' ),
 						'type'        => 'textarea',
 						'enabler'     => array( 'nopasshint' ),
 						'requires_wp' => '5.5'
@@ -357,6 +360,11 @@ function cerber_settings_config( $args = array() ) {
 						'type'    => 'checkbox',
 						'doclink' => 'https://wpcerber.com/cerber-sw-repository/',
 					),
+					'log_crb_errors'   => array(
+						'title'   => __( 'Collect WP Cerber software errors', 'wp-cerber' ),
+						'label'   => __( 'Collect and save WP Cerber software errors to a file', 'wp-cerber' ),
+						'type'    => 'checkbox',
+					),
 				),
 			),
 			'citadel'   => array(
@@ -421,15 +429,6 @@ function cerber_settings_config( $args = array() ) {
 						'label'   => __( 'Send malicious IP addresses to the Cerber Security Cloud', 'wp-cerber' ),
 						'type'    => 'checkbox',
 						'doclink' => 'https://wpcerber.com/cerber-laboratory/'
-					),
-					'cerberproto'  => array(
-						'title'   => __( 'Cerber Security Cloud protocol', 'wp-cerber' ),
-						'type'    => 'select',
-						'set'     => array(
-							'HTTP',
-							'HTTPS'
-						),
-						'enabler' => array( 'cerberlab' ),
 					),
 					'usefile'      => array(
 						'title'      => __( 'Use file', 'wp-cerber' ),
@@ -1300,7 +1299,7 @@ function cerber_settings_config( $args = array() ) {
 						'type'      => 'textarea',
 						'list'      => true,
 						'delimiter' => "\n",
-						'label'     => __( 'Specify URL paths to exclude requests from logging. One item per line.', 'wp-cerber' ) . ' ' . __( 'To specify a REGEX pattern, enclose a whole line in two braces.', 'wp-cerber' ),
+						'label'     => __( 'Specify a request path to exclude matching requests from logging. Use one path per line. To specify a REGEX pattern, enclose a line in a pair of braces. Requests that start with an excluded path or match a REGEX pattern will not be logged.', 'wp-cerber' ),
 						'enabler'   => array( 'timode', '[1,2,3]' ),
 					),
 					'tinoua'         => array(
@@ -1705,7 +1704,7 @@ function cerber_settings_config( $args = array() ) {
 
 							$list = explode( ',', (string) CERBER_DISABLE_SPAM_FILTER );
 							$titles = array();
-							$home = cerber_get_site_url();
+							$home = cerber_get_home_url();
 
 							foreach ( $list as $pid ) {
 								if ( $t = get_the_title( $pid ) ) {
@@ -1731,13 +1730,13 @@ function cerber_settings_config( $args = array() ) {
 				'desc'   => __( 'These settings enable you to fine-tune the behavior of anti-spam algorithms and avoid false positives', 'wp-cerber' ),
 				'fields' => array(
 					'botssafe'         => array(
-						'title' => __( 'Safe mode', 'wp-cerber' ),
-						'label' => __( 'Use less restrictive policies (allow AJAX)', 'wp-cerber' ),
+						'title' => __( 'Enable safe AJAX mode', 'wp-cerber' ),
+						'label' => __( 'Use less strict spam filtering for AJAX form submissions. May increase spam risk slightly.', 'wp-cerber' ),
 						'type'  => 'checkbox',
 					),
 					'botsnoauth'       => array(
-						'title' => __( 'Logged-in users', 'wp-cerber' ),
-						'label' => __( 'Disable bot detection engine for logged-in users', 'wp-cerber' ),
+						'title' => __( 'Disable spam checks for logged-in users', 'wp-cerber' ),
+						'label' => __( 'Disable spam checks and bot detection engine for logged-in users', 'wp-cerber' ),
 						'type'  => 'checkbox',
 					),
 					'botsipwhite'      => array(
@@ -1986,7 +1985,7 @@ function cerber_settings_config( $args = array() ) {
 				$field['section_name'] = $sect['name'] ?? '';
 				$field['section_id'] = $section_id;
 				$field['screen_id'] = $section_to_screen[ $section_id ];
-				$field['tab_id'] = crb_screen2tab( $section_to_screen[ $section_id ] );
+				$field['page_tab_id'] = crb_screen2tab( $section_to_screen[ $section_id ] );
 
                 return $field;
 			}
@@ -2118,15 +2117,18 @@ function cerber_wp_settings_setup( $screen_id, $sections = array() ) {
 }
 
 /**
- * Returns WP settings ID based on the tab ID
+ * Retrieve WordPress setting group name (ID) based on
+ * - the given tab query parameter,
+ * - or a hidden form field,
+ * - or a page query parameter.
  *
- * @param string $tab
+ * @param string $tab Query parameter used in the admin URLs
  *
- * @return string
+ * @return string WordPress setting group name (ID)
  */
-function cerber_get_setting_id( $tab = null ) {
+function cerber_get_setting_id( string $tab = '' ): string {
 
-	$id = ( ! $tab ) ? cerber_get_get( 'tab', CRB_TAB_ID_FILTER ) : $tab;
+	$id = $tab ?: crb_admin_get_tab();
 
     if ( ! $id ) {
 		$id = cerber_get_wp_option_id();
@@ -2136,23 +2138,17 @@ function cerber_get_setting_id( $tab = null ) {
 		$id = crb_admin_get_page();
 	}
 
-	return crb_get_setting_screen( $id );
-}
-
-/**
- * Mapping: tab/page => WP Settings screen ID
- * Some tab ID (page ID) don't match WP setting names directly
- *
- * @param string $id Page or Tab ID which is a URL parameter
- *
- * @return string
- *
- */
-function crb_get_setting_screen( $id ) {
-
-	if ( isset( CRB_WP_SETTING_MAP[ $id ] ) ) {
-		return CRB_WP_SETTING_MAP[ $id ];
+	if ( ! $id ) {
+        return '';
 	}
+
+    // Check for exceptions
+
+	if ( $ret = CRB_WP_SETTING_MAP[ $id ] ?? false ) {
+		return $ret;
+	}
+
+	// Check for possible add-on
 
 	if ( $screen = CRB_Addons::get_setting_screen( $id ) ) {
 		return $screen;
@@ -2162,7 +2158,7 @@ function crb_get_setting_screen( $id ) {
 }
 
 /**
- * Reverse mapping: WP Setting screen ID => tab
+ * Reverse mapping: WP Setting screen ID => tab/page
  *
  * @param string $screen_id
  *
@@ -2189,18 +2185,21 @@ function crb_screen2tab( $screen_id ) {
 /**
  * Works when updating WP options
  *
- * @return bool|string
+ * @param string $option_page
+ *
+ * @return string
  */
-function cerber_get_wp_option_id( $option_page = null ) {
+function cerber_get_wp_option_id( $option_page = '' ): string {
 
 	if ( ! $option_page ) {
-		$option_page = crb_array_get( $_POST, 'option_page' );
+		$option_page = crb_array_get( $_POST, 'option_page', '' );
 	}
+
 	if ( $option_page && ( 0 === strpos( $option_page, 'cerberus-' ) ) ) {
 		return substr( $option_page, 9 ); // 8 = length of 'cerberus-'
 	}
 
-	return false;
+	return '';
 }
 
 /**
@@ -2568,6 +2567,7 @@ function cerber_time_select( $args, $settings ) {
 	$field = $args['setting_id'].'-day';
 	$selected = $settings[ $field ] ?? '';
 	$ret = cerber_select( 'cerber-' . $args['group'] . '[' . $field . ']', $php_week, $selected );
+	/* translators: 'at' is a preposition of time, used in contexts like "at 11:00" or "at midnight". */
 	$ret .= ' &nbsp; ' . _x( 'at', 'preposition of time like: at 11:00', 'wp-cerber' ) . ' &nbsp; ';
 
 	// Hours
@@ -2616,6 +2616,7 @@ function cerber_time_picker( $conf, $val ) {
 
 	$selected = $val['day'] ?? '';
 	$picker = cerber_select( 'cerber-' . $conf['group'] . '[' . $conf['setting_id'] . '][day]', $period, $selected );
+	/* translators: 'at' is a preposition of time, used in contexts like "at 11:00" or "at midnight". */
 	$picker .= ' &nbsp; ' . _x( 'at', 'preposition of time like: at 11:00', 'wp-cerber' ) . ' &nbsp; ';
 
 	// Hours
@@ -2724,7 +2725,7 @@ function crb_pre_update_main( $new, $old, $option ) {
 				$new['loginpath'] = $old['loginpath'];
 			}
 			elseif ( $new['loginpath'] != $old['loginpath'] ) {
-				$href    = cerber_get_home_url() . '/' . $new['loginpath'] . '/';
+				$href    = cerber_get_site_url() . '/' . $new['loginpath'] . '/';
 				$url     = urldecode( $href );
 				$msg     = array();
 				$msg_e   = array();

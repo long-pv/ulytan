@@ -4,7 +4,7 @@
  Integration with the jetFlow.io automation and customization plugin, https://jetflow.io
  Actions and triggers definitions.
 
- Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+ Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
  Licenced under the GNU GPL.
 

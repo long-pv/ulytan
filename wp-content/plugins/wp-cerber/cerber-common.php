@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright (C) 2015-24 CERBER TECH INC., https://wpcerber.com
+	Copyright (C) 2015-25 CERBER TECH INC., https://wpcerber.com
 
     Licenced under the GNU GPL.
 
@@ -37,7 +37,6 @@ if ( ! defined( 'WPINC' ) ) {
 const MYSQL_FETCH_OBJECT = 5;
 const MYSQL_FETCH_OBJECT_K = 6;
 const CRB_IP_NET_RANGE = '/[^a-f\d\-\.\:\*\/]+/i';
-const CRB_TAB_ID_FILTER = '[a-z\d\_\-\.\:\*\/]+';
 const CRB_SANITIZE_KEY = '/[^a-z_\-\d.:\/]/i';
 const CRB_SANITIZE_ID = '/[^\w-]/i';
 const CRB_GROOVE = 'cerber_groove';
@@ -144,7 +143,7 @@ function crb_create_nonce( $action = 'control' ) {
 
 	if ( ! isset( $cache[ $action ] ) ) {
 		crb_load_dependencies( 'wp_create_nonce', true );
-		$cache[ $action ] = wp_create_nonce( $action );
+		$cache[ $action ] = crb_sanitize_id( wp_create_nonce( $action ) );
 	}
 
 	return $cache[ $action ];
@@ -185,35 +184,26 @@ function crb_get_admin_base(){
  *
  * @return string Full URL, safe to use in any HTML context (including attributes)
  */
-function cerber_admin_link( $tab = '', $args = array(), $add_nonce = false, $encode = true ) {
+function cerber_admin_link( string $tab = '', array $args = array(), bool $add_nonce = false, bool $encode = true ): string {
 
-	if ( $tab ) {
-		$tab = preg_replace( '/[^\w\-]+/', '', $tab );
-	}
+	$tab = $tab ?: $args['tab'] ?? '';
+	unset( $args['tab'] );
 
-	if ( empty( $args['page'] ) ) {
+	$page = $args['page'] ?? '';
+	unset( $args['page'] );
+
+	if ( ! $page && $tab ) {
 
 		if ( ! function_exists( 'crb_determine_page' ) ) {
 			cerber_load_admin_code();
 		}
 
-		if ( $page = crb_determine_page( $tab ) ) {
-			$tab = ( $tab == $page ) ? '' : $tab;
-		}
-		elseif ( ! $page = CRB_Addons::get_addon_page( $tab ) ) {
-			if ( list( $prefix ) = explode( '_', $tab, 2 ) ) {
-				if ( $prefix == 'scan' ) {
-					$page = 'cerber-integrity';
-				}
-				elseif ( $prefix == 'nexus' ) {
-					$page = 'cerber-nexus';
-				}
-			}
-		}
-	}
-	else {
-		$page = $args['page'];
-		unset( $args['page'] );
+		$page = crb_determine_page( $tab );
+
+		// Fix for some cases where no information about the first tab on the page,
+		// but tab is identified by the page, meaning tab can be equal page when it's the first tab.
+
+		$tab = ( $tab == $page ) ? '' : $tab;
 	}
 
 	if ( ! $page ) {
@@ -249,42 +239,21 @@ function cerber_admin_link( $tab = '', $args = array(), $add_nonce = false, $enc
 }
 
 /**
- * Return modified link to the currently displaying page
+ * Return a modified link to the currently displaying WP Cerber admin page.
+ * Return a link to the WP Cerber dashboard if called outside WP Cerber admin pages.
  *
- * @param array $args Arguments to add to the link to the currently displayed page
- * @param bool $preserve Save GET parameters of the current request other than 'page' and 'tab'
- * @param bool $add_nonce Add Cerber's nonce
+ * @param array $args Query parameters to add to the link to the currently displayed WP Cerber admin page
+ * @param bool $preserve If true, preservers GET parameters of the current request other than 'page' and 'tab'
+ * @param bool $add_nonce If true, add a WP Cerber's nonce
  *
- * @return string
+ * @return string Full URL, escaped and safe to use in any context
  */
-function cerber_admin_link_add( $args = array(), $preserve = false, $add_nonce = true ) {
+function cerber_admin_link_add( $args = array(), $preserve = false, $add_nonce = true ): string {
 
-	$link = cerber_admin_link( crb_admin_get_tab(), array( 'page' => crb_admin_get_page() ), $add_nonce );
-
-	if ( $preserve ) {
-		$get = crb_get_query_params();
-		unset( $get['page'], $get['tab'] );
-	}
-	else {
-		$get = array();
-	}
-
-	if ( $args ) {
-		$get = array_merge( $get, $args );
-	}
-
-	if ( $get ) {
-		foreach ( $get as $arg => $value ) {
-			if ( is_array( $value ) ) {
-				foreach ( $value as $key => $val ) {
-					$link .= '&amp;' . $arg . '[' . $key . ']=' . urlencode( $val );
-				}
-			}
-			else {
-				$link .= '&amp;' . $arg . '=' . urlencode( $value );
-			}
-		}
-	}
+	$filter = $preserve ? array() : [ 'tab', 'page' ];
+	$params = crb_get_referrer_params( $filter );
+	$params = array_merge( $params, $args );
+	$link = cerber_admin_link( '', $params, $add_nonce );
 
 	return esc_url( $link );
 }
@@ -294,7 +263,7 @@ function cerber_admin_link_add( $args = array(), $preserve = false, $add_nonce =
  * Those IDs will be used to filter out activities when rendering the Activity page.
  *
  * @param array $act Activity IDs
- * @param int $status Status ID
+ * @param int|null $status Status ID
  *
  * @return string Full URL, safe to use in any HTML context (including attributes)
  */
@@ -309,17 +278,17 @@ function cerber_activity_link( array $act = array(), int $status = null ) {
 
 	if ( $act ) {
 		if ( 1 == count( $act ) ) {
-			$filter .= '&filter_activity=' . crb_absint( array_shift( $act ) );
+			$filter .= '&amp;filter_activity=' . crb_absint( array_shift( $act ) );
 		}
 		else {
 			foreach ( $act as $key => $item ) {
-				$filter .= '&filter_activity[' . crb_absint( $key ) . ']=' . crb_absint( $item );
+				$filter .= '&amp;filter_activity[' . crb_absint( $key ) . ']=' . crb_absint( $item );
 			}
 		}
 	}
 
 	if ( $status ) {
-		$filter .= '&filter_status=' . crb_absint( $status );
+		$filter .= '&amp;filter_status=' . crb_absint( $status );
 	}
 
 	return $link . $filter;
@@ -336,24 +305,33 @@ function cerber_traffic_link( $set = array(), $format = 1 ) {
 	return $ret;
 }
 
-function cerber_get_login_url() {
-	$ret = '';
+/**
+ * Returns the Custom login URL
+ *
+ * @return string Full URL if the custom login page is configured in the WP Cerber settings, empty string otherwise
+ */
+function cerber_get_login_url(): string {
 
 	if ( $path = crb_get_settings( 'loginpath' ) ) {
-		$ret = cerber_get_home_url() . '/' . $path . '/';
+		return cerber_get_site_url() . '/' . $path . '/';
 	}
 
-	return $ret;
+	return '';
 }
 
 /**
- * Extracts the site domain (or IP address) and the sub folder (path) if any
+ * Extracts the website domain (or IP address) and the WordPress installation folder (path) of the website.
+ * Doesn't return the folder of the WordPress files if it's installed in a separate folder.
  *
- * @return array
+ * @return string[] An array containing two elements:
+ *                  [0] string - The website domain or IP address.
+ *                  [1] string - The optional folder path of the folder where the WordPress files are installed. No trailing slash.
+ *
+ * @see get_site_url()
  *
  * @since 8.6.6.1
  */
-function crb_parse_site_url() {
+function crb_parse_site_url(): array {
 	static $result;
 
 	if ( isset( $result ) ) {
@@ -361,33 +339,77 @@ function crb_parse_site_url() {
 	}
 
 	$site_url = cerber_get_site_url();
-
-	$p1 = strpos( $site_url, '//' );
-	$offset = ( $p1 !== false ) ? $p1 + 2 : 0;
-	$sub_folder_pos = ( strlen( $site_url ) > $offset ) ? strpos( $site_url, '/', $offset ) : false;
-
-	if ( $sub_folder_pos !== false ) {
-		$site_root = substr( $site_url, 0, $sub_folder_pos );
-		$sub_folder = substr( $site_url, $sub_folder_pos );
-	}
-	else {
-		$site_root = $site_url;
-		$sub_folder = '';
-	}
-
-	$result = array( $site_root, $sub_folder );
+	$result = crb_parse_url( $site_url );
 
 	return $result;
 }
 
 /**
- * Always includes the path to the current WP installation
+ * Extracts the website domain (or IP address) and the public path (folder) of the website.
+ * Doesn't return the folder of the WordPress files if they are installed in a separate folder.
  *
- * @return string
+ * @return string[] An array containing two elements:
+ *                  [0] string - The website domain or IP address.
+ *                  [1] string - The optional folder path of the website. No trailing slash.
+ *
+ * @see get_home_url()
+ *
+ * @since 8.6.6.1
+ */
+function crb_parse_home_url(): array {
+	static $result;
+
+	if ( isset( $result ) ) {
+		return $result;
+	}
+
+	$home_url = cerber_get_home_url();
+	$result = crb_parse_url( $home_url );
+
+	return $result;
+}
+
+/**
+ * Extracts the hostname (domain or IP address) and the URL path (folder) from the given full URL.
+ *
+ * @param string $url Full URL, e.g. https://domain.com/wp
+ *
+ * @return string[] An array containing two elements:
+ *                  [0] string - The website domain or IP address.
+ *                  [1] string - The optional folder path if it presents in the URL. No trailing slash.
+ *
+ * @since 8.6.6.1
+ */
+function crb_parse_url( string $url ): array {
+
+	$p1 = strpos( $url, '//' );
+	$offset = ( $p1 !== false ) ? $p1 + 2 : 0;
+	$sub_folder_pos = ( strlen( $url ) > $offset ) ? strpos( $url, '/', $offset ) : false;
+
+	if ( $sub_folder_pos !== false ) {
+		$host = substr( $url, 0, $sub_folder_pos );
+		$sub_folder = rtrim( substr( $url, $sub_folder_pos ), '/' );
+	}
+	else {
+		$host = $url;
+		$sub_folder = '';
+	}
+
+	return array( $host, $sub_folder );
+}
+
+/**
+ * Always includes the path to the WordPress installation folder, e.g. https://domain.com/wp
+ *
+ * It's a base URL for all WordPress admin locations (URLs), including the default WordPress login, password reset and registration pages.
+ * For public locations and REST API URLs use cerber_get_home_url()
+ *
+ * @return string URL of the WordPress installation without trailing slash.
+ *
  * @since 7.9.4
  *
  */
-function cerber_get_site_url() {
+function cerber_get_site_url(): string {
 	static $url;
 
 	if ( isset( $url ) ) {
@@ -400,16 +422,19 @@ function cerber_get_site_url() {
 }
 
 /**
- * Return URL of the home page
+ * Returns the URL of the website home page.
  *
- * Might NOT include the path to the current WP installation in some cases
- * See: https://wordpress.org/support/article/giving-wordpress-its-own-directory/
+ * It's a base URL for all public web pages and REST API URLs.
+ * For admin locations and login URLs use cerber_get_site_url()
  *
- * @return string URL of the home page without trailing slash
+ * If WordPress files are installed in a separate folder, this URL does not include the path to that folder: https://wordpress.org/support/article/giving-wordpress-its-own-directory/
+ *
+ * @return string URL of the website home page without trailing slash
+ *
  * @since 7.9.4
  *
  */
-function cerber_get_home_url() {
+function cerber_get_home_url(): string {
 	static $url;
 
 	if ( ! isset( $url ) ) {
@@ -420,16 +445,18 @@ function cerber_get_home_url() {
 }
 
 /**
- * Makes a site label to include it in the file name of files generated by WP Cerber
+ * Generates a site label for creating file names of files generated by WP Cerber.
  *
- * @return string
+ * The label is based on the site's home URL, sanitized to replace non-alphanumeric characters with hyphens.
+ *
+ * @return string A sanitized string representing the site label.
  *
  * @since 9.5.1
  */
-function crb_site_label() {
-	$home = cerber_get_site_url();
+function crb_site_label(): string {
+	$home = cerber_get_home_url();
 
-	return trim( preg_replace( '/[^\w\d]+/', '-', substr( $home, strpos( $home, '//' ) + 2 ) ), '-' );
+	return trim( preg_replace( '/\W+/', '-', substr( $home, strpos( $home, '//' ) + 2 ) ), '-' );
 }
 
 /**
@@ -1113,14 +1140,18 @@ function crb_array_get_deep( &$arr, $keys ) {
 }
 
 /**
- * Compare two arrays by using keys: check if two arrays have a different set of keys
+ * Compare two arrays by using the array keys. Compares the keys of two arrays and determines if they are different.
  *
- * @param $arr1 array
- * @param $arr2 array
+ * @param array $arr1 Array to compare
+ * @param array $arr2 Array to compare
  *
- * @return bool true if arrays have different set of keys
+ * @return bool True if arrays have two different set of keys, false if arrays have equal set of keys. If either argument is not an array returns true.
  */
-function crb_array_diff_keys( &$arr1, &$arr2 ) {
+function crb_array_diff_keys( &$arr1, &$arr2 ): bool {
+	if ( ! is_array( $arr1 )
+	     || ! is_array( $arr2 ) ) {
+		return true;
+	}
 	if ( count( $arr1 ) != count( $arr2 ) ) {
 		return true;
 	}
@@ -1383,17 +1414,17 @@ function crb_escape_url( $url = '' ) {
 	$url = trim( $url );
 
 	if ( ! $clean_url = filter_var( $url, FILTER_SANITIZE_URL ) ) {
-		return '';
+		return '#INVALID URL#';
 	}
 
 	if ( ! $clean_url = filter_var( $clean_url, FILTER_VALIDATE_URL ) ) {
-		return '';
+		return '#INVALID URL#';
 	}
 
 	// Protect from using data:, javascript: , file and so on
 
 	if ( ! preg_match( '/^(https?|mailto|ftps?):/i', $clean_url ) ) {
-		return '';
+		return '#INVALID URL#';
 	}
 
 	return str_replace( array( '"', "'", '<', '>', '`' ), '', $clean_url );
@@ -1506,7 +1537,7 @@ function cerber_is_rest_url() {
 
 	$ret = false;
 
-	if ( crb_get_rest_path() ) {
+	if ( CRB_Request::get_rest_api_path() ) {
 		$ret = true;
 	}
 
@@ -1721,7 +1752,7 @@ function crb_get_request_fields() {
  */
 function cerber_is_rest_permitted() {
 
-	$rest_path = crb_get_rest_path();
+	$rest_path = CRB_Request::get_rest_api_path();
 
 	// Exception: application passwords route @since WP Cerber 8.8 & WP 5.6 -> permissions are checked in the WP core
 	if ( preg_match( '#^wp/v\d+/users/\d+/application-passwords#', $rest_path ) ) {
@@ -1739,11 +1770,14 @@ function cerber_is_rest_permitted() {
 		     && $path[2] == 'users' ) {
 
 			if ( is_super_admin() ) {
-				return true; // @since 8.3.4
+
+				CRB_Globals::$req_status = 509;
+				return true;
 			}
 
 			if ( crb_wp_user_has_role( $opt['norestuser_roles'] ) ) {
 
+				CRB_Globals::$req_status = 509;
 				CRB_Globals::set_ctrl_setting( 'norestuser_roles' );
 
 				return true;
@@ -1791,54 +1825,13 @@ function cerber_is_rest_permitted() {
 
 	if ( crb_wp_user_has_role( $opt['restroles'] ) ) {
 
+		CRB_Globals::$req_status = 509;
 		CRB_Globals::set_ctrl_setting( 'restroles' );
 
 		return true;
 	}
 
 	return false;
-}
-
-/**
- * Returns requested REST route without leading and trailing slashes
- *
- * @return string Empty string for any non-REST API request
- */
-function crb_get_rest_path() {
-	global $wp_rewrite;
-	static $ret;
-
-	if ( isset( $ret ) ) {
-		return $ret;
-	}
-
-	$ret = '';
-
-	if ( isset( $_REQUEST['rest_route'] ) ) {
-		$ret = trim( $_REQUEST['rest_route'], '/' );
-	}
-	elseif ( cerber_is_permalink_enabled()
-	         && $path = CRB_Request::get_relative_path() ) {
-
-		$path = trim( $path, '/' );
-		$prefix = rest_get_url_prefix() . '/';
-
-		// See get_rest_url() ----------------
-
-		if ( ( $wp_rewrite instanceof WP_Rewrite )
-		     && $wp_rewrite->using_index_permalinks() ) {
-
-			$prefix = $wp_rewrite->index . '/' . $prefix;
-		}
-
-		// -----------------------------------
-
-		if ( 0 === strpos( $path, $prefix ) ) {
-			$ret = substr( $path, strlen( $prefix ) );
-		}
-	}
-
-	return $ret;
 }
 
 /**
@@ -1953,7 +1946,7 @@ function crb_user_blocked_by( $meta ) {
 		$user = get_userdata( $meta['blocked_by'] );
 		$who = '<a href="' . get_edit_user_link( $user->ID ) . '" target="_blank">' . $user->display_name . '</a>';
 	}
-
+	/* translators: Describes by whom and when a website user was blocked. Placeholder %s will be replaced with the name of the person (e.g., "John") and the time (e.g., "11:00"). */
 	return sprintf( _x( 'blocked by %s at %s', 'e.g. blocked by John at 11:00', 'wp-cerber' ), $who, cerber_date( $meta['blocked_time'] ) );
 }
 
@@ -2324,6 +2317,8 @@ function cerber_get_labels( $type = 'activity', $id = 0 ) {
 		$sts[ CRB_STS_51 ] = __( 'Executable file extension detected', 'wp-cerber' );
 		$sts[ CRB_STS_52 ] = __( 'Filename is prohibited', 'wp-cerber' );
 
+		$sts[ 55 ] = __( 'Pre-authentication block', 'wp-cerber' );
+
 		// @since 8.6.4
 		$sts[500] = __( 'IP whitelisted', 'wp-cerber' );
 		$sts[501] = __( 'Location exception applied', 'wp-cerber' );
@@ -2332,6 +2327,8 @@ function cerber_get_labels( $type = 'activity', $id = 0 ) {
 
 		$sts[504] = __( 'Header exception applied', 'wp-cerber' );
 		$sts[505] = __( 'Header exception applied', 'wp-cerber' );
+
+		$sts[509] = __( 'Role-based exception applied', 'wp-cerber' );
 
 		// IP is in the whitelist, BUT appropriate "Use Whitelist" setting is NOT enabled
 		$sts[510] = __( 'IP whitelisted', 'wp-cerber' ); // TI
@@ -2723,30 +2720,42 @@ function cerber_is_admin_page( $params = array(), $screen_base = '' ) {
 }
 
 /**
- * Returns human-readable "ago" time
+ * Calculates the difference between curren time and returns human-readable "ago" time
  *
- * @param $time integer Unix timestamp - time of an event
+ * @param int|string|float $time Unix timestamp - time of an event
  *
  * @return string
  */
-function cerber_ago_time( int $time ) {
+function cerber_ago_time( $time ): string {
 
-	$diff = abs( time() - $time );
+	if ( ! is_numeric( $time ) ) {
+		return __( 'Invalid Value', 'wp-cerber' );
+	}
+
+	$time = (int) $time;
+	$current_time = time();
+
+	$diff = abs( $current_time - $time );
+
 	if ( $diff < MINUTE_IN_SECONDS ) {
 		$secs = ( $diff <= 1 ) ? 1 : $diff;
-		/* translators: Time difference between two dates, in seconds. %s: number of seconds. */
-		$dt = sprintf( _n( '%s sec', '%s secs', $secs, 'wp-cerber' ), $secs );
-
-		__( '%s secs', 'wp-cerber' ); // registration for _n()
+		/* translators: Indicates time difference in seconds. Placeholder %d will be replaced by the number of seconds, e.g., "1 sec" or "45 secs". */
+		$dt = sprintf( _n( '%d sec', '%d secs', $secs, 'wp-cerber' ), $secs );
 	}
 	else {
 		$dt = human_time_diff( $time );
 	}
 
-	return ( $time <= time() ) ? sprintf( __( '%s ago' ), $dt )	: sprintf( _x( 'in %s', 'Preposition of a period of time, for instance: in 6 hours', 'wp-cerber' ), $dt );
+	if ( $time <= $current_time ) {
+		/* translators: Ago refers to a period in the past, starting backwards from now. Placeholder %s will be replaced by a time period in the past, e.g., "2 days ago", "1 hour ago". */
+		return sprintf( __( '%s ago', 'wp-cerber' ), $dt );
+	}
+
+	/* translators: It is used as a preposition to describe future time, e.g., "in 6 hours" or "in 2 days". */
+	return sprintf( _x( 'in %s', 'Preposition to describe future time', 'wp-cerber' ), $dt );
 }
 
-function cerber_auto_date( $time, $purify = true ) {
+function cerber_auto_date( $time, $purify = true ): string {
 	if ( ! $time ) {
 		return __( 'Never', 'wp-cerber' );
 	}
@@ -4134,25 +4143,30 @@ function cerber_set_boot_mode( $mode = null ) {
 			if ( sha1_file( $source, true ) == sha1_file( $target, true ) ) {
 				return 1;
 			}
+
+			if ( ! wp_is_writable( $target ) ) {
+				return new WP_Error( 'cerber-boot', __( 'Destination file is not writable', 'wp-cerber' ) . ' ' . $target );
+			}
 		}
 
 		// Copying the file
 
 		if ( ! is_dir( WPMU_PLUGIN_DIR ) ) {
 			if ( ! mkdir( WPMU_PLUGIN_DIR, 0755, true ) ) {
-				return new WP_Error( 'cerber-boot', __( 'Unable to create the directory', 'wp-cerber' ) . ' ' . WPMU_PLUGIN_DIR );
+				return new WP_Error( 'cerber-boot', __( 'Unable to create required directory', 'wp-cerber' ) . ' ' . WPMU_PLUGIN_DIR );
 			}
 		}
 
-		if ( ! copy( $source, $target ) ) {
-			if ( ! wp_is_writable( WPMU_PLUGIN_DIR ) ) {
-				return new WP_Error( 'cerber-boot', __( 'Destination folder access denied', 'wp-cerber' ) . ' ' . WPMU_PLUGIN_DIR );
-			}
-			elseif ( ! file_exists( $source ) ) {
-				return new WP_Error( 'cerber-boot', __( 'File not found', 'wp-cerber' ) . ' ' . $source );
-			}
+		if ( ! wp_is_writable( WPMU_PLUGIN_DIR ) ) {
+			return new WP_Error( 'cerber-boot', __( 'Destination directory is not writable', 'wp-cerber' ) . ' ' . WPMU_PLUGIN_DIR );
+		}
 
-			return new WP_Error( 'cerber-boot', __( 'Unable to copy the file', 'wp-cerber' ) . ' ' . $source . ' to the folder ' . WPMU_PLUGIN_DIR );
+		if ( ! file_exists( $source ) ) {
+			return new WP_Error( 'cerber-boot', __( 'Source file not found', 'wp-cerber' ) . ' ' . $source );
+		}
+
+		if ( ! copy( $source, $target ) ) {
+			return new WP_Error( 'cerber-boot', __( 'Unable to copy file', 'wp-cerber' ) . ' ' . $target );
 		}
 		else {
 			return 2;
@@ -4475,7 +4489,7 @@ function cerber_error_log( $msg, $source = '' ) {
  *
  * @return bool|int
  */
-function cerber_diag_log( $msg, $source = '', $error = false ) {
+function cerber_diag_log( $msg, string $source = '', $error = false ) {
 
 	if ( $source == 'CLOUD'
 	     && ( ! defined( 'CERBER_CLOUD_DEBUG' )
@@ -4514,22 +4528,42 @@ function cerber_diag_log( $msg, $source = '', $error = false ) {
 }
 
 /**
- * The full file name of WP Cerber's diag log or false on failure.
+ * Returns the full file name of WP Cerber's diagnostic log or empty string on failure.
  *
- * @return false|string
+ * @return string
  */
-function cerber_get_diag_log() {
+function cerber_get_diag_log(): string {
 
-	if ( defined( 'CERBER_DIAG_DIR' ) && is_dir( CERBER_DIAG_DIR ) ) {
-		$dir = CERBER_DIAG_DIR;
-	}
-	else {
-		if ( ! $dir = cerber_get_the_folder() ) {
-			return false;
-		}
+	if ( ! $dir = crb_get_diag_dir() ) {
+		return '';
 	}
 
-	return rtrim( $dir, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . 'cerber-debug.log';
+	return $dir . 'cerber-debug.log';
+}
+
+/**
+ * Returns a directory for storing optional WP Cerber diagnostic files.
+ * The directory must be protected from public access over the Internet.
+ *
+ * If a constant CERBER_DIAG_DIR is defined and points to an existing directory,
+ * it will be returned. Otherwise, a directory generated by cerber_get_the_folder()
+ * will be used. If no valid directory can be determined, an empty string is returned.
+ *
+ * @return string Absolute path to the diagnostic directory with trailing slash or an empty string.
+ *
+ * @since 9.6.5.10
+ */
+function crb_get_diag_dir(): string {
+	if ( defined( 'CERBER_DIAG_DIR' )
+	     && is_dir( CERBER_DIAG_DIR ) ) {
+
+		return rtrim( CERBER_DIAG_DIR, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
+	}
+	elseif ( $dir = cerber_get_the_folder() ) {
+		return $dir;
+	}
+
+	return '';
 }
 
 function cerber_truncate_log( $bytes = 10000000 ) {
@@ -4666,7 +4700,7 @@ function crb_create_folder( $target_dir, $permissions = 0755 ) {
 	$err = '';
 
 	if ( ! mkdir( $target_dir, $permissions, true ) ) {
-		$err = 'Unable to create the folder <b>' . $target_dir . '</b>. Check permissions of parent folders.';
+		$err = 'Unable to create directory: <b>' . $target_dir . '</b>. Check permissions of parent directory.';
 	}
 	elseif ( ! chmod( $target_dir, $permissions ) ) {
 		$err = 'Unable to set directory permissions for ' . $target_dir;
@@ -5438,14 +5472,18 @@ function crb_get_table_hash( $table, $hash_fields, $order_by ) {
 add_filter( 'update_plugins_downloads.wpcerber.com', 'cerber_check_for_update', 10, 4 );
 
 /**
- * Check for possible update: retrieve data about last version of WP Cerber
+ * Checks for a new version of WP Cerber and possible updates to translation files.
+ * Retrieve data about the last version of WP Cerber and translation files using the URL from the official UpdateURI plugin header.
  *
- * @param $update
- * @param $plugin_data
- * @param $plugin_file
- * @param $locales
+ * See $update = apply_filters( "update_plugins_{$hostname}", false, $plugin_data, $plugin_file, $locales );
  *
- * @return mixed|null
+ *
+ * @param array|false $update Plugin update information.
+ * @param array $plugin_data Plugin information.
+ * @param string $plugin_file Plugin filename.
+ * @param string[] $locales Installed locales to look up translations for.
+ *
+ * @return array|false
  *
  * @since 9.1.2
  */
@@ -5458,7 +5496,15 @@ function cerber_check_for_update( $update, $plugin_data, $plugin_file, $locales 
 
 	$response = wp_remote_get( $uri );
 
+	$err = '';
+
+	if ( crb_is_wp_error( $response ) ) {
+		$err = $response->get_error_message();
+	}
+
 	if ( ! $body = crb_array_get( $response, 'body' ) ) {
+		cerber_update_set( 'last_update_check', array( 'error' => $err, 'no_body' => 1, 'uri' => $uri ) );
+
 		return false;
 	}
 
@@ -5471,17 +5517,77 @@ function cerber_check_for_update( $update, $plugin_data, $plugin_file, $locales 
 	}
 
 	$update['tested'] = cerber_get_wp_version(); // The last version of WP Cerber is always tested with the last version of WP
+	$update['slug'] = 'wp-cerber';
 
-	// This mess is for WP
+	// External data, ensure it has correct format
 
-	global $pagenow;
-
-	if ( 'update-core.php' === $pagenow ) {
-		$update['slug'] = 'wp-cerber';
+	if ( ! is_array( $locales ) ) {
+		$locales = array();
 	}
 
-	return $update;
+	$available = $update['trans_bucket'] ?? array();
 
+	if ( ! is_array( $available ) ) {
+		$available = array();
+	}
+
+	$update['translations'] =  crb_process_locales( $locales, $available );
+	unset( $update['trans_bucket'] ); // Proprietary, not used by WP
+
+	cerber_update_set( 'last_update_check', array( 'success' => time(), 'uri' => $uri ) );
+
+	return $update;
+}
+
+/**
+ * Prepares the list of locales available to install/update on this website.
+ * Determines the necessity of updating existing files using hash data.
+ *
+ * @param array $wp_locales Website locales (languages) that are enabled in the global WordPress settings
+ * @param array $available Locales available to download for WP Cerber
+ *
+ * @return array
+ *
+ * @since 9.6.5.9
+ */
+function crb_process_locales( array $wp_locales, array $available ): array {
+	if ( ! $wp_locales || ! $available ) {
+		return array();
+	}
+
+	$candidates = array_intersect_key( $wp_locales, array_keys( $available ) );
+
+	if ( ! $candidates ) {
+		return array();
+	}
+
+	$translations = array();
+
+	foreach ( $candidates as $locale ) {
+
+		$mo_file = WP_LANG_DIR . '/plugins/wp-cerber-' . $locale . '.mo';
+
+		// If translation file exists, check for possible update available
+
+		$sha1 = $available[ $locale ];
+
+		if ( $sha1
+		     && file_exists( $mo_file )
+		     && $sha1 == sha1_file( $mo_file ) ) {
+
+			continue;
+		}
+
+		$translations[] = array(
+			'language'   => $locale,
+			'package'    => 'https://downloads.wpcerber.com/translations/wp-cerber/' . $locale . '.zip',
+			'autoupdate' => 1,
+			'version'    => CERBER_VER,
+			//'updated'    => date( 'Y-m-d H:i:s', $update['release_date'] ?? 0 ),
+		);
+	}
+
+	return $translations;
 }
 
 add_filter( 'auto_update_plugin', function ( $update, $item ) {
@@ -5651,6 +5757,32 @@ function crb_load_dependencies( $func, $load_cons = false ) {
 	return $ret;
 }
 
+add_filter( 'lang_dir_for_domain', 'crb_loc_exception_handler', 10, 3 );
+
+/**
+ * An exception handler to prevent the "doing it wrong" error caused by "too early translation requests" for wp-cerber text domain phrases.
+ *
+ * @param string $path
+ * @param string $domain
+ * @param string $locale
+ *
+ * @return string
+ *
+ * @see _load_textdomain_just_in_time()
+ *
+ * @since 9.6.5.9
+ */
+function crb_loc_exception_handler( $path, $domain, $locale ) {
+
+	if ( $domain == 'wp-cerber'
+	     && ( ! doing_action( 'after_setup_theme' ) && ! did_action( 'after_setup_theme' ) ) ) {
+
+		$path = ''; // Prevent processing translation to early
+	}
+
+	return $path;
+}
+
 /**
  * A replacement for global PHP variables. It doesn't make them good (less ugly), but it helps to trace their usage easily (within IDE).
  *
@@ -5661,9 +5793,10 @@ class CRB_Globals {
 	static $session_status;
 	static $act_status;
 	static $do_not_log = array();
-	static $reset_pwd_msg;
+	static $reset_pwd_msg = '';
 	static $reset_pwd_denied = false;
 	static $retrieve_password = false; // User is trying to retrieve password
+	static $login_form_errors = array();
 	static $user_id;
 	static $req_status = 0;
 	private static $assets_url = '';
@@ -5675,6 +5808,7 @@ class CRB_Globals {
 	static $bot_status = 0;
 	static $htaccess_failure = array();
 	static $php_errors = array();
+	static $prev_handler = null;
 	private static $by_settings = array();
 	static $admin_footer_html = '';
 
