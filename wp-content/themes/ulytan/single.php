@@ -801,6 +801,19 @@ if (in_array($post_type, $allowed_post_types)) {
 														echo '</td>';
 														echo '</tr>';
 													}
+
+
+													$slug = convert_to_slug('Mục đích khác'); // Chuyển đổi name thành slug
+
+													echo '<tr>';
+													echo '<td class="td_checkbox">';
+													echo '<input type="checkbox" name="services[]" class="contact_checkox" value="' . esc_attr($slug) . '">';
+													echo '</td>';
+
+													echo '<td>';
+													echo '<strong>Mục đích khác</strong>';
+													echo '</td>';
+													echo '</tr>';
 													?>
 												</tbody>
 											</table>
@@ -1036,7 +1049,7 @@ get_footer();
 			}
 		});
 
-		$('input[name="services[]"]').on('change', function() {
+		$('#page_contact_form input[name="services[]"]').on('change', function() {
 			var $tdGroup = $(this).closest('tr').find('.td_group');
 			$tdGroup.find('input').val('');
 			if ($(this).is(':checked')) {

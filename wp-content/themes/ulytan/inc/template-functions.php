@@ -3109,35 +3109,68 @@ function contact_info_export_data_csv()
 	}
 	// không gặp trường hợp nào 
 	else {
-		$column_title = [
-			'STT',
-			'Họ tên',
-			'Phone',
-			'Email',
-			'1. Cấp, đổi, gia hạn hộ chiếu',
-			'2. Cấp visa đa quốc gia',
-			'3. Bán vé máy bay',
-			'4. Dịch thuật công chứng',
-			'5. Hợp pháp hóa lãnh sự',
-			'6. Chứng thực lãnh sự',
-			'7. Lý lịch tư pháp',
-			'8. Đổi bằng lái xe quốc tế',
-			'9. Xin cấp, gia hạn thẻ tạm trú',
-			'10. Cấp, gia hạn giấy phép lao động',
-			'11. Xuất khẩu lao động',
-			'12. Tư vấn du học quốc tế',
-			'13. Đào tạo ngoại ngữ',
-			'14. Du lịch quốc tế',
-			'15. Xin cấp E-Visa',
-			'16. Bảo hiểm du lịch quốc tế',
-			'17. Đầu tư, định cư',
-			'18. Thẻ APEC',
-			'19. Chứng minh tài chính',
-			'20. Thủ tục hải quan',
-			'21. Giấy khám sức khoẻ',
-			'Trang đã gửi',
-			'Thời gian',
-		];
+		if ($page_id == 'trang_tai_lieu') {
+			$column_title = [
+				'STT',
+				'Họ tên',
+				'Phone',
+				'Email',
+				'1. Dịch thuật công chứng',
+				'2. Hợp pháp hóa lãnh sự',
+				'3. Chứng thực lãnh sự',
+				'4. Cấp visa đa quốc gia',
+				'5. Cấp, đổi, gia hạn hộ chiếu',
+				'6. Lý lịch tư pháp',
+				'7. Đổi bằng lái xe quốc tế',
+				'8. Xin cấp, gia hạn thẻ tạm trú',
+				'9. Cấp, gia hạn giấy phép lao động',
+				'10. Xuất khẩu lao động',
+				'11. Tư vấn du học quốc tế',
+				'12. Đào tạo ngoại ngữ',
+				'13. Du lịch quốc tế',
+				'14. Xin cấp E-Visa',
+				'15. Bảo hiểm du lịch quốc tế',
+				'16. Đầu tư, định cư',
+				'17. Thẻ APEC',
+				'18. Chứng minh tài chính',
+				'19. Thủ tục hải quan',
+				'20. Bán vé máy bay',
+				'21. Giấy khám sức khoẻ',
+				'Mục đích khác',
+				'Trang đã gửi',
+				'Thời gian',
+			];
+		} else {
+			$column_title = [
+				'STT',
+				'Họ tên',
+				'Phone',
+				'Email',
+				'1. Dịch thuật công chứng',
+				'2. Hợp pháp hóa lãnh sự',
+				'3. Chứng thực lãnh sự',
+				'4. Cấp visa đa quốc gia',
+				'5. Cấp, đổi, gia hạn hộ chiếu',
+				'6. Lý lịch tư pháp',
+				'7. Đổi bằng lái xe quốc tế',
+				'8. Xin cấp, gia hạn thẻ tạm trú',
+				'9. Cấp, gia hạn giấy phép lao động',
+				'10. Xuất khẩu lao động',
+				'11. Tư vấn du học quốc tế',
+				'12. Đào tạo ngoại ngữ',
+				'13. Du lịch quốc tế',
+				'14. Xin cấp E-Visa',
+				'15. Bảo hiểm du lịch quốc tế',
+				'16. Đầu tư, định cư',
+				'17. Thẻ APEC',
+				'18. Chứng minh tài chính',
+				'19. Thủ tục hải quan',
+				'20. Bán vé máy bay',
+				'21. Giấy khám sức khoẻ',
+				'Trang đã gửi',
+				'Thời gian',
+			];
+		}
 
 		fputcsv(
 			$output_handle,
@@ -3156,43 +3189,84 @@ function contact_info_export_data_csv()
 				$services = $post_data['services'] ?? [];
 
 				// Ghi dữ liệu
-				fputcsv(
-					$output_handle,
-					[
-						// STT và thông tin người dùng
-						$index,
-						$post_data['full_name'] ?? '',
-						"'" . $post_data['phone'] ?? '',              // Số điện thoại
-						$post_data['email'] ?? '',              // Email
+				if ($page_id == 'trang_tai_lieu') {
+					fputcsv(
+						$output_handle,
+						[
+							// STT và thông tin người dùng
+							$index,
+							$post_data['full_name'] ?? '',
+							"'" . $post_data['phone'] ?? '',              // Số điện thoại
+							$post_data['email'] ?? '',              // Email
 
-						// Các dịch vụ từ 1 đến 21
-						in_array(convert_to_slug('Cấp, đổi, gia hạn hộ chiếu'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Cấp visa đa quốc gia')] : '',
-						in_array(convert_to_slug('Bán vé máy bay'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Dịch thuật công chứng'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Hợp pháp hóa lãnh sự'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Chứng thực lãnh sự'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Lý lịch tư pháp'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Đổi bằng lái xe quốc tế'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Xin cấp, gia hạn thẻ tạm trú'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Cấp, gia hạn giấy phép lao động'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Xuất khẩu lao động')] : '',
-						in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Tư vấn du học quốc tế')] : '',
-						in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Đào tạo ngoại ngữ')] : '',
-						in_array(convert_to_slug('Du lịch quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Du lịch quốc tếa')] : '',
-						in_array(convert_to_slug('Xin cấp E-Visa'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Bảo hiểm du lịch quốc tế'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Đầu tư, định cư'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Thẻ APEC'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Chứng minh tài chính'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Thủ tục hải quan'), $services) ? 'x' : '',
-						in_array(convert_to_slug('Giấy khám sức khoẻ'), $services) ? 'x' : '',
+							// Các dịch vụ từ 1 đến 21
+							in_array(convert_to_slug('Dịch thuật công chứng'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Hợp pháp hóa lãnh sự'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Chứng thực lãnh sự'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Cấp visa đa quốc gia')] : '',
+							in_array(convert_to_slug('Cấp, đổi, gia hạn hộ chiếu'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Lý lịch tư pháp'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Đổi bằng lái xe quốc tế'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Xin cấp, gia hạn thẻ tạm trú'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Cấp, gia hạn giấy phép lao động'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Xuất khẩu lao động')] : '',
+							in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Tư vấn du học quốc tế')] : '',
+							in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Đào tạo ngoại ngữ')] : '',
+							in_array(convert_to_slug('Du lịch quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Du lịch quốc tếa')] : '',
+							in_array(convert_to_slug('Xin cấp E-Visa'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Bảo hiểm du lịch quốc tế'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Đầu tư, định cư'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Thẻ APEC'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Chứng minh tài chính'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Thủ tục hải quan'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Bán vé máy bay'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Giấy khám sức khoẻ'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Mục đích khác'), $services) ? 'x' : '',
 
-						// Trang đã gửi và thời gian
-						$post_data['trang_da_gui'],       // Trang đã gửi
-						"'" . get_the_date('d/m/Y H:i'),          // Thời gian
-					]
-				);
+							// Trang đã gửi và thời gian
+							$post_data['trang_da_gui'],       // Trang đã gửi
+							"'" . get_the_date('d/m/Y H:i'),          // Thời gian
+						]
+					);
+				} else {
+					fputcsv(
+						$output_handle,
+						[
+							// STT và thông tin người dùng
+							$index,
+							$post_data['full_name'] ?? '',
+							"'" . $post_data['phone'] ?? '',              // Số điện thoại
+							$post_data['email'] ?? '',              // Email
+
+							// Các dịch vụ từ 1 đến 21
+							in_array(convert_to_slug('Dịch thuật công chứng'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Hợp pháp hóa lãnh sự'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Chứng thực lãnh sự'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Cấp visa đa quốc gia'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Cấp visa đa quốc gia')] : '',
+							in_array(convert_to_slug('Cấp, đổi, gia hạn hộ chiếu'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Lý lịch tư pháp'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Đổi bằng lái xe quốc tế'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Xin cấp, gia hạn thẻ tạm trú'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Cấp, gia hạn giấy phép lao động'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Xuất khẩu lao động'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Xuất khẩu lao động')] : '',
+							in_array(convert_to_slug('Tư vấn du học quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Tư vấn du học quốc tế')] : '',
+							in_array(convert_to_slug('Đào tạo ngoại ngữ'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Đào tạo ngoại ngữ')] : '',
+							in_array(convert_to_slug('Du lịch quốc tế'), $services) ? $post_data['quoc_gia_' . convert_to_slug('Du lịch quốc tếa')] : '',
+							in_array(convert_to_slug('Xin cấp E-Visa'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Bảo hiểm du lịch quốc tế'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Đầu tư, định cư'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Thẻ APEC'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Chứng minh tài chính'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Thủ tục hải quan'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Bán vé máy bay'), $services) ? 'x' : '',
+							in_array(convert_to_slug('Giấy khám sức khoẻ'), $services) ? 'x' : '',
+
+							// Trang đã gửi và thời gian
+							$post_data['trang_da_gui'],       // Trang đã gửi
+							"'" . get_the_date('d/m/Y H:i'),          // Thời gian
+						]
+					);
+				}
 
 				$index++;
 			}
