@@ -628,7 +628,7 @@ function save_contact_info()
 
 		$new_post = array(
 			'post_type'   => 'contact_info',
-			'post_title'  => sanitize_text_field($data['email'] . ' - ' . $data['ten_trang']),
+			'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['ten_trang']),
 			'post_status' => 'publish',
 		);
 		$post_id = wp_insert_post($new_post);
@@ -811,7 +811,7 @@ function save_page_form()
 
 		$new_post = array(
 			'post_type'   => 'form_contribute',
-			'post_title'  => sanitize_text_field($data['email'] ?? 'No Email'),
+			'post_title'  => sanitize_text_field($data['so_dien_thoai'] ?? 'No Phone'),
 			'post_status' => 'publish',
 		);
 		$post_id = wp_insert_post($new_post);
@@ -3432,10 +3432,10 @@ function form_contribute_export_data_csv()
 		'Họ và tên',
 		'Số điện thoại',
 		'Email',
-		'Mã đơn hàng',
-		'Nhân viên tư vấn',
-		'Kế toán',
-		'Nhân viên xử lý đơn hàng',
+		// 'Mã đơn hàng',
+		'Đánh giá',
+		// 'Kế toán',
+		// 'Nhân viên xử lý đơn hàng',
 		'Lý do',
 		'Thời gian',
 	];
@@ -3463,10 +3463,10 @@ function form_contribute_export_data_csv()
 					get_field('ho_va_ten') ?? '',
 					"'" . get_field('so_dien_thoai') ?? '',
 					get_field('email') ?? '',
-					"'" . get_field('ma_don_hang') ?? '',
+					// "'" . get_field('ma_don_hang') ?? '',
 					get_field('nhan_vien_tu_van') ?? '',
-					get_field('ke_toan') ?? '',
-					get_field('nhan_vien_xu_ly_don_hang') ?? '',
+					// get_field('ke_toan') ?? '',
+					// get_field('nhan_vien_xu_ly_don_hang') ?? '',
 					get_field('ly_do') ?? '',
 					"'" . get_the_date('d/m/Y H:i'),
 				],
