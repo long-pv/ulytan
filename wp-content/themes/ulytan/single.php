@@ -117,7 +117,22 @@ get_header();
 					<?php the_content(); ?>
 
 					<?php
-					$allowed_post_types = ['form_nga', 'form_trung_quoc', 'form_cac_nuoc_khac'];
+					$allowed_post_types = [
+						'form_nga',
+						'form_trung',
+						'form_nhat',
+						'form_han',
+						'form_phap',
+						'form_duc',
+						'form_anh',
+						'form_arap',
+						'form_la_tinh',
+						'form_rumani',
+						'form_ucraina',
+						'form_tiep',
+						'form_bungari',
+						'form_khac'
+					];
 					if (in_array($post_type, $allowed_post_types)) {
 						$danh_sach_tai_lieu = get_field('danh_sach_tai_lieu') ?? [];
 						if ($danh_sach_tai_lieu) {
