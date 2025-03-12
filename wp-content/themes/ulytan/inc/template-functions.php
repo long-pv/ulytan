@@ -9,7 +9,7 @@ if (function_exists('acf_add_options_page')) {
 			'menu_slug' => 'theme-settings',
 			'capability' => 'edit_posts',
 			'redirect' => false,
-			'position' => 80
+			'position' => 200
 		)
 	);
 }
@@ -108,24 +108,106 @@ function getYoutubeEmbedUrl($input)
 function register_cpt_post_types()
 {
 	$cpt_list = [
+		// trang tài liệu
 		'form_nga' => [
-			'labels' => __('Tài liệu - Form Nga', 'basetheme'),
-			'slug' => 'form-nga',
+			'labels' => __('Tài liệu - Form Tiếng Nga', 'basetheme'),
+			'slug' => 'form-tieng-nga',
 			'cap' => false,
-			'hierarchical' => false
+			'hierarchical' => false,
+			'position' => 20
 		],
-		'form_trung_quoc' => [
-			'labels' => __('Tài liệu - Form Trung Quốc', 'basetheme'),
-			'slug' => 'form-trung-quoc',
+		'form_trung' => [
+			'labels' => __('Tài liệu - Form Tiếng Trung', 'basetheme'),
+			'slug' => 'form-tieng-trung',
 			'cap' => false,
-			'hierarchical' => false
+			'hierarchical' => false,
+			'position' => 20
 		],
-		'form_cac_nuoc_khac' => [
-			'labels' => __('Tài liệu - Form Các Nước Khác', 'basetheme'),
-			'slug' => 'form-cac-nuoc-khac',
+		'form_nhat' => [
+			'labels' => __('Tài liệu - Form Tiếng Nhật', 'basetheme'),
+			'slug' => 'form-tieng-nhat',
 			'cap' => false,
-			'hierarchical' => false
+			'hierarchical' => false,
+			'position' => 20
 		],
+		'form_han' => [
+			'labels' => __('Tài liệu - Form Tiếng Hàn', 'basetheme'),
+			'slug' => 'form-tieng-han',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_phap' => [
+			'labels' => __('Tài liệu - Form Tiếng Pháp', 'basetheme'),
+			'slug' => 'form-tieng-phap',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_duc' => [
+			'labels' => __('Tài liệu - Form Tiếng Đức', 'basetheme'),
+			'slug' => 'form-tieng-duc',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_anh' => [
+			'labels' => __('Tài liệu - Form Tiếng Anh', 'basetheme'),
+			'slug' => 'form-tieng-anh',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_arap' => [
+			'labels' => __('Tài liệu - Form Tiếng Ả Rập', 'basetheme'),
+			'slug' => 'form-tieng-arap',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_la_tinh' => [
+			'labels' => __('Tài liệu - Form Tiếng La Tinh', 'basetheme'),
+			'slug' => 'form-tieng-la-tinh',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_rumani' => [
+			'labels' => __('Tài liệu - Form Tiếng Rumani', 'basetheme'),
+			'slug' => 'form-tieng-rumani',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_ucraina' => [
+			'labels' => __('Tài liệu - Form Tiếng Ukraina', 'basetheme'),
+			'slug' => 'form-tieng-ucraina',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_tiep' => [
+			'labels' => __('Tài liệu - Form Tiếng Tiệp', 'basetheme'),
+			'slug' => 'form-tieng-tiep',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_bungari' => [
+			'labels' => __('Tài liệu - Form Tiếng Bungari', 'basetheme'),
+			'slug' => 'form-tieng-bungari',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		'form_khac' => [
+			'labels' => __('Tài liệu - Form Tiếng Khác', 'basetheme'),
+			'slug' => 'form-tieng-khac',
+			'cap' => false,
+			'hierarchical' => false,
+			'position' => 20
+		],
+		// end trang tài liệu
 		'download_documents' => [
 			'labels' => __('Tài liệu tải xuống', 'basetheme'),
 			'cap' => false,
@@ -151,12 +233,12 @@ function register_cpt_post_types()
 			'cap' => false,
 			'hierarchical' => false
 		],
-		'service' => [
-			'labels' => __('Dịch vụ', 'basetheme'),
-			'slug' => 'dich-vu',
-			'cap' => false,
-			'hierarchical' => false
-		],
+		// 'service' => [
+		// 	'labels' => __('Dịch vụ', 'basetheme'),
+		// 	'slug' => 'dich-vu',
+		// 	'cap' => false,
+		// 	'hierarchical' => false
+		// ],
 		'activity_videos' => [
 			'labels' => __('Video hoạt động', 'basetheme'),
 			'cap' => false,
@@ -215,6 +297,7 @@ function register_cpt($post_type, $data = [])
 {
 	$hierarchical = !empty($data['hierarchical']) ? $data['hierarchical'] : false;
 	$attributes = $hierarchical == true ? 'page-attributes' : '';
+	$position = !empty($data['position']) ? $data['position'] : 61;
 
 	$labels = [
 		'name' => $data['labels'],
@@ -231,7 +314,7 @@ function register_cpt($post_type, $data = [])
 			'with_front' => false,
 			'hierarchical' => true,
 		),
-		'menu_position' => 61,
+		'menu_position' => $position,
 		'supports'           => array('title', 'editor', 'thumbnail', 'revisions', 'author', $attributes),
 		'show_in_nav_menus'  => true,
 		'show_ui'            => true,
@@ -1203,10 +1286,10 @@ function contact_info_export_data_csv()
 	}
 	// không thuộc trường hợp nào
 	else {
+		$output_filename = 'Form liên hệ_' . $current_time . '.csv';
 		if ($page_id == 'trang_tai_lieu') {
 			$output_filename = 'Form trang tài liệu_' . $current_time . '.csv';
 		}
-		$output_filename = 'Form liên hệ_' . $current_time . '.csv';
 	}
 	header('Content-Disposition: attachment;filename=' . $output_filename);
 
