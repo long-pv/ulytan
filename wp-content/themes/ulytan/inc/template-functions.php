@@ -688,6 +688,16 @@ function save_contact_info()
 	// Lấy dữ liệu từ AJAX
 	if (!empty($_POST)) {
 		$data = $_POST;
+
+		if (!empty($data['email']) && is_email($data['email'])) {
+			$to = $data['email'];
+			$subject = 'Thư cảm ơn.';
+			$headers = array('Content-Type: text/html; charset=UTF-8');
+			$message = 'Cảm ơn quý khách đã đăng ký dịch vụ.';
+
+			wp_mail($to, $subject, $message, $headers);
+		}
+
 		$subject = 'Form 1 - Liên hệ';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
@@ -795,6 +805,16 @@ function save_form_ctv()
 	// Lấy dữ liệu từ AJAX
 	if (!empty($_POST)) {
 		$data = $_POST;
+
+		if (!empty($data['email']) && is_email($data['email'])) {
+			$to = $data['email'];
+			$subject = 'Thư cảm ơn.';
+			$headers = array('Content-Type: text/html; charset=UTF-8');
+			$message = 'Cảm ơn quý khách đã đăng ký cộng tác viên.';
+
+			wp_mail($to, $subject, $message, $headers);
+		}
+
 		$subject = 'Form 2 - Cộng tác viên';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
@@ -883,7 +903,7 @@ function save_page_form()
 	if (!empty($_POST)) {
 		$data = $_POST;
 
-		if (isset($data['email']) && is_email($data['email'])) {
+		if (!empty($data['email']) && is_email($data['email'])) {
 			$to = $data['email'];
 			$subject = 'Thư cảm ơn.';
 			$headers = array('Content-Type: text/html; charset=UTF-8');
@@ -3675,6 +3695,16 @@ function dang_ky_tai_xuong()
 	// Lấy dữ liệu từ AJAX
 	if (!empty($_POST)) {
 		$data = $_POST;
+
+		if (!empty($data['email']) && is_email($data['email'])) {
+			$to = $data['email'];
+			$subject = 'Thư cảm ơn.';
+			$headers = array('Content-Type: text/html; charset=UTF-8');
+			$message = 'Cảm ơn quý khách đã đăng ký nhận tài liệu.';
+
+			wp_mail($to, $subject, $message, $headers);
+		}
+
 		$subject = 'Tài liệu tải xuống';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
