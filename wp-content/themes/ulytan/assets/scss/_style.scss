@@ -2301,7 +2301,7 @@ footer.footer.bg-primary {
         top: 50%;
         right: 0px;
         transform: translateY(-50%);
-        z-index: 10;
+        z-index: 9999999;
 
         &::after {
             left: 50%;
@@ -2316,7 +2316,7 @@ footer.footer.bg-primary {
         height: calc(100vh - 90px);
         bottom: 10px;
         right: 20px;
-        z-index: 9;
+        z-index: 999999;
     }
 }
 
@@ -3565,10 +3565,15 @@ footer {
         display: inline-flex;
         border: none !important;
         outline: none !important;
+        z-index: 99 !important;
     }
 
-    .modal-content {
-        padding: 40px 60px;
+    .content_body {
+        padding: 16px;
+
+        @include media-breakpoint-up(lg) {
+            padding: 40px 60px;
+        }
     }
 
     .modal-body {
@@ -3635,4 +3640,41 @@ footer {
 
 .page-template-page-dich_thuat_cong_chung .arrow-down {
     animation: bounce 1.5s infinite;
+}
+
+.footer_info {
+    a {
+        text-decoration: underline !important;
+        color: #fff !important;
+    }
+}
+
+
+#form_tai_xuong_file {
+    .contact_label {
+        font-size: 13px;
+    }
+
+    .page_ctv_form_label {
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .contact_input {
+        height: 32px;
+    }
+
+    .error {
+        font-size: 12px;
+    }
+
+    .page_contact_service_table {
+        td {
+            font-size: 12px;
+        }
+    }
+
+    .page_contact_info {
+        margin: 0px;
+    }
 }

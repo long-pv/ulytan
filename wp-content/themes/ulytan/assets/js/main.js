@@ -251,6 +251,7 @@
 
 		$(document).on("click", ".single_toc_mb .single_toc_content a", function () {
 			$(this).parents(".single_toc_content").toggle();
+			$("body").css("overflow", ""); // Cho phép cuộn lại
 		});
 	}
 
@@ -480,6 +481,7 @@
 		autoplaySpeed: 2000,
 		centerMode: true,
 		centerPadding: "0px",
+		arrows: false,
 
 		responsive: [
 			{
@@ -514,5 +516,21 @@
 		autoplay: true,
 		arrows: true,
 		autoplaySpeed: 5000,
+	});
+
+	setTimeout(function () {
+		$("footer.footer .find_store_near").text("Tìm Văn phòng Ulytan gần bạn nhất");
+		$("footer.footer #keywork").attr("placeholder", "Tìm văn phòng ULYTAN Theo tên phố");
+	}, 500); // Thay đổi sau 2 giây
+
+	let isScrollDisabled = false;
+
+	$(".single_toc_btn").click(function () {
+		if (!isScrollDisabled) {
+			$("body").css("overflow", "hidden"); // Ngăn cuộn
+		} else {
+			$("body").css("overflow", ""); // Cho phép cuộn lại
+		}
+		isScrollDisabled = !isScrollDisabled;
 	});
 })(jQuery, window);

@@ -16,7 +16,7 @@
 <!-- end main body -->
 
 <?php
-if (is_page_template('page-contact-test.php')) :
+/* if (is_page_template('page-contact-test.php')) :
 ?>
     <div class="headquarters secSpace">
         <div class="container">
@@ -68,7 +68,7 @@ if (is_page_template('page-contact-test.php')) :
             </div>
         </div>
     </div>
-<?php endif; ?>
+<?php endif; */ ?>
 
 
 <?php

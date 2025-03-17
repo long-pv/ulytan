@@ -209,7 +209,7 @@ function register_cpt_post_types()
 		],
 		// end trang tài liệu
 		'download_documents' => [
-			'labels' => __('Tài liệu tải xuống', 'basetheme'),
+			'labels' => __('Upload - tài liệu', 'basetheme'),
 			'cap' => false,
 			'hierarchical' => false
 		],
@@ -1308,7 +1308,7 @@ function contact_info_export_data_csv()
 	else {
 		$output_filename = 'Form liên hệ_' . $current_time . '.csv';
 		if ($page_id == 'trang_tai_lieu') {
-			$output_filename = 'Form trang tài liệu_' . $current_time . '.csv';
+			$output_filename = 'Form Tài liệu upload_' . $current_time . '.csv';
 		}
 	}
 	header('Content-Disposition: attachment;filename=' . $output_filename);
@@ -3705,7 +3705,7 @@ function dang_ky_tai_xuong()
 			wp_mail($to, $subject, $message, $headers);
 		}
 
-		$subject = 'Tài liệu tải xuống';
+		$subject = 'Upload - tài liệu';
 		$headers = array('Content-Type: text/html; charset=UTF-8');
 		$message = 'Thông tin cá nhân:<br>';
 		$message .= 'Họ và tên: ' . $data['full_name'] . '<br>';

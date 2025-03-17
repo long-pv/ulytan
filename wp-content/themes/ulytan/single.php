@@ -47,7 +47,7 @@ get_header();
 
 <section class="secSpace pt-3">
 	<div class="container">
-		<div class="row" style="width: 100%;">
+		<div class="row">
 			<div class="col-lg-3 mb-4">
 				<div class="toc_block">
 					<div class="toc_title">Mục lục</div>
@@ -725,8 +725,8 @@ wp_reset_postdata();
 <?php
 if (in_array($post_type, $allowed_post_types)) {
 ?>
-	<div class="modal fade popup_tai_xuong_file" id="popup_tai_xuong_file" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
+	<div class="modal fade popup_tai_xuong_file" id="popup_tai_xuong_file" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -736,62 +736,89 @@ if (in_array($post_type, $allowed_post_types)) {
 					</svg>
 				</button>
 				<div class="modal-body">
-					<div class="popup_tai_xuong_file_title">
-						Bạn vui lòng điền thông tin để tải xuống
+					<div class="content_body">
+						<div class="popup_tai_xuong_file_title">
+							Bạn vui lòng điền thông tin để tải xuống
 
-						<div class="svg-container">
-							<svg width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M11.9114 0.319336H26.0894V24.986H37.5264L19.0004 49.1593L0.474365 24.986H11.9114V0.319336Z" fill="#E94235" />
-							</svg>
+							<div class="svg-container">
+								<svg width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M11.9114 0.319336H26.0894V24.986H37.5264L19.0004 49.1593L0.474365 24.986H11.9114V0.319336Z" fill="#E94235" />
+								</svg>
+							</div>
 						</div>
-					</div>
-					<form id="form_tai_xuong_file" action="" method="post">
-						<div class="page_contact_info">
-							<div class="row row_16">
-								<div class="col-lg-4">
-									<label class="contact_label" for="">
-										1. Họ và tên *
-									</label>
-									<input type="text" name="full_name" class="contact_input" placeholder="Nhập họ và tên">
-								</div>
-								<div class="col-lg-4">
-									<label class="contact_label" for="">
-										2. Số điện thoại *
-									</label>
-									<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
-								</div>
-								<div class="col-lg-4">
-									<label class="contact_label" for="">
-										3. Địa chỉ Email
-									</label>
-									<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
-								</div>
-								<div class="col-12 page_ctv_step_16">
-									<div class="page_ctv_form_group">
-										<label for="" class="page_ctv_form_label">
-											4. Mục đích sử dụng *
+						<form id="form_tai_xuong_file" action="" method="post">
+							<div class="page_contact_info">
+								<div class="row row_16">
+									<div class="col-lg-4">
+										<label class="contact_label" for="">
+											1. Họ và tên *
 										</label>
+										<input type="text" name="full_name" class="contact_input" placeholder="Nhập họ và tên">
+									</div>
+									<div class="col-lg-4">
+										<label class="contact_label" for="">
+											2. Số điện thoại *
+										</label>
+										<input type="text" name="phone" class="contact_input" placeholder="Điền tối đa 10 số">
+									</div>
+									<div class="col-lg-4">
+										<label class="contact_label" for="">
+											3. Địa chỉ Email
+										</label>
+										<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
+									</div>
+									<div class="col-12 page_ctv_step_16">
+										<div class="page_ctv_form_group">
+											<label for="" class="page_ctv_form_label">
+												4. Mục đích sử dụng *
+											</label>
 
-										<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
-										<input type="hidden" name="ten_trang" value="Trang tài liệu">
-										<input type="hidden" name="id_trang" value="trang_tai_lieu">
+											<input type="hidden" name="trang_da_gui" value="<?php the_permalink(); ?>">
+											<input type="hidden" name="ten_trang" value="Tài liệu upload">
+											<input type="hidden" name="id_trang" value="trang_tai_lieu">
 
-										<div class="page_contact_service">
-											<table class="page_contact_service_table">
-												<thead>
-													<tr>
-														<th width="20">
-															<!-- Chọn -->
-														</th>
-														<th style="text-align: center;">
-															Dịch vụ
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													foreach ($services as $key => $service) {
-														$slug = convert_to_slug($service['raw_name']); // Chuyển đổi name thành slug
+											<div class="page_contact_service">
+												<table class="page_contact_service_table">
+													<!-- <thead>
+														<tr>
+															<th width="20">
+															</th>
+															<th style="text-align: center;">
+																Dịch vụ
+															</th>
+														</tr>
+													</thead> -->
+													<tbody>
+														<?php
+														foreach ($services as $key => $service) {
+															$slug = convert_to_slug($service['raw_name']); // Chuyển đổi name thành slug
+
+															echo '<tr>';
+															echo '<td class="td_checkbox">';
+															echo '<input type="checkbox" name="services[]" class="contact_checkox" value="' . esc_attr($slug) . '">';
+															echo '</td>';
+
+															echo '<td>';
+															echo '<strong>Để ' . esc_html($service['raw_name']) . '</strong>';
+															echo $service['mo_ta'] ? '<div style="font-style:italic;">(' . $service['mo_ta'] . ')</div>' : '';
+
+															// Hiển thị input bổ sung nếu show_input = true
+															if ($service['show_input']) {
+																echo '<div class="td_group mt-2" style="display:none;">';
+																echo '<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>';
+																echo '<div class="td_label mb-1">';
+																echo 'Quốc gia <span class="td_req">(*bắt buộc)</span>';
+																echo '</div>';
+																echo '<input type="text" name="quoc_gia_' . $slug . '" class="td_input ' . esc_attr($service['key_input']) . '">';
+																echo '</div>';
+															}
+
+															echo '</td>';
+															echo '</tr>';
+														}
+
+
+														$slug = convert_to_slug('Mục đích khác'); // Chuyển đổi name thành slug
 
 														echo '<tr>';
 														echo '<td class="td_checkbox">';
@@ -799,48 +826,22 @@ if (in_array($post_type, $allowed_post_types)) {
 														echo '</td>';
 
 														echo '<td>';
-														echo '<strong>Để ' . esc_html($service['raw_name']) . '</strong>';
-														echo $service['mo_ta'] ? '<div style="font-style:italic; font-size: 14px;">(' . $service['mo_ta'] . ')</div>' : '';
-
-														// Hiển thị input bổ sung nếu show_input = true
-														if ($service['show_input']) {
-															echo '<div class="td_group mt-2" style="display:none;">';
-															echo '<div class="td_checkbox_desc">(Hãy điền ngắn gọn tên quốc gia. Ví dụ: Hàn Quốc)</div>';
-															echo '<div class="td_label mb-1">';
-															echo 'Quốc gia <span class="td_req">(*bắt buộc)</span>';
-															echo '</div>';
-															echo '<input type="text" name="quoc_gia_' . $slug . '" class="td_input ' . esc_attr($service['key_input']) . '">';
-															echo '</div>';
-														}
-
+														echo '<strong>Mục đích khác</strong>';
 														echo '</td>';
 														echo '</tr>';
-													}
-
-
-													$slug = convert_to_slug('Mục đích khác'); // Chuyển đổi name thành slug
-
-													echo '<tr>';
-													echo '<td class="td_checkbox">';
-													echo '<input type="checkbox" name="services[]" class="contact_checkox" value="' . esc_attr($slug) . '">';
-													echo '</td>';
-
-													echo '<td>';
-													echo '<strong>Mục đích khác</strong>';
-													echo '</td>';
-													echo '</tr>';
-													?>
-												</tbody>
-											</table>
+														?>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
-								</div>
 
-								<div class="col-12 mt-3 d-flex justify-content-center">
-									<input type="submit" class="contact_submit" value="Gửi">
+									<div class="col-12 mt-3 d-flex justify-content-center">
+										<input type="submit" class="contact_submit" value="Gửi">
+									</div>
 								</div>
-							</div>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
