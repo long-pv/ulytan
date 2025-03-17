@@ -3678,3 +3678,47 @@ footer {
         margin: 0px;
     }
 }
+
+
+/* Ẩn văn bản gốc của sao */
+.star {
+    font-size: 24px;
+    cursor: pointer;
+    color: #ccc;
+    /* Màu mặc định khi chưa chọn */
+    transition: color 0.2s ease-in-out;
+}
+
+/* Khi hover vào sao thì đổi màu */
+.star:hover,
+.star:hover~.star {
+    color: #ffcc00;
+    /* Màu vàng khi hover */
+}
+
+/* Sao đã chọn sẽ có màu vàng */
+.star.selected {
+    color: #ffcc00;
+    /* Màu vàng khi đã đánh giá */
+}
+
+/* Hiệu ứng khi chọn sao */
+.star-rating {
+    display: inline-block;
+    direction: rtl;
+    /* Đảo ngược để hover từ phải qua trái */
+}
+
+.star-rating span {
+    display: inline-block;
+    transform: scaleX(-1);
+    /* Lật lại để giữ đúng thứ tự */
+}
+
+#rating-toast {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 1050;
+    min-width: 250px;
+}

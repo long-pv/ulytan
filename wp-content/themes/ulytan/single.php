@@ -850,6 +850,38 @@ if (in_array($post_type, $allowed_post_types)) {
 }
 ?>
 
+<!-- Bootstrap Toast Container -->
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+	<div id="rating-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+		<div class="toast-header">
+			<strong class="mr-auto">Thông báo</strong>
+			<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="toast-body"></div>
+	</div>
+</div>
+
+<?php
+$total_ratings = get_post_meta($post_id, '_total_ratings', true) ?: 0;
+$total_votes = get_post_meta($post_id, '_total_votes', true) ?: 0;
+$average_rating = $total_votes ? round($total_ratings / $total_votes, 1) : 0;
+$user_rating = !empty($_COOKIE["rated_post_{$post_id}"]) ? $_COOKIE["rated_post_{$post_id}"] : 0;
+?>
+
+<div class="rating-container">
+	<p>Đánh giá bài viết:</p>
+	<div class="star-rating" data-post-id="<?php echo $post_id; ?>">
+		<?php for ($i = 5; $i >= 1; $i--) : // Render từ 5 -> 1 
+		?>
+			<span class="star <?php echo ($i <= $user_rating) ? 'selected' : ''; ?>" data-value="<?php echo $i; ?>">★</span>
+		<?php endfor; ?>
+	</div>
+	<p>Điểm trung bình: <span id="average-rating"><?php echo $average_rating; ?></span>/5</p>
+	<p>Bạn đã đánh giá: <span id="user-rating"><?php echo $user_rating ?: 'Chưa đánh giá'; ?></span>/5</p>
+</div>
+
 <style>
 	#ajax-loader {
 		z-index: 100000000 !important;
@@ -1202,6 +1234,57 @@ get_footer();
 				// ngăn không submit
 				return false;
 			}
+		});
+
+		function showToast(message, type = "success") {
+			let toast = $("#rating-toast");
+			toast.find(".toast-body").text(message);
+			toast.removeClass("bg-success bg-warning bg-danger").addClass(type === "success" ? "bg-success text-white" : "bg-warning text-dark");
+			toast.toast({
+				delay: 5000
+			});
+			toast.toast("show");
+		}
+
+		$(".star").on("click", function() {
+			let rating = $(this).data("value");
+			let postID = $(".star-rating").data("post-id");
+
+			$.ajax({
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				type: "POST",
+				data: {
+					action: "rate_post",
+					post_id: postID,
+					rating: rating,
+				},
+				beforeSend: function() {
+					$("#ajax-loader").show();
+				},
+				success: function(response) {
+					if (response.success) {
+						showToast(response.data.message, "success");
+
+						$("#average-rating").text(response.data.average_rating);
+						$("#user-rating").text(response.data.user_rating);
+
+						$(".star").removeClass("selected");
+						$(".star").each(function() {
+							if ($(this).data("value") <= rating) {
+								$(this).addClass("selected");
+							}
+						});
+					} else {
+						showToast(response.data.message, "warning");
+					}
+				},
+				error: function() {
+					alert('Có lỗi xảy ra khi gửi dữ liệu.');
+				},
+				complete: function() {
+					$("#ajax-loader").hide();
+				}
+			});
 		});
 	});
 </script>

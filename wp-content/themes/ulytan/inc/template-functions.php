@@ -3806,3 +3806,45 @@ function dang_ky_tai_xuong()
 	}
 	wp_die();
 }
+
+function rate_post()
+{
+	if (!isset($_POST['post_id']) || !isset($_POST['rating'])) {
+		wp_send_json_error(array("message" => "Dữ liệu không hợp lệ!"));
+	}
+
+	$post_id = intval($_POST['post_id']);
+	$rating = intval($_POST['rating']);
+
+	if ($rating < 1 || $rating > 5) {
+		wp_send_json_error(array("message" => "Số sao không hợp lệ!"));
+	}
+
+	// Kiểm tra xem đã đánh giá hay chưa bằng cookie
+	if (!empty($_COOKIE["rated_post_{$post_id}"])) {
+		wp_send_json_error(array("message" => "Bạn đã đánh giá bài viết này!"));
+	}
+
+	// Lấy dữ liệu hiện tại
+	$total_ratings = get_post_meta($post_id, '_total_ratings', true) ?: 0;
+	$total_votes = get_post_meta($post_id, '_total_votes', true) ?: 0;
+
+	// Cập nhật dữ liệu
+	update_post_meta($post_id, '_total_ratings', $total_ratings + $rating);
+	update_post_meta($post_id, '_total_votes', $total_votes + 1);
+
+	// Tính điểm trung bình mới
+	$average_rating = round(($total_ratings + $rating) / ($total_votes + 1), 1);
+
+	// Set cookie từ backend (thời gian 1 năm)
+	setcookie("rated_post_{$post_id}", $rating, time() + 365 * 24 * 60 * 60, "/");
+
+	wp_send_json_success(array(
+		"message" => "Cảm ơn bạn đã đánh giá!",
+		"average_rating" => $average_rating,
+		"user_rating" => $rating
+	));
+}
+
+add_action('wp_ajax_rate_post', 'rate_post');
+add_action('wp_ajax_nopriv_rate_post', 'rate_post');
