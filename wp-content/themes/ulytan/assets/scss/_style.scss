@@ -3685,7 +3685,7 @@ footer {
     font-size: 24px;
     cursor: pointer;
     color: #ccc;
-    /* Màu mặc định khi chưa chọn */
+    line-height: 0.8;
     transition: color 0.2s ease-in-out;
 }
 
@@ -3693,7 +3693,6 @@ footer {
 .star:hover,
 .star:hover~.star {
     color: #ffcc00;
-    /* Màu vàng khi hover */
 }
 
 /* Sao đã chọn sẽ có màu vàng */
@@ -3706,13 +3705,11 @@ footer {
 .star-rating {
     display: inline-block;
     direction: rtl;
-    /* Đảo ngược để hover từ phải qua trái */
 }
 
 .star-rating span {
     display: inline-block;
     transform: scaleX(-1);
-    /* Lật lại để giữ đúng thứ tự */
 }
 
 #rating-toast {
