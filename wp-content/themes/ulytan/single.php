@@ -275,6 +275,52 @@ get_header();
 						</div>
 					</div>
 				</section>
+
+				<!-- đánh giá -->
+				<!-- Bootstrap Toast Container -->
+				<div aria-live="polite" aria-atomic="true">
+					<div id="rating-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+						<div class="toast-header">
+							<strong class="mr-auto">Thông báo</strong>
+							<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="toast-body"></div>
+					</div>
+				</div>
+
+				<?php
+				$total_ratings = get_post_meta($post_id, '_total_ratings', true) ?: 0;
+				$total_votes = get_post_meta($post_id, '_total_votes', true) ?: 0;
+				$average_rating = $total_votes ? round($total_ratings / $total_votes, 1) : 0;
+				$user_rating = !empty($_COOKIE["rated_post_{$post_id}"]) ? $_COOKIE["rated_post_{$post_id}"] : 0;
+				?>
+				<div class="ratingPost">
+					<div class="ratingPost__show">
+						<div class="ratingPost__showAverage" id="average_rating">
+							<?php echo $average_rating; ?>
+						</div>
+						<div class="ratingPost__showTotal">
+							<strong id="total_votes"><?php echo $total_votes; ?></strong><br><span>đánh giá</span>
+						</div>
+					</div>
+					<div class="ratingPost__line">
+						<div class="ratingPost__lineItem">
+						</div>
+						<div class="ratingPost__lineItem">
+						</div>
+					</div>
+					<div class="ratingPost__text">
+						Đánh giá bài viết
+					</div>
+					<div class="ratingPost__star star-rating" data-post-id="<?php echo $post_id; ?>">
+						<?php for ($i = 5; $i >= 1; $i--) : // Render từ 5 -> 1 
+						?>
+							<span class="star <?php echo ($i <= $user_rating) ? 'selected' : ''; ?>" data-value="<?php echo $i; ?>">★</span>
+						<?php endfor; ?>
+					</div>
+				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="sidebar_lien_he">
@@ -850,38 +896,6 @@ if (in_array($post_type, $allowed_post_types)) {
 }
 ?>
 
-<!-- Bootstrap Toast Container -->
-<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
-	<div id="rating-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-		<div class="toast-header">
-			<strong class="mr-auto">Thông báo</strong>
-			<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="toast-body"></div>
-	</div>
-</div>
-
-<?php
-$total_ratings = get_post_meta($post_id, '_total_ratings', true) ?: 0;
-$total_votes = get_post_meta($post_id, '_total_votes', true) ?: 0;
-$average_rating = $total_votes ? round($total_ratings / $total_votes, 1) : 0;
-$user_rating = !empty($_COOKIE["rated_post_{$post_id}"]) ? $_COOKIE["rated_post_{$post_id}"] : 0;
-?>
-
-<div class="rating-container">
-	<p>Đánh giá bài viết:</p>
-	<div class="star-rating" data-post-id="<?php echo $post_id; ?>">
-		<?php for ($i = 5; $i >= 1; $i--) : // Render từ 5 -> 1 
-		?>
-			<span class="star <?php echo ($i <= $user_rating) ? 'selected' : ''; ?>" data-value="<?php echo $i; ?>">★</span>
-		<?php endfor; ?>
-	</div>
-	<p>Điểm trung bình: <span id="average-rating"><?php echo $average_rating; ?></span>/5</p>
-	<p>Bạn đã đánh giá: <span id="user-rating"><?php echo $user_rating ?: 'Chưa đánh giá'; ?></span>/5</p>
-</div>
-
 <style>
 	#ajax-loader {
 		z-index: 100000000 !important;
@@ -1265,8 +1279,8 @@ get_footer();
 					if (response.success) {
 						showToast(response.data.message, "success");
 
-						$("#average-rating").text(response.data.average_rating);
-						$("#user-rating").text(response.data.user_rating);
+						$("#average_rating").text(response.data.average_rating);
+						$("#total_votes").text(response.data.total_votes);
 
 						$(".star").removeClass("selected");
 						$(".star").each(function() {

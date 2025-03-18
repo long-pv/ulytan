@@ -3828,13 +3828,14 @@ function rate_post()
 	// Lấy dữ liệu hiện tại
 	$total_ratings = get_post_meta($post_id, '_total_ratings', true) ?: 0;
 	$total_votes = get_post_meta($post_id, '_total_votes', true) ?: 0;
+	$total_votes_add = $total_votes + 1;
 
 	// Cập nhật dữ liệu
 	update_post_meta($post_id, '_total_ratings', $total_ratings + $rating);
-	update_post_meta($post_id, '_total_votes', $total_votes + 1);
+	update_post_meta($post_id, '_total_votes', $total_votes_add);
 
 	// Tính điểm trung bình mới
-	$average_rating = round(($total_ratings + $rating) / ($total_votes + 1), 1);
+	$average_rating = round(($total_ratings + $rating) / $total_votes_add, 1);
 
 	// Set cookie từ backend (thời gian 1 năm)
 	setcookie("rated_post_{$post_id}", $rating, time() + 365 * 24 * 60 * 60, "/");
@@ -3842,7 +3843,7 @@ function rate_post()
 	wp_send_json_success(array(
 		"message" => "Cảm ơn bạn đã đánh giá!",
 		"average_rating" => $average_rating,
-		"user_rating" => $rating
+		"total_votes" => $total_votes_add
 	));
 }
 
