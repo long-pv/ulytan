@@ -164,7 +164,7 @@ get_header();
 
 											<div class="news_documents_item_btn">
 												<?php
-												if (!empty($_COOKIE["user_dang_ky_tai_xuong"]) && $_COOKIE["user_dang_ky_tai_xuong"] == 'da_dang_ky') {
+												if (!empty($_COOKIE["verified_email"]) && $_COOKIE["verified_email"] == 'da_dang_ky') {
 												?>
 													<a download href="<?php echo $url; ?>" class="btn_tai_xuong_modal_download btn_tai_xuong_modal">
 														Tải xuống
@@ -173,9 +173,6 @@ get_header();
 												} else {
 												?>
 													<a data-url="<?php echo $url; ?>" href="javascript:void(0);" class="btn_tai_xuong_modal_popup btn_tai_xuong_modal" data-toggle="modal" data-target="#popup_tai_xuong_file">
-														Tải xuống
-													</a>
-													<a download href="<?php echo $url; ?>" class="btn_tai_xuong_modal_download btn_tai_xuong_modal" style="display: none;">
 														Tải xuống
 													</a>
 												<?php
@@ -809,7 +806,7 @@ if (in_array($post_type, $allowed_post_types)) {
 									</div>
 									<div class="col-lg-4">
 										<label class="contact_label" for="">
-											3. Địa chỉ Email
+											3. Địa chỉ Email*
 										</label>
 										<input type="text" name="email" class="contact_input" placeholder="Ví dụ: sale@ulytan.com">
 									</div>
@@ -825,15 +822,6 @@ if (in_array($post_type, $allowed_post_types)) {
 
 											<div class="page_contact_service">
 												<table class="page_contact_service_table">
-													<!-- <thead>
-														<tr>
-															<th width="20">
-															</th>
-															<th style="text-align: center;">
-																Dịch vụ
-															</th>
-														</tr>
-													</thead> -->
 													<tbody>
 														<?php
 														foreach ($services as $key => $service) {
@@ -1152,7 +1140,7 @@ get_footer();
 					phoneVN: true,
 				},
 				email: {
-					// required: true,
+					required: true,
 					customEmail: true,
 				},
 				purpose: {

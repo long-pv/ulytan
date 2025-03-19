@@ -3701,8 +3701,21 @@ function dang_ky_tai_xuong()
 			$subject = 'Thư cảm ơn.';
 			$headers = array('Content-Type: text/html; charset=UTF-8');
 			$message = 'Cảm ơn quý khách đã đăng ký nhận tài liệu.';
-
 			wp_mail($to, $subject, $message, $headers);
+
+			// set cookie để lưu thông tin khách hàng
+			$token = wp_generate_password(32, false);
+			$verify_link = site_url('/verify?token=' . $token . '&email=' . urlencode($data['email']));
+
+			// Lưu token vào database tạm thời (Transient API)
+			set_transient("email_verification_$token", $data['email'], 7 * DAY_IN_SECONDS); // Hết hạn sau 7 ngày
+
+			// Thiết lập nội dung email
+			$subject_2 = "Xác nhận đăng ký trên " . get_bloginfo('name');
+			$message_2 = '<a href="' . $verify_link . '" >Xác nhận Email</a>';
+
+			// Gửi email
+			wp_mail($data['email'], $subject_2, $message_2, $headers);
 		}
 
 		$subject = 'Upload - tài liệu';
@@ -3791,11 +3804,6 @@ function dang_ky_tai_xuong()
 				}
 			}
 
-			// set cookie để lưu thông tin khách hàng
-			$cookie_name = "user_dang_ky_tai_xuong";
-			$cookie_value = "da_dang_ky";
-			$expiration = time() + (30 * 24 * 60 * 60); // 30 ngày
-			setcookie($cookie_name, $cookie_value, $expiration, "/");
 
 			wp_send_json_success(array('message' => 'Thông tin đã được lưu thành công!'));
 		} else {
