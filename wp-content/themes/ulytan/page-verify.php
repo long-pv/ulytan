@@ -31,9 +31,14 @@ if (isset($_GET['token']) && isset($_GET['email'])) {
 ob_end_flush(); // Đẩy output ra trình duyệt
 ?>
 
-<div class="container">
-    <h2>Kết quả xác minh</h2>
-    <p class="<?php echo esc_attr($status); ?>"><?php echo esc_html($message); ?></p>
+<div class="secSpace">
+    <div class="container">
+        <h2 class="sec_title">Kết quả xác minh</h2>
+        <div class="<?php echo esc_attr($status); ?>">
+            <?php echo esc_html($message); ?>
+        </div>
+    </div>
 </div>
 
-<?php get_footer(); ?>
+<?php
+get_footer();

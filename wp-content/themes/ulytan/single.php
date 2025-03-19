@@ -1211,19 +1211,12 @@ get_footer();
 					},
 					success: function(response) {
 						if (response.success) {
-							$('.btn_tai_xuong_modal_download').show();
-							$('.btn_tai_xuong_modal_popup').remove();
-							$('#popup_tai_xuong_file').modal('hide');
-							// Tạo thẻ `a` ẩn và kích hoạt tải xuống
-							var link = document.createElement("a");
-							link.href = data_download_btn;
-							link.download = data_download_btn.split('/').pop();
-							document.body.appendChild(link);
-							link.click();
-							document.body.removeChild(link);
+							alert('Vui lòng kiểm tra email xác minh để được tải xuống tài liệu.');
 						} else {
 							alert(response.data.message);
 						}
+						$("#form_tai_xuong_file")[0].reset();
+						$('#popup_tai_xuong_file').modal('hide');
 					},
 					error: function() {
 						alert('Có lỗi xảy ra khi gửi dữ liệu.');

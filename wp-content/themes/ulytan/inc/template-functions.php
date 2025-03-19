@@ -3698,10 +3698,11 @@ function dang_ky_tai_xuong()
 
 		if (!empty($data['email']) && is_email($data['email'])) {
 			$to = $data['email'];
-			$subject = 'Thư cảm ơn.';
+
+			// $subject = 'Thư cảm ơn.';
 			$headers = array('Content-Type: text/html; charset=UTF-8');
-			$message = 'Cảm ơn quý khách đã đăng ký nhận tài liệu.';
-			wp_mail($to, $subject, $message, $headers);
+			// $message = 'Cảm ơn quý khách đã đăng ký nhận tài liệu.';
+			// wp_mail($to, $subject, $message, $headers);
 
 			// set cookie để lưu thông tin khách hàng
 			$token = wp_generate_password(32, false);
@@ -3711,11 +3712,38 @@ function dang_ky_tai_xuong()
 			set_transient("email_verification_$token", $data['email'], 7 * DAY_IN_SECONDS); // Hết hạn sau 7 ngày
 
 			// Thiết lập nội dung email
-			$subject_2 = "Xác nhận đăng ký trên " . get_bloginfo('name');
-			$message_2 = '<a href="' . $verify_link . '" >Xác nhận Email</a>';
+			$subject_2 = "Tải tài liệu - ULYTAN";
+			$message_2 = '<p>ULYTAN kính chào quý khách! Vui lòng nhấp vào đây để nhận quyền tải tài liệu miễn phí tại Ulytan:';
+			$message_2 .= '<a href="' . $verify_link . '" >Tại đây.</a></p>';
 
 			// Gửi email
-			wp_mail($data['email'], $subject_2, $message_2, $headers);
+			wp_mail($to, $subject_2, $message_2, $headers);
+
+			$args = [
+				'post_type'      => 'contact_info',
+				'meta_query'     => [
+					'relation' => 'AND',
+					[
+						'key'     => 'email',
+						'value'   => $to,
+						'compare' => '='
+					],
+					[
+						'key'     => 'dang_ki_tai_xuong',
+						'value'   => 'yes',
+						'compare' => '='
+					]
+				],
+				'posts_per_page' => 1
+			];
+			$query = new WP_Query($args);
+			if ($query->have_posts()) {
+				wp_send_json_error(array(
+					'message' => 'Email này đã được đăng ký. Vui lòng kiểm tra hộp thư (kể cả Spam) hoặc tìm "kythuat@ulytan.com" để mở link cũ trước đó đã được cấp quyền để vào lại và tải tài liệu.'
+				));
+				return;
+			}
+			wp_reset_postdata();
 		}
 
 		$subject = 'Upload - tài liệu';
@@ -3758,6 +3786,7 @@ function dang_ky_tai_xuong()
 				update_field('services_12', sanitize_text_field($data['services_12']), $post_id);
 				update_field('services_13', sanitize_text_field($data['services_13']), $post_id);
 				update_field('trang_da_gui', sanitize_text_field($data['trang_da_gui']), $post_id);
+				update_field('dang_ki_tai_xuong', 'yes', $post_id);
 
 				if (!empty($data)) {
 					// Chuyển mảng thành chuỗi JSON (nếu cần thiết, bạn có thể lưu trực tiếp mảng tùy theo loại trường trong ACF)
