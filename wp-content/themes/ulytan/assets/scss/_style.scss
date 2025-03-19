@@ -1392,13 +1392,21 @@
 
 .custom_dropdown_menu label {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 5px;
     cursor: pointer;
     display: flex;
     gap: 8px;
     margin-bottom: 4px;
     font-size: 14px;
+}
+
+.custom_dropdown_menu label [type="checkbox"] {
+    margin-top: 5px;
+}
+
+.custom_dropdown_menu label br {
+    display: block !important;
 }
 
 .custom_dropdown_menu label:last-child {
