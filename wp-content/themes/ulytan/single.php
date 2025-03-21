@@ -870,11 +870,18 @@ if (in_array($post_type, $allowed_post_types)) {
 										</div>
 									</div>
 
-									<div class="col-12 mt-3 d-flex justify-content-center">
-										<input type="submit" class="contact_submit" value="Gửi">
+									<div class="col-12 d-none">
+										<input type="submit" class="contact_submit contact_submit_popup" value="Gửi">
 									</div>
 								</div>
+							</div>
 						</form>
+					</div>
+				</div>
+
+				<div class="modal-footer justify-content-center">
+					<div class="d-flex justify-content-center">
+						<input type="submit" class="contact_submit contact_submit_popup_fake" value="Gửi">
 					</div>
 				</div>
 			</div>

@@ -297,6 +297,13 @@
 		});
 	});
 
+	$(document).ready(function () {
+		$(".contact_submit_popup_fake").click(function (event) {
+			event.preventDefault();
+			$(".contact_submit_popup").trigger("click");
+		});
+	});
+
 	$(".custom_dropdown_button").on("click", function (e) {
 		e.stopPropagation();
 		$(".custom_dropdown_button").removeClass("down_show");
