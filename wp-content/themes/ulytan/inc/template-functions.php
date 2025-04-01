@@ -422,6 +422,14 @@ function wp_breadcrumbs()
 	$home = __('Trang chủ', 'basetheme');
 	$before = '<span class="current">';
 	$after = '</span>';
+    
+    // Danh sách các post type cần xử lý riêng
+    $allowed_post_types = [
+        'form_nga', 'form_trung', 'form_nhat', 'form_han', 'form_phap', 'form_duc',
+        'form_anh', 'form_arap', 'form_la_tinh', 'form_rumani', 'form_ucraina',
+        'form_tiep', 'form_bungari', 'form_khac'
+    ];
+    
 	if (!is_admin() && !is_home() && (!is_front_page() || is_paged())) {
 
 		global $post;
@@ -446,6 +454,16 @@ function wp_breadcrumbs()
 
 			case is_single() && !is_attachment():
 				$post_type = $post->post_type;
+                
+                // Nếu là post type trong danh sách $allowed_post_types
+                if (in_array($post_type, $allowed_post_types)) {
+                    $post_type_obj = get_post_type_object($post_type);
+                    if ($post_type_obj) {
+                        echo '<a href="' . get_post_type_archive_link($post_type) . '">' . $post_type_obj->labels->name . '</a>' . $delimiter . ' ';
+                    }
+                    echo $before . get_the_title() . $after;
+                    break;
+                }
 
 				if ($post_type == 'post') {
 					$categories = get_the_category($post->ID);
