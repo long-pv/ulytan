@@ -11,7 +11,8 @@
 
     strong>a,
     a>strong {
-        background-color: #FF8154;
+        // background-color: #FF8154;
+        background-color: $primary;
         padding: 8px 12px;
         display: inline-flex;
         gap: 8px;
