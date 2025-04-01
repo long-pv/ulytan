@@ -887,6 +887,44 @@ if (in_array($post_type, $allowed_post_types)) {
 			</div>
 		</div>
 	</div>
+
+	<div class="modal modal_lien_he fade" id="modal_down_thanh_cong" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<div class="modal-body">
+					<div class="modal_title">
+						ULYTAN - SIÊU NHANH, THỦ TỤC SIÊU ĐƠN GIẢN
+					</div>
+					<div class="editor">
+						<p style="text-align: center;"><span style="color: #339966;"><span style="font-size: 32px;"> Đăng ký thành công!</span></span></p>
+						<p style="text-align: center;"><strong>Vui lòng kiểm tra email ( kể cả thư rác/Spam) để được cấp quyền tải tài liệu.</strong></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal modal_lien_he fade" id="modal_down_that_bai" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<div class="modal-body">
+					<div class="modal_title">
+						ULYTAN - SIÊU NHANH, THỦ TỤC SIÊU ĐƠN GIẢN
+					</div>
+					<div class="editor">
+						<p style="text-align: center;"><span style="color: #900101;"><span style="font-size: 48px;">Email này đã được đăng ký.</span></span></p>
+						<p style="text-align: center;"><strong>Vui lòng kiểm tra hộp thư (kể cả Spam) hoặc tìm “kythuat@ulytan.com” để mở link đã được cấp quyền tải tài liệu</strong></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <?php
 }
 ?>
@@ -1217,13 +1255,15 @@ get_footer();
 						$("#ajax-loader").show();
 					},
 					success: function(response) {
-						if (response.success) {
-							alert('Vui lòng kiểm tra email xác minh để được tải xuống tài liệu.');
-						} else {
-							alert(response.data.message);
-						}
 						$("#form_tai_xuong_file")[0].reset();
 						$('#popup_tai_xuong_file').modal('hide');
+
+						if (response.success) {
+							$('#modal_down_thanh_cong').modal('show');
+						} else {
+							// modal_down_that_bai
+							$('#modal_down_that_bai').modal('show');
+						}
 					},
 					error: function() {
 						alert('Có lỗi xảy ra khi gửi dữ liệu.');
