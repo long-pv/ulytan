@@ -422,14 +422,25 @@ function wp_breadcrumbs()
 	$home = __('Trang chủ', 'basetheme');
 	$before = '<span class="current">';
 	$after = '</span>';
-    
-    // Danh sách các post type cần xử lý riêng
-    $allowed_post_types = [
-        'form_nga', 'form_trung', 'form_nhat', 'form_han', 'form_phap', 'form_duc',
-        'form_anh', 'form_arap', 'form_la_tinh', 'form_rumani', 'form_ucraina',
-        'form_tiep', 'form_bungari', 'form_khac'
-    ];
-    
+
+	// Danh sách các post type cần xử lý riêng
+	$allowed_post_types = [
+		'form_nga',
+		'form_trung',
+		'form_nhat',
+		'form_han',
+		'form_phap',
+		'form_duc',
+		'form_anh',
+		'form_arap',
+		'form_la_tinh',
+		'form_rumani',
+		'form_ucraina',
+		'form_tiep',
+		'form_bungari',
+		'form_khac'
+	];
+
 	if (!is_admin() && !is_home() && (!is_front_page() || is_paged())) {
 
 		global $post;
@@ -454,16 +465,16 @@ function wp_breadcrumbs()
 
 			case is_single() && !is_attachment():
 				$post_type = $post->post_type;
-                
-                // Nếu là post type trong danh sách $allowed_post_types
-                if (in_array($post_type, $allowed_post_types)) {
-                    $post_type_obj = get_post_type_object($post_type);
-                    if ($post_type_obj) {
-                        echo '<a href="' . get_post_type_archive_link($post_type) . '">' . $post_type_obj->labels->name . '</a>' . $delimiter . ' ';
-                    }
-                    echo $before . get_the_title() . $after;
-                    break;
-                }
+
+				// Nếu là post type trong danh sách $allowed_post_types
+				if (in_array($post_type, $allowed_post_types)) {
+					$post_type_obj = get_post_type_object($post_type);
+					if ($post_type_obj) {
+						echo '<a href="' . get_post_type_archive_link($post_type) . '">' . $post_type_obj->labels->name . '</a>' . $delimiter . ' ';
+					}
+					echo $before . get_the_title() . $after;
+					break;
+				}
 
 				if ($post_type == 'post') {
 					$categories = get_the_category($post->ID);
@@ -3730,9 +3741,48 @@ function dang_ky_tai_xuong()
 			set_transient("email_verification_$token", $data['email'], 7 * DAY_IN_SECONDS); // Hết hạn sau 7 ngày
 
 			// Thiết lập nội dung email
-			$subject_2 = "Tải tài liệu - ULYTAN";
+			$subject_2 = "Xác nhận Download";
 			$message_2 = '<p>ULYTAN kính chào quý khách! Vui lòng nhấp vào đây để nhận quyền tải tài liệu miễn phí tại Ulytan:';
 			$message_2 .= '<a href="' . $verify_link . '" >Tại đây.</a></p>';
+
+			$logo_url = get_template_directory_uri() . '/assets/images/logo.png';
+			$message_2 .= '<br>';
+			$message_2 .= '<div style="margin-top: 15px; font-size: 14px; font-family: Arial, sans-serif;">';
+			$message_2 .= '<div style="display: flex; align-items: center; margin-bottom: 8px; gap: 8px;">';
+			$message_2 .= '<span>👉</span> <span>Hãy theo dõi các kênh của ULYTAN để cập nhật thông tin cũng như các mẫu form tài liệu mới nhất.</span>';
+			$message_2 .= '</div>';
+			$message_2 .= '<div style="margin-left: 16px;">';
+			$message_2 .= '<a href="https://fb.com/@ulytan" style="text-decoration: none; color: #007bff;">Fb.com/@ulytan</a><br>';
+			$message_2 .= '<a href="https://www.tiktok.com/@ulytan" style="text-decoration: none; color: #007bff;">Tiktok.com/@ulytan</a><br>';
+			$message_2 .= '<a href="https://www.youtube.com/@ulytan" style="text-decoration: none; color: #007bff;">Youtube.com/@ulytan</a>';
+			$message_2 .= '</div>';
+			$message_2 .= '</div>';
+			$message_2 .= '<br>';
+			$message_2 .= '<div style="font-family: Arial, sans-serif;width: 500px;">';
+			$message_2 .= '<div style="font-weight: 500; font-size: 14px; margin-bottom: 16px;">ULYTAN Trân Trọng !</div>';
+			$message_2 .= '<div style="display: flex; border: 1px solid #ccc;">';
+			$message_2 .= '<div style="width: 40%; text-align: center; padding: 10px;border-right: 1px solid #ccc">';
+			$message_2 .= '<img style="max-width: 100%; height: auto;" src="' . $logo_url . '" >';
+			$message_2 .= '</div>';
+			$message_2 .= '<div style="width: 60%; padding: 10px; font-size: 14px;">';
+			$message_2 .= '<div><strong>ULYTAN - Siêu nhanh, siêu đơn giản, siêu chính xác</strong></div>';
+			$message_2 .= '<div style="margin-top: 10px;">';
+			$message_2 .= '<div style="display: flex; align-items: center; margin-bottom: 8px; gap: 8px;">';
+			$message_2 .= '<span>📞</span> <a href="tel:19004338" style="text-decoration: none; color: #007bff;">19004338</a>';
+			$message_2 .= '</div>';
+			$message_2 .= '<div style="display: flex; align-items: center; margin-bottom: 8px; gap: 8px;">';
+			$message_2 .= '<span>🌐</span> <a href="https://ulytan.com" style="text-decoration: none; color: #007bff;">https://ulytan.com</a>';
+			$message_2 .= '</div>';
+			$message_2 .= '<div style="display: flex; align-items: center; margin-bottom: 8px; gap: 8px;">';
+			$message_2 .= '<span>📂</span> <a href="mailto:support@ulytan.com" style="text-decoration: none; color: #007bff;">Support@ulytan.com</a>';
+			$message_2 .= '</div>';
+			$message_2 .= '<div style="display: flex; align-items: center; margin-bottom: 8px; gap: 8px;">';
+			$message_2 .= '<span>📍</span> <span>TRỤ SỞ: 146 P. Yên Lãng, P. Đống Đa, Hà Nội</span>';
+			$message_2 .= '</div>';
+			$message_2 .= '</div>';
+			$message_2 .= '</div>';
+			$message_2 .= '</div>';
+			$message_2 .= '</div>';
 
 			// Gửi email
 			wp_mail($to, $subject_2, $message_2, $headers);
