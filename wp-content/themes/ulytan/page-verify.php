@@ -13,17 +13,16 @@ if (isset($_GET['token']) && isset($_GET['email'])) {
     // Kiểm tra token trong Transient API
     $saved_email = get_transient("email_verification_$token");
 
-    $status = "text-success";
+    if ($saved_email && $saved_email === $email) {
+        // Xác minh thành công → Đặt cookie (1 năm)
+        setcookie("verified_email", 'da_dang_ky', time() + (5 * 365 * 24 * 60 * 60), "/");
+        setcookie("verified_email_value", $saved_email, time() + (5 * 365 * 24 * 60 * 60), "/");
+        delete_transient("email_verification_$token");
 
-    // if ($saved_email && $saved_email === $email) {
-    //     // Xác minh thành công → Đặt cookie (1 năm)
-    //     setcookie("verified_email", 'da_dang_ky', time() + (365 * 24 * 60 * 60), "/");
-    //     delete_transient("email_verification_$token");
-
-    //     $status = "text-success";
-    // } else {
-    //     $status = "text-danger";
-    // }
+        $status = "text-success";
+    } else {
+        $status = "text-danger";
+    }
 } else {
     $status = "text-warning";
 }

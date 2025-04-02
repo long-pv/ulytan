@@ -20,7 +20,7 @@
             "library": "all",
             "min_size": "",
             "max_size": "",
-            "mime_types": "pdf, doc, docx, xls, xlsx"
+            "mime_types": "pdf, docx, xlsx"
         },
         {
             "key": "field_67c1d52e49637",
@@ -41,6 +41,26 @@
             "toolbar": "full",
             "media_upload": 0,
             "delay": 0
+        },
+        {
+            "key": "field_67ed6183add30",
+            "label": "Download count",
+            "name": "download_count",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -67,5 +87,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1740756364
+    "modified": 1743610269
 }

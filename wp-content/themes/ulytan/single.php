@@ -136,6 +136,34 @@ get_header();
 					if (in_array($post_type, $allowed_post_types)) {
 						$danh_sach_tai_lieu = get_field('danh_sach_tai_lieu') ?? [];
 						if ($danh_sach_tai_lieu) {
+							$check_email_val = false;
+							$check_verified = false;
+							$verified_email_value = !empty($_COOKIE["verified_email_value"]) ? $_COOKIE["verified_email_value"] : '';
+
+							if (!empty($_COOKIE["verified_email"]) && $_COOKIE["verified_email"] == 'da_dang_ky') {
+								$check_verified = true;
+							}
+
+							if ($verified_email_value) {
+								$args = [
+									'post_type'      => 'contact_info',
+									'meta_query'     => [
+										[
+											'key'   => 'email',
+											'value' => $verified_email_value,
+											'compare' => '='
+										]
+									],
+									'posts_per_page' => 1, // Chỉ cần kiểm tra 1 kết quả
+									'fields'         => 'ids' // Chỉ lấy ID để tối ưu hiệu suất
+								];
+
+								$matching_posts = get_posts($args);
+
+								if (!empty($matching_posts)) {
+									$check_email_val = true;
+								}
+							}
 					?>
 							<div class="news_documents_list">
 								<?php
@@ -164,9 +192,9 @@ get_header();
 
 											<div class="news_documents_item_btn">
 												<?php
-												if (!empty($_COOKIE["verified_email"]) && $_COOKIE["verified_email"] == 'da_dang_ky') {
+												if ($check_email_val && $check_verified) {
 												?>
-													<a download href="<?php echo $url; ?>" class="btn_tai_xuong_modal_download btn_tai_xuong_modal">
+													<a download href="<?php echo $url; ?>" data-id="<?php echo $post_id; ?>" class="btn_tai_xuong_modal_download btn_tai_xuong_modal">
 														Tải xuống
 													</a>
 												<?php
@@ -1325,6 +1353,25 @@ get_footer();
 				},
 				complete: function() {
 					$("#ajax-loader").hide();
+				}
+			});
+		});
+
+		$('.btn_tai_xuong_modal_download').on('click', function(e) {
+			var postID = $(this).data('id'); // Lấy post ID từ data-id
+
+			$.ajax({
+				url: '<?php echo admin_url('admin-ajax.php'); ?>',
+				type: 'POST',
+				data: {
+					action: 'update_download_count', // Tên action để WP xử lý
+					post_id: postID
+				},
+				success: function(response) {
+					console.log('Lượt tải xuống đã được cập nhật!');
+				},
+				error: function(error) {
+					console.log('Lỗi:', error);
 				}
 			});
 		});

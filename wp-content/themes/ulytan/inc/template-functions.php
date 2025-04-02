@@ -3836,7 +3836,7 @@ function dang_ky_tai_xuong()
 
 		$new_post = array(
 			'post_type'   => 'contact_info',
-			'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['ten_trang']),
+			'post_title'  => sanitize_text_field($data['email'] . ' - Download tài liệu'),
 			'post_status' => 'publish',
 		);
 		$post_id = wp_insert_post($new_post);
@@ -3954,3 +3954,78 @@ function rate_post()
 
 add_action('wp_ajax_rate_post', 'rate_post');
 add_action('wp_ajax_nopriv_rate_post', 'rate_post');
+
+function update_download_count()
+{
+	if (isset($_POST['post_id'])) {
+		$post_id = intval($_POST['post_id']);
+
+		// Lấy số lượt tải xuống, nếu không có thì trả về 0
+		$current_count = get_post_meta($post_id, 'download_count', true);
+		$current_count = $current_count ? intval($current_count) : 0;
+
+		// Tăng số lượt tải xuống lên 1
+		$new_count = $current_count + 1;
+
+		// Cập nhật số lượt tải xuống
+		update_post_meta($post_id, 'download_count', $new_count);
+
+		wp_send_json_success(['new_count' => $new_count]);
+	} else {
+		wp_send_json_error(['message' => 'Không tìm thấy post_id']);
+	}
+}
+add_action('wp_ajax_update_download_count', 'update_download_count');
+add_action('wp_ajax_nopriv_update_download_count', 'update_download_count');
+
+// 1. Thêm cột "Lượt tải xuống" ngay sau cột Tiêu đề
+function add_download_count_column($columns)
+{
+	$new_columns = [];
+
+	foreach ($columns as $key => $title) {
+		$new_columns[$key] = $title;
+
+		// Chèn cột "Lượt tải xuống" ngay sau cột "Tiêu đề"
+		if ($key === 'title') {
+			$new_columns['download_count'] = 'Lượt tải xuống';
+		}
+	}
+
+	return $new_columns;
+}
+add_filter('manage_edit-download_documents_columns', 'add_download_count_column');
+
+// 2. Hiển thị số lượt tải xuống trong cột mới
+function show_download_count_column($column, $post_id)
+{
+	if ($column === 'download_count') {
+		$download_count = get_post_meta($post_id, 'download_count', true);
+		echo $download_count ? intval($download_count) : 0; // Hiển thị 0 nếu không có dữ liệu
+	}
+}
+add_action('manage_download_documents_posts_custom_column', 'show_download_count_column', 10, 2);
+
+// 3. Cho phép sắp xếp theo số lượt tải xuống
+function make_download_count_column_sortable($columns)
+{
+	$columns['download_count'] = 'download_count';
+	return $columns;
+}
+add_filter('manage_edit-download_documents_sortable_columns', 'make_download_count_column_sortable');
+
+// 4. Xử lý sắp xếp dữ liệu theo số lượt tải xuống
+function sort_download_count_column($query)
+{
+	if (!is_admin() || !$query->is_main_query()) {
+		return;
+	}
+
+	if ($orderby = $query->get('orderby')) {
+		if ($orderby === 'download_count') {
+			$query->set('meta_key', 'download_count');
+			$query->set('orderby', 'meta_value_num'); // Sắp xếp theo số
+		}
+	}
+}
+add_action('pre_get_posts', 'sort_download_count_column');
