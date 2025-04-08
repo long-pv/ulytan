@@ -540,7 +540,7 @@ if ($menu_dich_vu):
     $menu_html_mb .= '<ul class="sub-menu">';
 
     $menu_html .= '<div class="sub_menu_dich_vu">';
-    $menu_html .= '<div class="title">Dịch vụ</div>';
+    // $menu_html .= '<div class="title">Dịch vụ</div>';
     $menu_html .= '<div class="desc">ULYTAN cung cấp dịch vụ dịch thuật cho rất nhiều thứ tiếng với 63 quốc gia hiện nay, cùng với nhiều dịch vụ khác như đổi bằng lái xe, xin visa quốc tế, ...</div>';
     $menu_html .= '<div class="row list_dich_vu">';
     // while ($query->have_posts()) : $query->the_post();

@@ -75,6 +75,14 @@ ob_end_flush(); // Đẩy output ra trình duyệt
         ?>
     </div>
 </div>
+<style>
+    .header {
+        display: none !important;
+    }
 
+    .footer {
+        display: none !important;
+    }
+</style>
 <?php
 get_footer();

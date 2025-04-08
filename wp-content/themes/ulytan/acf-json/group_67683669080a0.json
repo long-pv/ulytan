@@ -67,7 +67,7 @@
         },
         {
             "key": "field_67cbd75957cc9",
-            "label": "Menu dịch vụ (cấp 2)",
+            "label": "Menu dịch vụ nhóm 1",
             "name": "menu_dich_vu",
             "aria-label": "",
             "type": "repeater",
@@ -171,5 +171,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1741412292
+    "modified": 1744090448
 }

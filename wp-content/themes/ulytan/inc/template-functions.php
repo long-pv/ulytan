@@ -3777,7 +3777,7 @@ function dang_ky_tai_xuong()
 			$message_2 .= '<span>📂</span> <a href="mailto:support@ulytan.com" style="text-decoration: none; color: #007bff;">Support@ulytan.com</a>';
 			$message_2 .= '</div>';
 			$message_2 .= '<div style="display: flex; align-items: center; margin-bottom: 8px; gap: 8px;">';
-			$message_2 .= '<span>📍</span> <span>TRỤ SỞ: 146 P. Yên Lãng, P. Đống Đa, Hà Nội</span>';
+			$message_2 .= '<span>📍</span> <span>TRỤ SỞ: 146 Phố Yên lãng, P Thịnh Quang, Q Đống Đa, TP Hà Nội</span>';
 			$message_2 .= '</div>';
 			$message_2 .= '</div>';
 			$message_2 .= '</div>';

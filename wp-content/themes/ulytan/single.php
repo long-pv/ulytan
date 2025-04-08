@@ -928,7 +928,9 @@ if (in_array($post_type, $allowed_post_types)) {
 					</div>
 					<div class="editor">
 						<p style="text-align: center;"><span style="color: #339966;"><span style="font-size: 32px;"> Đăng ký thành công!</span></span></p>
-						<p style="text-align: center;"><strong>Vui lòng kiểm tra email ( kể cả thư rác/Spam) để được cấp quyền tải tài liệu.</strong></p>
+						<p style="text-align: center;">
+							<em>Vui lòng kiểm tra email <strong>(Lưu ý: Kiểm tra cả thư rác/Spam)</strong> để được cấp quyền tải tài liệu.</em>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -947,7 +949,9 @@ if (in_array($post_type, $allowed_post_types)) {
 					</div>
 					<div class="editor">
 						<p style="text-align: center;"><span style="color: #900101;"><span style="font-size: 48px;">Email này đã được đăng ký.</span></span></p>
-						<p style="text-align: center;"><strong>Vui lòng kiểm tra hộp thư (kể cả Spam) hoặc tìm “kythuat@ulytan.com” để mở link đã được cấp quyền tải tài liệu</strong></p>
+						<p style="text-align: center;">
+							<em>Email này đã được đăng ký thành công trước đây. Vui lòng kiểm tra hộp thư <strong>(Lưu ý: Kiểm tra cả thư rác/Spam)</strong> hoặc tìm “kythuat@ulytan.com” để mở link đã được cấp quyền tải tài liệu.</em>
+						</p>
 					</div>
 				</div>
 			</div>
