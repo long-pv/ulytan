@@ -2280,6 +2280,12 @@ footer.footer.bg-primary {
 
             li {
                 margin-bottom: 8px;
+                font-size: 14px;
+
+                &.nav-h2 {
+                    font-weight: 700;
+                    font-size: 15px;
+                }
             }
 
             a {
@@ -2320,9 +2326,9 @@ footer.footer.bg-primary {
 
     .single_toc_content {
         position: fixed;
-        width: calc(100% - 30px);
-        height: calc(100vh - 90px);
-        bottom: 10px;
+        width: calc(100% - 20px);
+        height: 100vh;
+        bottom: 0px;
         right: 20px;
         z-index: 999999;
         overflow-y: auto;
