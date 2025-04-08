@@ -561,6 +561,23 @@
             "toolbar": "basic",
             "media_upload": 0,
             "delay": 0
+        },
+        {
+            "key": "field_67f5238b98521",
+            "label": "Chứng nhận DMCA",
+            "name": "chung_nhan_dmca",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -581,5 +598,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1741105645
+    "modified": 1744118792
 }

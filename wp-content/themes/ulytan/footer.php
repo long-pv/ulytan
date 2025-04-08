@@ -382,6 +382,18 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
                 <?php endif; ?>
             </div>
         </div>
+
+        <?php
+        $chung_nhan_dmca = get_field('chung_nhan_dmca', 'option') ?? '';
+        if ($chung_nhan_dmca):
+        ?>
+            <div class="chung_nhan_dcma">
+                <a target="_blank" href="<?php echo $chung_nhan_dmca; ?>" class="link">
+                    <?php $logo_url = get_template_directory_uri() . '/assets/images/dmca-badge.png'; ?>
+                    <img src="<?php echo $logo_url; ?>" alt="dcma">
+                </a>
+            </div>
+        <?php endif; ?>
     </div>
 </footer>
 
@@ -394,21 +406,21 @@ $thong_tin_doanh_nghiep = get_field('thong_tin_doanh_nghiep', 'option') ?? '';
         </div>
     </div>-->
     <div class='global-spinner-container'>
-      <div class='spinners'>
-        <div class='bar1'></div>
-        <div class='bar2'></div>
-        <div class='bar3'></div>
-        <div class='bar4'></div>
-        <div class='bar5'></div>
-        <div class='bar6'></div>
-        <div class='bar7'></div>
-        <div class='bar8'></div>
-        <div class='bar9'></div>
-        <div class='bar10'></div>
-        <div class='bar11'></div>
-        <div class='bar12'></div>
-      </div>
-      <div class='spinner-message'>Loading...</div>
+        <div class='spinners'>
+            <div class='bar1'></div>
+            <div class='bar2'></div>
+            <div class='bar3'></div>
+            <div class='bar4'></div>
+            <div class='bar5'></div>
+            <div class='bar6'></div>
+            <div class='bar7'></div>
+            <div class='bar8'></div>
+            <div class='bar9'></div>
+            <div class='bar10'></div>
+            <div class='bar11'></div>
+            <div class='bar12'></div>
+        </div>
+        <div class='spinner-message'>Loading...</div>
     </div>
 </div>
 
@@ -590,6 +602,14 @@ wp_reset_postdata();
         $('.header__menupc ul.menu li.menu_dich_vu').append(menu_dich_vu);
         $('.header__menusp ul.menu li.menu_dich_vu').addClass('menu-item-has-children');
         $('.header__menusp ul.menu li.menu_dich_vu').append(menu_dich_vu_mb);
+    });
+
+    document.addEventListener('wpcf7beforesubmit', function(event) {
+        document.getElementById("ajax-loader").style.display = "block";
+    });
+
+    document.addEventListener('wpcf7submit', function(event) {
+        document.getElementById("ajax-loader").style.display = "none";
     });
 </script>
 

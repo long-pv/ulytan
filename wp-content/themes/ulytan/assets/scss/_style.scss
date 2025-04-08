@@ -1056,7 +1056,7 @@
 
 .accordion {
     &__item {
-        margin-bottom: 16px;
+        margin-bottom: 6px;
     }
 
     &__body {
@@ -2665,7 +2665,7 @@ footer {
     .footer_form input[type="text"],
     .footer_form input[type="tel"],
     .footer_form input[type="email"] {
-        font-size: 13px;
+        font-size: 16px;
     }
 
     .footer_form input[type="submit"] {
@@ -2760,7 +2760,7 @@ footer {
         outline: none !important;
         padding: 8px 12px;
         color: #757575 !important;
-        font-size: 13px;
+        font-size: 16px;
 
         p {
             margin: 0 !important;
@@ -3797,5 +3797,35 @@ footer {
             border-bottom: 1px dashed #999;
             width: 80px;
         }
+    }
+}
+
+.footer_form {
+    .wpcf7-spinner {
+        display: none !important;
+    }
+}
+
+.chung_nhan_dcma {
+    position: relative;
+    display: flex;
+    margin-top: 24px;
+
+    .link {
+        display: inline-flex;
+        position: relative;
+        z-index: 10;
+        background-color: $primary;
+    }
+
+    &::before {
+        content: '';
+        height: 1px;
+        width: 100%;
+        top: 50%;
+        left: 0px;
+        background-color: #fff;
+        position: absolute;
+        transform: translateY(-50%);
     }
 }
