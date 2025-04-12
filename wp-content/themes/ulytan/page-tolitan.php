@@ -50,7 +50,7 @@ if ($author_content) :
 							</div>
 						</div>
 					<?php endif; ?>
-					<div class="editor">
+					<div class="editor text-white">
 						<?php echo $author_content; ?>
 					</div>
 				</div>
