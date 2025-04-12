@@ -3787,31 +3787,31 @@ function dang_ky_tai_xuong()
 			// Gửi email
 			wp_mail($to, $subject_2, $message_2, $headers);
 
-			$args = [
-				'post_type'      => 'contact_info',
-				'meta_query'     => [
-					'relation' => 'AND',
-					[
-						'key'     => 'email',
-						'value'   => $to,
-						'compare' => '='
-					],
-					[
-						'key'     => 'dang_ki_tai_xuong',
-						'value'   => 'yes',
-						'compare' => '='
-					]
-				],
-				'posts_per_page' => 1
-			];
-			$query = new WP_Query($args);
-			if ($query->have_posts()) {
-				wp_send_json_error(array(
-					'message' => 'Email này đã được đăng ký. Vui lòng kiểm tra hộp thư (kể cả Spam) hoặc tìm "kythuat@ulytan.com" để mở link cũ trước đó đã được cấp quyền để vào lại và tải tài liệu.'
-				));
-				return;
-			}
-			wp_reset_postdata();
+			// $args = [
+			// 	'post_type'      => 'contact_info',
+			// 	'meta_query'     => [
+			// 		'relation' => 'AND',
+			// 		[
+			// 			'key'     => 'email',
+			// 			'value'   => $to,
+			// 			'compare' => '='
+			// 		],
+			// 		[
+			// 			'key'     => 'dang_ki_tai_xuong',
+			// 			'value'   => 'yes',
+			// 			'compare' => '='
+			// 		]
+			// 	],
+			// 	'posts_per_page' => 1
+			// ];
+			// $query = new WP_Query($args);
+			// if ($query->have_posts()) {
+			// 	wp_send_json_error(array(
+			// 		'message' => 'Email này đã được đăng ký. Vui lòng kiểm tra hộp thư (kể cả Spam) hoặc tìm "kythuat@ulytan.com" để mở link cũ trước đó đã được cấp quyền để vào lại và tải tài liệu.'
+			// 	));
+			// 	return;
+			// }
+			// wp_reset_postdata();
 		}
 
 		$subject = 'Upload - tài liệu';
