@@ -140,8 +140,9 @@
                             background: $white;
                             transition: all 0.3s;
                             color: $primary;
-                            padding: 12px $margin_menu_pc;
+                            padding: 6px $margin_menu_pc;
                             font-size: 14px;
+                            font-weight: 500;
                         }
 
                         &.current-menu-parent,
@@ -182,14 +183,16 @@
                                     background: $white;
                                     transition: all 0.3s;
                                     color: $primary;
-                                    padding: 12px 12px 12px 32px;
-                                    font-size: 14px;
+                                    padding: 6px 12px 6px 32px;
+                                    // font-size: 14px;
+                                    font-size: 12px;
+                                    font-weight: 500;
                                     position: relative;
 
                                     &::before {
                                         content: '';
                                         position: absolute;
-                                        top: 18px;
+                                        top: 12px;
                                         left: 20px;
                                         width: 6px;
                                         height: 6px;
@@ -200,7 +203,16 @@
 
                                 &:hover {
                                     &>a {
-                                        font-weight: 600;
+                                        font-weight: 700;
+                                    }
+                                }
+
+                                &.current-menu-parent,
+                                &.current-menu-item,
+                                &.current_page_item {
+                                    &>a {
+                                        color: $primary !important;
+                                        font-weight: 700;
                                     }
                                 }
                             }
@@ -208,11 +220,20 @@
 
                         &:hover {
                             &>a {
-                                font-weight: 600;
+                                font-weight: 700;
                             }
 
                             &>ul.sub-menu {
                                 display: block;
+                            }
+                        }
+
+                        &.current-menu-parent,
+                        &.current-menu-item,
+                        &.current_page_item {
+                            &>a {
+                                color: $primary !important;
+                                font-weight: 700;
                             }
                         }
                     }

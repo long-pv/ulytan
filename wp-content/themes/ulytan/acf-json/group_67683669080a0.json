@@ -66,6 +66,26 @@
             "ui": 1
         },
         {
+            "key": "field_67fe8cbdb3114",
+            "label": "Mô tả dịch vụ nhóm 1",
+            "name": "mo_ta_dich_vu_nhom_1",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
             "key": "field_67cbd75957cc9",
             "label": "Menu dịch vụ nhóm 1",
             "name": "menu_dich_vu",
@@ -171,5 +191,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1744090448
+    "modified": 1744735454
 }

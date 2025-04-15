@@ -540,4 +540,17 @@
 		}
 		isScrollDisabled = !isScrollDisabled;
 	});
+
+	$(".header__menupc ul.menu li a span").each(function () {
+		$(this)
+			.css({
+				"pointer-events": "auto",
+				cursor: "text",
+				"user-select": "text",
+			})
+			.on("click", function (e) {
+				e.preventDefault(); // không chuyển hướng khi click
+				e.stopPropagation(); // không lan click lên thẻ a
+			});
+	});
 })(jQuery, window);

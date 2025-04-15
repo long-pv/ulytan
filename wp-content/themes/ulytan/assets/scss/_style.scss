@@ -2172,9 +2172,17 @@ footer.footer.bg-primary {
                 justify-content: space-between;
 
                 .item_title {
-                    font-size: 18px;
-                    font-weight: 700;
+                    // font-size: 18px;
+                    // font-weight: 700;
+                    font-size: 14px;
+                    font-weight: 500;
                     color: $primary;
+                    transition: all 0.3s;
+
+                    &:hover {
+                        color: #ffd503 !important;
+                        // font-weight: 700;
+                    }
                 }
 
                 .item_desc {
@@ -3834,4 +3842,10 @@ footer {
         position: absolute;
         transform: translateY(-50%);
     }
+}
+
+.sub_menu_dich_vu_desc_mb {
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 700;
 }
