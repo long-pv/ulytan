@@ -70,7 +70,7 @@ add_filter('auto_update_plugin', '__return_false');
 function video_popup($src_iframe, $thumb = null)
 {
 	$url = getYoutubeEmbedUrl($src_iframe);
-?>
+	?>
 	<div class="videoBlock">
 		<div class="videoBlock__inner">
 			<img class="videoBlock__img" src="<?php echo $thumb; ?>">
@@ -79,7 +79,8 @@ function video_popup($src_iframe, $thumb = null)
 				<a href="javascript:void(0);" class="videoBlock__playAction" data-toggle="modal" data-target="#videoUrl"
 					data-src="<?php echo $url; ?>">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-						<path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z" />
+						<path
+							d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z" />
 					</svg>
 				</a>
 			</div>
@@ -306,19 +307,19 @@ function register_cpt($post_type, $data = [])
 	];
 
 	$args = array(
-		'labels'             => $labels,
-		'public'             => true,
-		'has_archive'        => true,
-		'rewrite'            => array(
-			'slug'       => $data['slug'] ?? $post_type,
+		'labels' => $labels,
+		'public' => true,
+		'has_archive' => true,
+		'rewrite' => array(
+			'slug' => $data['slug'] ?? $post_type,
 			'with_front' => false,
 			'hierarchical' => true,
 		),
 		'menu_position' => $position,
-		'supports'           => array('title', 'editor', 'thumbnail', 'revisions', 'author', $attributes),
-		'show_in_nav_menus'  => true,
-		'show_ui'            => true,
-		'menu_icon'          => 'dashicons-admin-post',
+		'supports' => array('title', 'editor', 'thumbnail', 'revisions', 'author', $attributes),
+		'show_in_nav_menus' => true,
+		'show_ui' => true,
+		'menu_icon' => 'dashicons-admin-post',
 		'archive_title' => $data['labels'],
 	);
 
@@ -611,7 +612,7 @@ add_filter('comment_form_defaults', 'change_comment_form_submit_button_text');
 function add_custom_cf7_script()
 {
 	if (!is_admin() && class_exists('WPCF7')) {
-	?>
+		?>
 		<!-- contact form 7 custom -->
 		<style>
 			.wpcf7-pointer-events {
@@ -620,14 +621,14 @@ function add_custom_cf7_script()
 		</style>
 
 		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$(".wpcf7-form").on("submit", function() {
+			jQuery(document).ready(function ($) {
+				$(".wpcf7-form").on("submit", function () {
 					$('input[type="submit"]').addClass("wpcf7-pointer-events");
 				});
 
 				document.addEventListener(
 					"wpcf7submit",
-					function(event) {
+					function (event) {
 						$('input[type="submit"]').removeClass("wpcf7-pointer-events");
 					},
 					false
@@ -635,7 +636,7 @@ function add_custom_cf7_script()
 			});
 		</script>
 		<!-- end -->
-	<?php
+		<?php
 	}
 }
 add_action('wp_footer', 'add_custom_cf7_script', 99);
@@ -646,7 +647,7 @@ function accordion($data = [])
 		$key_id = mt_rand(1000, 9999);
 		$accordion_id = 'accordion_' . $key_id;
 		$index = 1;
-	?>
+		?>
 		<div class="accordion" id="<?php echo $accordion_id; ?>">
 			<?php
 			foreach ($data as $key => $item):
@@ -657,7 +658,7 @@ function accordion($data = [])
 					$expanded = 'false';
 					$attr_button = 'type="button" data-toggle="collapse" data-target="#' . $collapse . '" aria-controls="' . $collapse . '"';
 					$attr_collapse = 'id="' . $collapse . '" aria-labelledby="' . $heading . '" data-parent="#' . $accordion_id . '"';
-			?>
+					?>
 					<div class="accordion__item">
 						<div class="accordion__header" id="<?php echo $heading; ?>">
 							<button class="accordion__btn" aria-expanded="<?php echo $expanded; ?>" <?php echo $attr_button; ?>>
@@ -671,7 +672,7 @@ function accordion($data = [])
 							</div>
 						</div>
 					</div>
-			<?php
+					<?php
 					$index++;
 				endif;
 			endforeach;
@@ -749,19 +750,19 @@ function save_contact_info()
 		// wp_mail('xuandxop@gmail.com', $subject, $message, $headers);
 
 		$new_post = array(
-			'post_type'   => 'contact_info',
-			'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['ten_trang']),
+			'post_type' => 'contact_info',
+			'post_title' => sanitize_text_field($data['phone'] . ' - ' . $data['ten_trang']),
 			'post_status' => 'publish',
 		);
 		$post_id = wp_insert_post($new_post);
 
 		if ($post_id) {
 			if (function_exists('update_field')) {
-				$services =  implode(', ', $data['services']) ?? '';
+				$services = implode(', ', $data['services']) ?? '';
 				update_field('full_name', sanitize_text_field($data['full_name']), $post_id);
 				update_field('phone', sanitize_text_field($data['phone']), $post_id);
 				update_field('email', sanitize_text_field($data['email']), $post_id);
-				update_field('services_list',   sanitize_text_field((string) $services), $post_id);
+				update_field('services_list', sanitize_text_field((string) $services), $post_id);
 				update_field('services_2', sanitize_text_field($data['services_2']), $post_id);
 				update_field('services_10', sanitize_text_field($data['services_10']), $post_id);
 				update_field('services_11', sanitize_text_field($data['services_11']), $post_id);
@@ -855,8 +856,8 @@ function save_form_ctv()
 		// wp_mail('xuandxop@gmail.com', $subject, $message, $headers);
 
 		$new_post = array(
-			'post_type'   => 'form_ctv',
-			'post_title'  => sanitize_text_field($data['phone'] . ' - ' . $data['email']),
+			'post_type' => 'form_ctv',
+			'post_title' => sanitize_text_field($data['phone'] . ' - ' . $data['email']),
 			'post_status' => 'publish',
 		);
 		$post_id = wp_insert_post($new_post);
@@ -942,8 +943,8 @@ function save_page_form()
 		}
 
 		$new_post = array(
-			'post_type'   => 'form_contribute',
-			'post_title'  => sanitize_text_field($data['so_dien_thoai'] ?? 'No Phone'),
+			'post_type' => 'form_contribute',
+			'post_title' => sanitize_text_field($data['so_dien_thoai'] ?? 'No Phone'),
 			'post_status' => 'publish',
 		);
 		$post_id = wp_insert_post($new_post);
@@ -986,16 +987,16 @@ function ajax_pagination_load_post()
 	);
 	$query = new WP_Query($args);
 
-	if ($query->have_posts()) :
+	if ($query->have_posts()):
 		while ($query->have_posts()):
 			$query->the_post();
-		?>
+			?>
 			<li>
 				<a class="notarized_translation_news_item" href="<?php the_permalink(); ?>">
 					<?php the_title(); ?>
 				</a>
 			</li>
-	<?php
+			<?php
 		endwhile;
 	endif;
 	wp_die();
@@ -1017,8 +1018,8 @@ function ajax_pagination_handler()
 
 	echo paginate_links(
 		array(
-			'total'     => $query->max_num_pages,
-			'current'   => $paged,
+			'total' => $query->max_num_pages,
+			'current' => $paged,
 			'end_size' => 2,
 			'mid_size' => 1,
 			'prev_text' => __('Trước', 'basetheme'),
@@ -1117,10 +1118,11 @@ add_action('admin_head', function () {
 add_action('admin_footer', function () {
 	?>
 	<script type="text/javascript">
-		jQuery(document).ready(function($) {
+		jQuery(document).ready(function ($) {
 			$('#toplevel_page_cfdb7-list .wp-menu-name').text('4. Form chân trang');
 			$('#menu-pages .wp-menu-name').text('Loại trang');
-			$('#menu-posts a[href="edit-tags.php?taxonomy=category"]').text('Danh mục - Tin hữu ích');
+			$('#menu-posts a[href="edit-tags.php?taxonomy=category"]').text('Danh mục - Khởi tạo');
+			$('#menu-posts-local_store .wp-menu-name').text('DS Văn phòng');
 		});
 	</script>
 	<?php
@@ -1192,22 +1194,22 @@ function add_export_button_with_jquery()
 		$terms = [];
 		if ($post_type === 'contact_info') {
 			$terms = get_terms(array(
-				'taxonomy'   => 'loai_page',
+				'taxonomy' => 'loai_page',
 				'hide_empty' => false,
 			));
 		}
-	?>
+		?>
 		<script type="text/javascript">
-			jQuery(document).ready(function($) {
+			jQuery(document).ready(function ($) {
 				var noti = '<?php echo isset($_POST['export_csv']) ? 'Export successfully.' : ''; ?>';
 				var post_type_export = '<?php echo $post_type; ?>';
 
 				var selectHTML = '';
-				<?php if ($post_type === 'contact_info') : ?>
+				<?php if ($post_type === 'contact_info'): ?>
 					// Tạo danh sách <option> từ các terms nếu là contact_info
 					selectHTML = '<select name="loai_page_select" class="button button-secondary" style="margin-right: 10px;">';
-					<?php if (!empty($terms)) : ?>
-						<?php foreach ($terms as $term) : ?>
+					<?php if (!empty($terms)): ?>
+						<?php foreach ($terms as $term): ?>
 							selectHTML += '<option value="<?php echo esc_attr($term->term_id); ?>"><?php echo esc_html($term->name); ?></option>';
 						<?php endforeach; ?>
 					<?php endif; ?>
@@ -1229,7 +1231,7 @@ function add_export_button_with_jquery()
 				}
 			});
 		</script>
-	<?php
+		<?php
 	}
 }
 add_action('admin_footer', 'add_export_button_with_jquery');
@@ -1267,9 +1269,9 @@ function contact_info_export_data_csv()
 
 	$loai_page_select = $_POST['loai_page_select'] ?? ''; // Lấy giá trị của loại page (nếu có)
 	$args = array(
-		'post_type'      => 'contact_info', // Post type cần lấy
+		'post_type' => 'contact_info', // Post type cần lấy
 		'posts_per_page' => -1,             // Lấy tất cả bài viết
-		'post_status'    => 'publish',      // Chỉ lấy bài đã xuất bản
+		'post_status' => 'publish',      // Chỉ lấy bài đã xuất bản
 	);
 
 	// Thêm điều kiện lọc theo loại page nếu có lựa chọn
@@ -1277,8 +1279,8 @@ function contact_info_export_data_csv()
 		$args['tax_query'] = array(
 			array(
 				'taxonomy' => 'loai_page',   // Taxonomy cần lọc
-				'field'    => 'id',        // Lọc theo slug
-				'terms'    => $loai_page_select, // Giá trị của loại page (slug)
+				'field' => 'id',        // Lọc theo slug
+				'terms' => $loai_page_select, // Giá trị của loại page (slug)
 			),
 		);
 
@@ -3469,9 +3471,9 @@ function form_ctv_export_data_csv()
 	);
 
 	$args = array(
-		'post_type'      => 'form_ctv', // Post type cần lấy
+		'post_type' => 'form_ctv', // Post type cần lấy
 		'posts_per_page' => -1,             // Lấy tất cả bài viết
-		'post_status'    => 'publish',      // Chỉ lấy bài đã xuất bản
+		'post_status' => 'publish',      // Chỉ lấy bài đã xuất bản
 	);
 
 	$query = new WP_Query($args);
@@ -3578,9 +3580,9 @@ function form_contribute_export_data_csv()
 	);
 
 	$args = array(
-		'post_type'      => 'form_contribute', // Post type cần lấy
+		'post_type' => 'form_contribute', // Post type cần lấy
 		'posts_per_page' => -1,             // Lấy tất cả bài viết
-		'post_status'    => 'publish',      // Chỉ lấy bài đã xuất bản
+		'post_status' => 'publish',      // Chỉ lấy bài đã xuất bản
 	);
 
 	$query = new WP_Query($args);
@@ -3616,26 +3618,26 @@ function create_loai_page_taxonomy()
 {
 	// Đăng ký taxonomy 'loai_page'
 	$labels = array(
-		'name'              => _x('Loại Page', 'taxonomy general name'),
-		'singular_name'     => _x('Loại Page', 'taxonomy singular name'),
-		'search_items'      => __('Tìm Loại Page'),
-		'all_items'         => __('Tất cả Loại Page'),
-		'parent_item'       => __('Loại Page cha'),
+		'name' => _x('Loại Page', 'taxonomy general name'),
+		'singular_name' => _x('Loại Page', 'taxonomy singular name'),
+		'search_items' => __('Tìm Loại Page'),
+		'all_items' => __('Tất cả Loại Page'),
+		'parent_item' => __('Loại Page cha'),
 		'parent_item_colon' => __('Loại Page cha:'),
-		'edit_item'         => __('Chỉnh sửa Loại Page'),
-		'update_item'       => __('Cập nhật Loại Page'),
-		'add_new_item'      => __('Thêm mới Loại Page'),
-		'new_item_name'     => __('Tên mới của Loại Page'),
-		'menu_name'         => __('Loại Page'),
+		'edit_item' => __('Chỉnh sửa Loại Page'),
+		'update_item' => __('Cập nhật Loại Page'),
+		'add_new_item' => __('Thêm mới Loại Page'),
+		'new_item_name' => __('Tên mới của Loại Page'),
+		'menu_name' => __('Loại Page'),
 	);
 
 	$args = array(
-		'hierarchical'      => true, // True nếu muốn hiển thị dạng phân cấp (giống category)
-		'labels'            => $labels,
-		'show_ui'           => true,
+		'hierarchical' => true, // True nếu muốn hiển thị dạng phân cấp (giống category)
+		'labels' => $labels,
+		'show_ui' => true,
 		'show_admin_column' => true,
-		'query_var'         => true,
-		'rewrite'           => array('slug' => 'loai_page'), // Đường dẫn của taxonomy
+		'query_var' => true,
+		'rewrite' => array('slug' => 'loai_page'), // Đường dẫn của taxonomy
 	);
 
 	// Gắn taxonomy 'loai_page' với post type 'contact_info'
@@ -3705,14 +3707,14 @@ function custom_comments_format($comment, $args, $depth)
 				<?php
 				comment_reply_link(array_merge($args, array(
 					'reply_text' => 'Trả lời',
-					'depth'      => $depth,
-					'max_depth'  => $args['max_depth']
+					'depth' => $depth,
+					'max_depth' => $args['max_depth']
 				)));
 				?>
 			</div>
 		</div>
 	</li>
-<?php
+	<?php
 }
 
 // Hook để xử lý yêu cầu AJAX
@@ -3835,19 +3837,19 @@ function dang_ky_tai_xuong()
 		wp_mail('Sales@ulytan.com', $subject, $message, $headers);
 
 		$new_post = array(
-			'post_type'   => 'contact_info',
-			'post_title'  => sanitize_text_field($data['email'] . ' - Download tài liệu'),
+			'post_type' => 'contact_info',
+			'post_title' => sanitize_text_field($data['email'] . ' - Download tài liệu'),
 			'post_status' => 'publish',
 		);
 		$post_id = wp_insert_post($new_post);
 
 		if ($post_id) {
 			if (function_exists('update_field')) {
-				$services =  implode(', ', $data['services']) ?? '';
+				$services = implode(', ', $data['services']) ?? '';
 				update_field('full_name', sanitize_text_field($data['full_name']), $post_id);
 				update_field('phone', sanitize_text_field($data['phone']), $post_id);
 				update_field('email', sanitize_text_field($data['email']), $post_id);
-				update_field('services_list',   sanitize_text_field((string) $services), $post_id);
+				update_field('services_list', sanitize_text_field((string) $services), $post_id);
 				update_field('services_2', sanitize_text_field($data['services_2']), $post_id);
 				update_field('services_10', sanitize_text_field($data['services_10']), $post_id);
 				update_field('services_11', sanitize_text_field($data['services_11']), $post_id);

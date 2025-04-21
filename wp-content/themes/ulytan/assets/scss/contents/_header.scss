@@ -172,10 +172,13 @@
                         }
 
                         &>ul.sub-menu {
-                            display: none;
+                            display: block;
                             list-style-type: none;
                             margin: 0px;
                             padding: 0px;
+                            overflow: hidden;
+                            height: 0px;
+                            transition: all 0.8s;
 
                             li {
                                 &>a {
@@ -218,13 +221,13 @@
                             }
                         }
 
-                        &:hover {
+                        &.open {
                             &>a {
                                 font-weight: 700;
                             }
 
                             &>ul.sub-menu {
-                                display: block;
+                                height: unset;
                             }
                         }
 
@@ -392,7 +395,8 @@
                     display: block;
                     padding: 12px 0px;
                     padding-right: 24px;
-                    color: $primary;
+                    color: $primary !important;
+                    font-weight: 700;
 
                     &:hover {
                         text-decoration: none;
@@ -444,6 +448,7 @@
                             padding: 12px 0px;
                             color: $primary;
                             padding-right: 24px;
+                            font-weight: 700;
 
                             &:hover {
                                 text-decoration: none;

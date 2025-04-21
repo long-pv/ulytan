@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Template name: Page verify
+ * Template name: Loại Page xác nhận
+ * Template_name: Page verify (bỏ)
  * */
 ob_start(); // Bắt đầu output buffering
 get_header();

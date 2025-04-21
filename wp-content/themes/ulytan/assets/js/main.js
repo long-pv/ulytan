@@ -39,6 +39,21 @@
 			$("ul.menu > li > ul > .menu-item-has-children").not($(this).parent()).removeClass("open");
 		}
 	});
+
+	// Hover vào từng item
+	$(document).on("mouseenter", "ul.menu > li > ul > .menu-item-has-children", function () {
+		if ($(window).width() >= 1200) {
+			$("ul.menu > li > ul > .menu-item-has-children").not(this).removeClass("open").children(".sub-menu").stop(true, true).slideUp(100);
+			$(this).addClass("open").children(".sub-menu").stop(true, true).slideDown(100);
+		}
+	});
+
+	// Hover ra khỏi toàn bộ menu => đóng tất cả
+	$(document).on("mouseleave", "ul.menu > li > ul", function () {
+		if ($(window).width() >= 1200) {
+			$("ul.menu > li > ul > .menu-item-has-children").removeClass("open").children(".sub-menu").stop(true, true).slideUp(100);
+		}
+	});
 	// end mobile menu
 
 	// wpadminbar

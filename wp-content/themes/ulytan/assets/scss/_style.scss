@@ -2149,6 +2149,7 @@ footer.footer.bg-primary {
         .desc {
             margin-bottom: 16px;
             font-size: 14px;
+            font-style: italic;
         }
 
         .list_dich_vu {
@@ -2169,7 +2170,7 @@ footer.footer.bg-primary {
                 display: flex;
                 flex-direction: column;
                 gap: 4px;
-                justify-content: space-between;
+                // justify-content: space-between;
 
                 .item_title {
                     // font-size: 18px;
@@ -2203,6 +2204,7 @@ footer.footer.bg-primary {
             color: $primary !important;
             font-size: 16px;
             font-style: unset !important;
+            font-weight: 700;
         }
 
         .desc {
@@ -3847,5 +3849,6 @@ footer {
 .sub_menu_dich_vu_desc_mb {
     font-size: 14px;
     margin-bottom: 8px;
-    font-weight: 700;
+    font-weight: 400;
+    font-style: italic;
 }
