@@ -568,4 +568,12 @@
 				e.stopPropagation(); // không lan click lên thẻ a
 			});
 	});
+
+	// $(document).on("mouseenter", ".dich_vu_item", function () {
+	// 	$(this).find(".item_desc").stop(true, true).slideDown(300);
+	// });
+
+	// $(document).on("mouseleave", ".dich_vu_item", function () {
+	// 	$(this).find(".item_desc").stop(true, true).slideUp(300);
+	// });
 })(jQuery, window);

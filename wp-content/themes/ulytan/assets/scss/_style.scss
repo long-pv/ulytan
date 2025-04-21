@@ -2173,23 +2173,31 @@ footer.footer.bg-primary {
                 // justify-content: space-between;
 
                 .item_title {
-                    // font-size: 18px;
-                    // font-weight: 700;
-                    font-size: 14px;
+                    font-size: 18px;
+                    // font-weight: 600;
+                    // font-size: 14px;
                     font-weight: 500;
                     color: $primary;
                     transition: all 0.3s;
-
-                    &:hover {
-                        color: #ffd503 !important;
-                        // font-weight: 700;
-                    }
                 }
 
                 .item_desc {
                     font-size: 14px;
                     font-style: italic;
                     color: $body;
+                    transition: all 0.3s;
+                }
+
+                &:hover {
+                    .item_title {
+                        transition: all 0.3s;
+                        font-weight: 700;
+                    }
+
+                    .item_desc {
+                        transition: all 0.3s;
+                        font-weight: 600;
+                    }
                 }
             }
         }
