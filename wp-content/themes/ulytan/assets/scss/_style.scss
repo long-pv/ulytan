@@ -886,6 +886,7 @@
 
 #sticky-navigator ul li.nav-h2 {
     padding: 4px 0px;
+    font-weight: 700;
 }
 
 #sticky-navigator ul li.nav-h3 {
@@ -1067,7 +1068,7 @@
     &__btn {
         position: relative;
         color: $primary;
-        padding: 8px 16px;
+        padding: 5px 16px;
         border: none;
         transition: all 0.5s;
         text-decoration: none;
@@ -1076,6 +1077,7 @@
         text-align: start;
         text-decoration: none !important;
         font-weight: 700 !important;
+        font-size: 15px;
 
         // Close item accordion
         &::after {
@@ -2173,11 +2175,9 @@ footer.footer.bg-primary {
                 // justify-content: space-between;
 
                 .item_title {
-                    font-size: 18px;
-                    // font-weight: 600;
-                    // font-size: 14px;
-                    font-weight: 500;
-                    color: $primary;
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: $body;
                     transition: all 0.3s;
                 }
 
@@ -2192,6 +2192,7 @@ footer.footer.bg-primary {
                     .item_title {
                         transition: all 0.3s;
                         font-weight: 700;
+                        color: $primary;
                     }
 
                     .item_desc {
@@ -2210,9 +2211,9 @@ footer.footer.bg-primary {
 
         .title {
             color: $primary !important;
-            font-size: 16px;
+            font-size: 16px !important;
             font-style: unset !important;
-            font-weight: 700;
+            font-weight: 700 !important;
         }
 
         .desc {

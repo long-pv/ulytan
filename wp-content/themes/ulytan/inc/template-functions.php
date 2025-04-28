@@ -1123,6 +1123,8 @@ add_action('admin_footer', function () {
 			$('#menu-pages .wp-menu-name').text('Loại trang');
 			$('#menu-posts a[href="edit-tags.php?taxonomy=category"]').text('Danh mục - Khởi tạo');
 			$('#menu-posts-local_store .wp-menu-name').text('DS Văn phòng');
+			$('#menu-posts-local_store a[href=""edit.php?post_type=local_store"]').text('Toàn bộ văn phòng');
+			$('#menu-posts-local_store a[href=""post-new.php?post_type=local_store"]').text('Thêm mới văn phòng');
 		});
 	</script>
 	<?php

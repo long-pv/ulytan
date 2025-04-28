@@ -49,7 +49,7 @@
             height: 100%;
         }
 
-        $margin_menu_pc: 12px;
+        $margin_menu_pc: 10px;
 
         ul.menu {
             margin: 0px;
@@ -86,16 +86,17 @@
                 &>a {
                     text-decoration: none;
                     display: block;
-                    color: $primary;
+                    color: $body;
                     padding: 12px $margin_menu_pc;
-                    font-size: 14px;
-                    font-weight: 500;
+                    font-size: 16px;
+                    font-weight: 700;
                 }
 
                 // active current
                 &.current-menu-parent,
                 &.current-menu-item,
-                &.current_page_item {
+                &.current_page_item,
+                &:hover {
                     &>a {
                         color: $primary !important;
                         font-weight: 700;
@@ -142,15 +143,16 @@
                             display: block;
                             background: $white;
                             transition: all 0.3s;
-                            color: $primary;
+                            color: $body;
                             padding: 6px $margin_menu_pc;
-                            font-size: 18px;
-                            font-weight: 500;
+                            font-size: 20px;
+                            font-weight: 700;
                         }
 
                         &.current-menu-parent,
                         &.current-menu-item,
-                        &.current_page_item {
+                        &.current_page_item,
+                        &:hover {
                             &>a {
                                 color: $primary !important;
                                 font-weight: 700;
@@ -189,17 +191,16 @@
                                     display: block;
                                     background: $white;
                                     transition: all 0.3s;
-                                    color: $primary;
+                                    color: $body;
                                     padding: 6px 12px 6px 32px;
-                                    font-size: 15px;
-                                    // font-size: 12px;
-                                    font-weight: 500;
+                                    font-size: 20px;
+                                    font-weight: 700;
                                     position: relative;
 
                                     &::before {
                                         content: '';
                                         position: absolute;
-                                        top: 12px;
+                                        top: 18px;
                                         left: 20px;
                                         width: 6px;
                                         height: 6px;
@@ -208,28 +209,15 @@
                                     }
                                 }
 
-                                &:hover {
-                                    &>a {
-                                        transition: all 0.3s;
-                                        font-weight: 700;
-                                    }
-                                }
-
                                 &.current-menu-parent,
                                 &.current-menu-item,
-                                &.current_page_item {
+                                &.current_page_item,
+                                &:hover {
                                     &>a {
                                         color: $primary !important;
                                         font-weight: 700;
                                     }
                                 }
-                            }
-                        }
-
-                        &:hover {
-                            &>a {
-                                font-weight: 700;
-                                transition: all 0.3s;
                             }
                         }
 
@@ -245,7 +233,8 @@
 
                         &.current-menu-parent,
                         &.current-menu-item,
-                        &.current_page_item {
+                        &.current_page_item,
+                        &:hover {
                             &>a {
                                 color: $primary !important;
                                 font-weight: 700;
@@ -378,10 +367,10 @@
 
                 &.menu-item-has-children {
                     &>.dropdown-arrow {
-                        width: 50px;
-                        height: 50px;
+                        width: 30px;
+                        height: 30px;
                         position: absolute;
-                        top: 0px;
+                        top: 10px;
                         right: 0px;
                         z-index: 10;
                         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23900101' d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
@@ -435,10 +424,10 @@
 
                         &.menu-item-has-children {
                             &>.dropdown-arrow {
-                                width: 50px;
-                                height: 50px;
+                                width: 30px;
+                                height: 30px;
                                 position: absolute;
-                                top: 0px;
+                                top: 10px;
                                 right: 0px;
                                 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23900101' d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
                                 background-repeat: no-repeat;
@@ -514,18 +503,19 @@
                     }
                 }
 
-                &.tin_huu_ich {
+                &.tin_huu_ich,
+                &.menu-item {
                     &>ul {
-                        padding-left: 32px;
+                        padding-left: 24px;
 
                         &>li {
                             &::before {
                                 content: '';
                                 position: absolute;
-                                left: -28px;
-                                top: 12px;
-                                width: 16px;
-                                height: 16px;
+                                left: -20px;
+                                top: 17px;
+                                width: 12px;
+                                height: 12px;
                                 background-image: url("data:image/svg+xml,%3Csvg width='42' height='31' viewBox='0 0 42 31' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M42 2L14.5 29.5L2 17' stroke='%23900101' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
                                 background-position: center center;
                                 background-repeat: no-repeat;
@@ -533,7 +523,7 @@
                             }
 
                             &>ul {
-                                padding-left: 30px;
+                                padding-left: 24px;
 
                                 &>li {
                                     position: relative;
@@ -541,10 +531,10 @@
                                     &::before {
                                         content: '';
                                         position: absolute;
-                                        left: -28px;
-                                        top: 16px;
-                                        width: 12px;
-                                        height: 12px;
+                                        left: -20px;
+                                        top: 20px;
+                                        width: 8px;
+                                        height: 8px;
                                         background-color: #000;
                                         border-radius: 50%;
                                     }

@@ -61,7 +61,7 @@ if (is_category() || is_tag() || is_tax()) {
 		<div class="row">
 			<div class="col-lg-9 mb-4 mb-lg-0">
 				<h2 class="archive_cat_title">
-					<span>Danh sách bài viết: </span>
+					<!-- <span>Danh sách bài viết: </span> -->
 					<?php
 					echo $cat_name;
 					?>
