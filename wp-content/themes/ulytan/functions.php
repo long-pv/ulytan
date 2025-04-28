@@ -8,7 +8,7 @@
  * @package ulytan
  */
 
-if (! defined('_S_VERSION')) {
+if (!defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
 	define('_S_VERSION', '1.0.23');
 }
@@ -56,29 +56,29 @@ if (!defined('WP_AUTO_UPDATE_CORE')) {
 function ulytan_setup()
 {
 	/*
-		* Make theme available for translation.
-		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on ulytan, use a find and replace
-		* to change 'ulytan' to the name of your theme in all the template files.
-		*/
+	 * Make theme available for translation.
+	 * Translations can be filed in the /languages/ directory.
+	 * If you're building a theme based on ulytan, use a find and replace
+	 * to change 'ulytan' to the name of your theme in all the template files.
+	 */
 	load_theme_textdomain('ulytan', get_template_directory() . '/languages');
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support('automatic-feed-links');
 
 	/*
-		* Let WordPress manage the document title.
-		* By adding theme support, we declare that this theme does not use a
-		* hard-coded <title> tag in the document head, and expect WordPress to
-		* provide it for us.
-		*/
+	 * Let WordPress manage the document title.
+	 * By adding theme support, we declare that this theme does not use a
+	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * provide it for us.
+	 */
 	add_theme_support('title-tag');
 
 	/*
-		* Enable support for Post Thumbnails on posts and pages.
-		*
-		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		*/
+	 * Enable support for Post Thumbnails on posts and pages.
+	 *
+	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+	 */
 	add_theme_support('post-thumbnails');
 
 	// This theme uses wp_nav_menu() in one location.
@@ -90,9 +90,9 @@ function ulytan_setup()
 	);
 
 	/*
-		* Switch default core markup for search form, comment form, and comments
-		* to output valid HTML5.
-		*/
+	 * Switch default core markup for search form, comment form, and comments
+	 * to output valid HTML5.
+	 */
 	add_theme_support(
 		'html5',
 		array(
@@ -129,9 +129,9 @@ function ulytan_setup()
 	add_theme_support(
 		'custom-logo',
 		array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => true,
+			'height' => 250,
+			'width' => 250,
+			'flex-width' => true,
 			'flex-height' => true,
 		)
 	);
@@ -178,13 +178,13 @@ function ulytan_widgets_init()
 {
 	register_sidebar(
 		array(
-			'name'          => esc_html__('Sidebar', 'ulytan'),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__('Add widgets here.', 'ulytan'),
+			'name' => esc_html__('Sidebar', 'ulytan'),
+			'id' => 'sidebar-1',
+			'description' => esc_html__('Add widgets here.', 'ulytan'),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
+			'after_widget' => '</section>',
+			'before_title' => '<h2 class="widget-title">',
+			'after_title' => '</h2>',
 		)
 	);
 }
@@ -210,28 +210,15 @@ function ulytan_scripts()
 	wp_enqueue_script('ulytan-script-stickyNavigator', get_template_directory_uri() . '/assets/js/jquery-stickyNavigator.js', array(), _S_VERSION, true);
 
 	//add custom main css/js
-	// wp_enqueue_style('ulytan-style-main', get_template_directory_uri() . '/assets/css/main.css', array(), _S_VERSION);
-	wp_enqueue_script('ulytan-script-main', get_template_directory_uri() . '/assets/js/main.js', array(), _S_VERSION, true);
+	$main_css_file_path = get_template_directory() . '/assets/css/main.css';
+	$main_js_file_path = get_template_directory() . '/assets/js/main.js';
+	$ver_main_css = file_exists($main_css_file_path) ? filemtime($main_css_file_path) : '1.0.0';
+	$ver_main_js = file_exists($main_js_file_path) ? filemtime($main_js_file_path) : '1.0.0';
+	wp_enqueue_style('dev_theme-style-main', get_template_directory_uri() . '/assets/css/main.css', array(), $ver_main_css);
+	wp_enqueue_script('dev_theme-script-main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), $ver_main_js, true);
+
 }
 add_action('wp_enqueue_scripts', 'ulytan_scripts');
-
-function ullytan_enqueue_styles()
-{
-	// Đường dẫn đầy đủ đến file CSS trong thư mục theme
-	$css_file_path = get_template_directory() . '/assets/css/main.css';
-
-	// Lấy phiên bản tự động dựa trên thời gian chỉnh sửa file
-	$version = file_exists($css_file_path) ? filemtime($css_file_path) : '1.0.0';
-
-	// Đăng ký file CSS
-	wp_enqueue_style(
-		'ulytan-style-main',
-		get_template_directory_uri() . '/assets/css/main.css',
-		array(),
-		$version
-	);
-}
-add_action('wp_enqueue_scripts', 'ullytan_enqueue_styles');
 
 /**
  * Functions which enhance the theme by hooking into WordPress.
