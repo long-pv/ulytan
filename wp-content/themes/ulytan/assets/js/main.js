@@ -43,7 +43,7 @@
 	// Hover vào từng item
 	$(document).on("mouseenter", "ul.menu > li > ul > .menu-item-has-children", function () {
 		if ($(window).width() >= 1200) {
-			$("ul.menu > li > ul > .menu-item-has-children").not(this).removeClass("open").children(".sub-menu").stop(true, true).slideUp(100);
+			// $("ul.menu > li > ul > .menu-item-has-children").not(this).removeClass("open").children(".sub-menu").stop(true, true).slideUp(100);
 			$(this).addClass("open").children(".sub-menu").stop(true, true).slideDown(100);
 		}
 	});
