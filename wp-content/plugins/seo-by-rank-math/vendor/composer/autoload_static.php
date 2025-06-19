@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita036c2ab66ced77a0df2eaf1433f7b13
+class ComposerStaticInitfcade2ec2dd476d106b15b7e32a2408c
 {
     public static $files = array (
         'da5f6548f070d3d306f90eee42dd5de6' => __DIR__ . '/..' . '/donatj/phpuseragentparser/src/UserAgentParser.php',
@@ -88,7 +88,7 @@ class ComposerStaticInita036c2ab66ced77a0df2eaf1433f7b13
         'RankMath\\Admin\\Importers\\AIOSEO' => __DIR__ . '/../..' . '/includes/admin/importers/class-aioseo.php',
         'RankMath\\Admin\\Importers\\AIO_Rich_Snippet' => __DIR__ . '/../..' . '/includes/admin/importers/class-aio-rich-snippet.php',
         'RankMath\\Admin\\Importers\\Detector' => __DIR__ . '/../..' . '/includes/admin/importers/class-detector.php',
-        'RankMath\\Admin\\Importers\\Plugin_Importer' => __DIR__ . '/../..' . '/includes/admin/importers/abstract-importer.php',
+        'RankMath\\Admin\\Importers\\Plugin_Importer' => __DIR__ . '/../..' . '/includes/admin/importers/class-plugin-importer.php',
         'RankMath\\Admin\\Importers\\Redirections' => __DIR__ . '/../..' . '/includes/admin/importers/class-redirections.php',
         'RankMath\\Admin\\Importers\\SEOPress' => __DIR__ . '/../..' . '/includes/admin/importers/class-seopress.php',
         'RankMath\\Admin\\Importers\\Status' => __DIR__ . '/../..' . '/includes/admin/importers/class-status.php',
@@ -280,7 +280,6 @@ class ComposerStaticInita036c2ab66ced77a0df2eaf1433f7b13
         'RankMath\\Rollback_Version' => __DIR__ . '/../..' . '/includes/modules/version-control/class-rollback-version.php',
         'RankMath\\Runner' => __DIR__ . '/../..' . '/includes/interface-runner.php',
         'RankMath\\SEO_Analysis\\Admin' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-admin.php',
-        'RankMath\\SEO_Analysis\\Admin_Tabs' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-admin-tabs.php',
         'RankMath\\SEO_Analysis\\Result' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-result.php',
         'RankMath\\SEO_Analysis\\SEO_Analysis' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-seo-analysis.php',
         'RankMath\\SEO_Analysis\\SEO_Analyzer' => __DIR__ . '/../..' . '/includes/modules/seo-analysis/class-seo-analyzer.php',
@@ -336,7 +335,10 @@ class ComposerStaticInita036c2ab66ced77a0df2eaf1433f7b13
         'RankMath\\Sitemap\\Stylesheet' => __DIR__ . '/../..' . '/includes/modules/sitemap/class-stylesheet.php',
         'RankMath\\Sitemap\\Timezone' => __DIR__ . '/../..' . '/includes/modules/sitemap/class-timezone.php',
         'RankMath\\Sitemap\\XML' => __DIR__ . '/../..' . '/includes/modules/sitemap/abstract-xml.php',
+        'RankMath\\Status\\Backup' => __DIR__ . '/../..' . '/includes/modules/status/class-backup.php',
         'RankMath\\Status\\Error_Log' => __DIR__ . '/../..' . '/includes/modules/status/class-error-log.php',
+        'RankMath\\Status\\Import_Export_Settings' => __DIR__ . '/../..' . '/includes/modules/status/class-import-export-settings.php',
+        'RankMath\\Status\\Rest' => __DIR__ . '/../..' . '/includes/modules/status/class-rest.php',
         'RankMath\\Status\\Status' => __DIR__ . '/../..' . '/includes/modules/status/class-status.php',
         'RankMath\\Status\\System_Status' => __DIR__ . '/../..' . '/includes/modules/status/class-system-status.php',
         'RankMath\\Term' => __DIR__ . '/../..' . '/includes/class-term.php',
@@ -373,6 +375,7 @@ class ComposerStaticInita036c2ab66ced77a0df2eaf1433f7b13
         'RankMath\\Wizard\\Wizard_Step' => __DIR__ . '/../..' . '/includes/admin/wizard/interface-wizard-step.php',
         'RankMath\\Wizard\\Your_Site' => __DIR__ . '/../..' . '/includes/admin/wizard/class-your-site.php',
         'RankMath\\WooCommerce\\Admin' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-admin.php',
+        'RankMath\\WooCommerce\\Base' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-base.php',
         'RankMath\\WooCommerce\\Opengraph' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-opengraph.php',
         'RankMath\\WooCommerce\\Permalink_Watcher' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-permalink-watcher.php',
         'RankMath\\WooCommerce\\Product_Redirection' => __DIR__ . '/../..' . '/includes/modules/woocommerce/class-product-redirection.php',
@@ -391,9 +394,9 @@ class ComposerStaticInita036c2ab66ced77a0df2eaf1433f7b13
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita036c2ab66ced77a0df2eaf1433f7b13::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita036c2ab66ced77a0df2eaf1433f7b13::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInita036c2ab66ced77a0df2eaf1433f7b13::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitfcade2ec2dd476d106b15b7e32a2408c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitfcade2ec2dd476d106b15b7e32a2408c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitfcade2ec2dd476d106b15b7e32a2408c::$classMap;
 
         }, null, ClassLoader::class);
     }
